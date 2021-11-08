@@ -1,0 +1,10 @@
+{{- $filename := .Get "filename" }}
+{{- $path := (printf "static%v" $filename) }}
+{{- if not (fileExists $path) }}
+{{ errorf "Image not found: %v" $path }}
+{{- end }}
+<a href="{{.Site.BaseURL}}{{.Page.Params.id}}/{{$filename}}" data-featherlight="image">
+	<img src="{{.Site.BaseURL}}{{.Page.Params.id}}/{{$filename}}" style="border:0px" {{ with .Get "width" }}
+		width="{{.}}" {{ end }} {{ with .Get "align" }} align="{{.}}" {{ end }} {{ with .Get "alt" }} alt="{{.}}" {{ end
+		}} />
+</a>
