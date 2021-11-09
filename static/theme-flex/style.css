@@ -3131,7 +3131,7 @@ article section.page table.hot-topics-table tbody tr:last-of-type td {
   }
 }
 
-@media (max-width: 1105px) {
+@media (max-width: 768px) {
   header .header-wrap {
     height: 73px;
   }
@@ -3140,8 +3140,8 @@ article section.page table.hot-topics-table tbody tr:last-of-type td {
     display: none;
   }
 
-  header nav.shortcuts.shortcuts-right {
-    display: inline-block;
+  /*header nav.shortcuts.shortcuts-right {
+    display: none;
     text-align: right;
     flex: 1;    
     margin: 15px 0px 0px 0px;
@@ -3149,7 +3149,7 @@ article section.page table.hot-topics-table tbody tr:last-of-type td {
 
   header nav.shortcuts.shortcuts-right:first-child {
     display: none;
-  }
+  }*/
 
   article section.page table.hot-topics-table th {
     font-size: 12px;
