@@ -1,7 +1,7 @@
 ---
 Title: Developer Guide
 description: How to setup the development environment
-weight: 20
+weight: 110
 alwaysopen: false
 categories: []
 ---

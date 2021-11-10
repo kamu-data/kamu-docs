@@ -1,5 +1,5 @@
 ---
-Title: Learning Materials
+Title: Materials
 description: 
 weight: 10
 categories: []

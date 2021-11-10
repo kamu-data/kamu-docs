@@ -13,11 +13,11 @@ We welcome contributors of any skill level and background. You [don't have to be
 
 Besides code you can cotribute in many different ways: 
 
-- Improving documentation
+- Improving the [documentation](https://github.com/kamu-data/kamu-docs)
 - Graphic design
-- Adding more interesting data science examples
+- Adding more interesting [data science examples]({{<relref "examples">}})
 - Improving CI pipelines
-- Working with the community
+- Working with the [community](https://discord.gg/aSpVjWwu)
 - Mentoring others
 - and much more...
 
