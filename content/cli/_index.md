@@ -41,8 +41,8 @@ In short, it can be described as:
 * Or even Kubernetes for data :)
 
 Using `kamu`, data publishers can easily **share structured data** with the world. Data can be static or **flow continuously**. In all cases `kamu` will ensure that it stays:
-* Reproducible - i.e. you can ask the publisher *"Give me the same exact data you gave me yesterday / a year ago"*
-* Verifiable - i.e. you can ask the publisher *"Is this the exact data you gave me yesterday / a year ago?"*
+* Reproducible - i.e. you can ask the publisher *"Give me the same exact data you gave me a year ago"*
+* Verifiable - i.e. you can ask the publisher *"Is this the exact data you had a year ago?"*
 
 Teams and data communities can then **collaborate** on cleaning, enriching, and aggregating data by building arbitrarily complex **decentralized data pipelines**. Following the **"data as code"** philosophy `kamu` doesn't let you touch data manually - instead, you transform it using **Streaming SQL** (we support [multiple frameworks]({{<ref "supported-engines">}})). This ensures that data supply chains are:
 * Autonomous - write query once and run it forever, no more babysitting fragile batch workflows

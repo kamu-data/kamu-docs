@@ -8,9 +8,22 @@ categories: []
 aliases:
 ---
 
-![Open Data Fabric Logo](/images/odf_logo_2.svg)
+<div align="center">
 
-[![Latest Version](https://img.shields.io/badge/version-0.18.0-green)]({{<ref "spec">}})
+<img src="/images/odf_logo_2.svg" alt="Open Data Fabric Logo" width="500">
+
+<p><strong>Open protocol for decentralized exchange and transformation of data</strong></p>
+
+[Repository](https://github.com/kamu-data/open-data-fabric) |
+[Reference Implementation]({{<ref "cli">}}) |
+[Chat](https://discord.gg/nU6TXRQNXC)
+
+[![Latest Version](https://img.shields.io/badge/Spec-0.18.0-green)]({{<ref "spec">}})
+[![Chat](https://shields.io/discord/898726370199359498?label=Discord)](https://discord.gg/nU6TXRQNXC)
+
+</p>
+</div>
+
 
 ## Introduction
 

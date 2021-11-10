@@ -7,7 +7,7 @@ alwaysopen: false
 categories: []
 ---
 
-Version: 0.18.0
+Version: 0.18.0 (this is a rendered version of the [original spec](https://github.com/kamu-data/open-data-fabric))
 
 # Abstract
 **Open Data Fabric** is an open protocol specification for decentralized exchange and transformation of semi-structured data that aims to holistically address many shortcomings of the modern data management systems and workflows.
