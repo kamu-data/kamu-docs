@@ -27,6 +27,7 @@ aliases:
 | Name                                                                                     | Level    | Description                                         |
 | ---------------------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
 | [Kamu Blog: Introducing Open Data Fabric](https://www.kamu.dev/blog/introducing-odf/)    | Beginner | Initial announcement of the ODF project             |
+| [Whitepaper: Open Data Fabric](https://arxiv.org/abs/2111.06364)                         | Beginner | Original ODF protocol whitepaper                    |
 | [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)           | Beginner | Why we are using stream processing instead of batch |
 | [Open Data Fabric protocol specification](https://github.com/kamu-data/open-data-fabric) | Advanced | Specification itself, for tech-savvy readers        |
 

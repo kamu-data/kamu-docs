@@ -31,7 +31,7 @@ aliases:
 
 ## About
 
-`kamu` is an easy-to-use command-line tool for managing, transforming, and collaborating on structured data. 
+`kamu` (pronounced `kaˈmju`) is an easy-to-use command-line tool for managing, transforming, and collaborating on structured data. 
 
 In short, it can be described as:
 * Decentralized data warehouse
@@ -40,7 +40,7 @@ In short, it can be described as:
 * Blockchain-like ledger for data
 * Or even Kubernetes for data :)
 
-Using `kamu`, data publishers can easily **share structured data** with the world. Data can be static or **flow continuously**. In all cases `kamu` will ensure that it stays:
+Using `kamu`, any person or smallest organization can easily **share structured data** with the world. Data can be static or **flow continuously**. In all cases `kamu` will ensure that it stays:
 * Reproducible - i.e. you can ask the publisher *"Give me the same exact data you gave me a year ago"*
 * Verifiable - i.e. you can ask the publisher *"Is this the exact data you had a year ago?"*
 
