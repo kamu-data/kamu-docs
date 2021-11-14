@@ -64,33 +64,34 @@ header .header-wrap-outer {
 
 header .header-wrap {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 90%;  
   max-width: 1600px;
-  margin: 0 0rem 0 2rem;
-  position: relative;  
+  margin-left: 82px;
+  position: relative;
+}
+
+@media screen and (max-width: 1000px) {
+  header .header-wrap {
+    margin-left: 20px;
+  }
 }
 
 header .logo {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  margin-top: -19px;
+  margin-right: 80px;
 }
 
 header nav.shortcuts {
   display: inline-block;
   float: left;
-  margin-left: 250px;
-  margin-top: 3px;
   position: relative;
 }
 header nav.shortcuts-right {
   display: flex;
   align-items: center;
+  margin-left: auto;
 }
 header nav.shortcuts li {
   opacity: 1;
@@ -621,10 +622,6 @@ section a {
   text-align: center;
   max-width: 330px;
   min-height: 394px;
-}
-
-.home-options__option:first-of-type {
-  transform: translateY(8px);
 }
 
 .home-options__option hr {
