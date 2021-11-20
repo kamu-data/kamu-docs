@@ -7,19 +7,17 @@ aliases:
 ---
 
 ## Documentation
-
 Our code and documentation is **actively evolving**, so many topics (those in lighter gray color) have not been covered yet. 
 
-While formal documentation may be lacking, we are focusing on prividing **good quality examples, tutorials, and reference documentation**, so you can learn a lot from those.
+While some formal documentation is missing, we are focusing on prividing **good quality examples, tutorials, and reference documentation**, so you can learn a lot from those.
 
 ## Project Status Disclaimer
-`kamu` is an **alpha quality** software. Our main goal currently is to demonstrate the potential of the [Open Data Fabric protocol]({{<ref "odf">}}) to the data science community and the industry and validate our ideas.
+`kamu` is at the MVP stage of maturity, but have not reached a stable release yet. Before `v1.0` we reserve the right to break compatibility between the releases.
 
-Naturally, we don't recommend using `kamu` for any critical tasks - it's definitely **not prod-ready**. We are, however, absolutely delighted to use `kamu` for our personal data analytics needs and small projects, and hoping you will enjoy it too.
+Therefore, we don't recommend using `kamu` in production yet. When you use it for projects, make sure to **maintain your source data separately** and not rely on `kamu` for durable long-term data storage. This way any time a new version comes out that breaks some compatibility you can simply delete your workspace and re-create it from scratch in a matter of seconds.
 
-If you do - simply make sure to **maintain your source data separately** and don't rely on `kamu` for data storage. This way any time a new version comes out that breaks some compatibility you can simply delete your kamu workspace and re-create it from scratch in a matter of seconds.
-
-Also, please **be patient with current performance** and resource usage. We fully realize that waiting 15s to process a few KiB of CSV isn't great. Stream processing technologies is a relatively new area, and the data processing engines `kamu` uses (e.g. Apache Spark and Flink) are tailored to run in large clusters, not on a laptop. They take a lot of resources to just boot up, so the start-stop-continue nature of `kamu`'s transformations is at odds with their design. We are hoping that the industry will recognize our use-case and expect to see a better support for it in future. We are committed to improving the performance significantly in the near future.
+### Note on Performance
+Please be patient with current performance and resource usage. We fully realize that waiting 15s to process a few KiB of CSV isn't great. Stream processing technologies is a relatively new area, and the data processing engines `kamu` uses (e.g. Apache Spark and Flink) are tailored to run in large clusters, not on a laptop. They take a lot of resources to just boot up, so the *start-stop* nature of `kamu`'s transformations is at odds with their design. We are hoping that the industry will recognize our use-case and expect to see a better support for it in future. We are committed to improving the performance significantly in the near future.
 
 
 ## Feature Coverage

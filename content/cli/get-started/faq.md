@@ -6,9 +6,18 @@ categories: []
 aliases:
 ---
 
-## How does kamu compare to Spark / Flink (or other enterprise data processing tech)?
+## How does kamu compare to Spark / Flink / Kafka Streams (or other enterprise data processing tech)?
 
-Spark and Flink to `kamu` is what `diff` is for `git` - an implementation detail of a particular flavor of stream processing. `kamu` builds on top of those engines to provide higher level properties like preserving history and reproducibility of data, making data verifiable, and enabeling collaboration.
+`kamu` does not compete with enterprise data processing technologies - it builds on top of them:
+
+- It specifies how data should be stored (e.g. making sure that data is never modified or deleted)
+- Provides stable references to data for reproducibility
+- Specifies how data & metadata are shared
+- Tracks every processing step executed, so that a person on another side of the world who downloaded your dataset could understand exactly where every single piece of data came from
+- Allows you to evolve your processing steps over time without breaking other people's pipelines that consume your data
+- And much more...
+
+So Spark and Flink to `kamu` is just a building block, while `kamu` is a higher level and opinionated tool.
 
 
 ## Can I create derivative datasets with Pandas (or other data procesing library)?
