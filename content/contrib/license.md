@@ -32,7 +32,7 @@ As opposed to the "open-core" model, we believe BSL license also avoids wasting 
 
 
 ## Who else is using BSL?
-Unfortunately, there are many precedents where the work of Open Source companies was blantly exploited. This not prevents the developers of the technology from reaping the well-deserved rewards, but also prevents them re-investing the resources into improving the tech, which leads to stagnation. Many such companies have successfully adopted the BSL license as a way to restore the balance:
+Unfortunately, there are many precedents where the work of Open Source companies was blantly exploited. This not only prevents the developers of the technology from reaping the well-deserved rewards, but also prevents them from **re-investing the resources into improving the tech**, which leads to stagnation. Many such companies have successfully adopted the BSL license as a way to restore the balance:
 
 - [MariaDB](https://mariadb.com/bsl-faq-adopting/)
 - [CockroachDB](https://www.cockroachlabs.com/blog/oss-relicensing-cockroachdb/)
@@ -40,7 +40,7 @@ Unfortunately, there are many precedents where the work of Open Source companies
 - [Sentry](https://blog.sentry.io/2019/11/06/relicensing-sentry)
 
 {{<info>}}
-Same reasons have also lead to creation of the [SSPL license](https://www.mongodb.com/licensing/server-side-public-license/faq), which is also adopted by many companies, but we chose BSL for being **simpler and less ambiguous**.
+Same reasons have also lead to creation of the [SSPL license](https://www.mongodb.com/licensing/server-side-public-license/faq) by MongoDB, which is also adopted by many companies, but we chose BSL for being **simpler and less ambiguous**.
 {{</info>}}
 
 
