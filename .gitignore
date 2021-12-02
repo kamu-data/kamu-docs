@@ -1,24 +1,3 @@
-#git files
-/.github
-
-#Hugo output
-/public/*
-!/public/.gitkeep
-
-#Forestry config files
-/forestry
-
-# IDEA configuration
-.idea/
-
-# VSCode configuration
-.vscode/
-
-# Windows files
-Thumbs.db
-
-# MacOS files
-.DS_Store
-
+/public
 /resources
-node_modules
+.hugo_build.lock

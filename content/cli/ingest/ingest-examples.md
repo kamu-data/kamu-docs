@@ -106,3 +106,7 @@ preprocess:
       ...
     FROM input
 ```
+
+# Need More Examples?
+
+To give you more examples on how to deal with **different ingest scenarios** we've created an experimental repository where we publish Root Dataset manifests for a variety of Open Data sources - check out [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib).
