@@ -8,11 +8,12 @@ categories: []
 
 # Building Locally
 Prerequisites:
-* Docker or Podman
+* Docker or Podman (note: unit tests run with Podman by default)
   * If using `docker` - make sure it's usable without `sudo`
   * If using `podman` - make sure it's setup to run root-less containers
 * Rust toolset
-  * Use `rustup` to install the compiler and `cargo`
+  * Install `rustup`
+  * When running `cargo` in the repository it will detect and download the right toolchain version based on the `rust-toolchain` file
 * AWS account and configured AWS CLI (optional, needed for S3 volumes)
 
 Clone the repository:
@@ -30,6 +31,16 @@ cargo test
 To use your locally-built `kamu` executable link it as so:
 ```shell
 sudo ln -s $PWD/target/debug/kamu /usr/bin/kamu
+```
+
+## Build Speed Tweaks (Optional)
+Consider configuring Rust to use `lld` linker, which is much faster than the default `ld` (may improve link times by ~10-20x).
+
+To do so install `lld`, then create `~/.cargo/config.toml` file with the following contents:
+
+```toml
+[build]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 
 # Release Procedure
