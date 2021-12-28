@@ -38,10 +38,10 @@ This dataset is temporal (has a `year` column), so it's a good sign that we're d
 So we use the following root dataset manifest to ingest it:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: cities-population
+  name: cities-population
   source:
     kind: root
     ...
@@ -120,10 +120,10 @@ This dataset is non-temporal (doesn't have any date/time columns), so it's a cle
 So we use the following root dataset manifest to ingest it:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: cities-population
+  name: cities-population
   source:
     kind: root
     fetch:

@@ -84,14 +84,14 @@ Since this data might be something we can reuse in other calculations - let's cr
 The following listing shows the use of Flink engine and the SQL window functions for enriching all transaction events with cumulative sums of stock quantities and cash put into buying them:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: my.trading.holdings
+  name: my.trading.holdings
   source:
     kind: derivative
     inputs:
-      - my.trading.transactions
+      - name: my.trading.transactions
     transform:
       kind: sql
       engine: flink
@@ -177,20 +177,20 @@ Temporal table joins (see this [great explanation in Apache Flink's blog](https:
 Let's have a look at the `my.trading.holdings.market-value` dataset:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: my.trading.holdings.market-value
+  name: my.trading.holdings.market-value
   source:
     kind: derivative
     inputs:
-    - com.yahoo.finance.tickers.daily
-    - my.trading.holdings
+    - name: com.yahoo.finance.tickers.daily
+    - name: my.trading.holdings
     transform:
       kind: sql
       engine: flink
       temporalTables:
-      - id: my.trading.holdings
+      - name: my.trading.holdings
         primaryKey:
         - symbol
       query: >
