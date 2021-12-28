@@ -55,10 +55,10 @@ One of the design principles of `kamu` is to always know exactly where any piece
 We will use a dataset manifest from the [kamu-repo-contrib](https://github.com/kamu-data/kamu-repo-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) which looks like this:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: us.cityofnewyork.data.zipcode-boundaries
+  name: us.cityofnewyork.data.zipcode-boundaries
   source:
     kind: root
     fetch:

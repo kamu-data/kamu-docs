@@ -88,20 +88,20 @@ Temporal table joins (see this [great explanation in Apache Flink's blog](https:
 Let's have a look at the `my.trading.transactions.cad` dataset:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: my.trading.transactions.cad
+  name: my.trading.transactions.cad
   source:
     kind: derivative
     inputs:
-    - ca.bankofcanada.exchange-rates.daily
-    - my.trading.transactions
+    - name: ca.bankofcanada.exchange-rates.daily
+    - name: my.trading.transactions
     transform:
       kind: sql
       engine: flink
       temporalTables:
-      - id: ca.bankofcanada.exchange-rates.daily
+      - name: ca.bankofcanada.exchange-rates.daily
         primaryKey:
         - currency_base
       query: >

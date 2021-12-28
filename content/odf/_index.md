@@ -25,6 +25,10 @@ aliases:
 </p>
 </div>
 
+{{<info>}}
+While we are in the process of automating our documentation pipeline please refer to the [GitHub Repository](https://github.com/kamu-data/open-data-fabric) for the latest version of the protocol specification.
+{{</info>}}
+
 
 ## Introduction
 

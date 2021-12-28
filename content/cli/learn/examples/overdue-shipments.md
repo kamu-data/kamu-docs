@@ -137,15 +137,15 @@ WHERE order_quantity <> shipped_quantity_total
 Putting all of this together, our final dataset will look like this:
 
 ```yaml
-apiVersion: 1
 kind: DatasetSnapshot
+version: 1
 content:
-  id: com.acme.shipments.overdue
+  name: com.acme.shipments.overdue
   source:
     kind: derivative
     inputs:
-    - com.acme.orders
-    - com.acme.shipments
+    - name: com.acme.orders
+    - name: com.acme.shipments
     transform:
       kind: sql
       engine: flink
