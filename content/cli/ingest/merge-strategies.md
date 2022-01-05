@@ -42,16 +42,17 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: cities-population
-  source:
-    kind: root
-    ...
-    merge:
-      kind: ledger
-      primaryKey:
-      - country
-      - city
-  vocab:
-    eventTimeColumn: year
+  kind: root
+  metadata:
+    - kind: setPollingSource
+      ...
+      merge:
+        kind: ledger
+        primaryKey:
+          - country
+          - city
+    - kind: setVocab
+      eventTimeColumn: year
 ```
 
 Notice that we specify `ledger` merge strategy with composite primary key `(country, city)`, and also set `eventTimeColumn` to use `year` as the source of event times.
@@ -124,19 +125,20 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: cities-population
-  source:
-    kind: root
-    fetch:
-      kind: url
-      url: https://...
-      eventTime:
-        kind: fromMetadata
-    ...
-    merge:
-      kind: snapshot
-      primaryKey:
-      - country
-      - city
+  kind: root
+  metadata:
+    - kind: setPollingSource
+      fetch:
+        kind: url
+        url: https://...
+        eventTime:
+          kind: fromMetadata
+      ...
+      merge:
+        kind: snapshot
+        primaryKey:
+        - country
+        - city
 ```
 
 Notice that we specify `snapshot` merge strategy with composite primary key `(country, city)`. We also specify the `eventTime` of kind `fromMetadata`, instructing the ingest to use time from the caching headers as the event time of new records.

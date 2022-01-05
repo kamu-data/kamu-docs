@@ -48,36 +48,39 @@ $ kamu list
 As you'd expect the workspace is currently empty.
 
 ### Adding a dataset
-One of the design principles of `kamu` is to always know exactly where any piece of data came from, so it never simply copies data - instead we create source links to an external data (we'll get into the details of that later). For now let's create such link.
+One of the design principles of `kamu` is to always know exactly where any piece of data came from, so it never simply copies data - instead we create links to an external data (we'll get into the details of that later). For now let's create such link.
 
 {{<image filename="/images/cli/first-steps/pull.gif" alt="kamu pull">}}
 
-We will use a dataset manifest from the [kamu-repo-contrib](https://github.com/kamu-data/kamu-repo-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) which looks like this:
+Datasets that ingest external data in `kamu` are called **root** datasets. To create one, we will use a `DatasetSnapshot` manifest from the [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) which looks like this:
 
 ```yaml
 kind: DatasetSnapshot
 version: 1
 content:
   name: us.cityofnewyork.data.zipcode-boundaries
-  source:
-    kind: root
-    fetch:
-      kind: url
-      url: https://data.cityofnewyork.us/api/views/i8iw-xf4u/files/YObIR0MbpUVA0EpQzZSq5x55FzKGM2ejSeahdvjqR20?filename=ZIP_CODE_040114.zip
-    read:
-      kind: esriShapefile
-    merge:
-      kind: snapshot
-      primaryKey:
-      - ZIPCODE
+  kind: root
+  metadata:
+    - kind: setPollingSource
+      fetch:
+        kind: url
+        url: https://data.cityofnewyork.us/api/views/i8iw-xf4u/files/YObIR0MbpUVA0EpQzZSq5x55FzKGM2ejSeahdvjqR20?filename=ZIP_CODE_040114.zip
+      read:
+        kind: esriShapefile
+      merge:
+        kind: snapshot
+        primaryKey:
+          - ZIPCODE
 ```
 
-Such dataset in `kamu` is called a **root** dataset and is defined by a sequence of following operations:
+A `DatasetSnapshot` manifest contains a `name` of the dataset, its `kind` (`root` or `derivative`) and a series of `metadata` events that define dataset's desired state. 
+
+In this example we only have one such event - `setPollingSource`, which describes how `kamu` can ingest external data by performing following operations:
 - `fetch` - obtaining the data from some external source (e.g. HTTP/FTP)
-- `prepare` (optional) - steps for preparing data for ingestion (e.g. extracting an archive)
+- `prepare` (optional) - steps for preparing data for ingestion (e.g. extracting an archive or converting between formats)
 - `read` - reading the data into a structured form
-- `preprocess` (optional) - shaping the structured data and converting types into best suited form
-- `merge` - merging the new data from the source with the history of previously seen data
+- `preprocess` (optional) - shaping the structured data and converting types into best suited form using query engines
+- `merge` - merging the new data from the source with the **history of previously seen data**
 
 {{<tip>}}
 To create your own dataset manifests use `kamu new` command - it outputs a well-annotated template that you can customize for your needs.
@@ -88,7 +91,7 @@ Note that the data file we are ingesting is in ESRI Shapefile format, which is a
 Let's add it to our workspace by giving `kamu` this file's URL:
 
 ```bash
-$ kamu add https://raw.githubusercontent.com/kamu-data/kamu-repo-contrib/master/us.cityofnewyork.data/zipcode-boundaries.yaml
+$ kamu add https://raw.githubusercontent.com/kamu-data/kamu-contrib/master/us.cityofnewyork.data/zipcode-boundaries.yaml
 ```
 
 At this point no data was yet loaded from the source, so let's fetch it:

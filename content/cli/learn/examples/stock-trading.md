@@ -88,19 +88,20 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: my.trading.holdings
-  source:
-    kind: derivative
-    inputs:
-      - name: my.trading.transactions
-    transform:
-      kind: sql
-      engine: flink
-      query: >
-        SELECT
-          *,
-          sum(quantity) over(partition by symbol order by event_time rows unbounded preceding) as cum_quantity,
-          sum(settlement) over(partition by symbol order by event_time rows unbounded preceding) as cum_balance
-        FROM `my.trading.transactions`
+  kind: derivative
+  metadata:
+    - kind: setPollingSource
+      inputs:
+        - name: my.trading.transactions
+      transform:
+        kind: sql
+        engine: flink
+        query: >
+          SELECT
+            *,
+            sum(quantity) over(partition by symbol order by event_time rows unbounded preceding) as cum_quantity,
+            sum(settlement) over(partition by symbol order by event_time rows unbounded preceding) as cum_balance
+          FROM `my.trading.transactions`
 ```
 
 Let's create this dataset:
@@ -181,18 +182,19 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: my.trading.holdings.market-value
-  source:
-    kind: derivative
+  kind: derivative
+  metadata:
+  - kind: setTransform
     inputs:
-    - name: com.yahoo.finance.tickers.daily
-    - name: my.trading.holdings
+      - name: com.yahoo.finance.tickers.daily
+      - name: my.trading.holdings
     transform:
       kind: sql
       engine: flink
       temporalTables:
-      - name: my.trading.holdings
-        primaryKey:
-        - symbol
+        - name: my.trading.holdings
+          primaryKey:
+            - symbol
       query: >
         SELECT
           tickers.`event_time`,
