@@ -114,7 +114,11 @@ To avoid all these issues please consider using [`podman`]({{<relref "#using-pod
 
 
 ## Using Podman instead of Docker 
-[`podman`](https://podman.io/) is an alternative container runtime that fixes the shortcomings of `docker` [related to security](#a-note-on-docker-security). We highly recommend you to give it a try, as we are planning to make it a default runtime in the near future.
+[`podman`](https://podman.io/) is an alternative container runtime that fixes the [security shortcomings of `docker`](#a-note-on-docker-security). We highly recommend you to give it a try, as we are planning to make it a default runtime in the near future.
+
+{{<warning>}}
+Make sure to follow [Podman's Rootless Setup Guide](https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md) to allow `kamu` to run containers without `sudo`.
+{{</warning>}}
 
 In order to instruct `kamu` to use `podman` run:
 
@@ -123,7 +127,8 @@ kamu config set --user engine.runtime podman
 kamu init --pull-images
 ```
 
-Note: On some systems you need to separately install `podman-dnsname` package to allow contaiers to communicate with one another via hostnames. To check whether you have it run:
+{{<info>}}
+On some systems you need to separately install `podman-dnsname` package to allow contaiers to communicate with one another via hostnames. To check whether you have it run:
 
 ```bash
 podman network create test
@@ -133,4 +138,4 @@ podman network ls
 #                                                               ^^^ plugin installed
 podman network prune
 ```
- 
+{{</info>}} 
