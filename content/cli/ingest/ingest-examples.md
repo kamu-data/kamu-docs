@@ -16,7 +16,7 @@ prepare:
   format: gzip
 ```
 
-In case of a multi-file archive:
+In case of a multi-file archive you can specify which file should be extracted:
 
 ```yaml
 prepare:
@@ -25,7 +25,7 @@ prepare:
   subPath: specific-file-*.csv  # Note: can contain glob patterns
 ```
 
-See also: [PrepStep::Decompress](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#prepstepdecompress-schema)
+See also: [PrepStep::Decompress](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#prepstep-decompress-schema)
 
 # CSV and Variants
 
@@ -38,7 +38,7 @@ read:
   quote: '"'
 ```
 
-See also: [ReadStep::Csv](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstepcsv-schema)
+See also: [ReadStep::Csv](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-csv-schema)
 
 # JSON Document
 
@@ -53,7 +53,7 @@ A JSON document such as the following:
 }
 ```
 
-Can be "flattened" into a columnar form and read using:
+Can be "flattened" into a columnar form and read using an external command (`jq` has to be installed on your system):
 
 ```yaml
 prepare:
@@ -88,7 +88,35 @@ read:
   - key STRING
 ```
 
-See also: [ReadStep::JsonLines](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstepjsonlines-schema)
+See also: [ReadStep::JsonLines](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-jsonlines-schema)
+
+# Directory of Timestamped CSV files
+
+The [FetchStep::FilesGlob](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#fetchstep-filesglob-schema) is used in cases where directory contains a growing set of files. Files can be periodic snapshots of your database or represent batches of new data in a ledger. In either case file content should never change - once `kamu` processes a file it will not consider it again. It's OK for files to disappear - `kamu` will remember the name of the file it ingested last and will only consider files that are higher in order than that one (lexicographically based on file name, or based on event time as shown below).
+
+In the example below data inside the files is in snapshot format, and to complicate things it does not itself contain an event time - the event time is written into the file's name.
+
+Directory contents:
+
+```bash
+db-table-dump-2020-01-01.csv
+db-table-dump-2020-01-02.csv
+db-table-dump-2020-01-03.csv
+```
+
+Fetch step:
+
+```yaml
+fetch:
+  kind: filesGlob
+  path: /home/username/data/db-table-dump-*.csv
+  eventTime:
+    kind: fromPath
+    pattern: 'db-table-dump-(\d+-\d+-\d+)\.csv'
+    timestampFormat: '%Y-%m-%d'
+  cache:
+    kind: forever
+```
 
 # Esri Shapefile
 
