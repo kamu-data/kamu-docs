@@ -139,3 +139,16 @@ podman network ls
 podman network prune
 ```
 {{</info>}} 
+
+
+## Development Images
+It is sometimes conveniet to get `kamu-cli` in a Docker/Podman image. For this we have few options:
+
+- [`kamudata/kamu-base:{version}`](https://github.com/kamu-data/kamu-cli/tree/master/images/kamu-base) - comes with just `podman` and `kamu-cli` pre-installed
+- [`kamudata/kamu-base:latest-with-data`](https://github.com/kamu-data/kamu-cli/tree/master/images/kamu-base-with-data) - comes with a sample data pipeline that you can use to test different features with
+
+For example, try running:
+
+```bash
+docker run -it --rm kamudata/kamu-base:latest-with-data kamu list
+```
