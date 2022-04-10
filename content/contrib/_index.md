@@ -7,11 +7,11 @@ categories: []
 aliases:
 ---
 
-Thanks for considering to contribute! This project is a massive undertaking and developed just by a few people, so every little bit helps.
+Thanks for considering contributing! This project is a massive undertaking and developed just by a few people, so every little bit helps.
 
-We welcome contributors of any skill level and background. You [don't have to be a software engineer](https://dev.to/navendu/how-to-make-non-code-contributions-to-open-source-projects-35nj) to make large impact in an open-source project! 
+We welcome contributors of any skill level and background. You [don't have to be a software engineer](https://dev.to/navendu/how-to-make-non-code-contributions-to-open-source-projects-35nj) to make a large impact in an open-source project! 
 
-Besides code you can cotribute in many different ways: 
+Besides code you can contribute in many different ways: 
 
 - Improving the [documentation](https://github.com/kamu-data/kamu-docs)
 - Graphic design
