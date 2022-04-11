@@ -43,6 +43,17 @@ To do so install `lld`, then create `~/.cargo/config.toml` file with the followi
 rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 ```
 
+## Building with Web UI (Optional)
+To build the tool with embedded Web UI you will need to clone and build [kamu-web-ui](https://github.com/kamu-data/kamu-web-ui) repo or use pre-built release. Now build the tool while enabling the optional feature and passing the location of the web root directory:
+
+```shell
+KAMU_WEB_UI_DIR=`pwd`/../kamu-web-ui/dist/kamu-platform/ cargo build --features kamu-cli/web-ui
+```
+
+Note: `KAMU_WEB_UI_DIR` requires absolute path
+
+Note: in debug mode the directory content is not actually being embedded into the executable but accessed from the specified directory.
+
 # Release Procedure
 1. While on the feature branch, bump the crates versions using `release` tool, e.g. `cargo run --bin release -- --major / --minor / --patch`
 2. Create a CHANGELOG entry for the new version
