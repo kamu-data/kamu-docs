@@ -1,12 +1,10 @@
-{{- $filename := .Get "filename" }} {{- $path := (printf "static%v" $filename)
-}} {{- if not (fileExists $path) }} {{ errorf "Image not found: %v" $path }} {{-
-end }}
+{{- $filename := .Get "filename" }} {{- $path := (printf "static%v" $filename) }} 
+{{- if not (fileExists $path) }} {{ errorf "Image not found: %v" $path }} {{- end }}
 <a href="{{$filename}}" data-featherlight="image">
   {{ with .Get "align" }}
   <div style="text-align: center">
-    {{ end }} <img src="{{$filename}}" style="border:0px" {{ with .Get "width"
-    }} width="{{.}}" {{ end }} {{ with .Get "alt" }} alt="{{.}}" {{ end }} /> {{
-    with .Get "align" }}
+    {{ end }} <img src="{{$filename}}" style="border:0px" {{ with .Get "width" }} 
+    width="{{.}}" {{ end }} {{ with .Get "alt" }} alt="{{.}}" {{ end }} /> {{ with .Get "align" }}
   </div>
   {{ end }}
 </a>

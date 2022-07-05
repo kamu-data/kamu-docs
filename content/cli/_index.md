@@ -198,7 +198,7 @@ If you'd like to contribute [start here]({{<ref "contrib">}}).
 
 [Repository]: https://github.com/kamu-data/kamu-cli
 [Demo]: {{<ref "self-serve-demo">}}
-[Tutorials]: {{<ref "learning-materials">}}
+[Tutorials]: {{<ref "learn/learning-materials">}}
 [Examples]: {{<ref "examples">}}
 [FAQ]: {{<ref "faq">}}
 [Chat]: https://discord.gg/nU6TXRQNXC

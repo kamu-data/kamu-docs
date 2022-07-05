@@ -36,8 +36,7 @@
 
     <ul>
       {{ with $sourcePage }}
-      {{ partial "recursive-children.html" (dict "context" . "printType" "toc" "depth" 0 "pageFilepath" .Page.File.Path
-      "paddingVal" 0) }}
+      {{ partial "recursive-children.html" (dict "context" . "printType" "toc" "depth" 0 "pageFilepath" .Page.File.Path "paddingVal" 0) }}
       {{ end }}
     </ul>
   </div>
