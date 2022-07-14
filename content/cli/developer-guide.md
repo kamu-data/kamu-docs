@@ -98,9 +98,10 @@ Note: in debug mode the directory content is not actually being embedded into th
 
 # Release Procedure
 1. While on the feature branch, bump the crates versions using `release` tool, e.g. `cargo run --bin release -- --major / --minor / --patch`
-2. Create a CHANGELOG entry for the new version
-3. Create PR, wait for tests, then merge
-4. Checkout and pull `master`
-5. Tag the latest commit with a new version: `git tag vX.Y.Z`
-6. Push the tag to repo: `git push origin tag vX.Y.Z`
-7. Github Actions will pick up the new tag and create a new GitHub release from it
+2. We try to stay up-to-date with all dependencies, so for any minor or major release you should also run `cargo update`
+3. Create a `CHANGELOG` entry for the new version
+4. Create PR, wait for tests, then merge
+5. Checkout and pull `master`
+6. Tag the latest commit with a new version: `git tag vX.Y.Z`
+7. Push the tag to repo: `git push origin tag vX.Y.Z`
+8. Github Actions will pick up the new tag and create a new GitHub release from it
