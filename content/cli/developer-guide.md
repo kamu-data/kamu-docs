@@ -15,8 +15,10 @@ Prerequisites:
   * Install `rustup`
   * When running `cargo` in the repository it will detect and download the right toolchain version based on the `rust-toolchain` file
 * Additional tools
-  * Install [`jq`](https://stedolan.github.io/jq)
-  * Install [`go-ipfs`](https://docs.ipfs.io/install/command-line/#official-distributions)
+  * Install [`protoc`](https://github.com/protocolbuffers/protobuf) (currently required to compile gRPC client)
+  * Install [`flatc`](https://github.com/google/flatbuffers) (optional, only needed when you change ODF schemas)
+  * Install [`jq`](https://stedolan.github.io/jq) (used in tests)
+  * Install [`go-ipfs`](https://docs.ipfs.io/install/command-line/#official-distributions) (used in tests)
 * AWS account and configured AWS CLI (optional, needed for S3 volumes)
 
 Clone the repository:
