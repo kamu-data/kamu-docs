@@ -13,13 +13,15 @@ Prerequisites:
   * If using `podman` - make sure it's setup to run root-less containers ([guidelines](https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md))
 * Rust toolset
   * Install `rustup`
-  * When running `cargo` in the repository it will detect and download the right toolchain version based on the `rust-toolchain` file
-* Additional tools
-  * Install [`protoc`](https://github.com/protocolbuffers/protobuf) (currently required to compile gRPC client)
-  * Install [`flatc`](https://github.com/google/flatbuffers) (optional, only needed when you change ODF schemas)
-  * Install [`jq`](https://stedolan.github.io/jq) (used in tests)
-  * Install [`go-ipfs`](https://docs.ipfs.io/install/command-line/#official-distributions) (used in tests)
-* AWS account and configured AWS CLI (optional, needed for S3 volumes)
+  * The correct toolchain version will be automatically installed based on the `rust-toolchain` file in the repository
+* Tools used by tests
+  * Install [`jq`](https://stedolan.github.io/jq) - used to query and format JSON files
+  * Install [`kubo`](https://docs.ipfs.io/install/command-line/#official-distributions) (formerly known as `go-ipfs`) - for IPFS-related tests
+* Code generation tools (optional - needed if you will be updating schemas)
+  * Install [`flatc`](https://github.com/google/flatbuffers)
+  * Install [`protoc`](https://github.com/protocolbuffers/protobuf) followed by:
+    * `cargo install protoc-gen-prost` - to install [prost protobuf plugin](https://crates.io/crates/protoc-gen-prost)
+    * `cargo install protoc-gen-tonic` - to install [tonic protobuf plugin](https://crates.io/crates/protoc-gen-tonic)
 
 Clone the repository:
 ```shell
@@ -97,6 +99,17 @@ KAMU_WEB_UI_DIR=`pwd`/../kamu-web-ui/dist/kamu-platform/ cargo build --features 
 Note: `KAMU_WEB_UI_DIR` requires absolute path
 
 Note: in debug mode the directory content is not actually being embedded into the executable but accessed from the specified directory.
+
+
+## Code Generation
+Many core types in `kamu` are generated from schemas and IDLs in the [open-data-fabric](https://github.com/open-data-fabric/open-data-fabric) repository. If your work involves making changes to those - you will need to re-run the code generation tasks using:
+
+```sh
+make codegen
+```
+
+Make sure you have all related dependencies installed (see above) and that ODF repo is checked out in the same directory as `kamu-cli` repo.
+
 
 # Release Procedure
 1. While on the feature branch, bump the crates versions using `release` tool, e.g. `cargo run --bin release -- --major / --minor / --patch`
