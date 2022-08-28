@@ -1,6 +1,6 @@
 ---
 Title: FAQ
-description:
+description: Frequently asked questions
 weight: 40
 categories: []
 aliases:

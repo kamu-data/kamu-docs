@@ -1,6 +1,6 @@
 ---
 Title: Self-Serve Demo
-description:
+description: A detailed self-guded tour of the took and its features
 weight: 15
 categories: []
 aliases:

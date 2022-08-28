@@ -1,6 +1,6 @@
 ---
 Title: Sharing datasets with IPFS
-description:
+description: Describes integration with content-addressable decentralized storage
 weight: 20
 alwaysopen: false
 categories: []

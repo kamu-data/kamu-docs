@@ -80,7 +80,7 @@ Let's acknowledge that for organizations that produce the most valuable data (go
 This is why the goal of `kamu` is to make data publishing **cheap and effortless**:
 - It invisibly guides publishers towards best data management practices (preserving history, making data reproducible and verifiable)
 - Adds as little friction as exporting data to CSV
-- Lets you host your data on any storage (FTP, S3, GCS, etc.)
+- Lets you host your data on any storage (S3, IPFS, GCS, FTP etc.)
 - Maintain full control and ownership of your data
 
 As opposed to just the download counter you get on most data portals, `kamu` brings publishers closer with the communities allowing them to see who and how uses their data. You no longer send data into "the ether", but create a **closed feedback loop** with your consumers.
@@ -178,8 +178,10 @@ We also scrape a lot of websites to make smarter purchasing decisions. `kamu` le
 - Launch a **Jupyter notebook** with one command
 - Join, filter, and shape your data using SQL
 - Visualize the result using your favorite library
+- Explore complex pipelines in Web UI
   {{<image filename="/images/cli/first-steps/sql.gif" alt="SQL Shell">}}
   {{<image filename="/images/cli/first-steps/notebook-005.png" alt="Jupyter notebooks">}}
+  {{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Web UI">}}
 {{< /tab >}}
 
 {{< /tabs >}}

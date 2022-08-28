@@ -1,6 +1,6 @@
 ---
 Title: First Steps
-description:
+description: A quick rundown of the key features to get a feel for the tool
 weight: 30
 categories: []
 aliases:
@@ -112,10 +112,11 @@ $ kamu log us.cityofnewyork.data.zipcode-boundaries
 
 ## Exploring data
 
-Since you might not have worked with this dataset before you'd want to explore it first. For this `kamu` provides two tools:
+Since you might not have worked with this dataset before you'd want to explore it first. For this `kamu` provides many tools:
 * `tail` command
 * SQL shell
-* Jupyter Notebooks integration
+* Jupyter notebooks integration
+* Web UI
 
 ### Tail command
 
@@ -232,4 +233,19 @@ Now that we have the data in Jupyter - we can use any of your favorite tools and
 
 You can find this as well as many other notebooks in [kamu-contrib](https://github.com/kamu-data/kamu-contrib) repo.
 
-Don't get distracted by the pretty notebooks however - the true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily reproducible an verifiable way. So make sure to check out our other tutorials!
+
+### Web UI
+
+Once your pipelines become more complex it can be really useful to explore them more visually. For this `kamu` comes with embedded Web UI which you can launch by running:
+
+```bash
+$ kamu ui
+```
+
+It should look something like this:
+
+{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}
+
+Don't get distracted by the pretty notebooks and UIs though - the true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily reproducible an verifiable way. 
+
+To learn more make sure to try the [self-serve demo]({{<ref "self-serve-demo">}}) and check out our other [learning materials]({{<ref "learning-materials">}})!

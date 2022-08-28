@@ -1,6 +1,6 @@
 ---
 Title: Materials
-description: 
+description: Explainer videos, talks, publications and other learning materials
 weight: 10
 categories: []
 aliases:

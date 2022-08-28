@@ -1,6 +1,6 @@
 ---
 Title: Examples
-description:
+description: Examples of handling tricky formats during ingestion
 weight: 30
 categories: []
 aliases:
@@ -134,6 +134,37 @@ preprocess:
       ...
     FROM input
 ```
+
+# Dealing with API Keys
+
+Sometimes you may want to parametrize the URL to include things like API keys and auth tokens. For this `kamu` supports basic variable substitution:
+
+```yaml
+fetch:
+  kind: url
+  url: "https://api.etherscan.io/api?apikey=${{ env.ETHERSCAN_API_KEY }}"
+```
+
+# Using Ingest Scripts
+
+Sometimes you may need the power of a general purpose programming language to deal with particularly complex API, or when doing web scraping. For this `kamu` supports containerized ingestion tasks:
+
+```yaml
+fetch:
+  kind: container
+  image: "docker.io/kamudata/example-rocketpool-ingest:0.1.0"
+  env:
+    - name: ETH_NODE_PROVIDER_URL
+```
+
+The specified container image is expected to conform to the following interface:
+- Produce data to `stdout`
+- Write warnings / errors to `sterr`
+- Use following environment variables:
+  - `ODF_LAST_MODIFIED` - last modified time of data from the previous ingest run, if any (in RFC3339 format)
+  - `ODF_ETAG` - caching tag of data from the previous ingest run, if any
+  - `ODF_NEW_LAST_MODIFIED_PATH` - path to a text file where ingest script may write new `Last-Modified` timestamp
+  - `ODF_NEW_ETAG_PATH` - path to a text file where ingest script may write new `eTag`
 
 # Need More Examples?
 

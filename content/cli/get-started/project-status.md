@@ -1,6 +1,6 @@
 ---
 Title: Project Status
-description:
+description: The state of development of the project's key functionality
 weight: 10
 categories: []
 aliases:
@@ -28,13 +28,18 @@ Please be patient with current performance and resource usage. We fully realize 
 | Ingest merge strategies            |   ✔️   |   ✔️   |
 | Derivative datasets                |   ✔️   |   ✔️   |
 | Validation - Metadata integrity    |   ✔️   |   ✔️   |
-| Validation - Data integrity        |   ❌   |   ❌   |
+| Validation - Data integrity        |   ✔️   |   ✔️   |
 | Validation - Transformation replay |   ✔️   |   ✔️   |
+| Enines - Deterministic SQL         |   ❌   |   ❌   |
 | Source evolution                   |   ❌   |   ❌   |
 | Schema evolution                   |   ❌   |   ❌   |
 | Query migrations                   |   ❌   |   ❌   |
 | Engine versioning                  |   ❌   |   ❌   |
 | Engine migrations                  |   ❌   |   ❌   |
+| Dataset identity                   |   ✔️   |   ✔️   |
+| Dataset ownership                  |   ❌   |   ❌   |
+| Transaction signing                |   ❌   |   ❌   |
+| Data encryption                    |   ❌   |   ❌   |
 
 
 

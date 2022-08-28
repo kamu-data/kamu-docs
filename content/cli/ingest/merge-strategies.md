@@ -1,6 +1,6 @@
 ---
 Title: Merge Strategies
-description:
+description: Describes the process of historization used depending on the nature of source data
 weight: 20
 categories: []
 aliases:
