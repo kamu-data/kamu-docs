@@ -151,17 +151,17 @@ LEFT JOIN holdings as h ON t.symbol = h.symbol
 
 In our case, however, we are joining two streams of events, which might be new to many people.
 
-Consider, for example, the following ticker event:
+Consider, for example, the following event in `tickers`:
 
 ```sql
 +-------------+------------+---------+------------+-----------+-----------+-----------+-----------+-----------------+
 | system_time | event_time | symbol  | close_adj  |   close   |   high    |    low    |   open    |     volume      |
 +-------------+------------+---------+------------+-----------+-----------+-----------+-----------+-----------------+
-|     ...     | 2016-01-06 | IPO     | 19.4156    | 19.8200   | 20.0600   | 19.8200   | 19.9700   | 2600.0000       |
+|     ...     | 2016-01-06 | SPY     | 181.2856   | 198.8200  | 200.0599  | 197.600   | 198.3399  | 152112600.0000  |
 +-------------+------------+---------+------------+-----------+-----------+-----------+-----------+-----------------+
 ```
 
-When we join it with holdings data we would like it to be joined with the holdings event that directly precedes it in the event time space. In our example it would be:
+When we join it with `holdings` data we would like it to be joined with the holdings event that directly precedes it in the event time space - current price joined to the value of portfolio at that time. In our example it would be:
 
 ```sql
 +-------------+------------+---------+-----------+-----------+-------------+---------------+--------------+
@@ -173,7 +173,7 @@ When we join it with holdings data we would like it to be joined with the holdin
 
 There are two ways to achieve this. We could use **stream-to-stream joins** and describe the tolerance intervals (how far two events can be apart from each other in time) and the "precedes" condition in our join statement. While stream-to-stream joins have valuable applications using them in this case would be too cumbersome. Instead, we can use the **temporal table joins**.
 
-Temporal table joins (see this [great explanation in Apache Flink's blog](https://flink.apache.org/2019/05/14/temporal-tables.html)) take one of the streams and represent it as a three-dimensional table. You can think of it as `holdings` table from the non-temporal example above that hash a third "depth" axis which is `event_time`. When joining to such a table you need to pass in the time argument to tell join to consider the version of the table that would exist at that point in time.
+Temporal table joins (see this [great explanation in Apache Flink's blog](https://flink.apache.org/2019/05/14/temporal-tables.html)) take one of the streams and represent it as a three-dimensional table. You can think of it as `holdings` table from the non-temporal example above that has a third "depth" axis which is `event_time`. When joining to such a table you need to pass in the time argument to tell the join which version of the table to consider.
 
 Let's have a look at the `my.trading.holdings.market-value` dataset:
 
@@ -208,7 +208,7 @@ content:
         WHERE tickers.`symbol` = holdings.`symbol`
 ```
 
-Using `temporalTables` section we instruct the Flink engine to use `my.trading.holdings` event stream to create a temporal table of the same name.
+Using `temporalTables` section we instruct the Flink engine to use `my.trading.holdings` event stream to create a virtual temporal table of the same name.
 
 Here's how this three-dimensional table would look like when sliced at different points in time:
 
