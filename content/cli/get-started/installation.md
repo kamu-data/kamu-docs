@@ -56,14 +56,20 @@ See also:
 - [Installing shell completions]({{<relref "#installing-shell-completions">}})
 - [Using Podman instead of Docker]({{<relref "#using-podman-instead-of-docker">}})
 
-### Windows (using WSL 2)
-- Install WSL following [these steps](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-- Install Ubuntu distro from Microsoft Store
-- Install `docker` (alternatively try [podman]({{<relref "#using-podman-instead-of-docker">}}))
-  - Make sure you can launch containers without `sudo` by following [official documentation](https://docs.docker.com/engine/install/linux-postinstall/)
-- Download the latest version of `kamu` from the GitHub [release page](https://github.com/kamu-data/kamu-cli/releases/latest) (note that you should download Linux release)
-- Unpack and, `chmod +x` it
-- Link it into your preferred location on your `PATH`
+### Windows (using WSL2)
+- Install WSL2 following [these steps](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+- Install `docker`
+  - We recommend you to install Docker Desktop for Windows with WSL2 backend (see [instructions](https://docs.docker.com/desktop/windows/wsl/))
+  - Ensure that from your linux distribution you can launch containers without `sudo` (e.g. `docker run -it --rm hello-world` should work)
+- Inside your WSL2 distribution of choice:
+  - Download the latest version of `kamu` from the GitHub [release page](https://github.com/kamu-data/kamu-cli/releases/latest)
+    - Remember to download the Linux release!
+  - Unpack and, `chmod +x` it
+  - Link it into your preferred location on your `PATH`
+
+To get the best experience using `kamu` with WSL2 we recommend you to also:
+  - Use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) that supports unicode symbols and full colors
+  - Configure [shell completions]({{<relref "#installing-shell-completions">}})
 
 See also:
 <!-- no toc -->
