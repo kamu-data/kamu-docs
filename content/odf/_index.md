@@ -15,12 +15,13 @@ aliases:
 <p><strong>Open protocol for decentralized exchange and transformation of data</strong></p>
 
 [Repository](https://github.com/kamu-data/open-data-fabric) |
-[Original Whitepaper](https://arxiv.org/abs/2111.06364) |
 [Reference Implementation]({{<ref "cli">}}) |
+[Original Whitepaper](https://arxiv.org/abs/2111.06364) |
 [Chat](https://discord.gg/nU6TXRQNXC)
 
-[![Latest Version](https://img.shields.io/badge/Spec-0.18.0-green)]({{<ref "spec">}})
-[![Chat](https://shields.io/discord/898726370199359498?label=Discord)](https://discord.gg/nU6TXRQNXC)
+[![Spec](https://img.shields.io/github/v/tag/open-data-fabric/open-data-fabric?include_prereleases&logo=gitbook&logoColor=white&label=Spec&style=for-the-badge)](https://github.com/kamu-data/kamu-cli/releases/latest)
+[![Metadata Reference](https://img.shields.io/static/v1?label={}&message=Schemas&color=blue&style=for-the-badge)](./open-data-fabric.md#reference-information)
+[![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
 
 </p>
 </div>
