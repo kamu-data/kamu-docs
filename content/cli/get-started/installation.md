@@ -4,6 +4,7 @@ description: Covers installation steps to get kamu-cli running on your computer
 weight: 20
 categories: []
 aliases:
+  - /cli/install
 ---
 
 {{<info>}}
@@ -27,17 +28,7 @@ See also:
 Linux is our primary target environment. We don't have packages for various Linux flavors yet, but since the tool is just a simple binary it's very easy to get started:
 - Install `docker` using your distro's package manager (alternatively try [podman]({{<relref "#using-podman-instead-of-docker">}}))
   - Make sure you can launch containers without `sudo` by following [official documentation](https://docs.docker.com/engine/install/linux-postinstall/)
-- Download the latest version of `kamu` from the GitHub [release page](https://github.com/kamu-data/kamu-cli/releases/latest)
-- Unpack and, `chmod +x` it
-  ```
-  tar -zxvf kamu-cli-x86_64-unknown-linux-gnu.tar.gz
-  chmod +x kamu-cli-x86_64-unknown-linux-gnu/kamu
-  ```
-- Link it or copy it into your preferred location on your `$PATH`, we recommend:
-  ```
-  cp kamu /usr/local/bin
-  ```
-- Use `kamu init --pull-images` to pre-load all Docker images
+- Install `kamu` via installer script by running `curl -s "https://get.kamu.dev" | sh`
 
 See also:
 <!-- no toc -->
@@ -62,10 +53,7 @@ See also:
   - We recommend you to install Docker Desktop for Windows with WSL2 backend (see [instructions](https://docs.docker.com/desktop/windows/wsl/))
   - Ensure that from your linux distribution you can launch containers without `sudo` (e.g. `docker run -it --rm hello-world` should work)
 - Inside your WSL2 distribution of choice:
-  - Download the latest version of `kamu` from the GitHub [release page](https://github.com/kamu-data/kamu-cli/releases/latest)
-    - Remember to download the Linux release!
-  - Unpack and, `chmod +x` it
-  - Link it into your preferred location on your `PATH`
+  - Install `kamu` via installer script by running `curl -s "https://get.kamu.dev" | sh`
 
 To get the best experience using `kamu` with WSL2 we recommend you to also:
   - Use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) that supports unicode symbols and full colors
@@ -85,7 +73,6 @@ See also:
   * We recommend using `PowerShell` when working with `kamu`
 * Download the latest `kamu` binary for Windows
 * Add it to your `PATH` environment variable
-* Use `kamu init --pull-images` to pre-load all Docker images
 
 Docker Toolbox runs Docker in a Virtual Machine. This means to mount a file from your host file system into a Docker container the file first needs to be mounted into VM, so make sure all paths that `kamu` will need are mapped in VirtualBox VM settings.
 
@@ -130,7 +117,6 @@ In order to instruct `kamu` to use `podman` run:
 
 ```bash
 kamu config set --user engine.runtime podman
-kamu init --pull-images
 ```
 
 {{<info>}}

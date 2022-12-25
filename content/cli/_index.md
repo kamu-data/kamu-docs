@@ -12,7 +12,7 @@ aliases:
 
 ![Kamu Logo](/images/kamu_logo.svg)
 
-<p><strong>World's first decentralized real-time data warehouse, on your laptop</strong></p>
+<p><strong>Planet-scale data pipeline</strong></p>
 
 [Repository] | [Demo] | [Tutorials] | [Examples] | [FAQ] | [Chat]
 
@@ -23,6 +23,13 @@ aliases:
 
 </p>
 </div>
+
+## Quickstart
+
+Using the installer script _(Linux / MacOSX / WSL2)_:
+```sh
+curl -s "https://get.kamu.dev" | sh
+```
 
 ## Get Started
 

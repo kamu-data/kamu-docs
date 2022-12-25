@@ -36,7 +36,13 @@ cargo build
 
 To use your locally-built `kamu` executable link it as so:
 ```shell
-sudo ln -s $PWD/target/debug/kamu-cli /usr/bin/kamu
+ln -s $PWD/target/debug/kamu-cli ~/.local/bin/kamu
+```
+
+When needing to test against a specific official release you can install it under a different alias:
+
+```shell
+curl -s "https://get.kamu.dev" | KAMU_ALIAS=kamu-release sh
 ```
 
 
