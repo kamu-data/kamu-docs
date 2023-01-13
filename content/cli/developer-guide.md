@@ -73,6 +73,24 @@ KAMU_CONTAINER_RUNTIME_TYPE=docker cargo test
 
 ```
 
+## Using Nextest test runner (Optional)
+[Nextest](https://nexte.st/) is a better test runner.
+
+To install it first prepare `cargo-binstall` and `cargo-update` packages:
+
+```sh
+cargo install cargo-binstall
+cargo install cargo-update
+cargo binstall cargo-binstall --force # Make future updates to this binary use precompiled version
+```
+
+Then run:
+
+```sh
+cargo binstall cargo-nextest
+cargo nextest run
+```
+
 
 ## Build Speed Tweaks (Optional)
 Consider configuring Rust to use `lld` linker, which is much faster than the default `ld` (may improve link times by ~10-20x).
