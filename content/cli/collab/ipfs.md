@@ -7,7 +7,7 @@ categories: []
 aliases:
 ---
 
-The `kamu` and [IPFS](https://ipfs.io/) (The Interplanetary File System) projects have overlaping goals - preserving and growing humanity's knowledge.
+The `kamu` and [IPFS](https://ipfs.io/) (The Interplanetary File System) projects have overlapping goals - preserving and growing humanity's knowledge.
 
 While IPFS focuses on storing files (objects), `kamu`'s focus is on structured data and dynamic data processing, but under the hood even a real-time dataset in `kamu` is just a set of files!
 
@@ -35,7 +35,7 @@ These event streams are represented by a linked list of metadata blocks (think g
 
 {{<image filename="/images/pages/ipfs/odf-chain.svg" alt="ODF dataset structure" width="350px" align="center">}}
 
-So, very similarly to IPFS, the composing parts of a datasets in `kamu` are:
+So, very similarly to IPFS, the composing parts of a dataset in `kamu` are:
 - **Immutable** - dataset only changes by appending new blocks
 - **Content-addressable** - a metadata block, data file, or a checkpoint are uniquely identified by their hashsum
 
