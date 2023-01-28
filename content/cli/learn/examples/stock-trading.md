@@ -113,9 +113,10 @@ kamu pull my.trading.holdings
 
 The result should look something like:
 
+```sh
+$ kamu tail my.trading.holdings
+```
 ```sql
-$ kamu sql
-0: kamu> select * from `my.trading.holdings` limit 5;
 +-------------+------------+---------+-----------+-----------+-------------+---------------+--------------+
 | system_time | event_time | symbol  | quantity  |   price   | settlement  | cum_quantity  | cum_balance  |
 +-------------+------------+---------+-----------+-----------+-------------+---------------+--------------+
@@ -202,10 +203,9 @@ content:
           holdings.`cum_quantity`,
           holdings.`quantity` as `quantity`,
           tickers.`close_adj` * holdings.`cum_quantity` as `market_value`
-        FROM
-          `com.yahoo.finance.tickers.daily` as tickers,
-          LATERAL TABLE (`my.trading.holdings`(tickers.`event_time`)) as holdings
-        WHERE tickers.`symbol` = holdings.`symbol`
+        FROM `com.yahoo.finance.tickers.daily` as tickers
+        JOIN `my.trading.holdings` FOR SYSTEM_TIME AS OF tickers.`event_time` AS holdings
+        ON tickers.`symbol` = holdings.`symbol`
 ```
 
 Using `temporalTables` section we instruct the Flink engine to use `my.trading.holdings` event stream to create a virtual temporal table of the same name.
@@ -239,7 +239,7 @@ my.trading.holdings:
 
 It basically remembers the last observed value of every column grouped by the provided `primaryKey` (`symbol` in our case).
 
-The `LATERAL TABLE (``my.trading.holdings``(tickers.``event_time``)) as holdings` part can be interpreted as us taking every ticker event from `tickers`, indexing the temporal table `my.trading.holdings` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
+The `JOIN my.trading.holdings FOR SYSTEM_TIME AS OF tickers.event_time` part can be interpreted as us taking every ticker event from `tickers`, indexing the temporal table `my.trading.holdings` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
 
 With theory out of the way, time to give this a try:
 

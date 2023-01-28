@@ -48,10 +48,14 @@ $ kamu pull --all
 You can verify the result using `tail` command or the SQL shell:
 
 ```bash
-$ kamu sql
+$ kamu tail ca.bankofcanada.exchange-rates.daily
 ```
 
+OR:
+
 ```sql
+$ kamu sql
+
 0: kamu> select * from `ca.bankofcanada.exchange-rates.daily` limit 5;
 ```
 
@@ -114,13 +118,12 @@ content:
             tr.`price` * exc.`rate` as `price_cad`,
             tr.`settlement` as `settlement_usd`,
             tr.`settlement` * exc.`rate` as `settlement_cad`
-          FROM
-            `my.trading.transactions` as tr,
-            LATERAL TABLE (`ca.bankofcanada.exchange-rates.daily`(tr.`event_time`)) as exc
-          WHERE tr.`currency` = exc.`currency_base` AND exc.`currency_target` = 'CAD'
+          FROM `my.trading.transactions` as tr
+          LEFT JOIN `ca.bankofcanada.exchange-rates.daily` FOR SYSTEM_TIME AS OF tr.`event_time` AS exc
+          ON tr.`currency` = exc.`currency_base` AND exc.`currency_target` = 'CAD'
 ```
 
-> Note: The excessive use of back ticks is currency caused by the SQL parser used by Apache Flink which is overly sensitive to reserved words - this should improve in future versions.
+> Note: The excessive use of back ticks is currently caused by the SQL parser used by Apache Flink which is overly sensitive to reserved words - this should improve in future versions.
 
 Using the `temporalTables` section we instruct the Flink engine to use `ca.bankofcanada.exchange-rates.daily` event stream to create a temporal table of the same name.
 
@@ -153,7 +156,9 @@ ca.bankofcanada.exchange-rates.daily:
 
 It basically remembers the last observed value of every column grouped by the provided `primaryKey` (`currency_base` in our case).
 
-The `LATERAL TABLE (``ca.bankofcanada.exchange-rates.daily``(tr.``event_time``))` part can be interpreted as us taking every transaction event from `my.trading.transactions`, indexing the temporal table `ca.bankofcanada.exchange-rates.daily` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
+The `LEFT JOIN ca.bankofcanada.exchange-rates.daily FOR SYSTEM_TIME AS OF tr.event_time` part can be interpreted as us taking every transaction event from `my.trading.transactions`, indexing the temporal table `ca.bankofcanada.exchange-rates.daily` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
+
+> Note that `SYSTEM_TIME AS OF` syntax is a relic of SQL:2011 standard and should not be confused with Kamu's `system_time` column. The actual join is perforemed in the event time space. You can learn more about temporal event time joins in [Flink documentation](https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/queries/joins/#temporal-joins).
 
 With theory out of the way, it's time to give this a try:
 
@@ -165,10 +170,7 @@ $ kamu pull my.trading.transactions.cad
 The results should be:
 
 ```bash
-$ kamu sql
-```
-```sql
-0: kamu> select * from `my.trading.transactions.cad` limit 5;
+$ kamu tail my.trading.transactions.cad
 ```
 ```sql
 +-------------+------------+--------+----------+-----------+---------------------+
