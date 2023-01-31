@@ -18,8 +18,9 @@ aliases:
 
 | Name                                                                                                                                                           |    Level     | Description                                                                                                 |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | ----------------------------------------------------------------------------------------------------------- |
-| [Open Data Fabric for Research Data Management](https://www.youtube.com/watch?v=Ivh-YDDmRf8)                                                                   |   Beginner   | Current state and problems of scientific data portals, motivation behind ODF and system's design principles |
 | [Time: The most misunderstood dimension in data modelling](https://www.youtube.com/watch?v=XxKnTusccUM)                                                        |   Beginner   | Educational talk from **PyData Global 2021** about event-based data models and stream processing            |
+| [Structured Data in Web3 - Rethinking Databases](https://www.youtube.com/watch?v=ZQ-MdKj3BjU&list=PL_1oLZF_wrbTeLmaYWadPmKCCxjF9zGt0)                          |   Beginner   | **Protocol Labs: Compute Over Data Summit** talk about structured data processing in Web3 world             |
+| [Open Data Fabric for Research Data Management](https://www.youtube.com/watch?v=Ivh-YDDmRf8)                                                                   |   Beginner   | Current state and problems of scientific data portals, motivation behind ODF and system's design principles |
 | [Building a Distributed Collaborative Data Pipeline](https://databricks.com/session_eu20/building-a-distributed-collaborative-data-pipeline-with-apache-spark) | Intermediate | Technical talk from **Data+AI Summit 2020**                                                                 |
 
 ## Publications
