@@ -19,12 +19,6 @@ Geospatial data is so widespread that no data science software would be complete
 ### Getting Started
 To follow this example checkout `kamu-cli` repository and navigate into [examples/housing_prices](https://github.com/kamu-data/kamu-cli/tree/master/examples/housing_prices) sub-directory.
 
-Create a temporary kamu workspace in that folder using:
-
-```sh
-$ kamu init
-```
-
 ### Root Datasets
 We will be using following root datasets:
 - `ca.vancouver.opendata.property.tax-reports` - contains property assessment reports from the city of Vancouver
@@ -53,10 +47,21 @@ The `ST_Transform` function here comes from [Apache Sedona](http://sedona.apache
 Lets add all these datasets to our workspace and ingest them:
 
 ```sh
+
+# Create a kamu workspace in the example folder
+$ kamu init
+
 # Add all dataset manifests found in the current directory
 $ kamu add . --recursive
 $ kamu pull --all
+
+# Alternatively: Pull datasets in ODF format from Kamu's repository
+$ ./init-s3.sh
 ```
+
+{{<warning>}}
+The source data for `tax-reports` dataset is quite large (~400MB in CSV format) so if you don't want to wait too long - use the `init-s3.sh` script.
+{{</warning>}}
 
 This may take 10+ minutes as the tax report dataset is quite large. You can leave the ingest running and move on to the next step meanwhile.
 
