@@ -22,6 +22,13 @@ Prerequisites:
   * Install [`protoc`](https://github.com/protocolbuffers/protobuf) followed by:
     * `cargo install protoc-gen-prost` - to install [prost protobuf plugin](https://crates.io/crates/protoc-gen-prost)
     * `cargo install protoc-gen-tonic` - to install [tonic protobuf plugin](https://crates.io/crates/protoc-gen-tonic)
+* Cargo toolbelt (optional - if you will be doing releases)
+  * `cargo install cargo-update` - to easily keep your tools up-to-date
+  * `cargo install cargo-binstall` - to install binaries without compiling
+  * `cargo binstall cargo-binstall --force` - make future updates to use precompiled version
+  * `cargo binstall cargo-edit` - for setting crate versions during release
+  * `cargo binstall cargo-update` - for keeping up with major dependency updates
+  * `cargo binstall cargo-llvm-cov` - for coverage
 
 Clone the repository:
 ```shell
@@ -76,15 +83,7 @@ KAMU_CONTAINER_RUNTIME_TYPE=docker cargo test
 ## Using Nextest test runner (Optional)
 [Nextest](https://nexte.st/) is a better test runner.
 
-To install it first prepare `cargo-binstall` and `cargo-update` packages:
-
-```sh
-cargo install cargo-binstall
-cargo install cargo-update
-cargo binstall cargo-binstall --force # Make future updates to this binary use precompiled version
-```
-
-Then run:
+To use it run:
 
 ```sh
 cargo binstall cargo-nextest
@@ -137,7 +136,9 @@ Make sure you have all related dependencies installed (see above) and that ODF r
 
 # Release Procedure
 1. While on the feature branch, bump the crates versions using `release` tool, e.g. `cargo run --bin release -- --major / --minor / --patch`
-2. We try to stay up-to-date with all dependencies, so for any minor or major release you should also run `cargo update`
+2. We try to stay up-to-date with all dependencies, so:
+   1. Run `cargo update` to pull in any minor releases
+   2. Run `cargo upgrade --dry-run` and see which packages have major upgrades - either perform them or ticket them up
 3. Create a `CHANGELOG` entry for the new version
 4. Create PR, wait for tests, then merge
 5. Checkout and pull `master`
