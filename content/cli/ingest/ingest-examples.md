@@ -152,7 +152,7 @@ Sometimes you may need the power of a general purpose programming language to de
 ```yaml
 fetch:
   kind: container
-  image: "docker.io/kamudata/example-rocketpool-ingest:0.1.0"
+  image: "ghcr.io/kamu-data/fetch-my-dataset:0.1.0"
   env:
     - name: ETH_NODE_PROVIDER_URL
 ```
