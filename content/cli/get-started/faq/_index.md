@@ -2,7 +2,7 @@
 draft: false
 Title: FAQ
 description: Frequently asked questions
-weight: 10
+weight: 100
 alwaysopen: false
 categories: []
 aliases:

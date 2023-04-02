@@ -30,7 +30,7 @@ Please be patient with current performance and resource usage. We fully realize 
 | Validation - Metadata integrity    |   ✔️   |   ✔️   |
 | Validation - Data integrity        |   ✔️   |   ✔️   |
 | Validation - Transformation replay |   ✔️   |   ✔️   |
-| Enines - Deterministic SQL         |   ❌   |   ❌   |
+| Engines - Determ enforcement       |   ❌   |   ❌   |
 | Source evolution                   |   ❌   |   ❌   |
 | Schema evolution                   |   ❌   |   ❌   |
 | Query migrations                   |   ❌   |   ❌   |

@@ -28,7 +28,10 @@ See also:
 Linux is our primary target environment. We don't have packages for various Linux flavors yet, but since the tool is just a simple binary it's very easy to get started:
 - Install `docker` using your distro's package manager (alternatively try [podman]({{<relref "#using-podman-instead-of-docker">}}))
   - Make sure you can launch containers without `sudo` by following [official documentation](https://docs.docker.com/engine/install/linux-postinstall/)
-- Install `kamu` via installer script by running `curl -s "https://get.kamu.dev" | sh`
+- Install `kamu` via installer script by running:
+  ```bash
+  curl -s "https://get.kamu.dev" | sh
+  ```
 
 See also:
 <!-- no toc -->
@@ -53,7 +56,10 @@ See also:
   - We recommend you to install Docker Desktop for Windows with WSL2 backend (see [instructions](https://docs.docker.com/desktop/windows/wsl/))
   - Ensure that from your linux distribution you can launch containers without `sudo` (e.g. `docker run -it --rm hello-world` should work)
 - Inside your WSL2 distribution of choice:
-  - Install `kamu` via installer script by running `curl -s "https://get.kamu.dev" | sh`
+  - Install `kamu` via installer script by running:
+    ```bash
+    curl -s "https://get.kamu.dev" | sh
+    ```
 
 To get the best experience using `kamu` with WSL2 we recommend you to also:
   - Use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) that supports unicode symbols and full colors

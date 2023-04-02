@@ -1,9 +1,10 @@
 ---
 Title: Examples
 description: Sample data projects executed with kamu
-weight: 20
+weight: 50
 categories: []
 aliases:
+  - /cli/learn/examples
 ---
 
 ## Guided Examples

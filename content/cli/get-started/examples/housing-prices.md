@@ -4,6 +4,7 @@ description:
 weight: 0
 categories: []
 aliases:
+  - /cli/learn/examples/housing-prices
 ---
 
 **Topics covered:**

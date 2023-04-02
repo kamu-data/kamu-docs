@@ -1,5 +1,5 @@
 ---
-Title: Self-Serve Demo
+Title: Demo
 description: A detailed self-guded tour of the took and its features
 weight: 15
 categories: []
@@ -8,18 +8,22 @@ aliases:
 
 This demo guides you through the basics of using `kamu` and its key concepts. It lets you try out most of the tool's features without having to install it.
 
-{{<info>}}
+## Try Online
+
 The demo is also available online at: https://demo.kamu.dev
 
-*(for financial reasons the capacity of this environment is limited)*
+{{<info>}}
+for financial reasons the capacity of this environment is limited
 {{</info>}}
 
-## Requirements
+## Run It Yourself
+
+### Requirements
 To run this demo you'll only need:
 * `docker`
 * `docker-compose`
 
-## Running
+### Running
 First you will need to download the `docker-compose.yml` file:
 
 ```bash
@@ -48,7 +52,7 @@ Use this URL in your browser to open Jupyter. Once in Jupyter, navigate to the `
 
 Enjoy, and please send us [your feedback](https://github.com/issues)!
 
-## Shutting down
+### Shutting down
 To shutdown the environment do:
 
 ```bash

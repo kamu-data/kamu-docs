@@ -1,9 +1,10 @@
 ---
-Title: Materials
+Title: Learning Materials
 description: Explainer videos, talks, publications and other learning materials
-weight: 10
+weight: 13
 categories: []
 aliases:
+  - /cli/learn/learning-materials
 ---
 
 
