@@ -9,16 +9,14 @@ categories: []
 While `kamu` focuses primarily on the problem of data management, you often may want to do some basic data exploration before exporting data for further use in your data science projects, so we decided to provide a few simple exploration tools for you to assess the state of data without leaving the comfort of one tool.
 
 ## Tail Command
-
 To quickly view a sample of last events in a dataset:
 
 ```bash
 $ kamu tail ca.bccdc.covid19.case-details
 ```
 
-## Lineage Command
-
-To display the lineage of a certain dataset in a browser:
+## Inspect Command Group
+A set of `kamu inspect *` commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
 
 ```bash
 $ kamu inspect lineage ca.covid19.daily-cases -b
@@ -128,13 +126,12 @@ After you are done joining, filtering, and shaping the data you can choose to ge
 Now that you have the data in Jupyter - you can use any of your favorite tools and libraries to further process it or visualize it.
 
 ## Web UI
+And finally, `kamu` comes with embedded Web UI that you can use to explore your pipelines and run SQL queries on data from the comfort of your browser:
 
-Once your pipelines become more complex it can be really useful to explore them more visually. For this `kamu` comes with embedded Web UI which you can launch by running:
+{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}
+
+You can launch it by running:
 
 ```bash
 $ kamu ui
 ```
-
-It should look something like this:
-
-{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}

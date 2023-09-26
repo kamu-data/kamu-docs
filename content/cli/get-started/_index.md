@@ -6,6 +6,15 @@ alwaysopen: false
 categories: []
 ---
 
-This section covers everything you need to know to run Kamu CLI.
+Hi, and welcome to `kamu` - the world's first **planet-scale data pipeline**!
 
-{{% children style="h2" description="true" %}}
+`kamu` is an innovative project with a unique design that will take some time to wrap your head around. To help you in this journey we have outlined the recommended sequence of steps for you below. If you need help or want to share your feedback along the way - please consider joining our [Discord community](https://discord.gg/nU6TXRQNXC)!
+
+To get started:
+1. Acknowledge the [current project status]({{<ref "project-status">}})
+2. Go through [Kamu 101]({{<ref "learning-materials">}}) series of videos to get a taste of what `kamu` is about
+3. Take a self-guided tour in our [online demo environment]({{<ref "self-serve-demo">}})
+4. [Install]({{<ref "installation">}}) `kamu` on your laptop
+5. Get to know it through [first steps]({{<ref "first-steps">}}) guide and try out the [advanced examples]({{<ref "examples">}})
+6. Learn about architecture and design choices behind our data formats and protocols from our [conference talks]({{<ref "learning-materials">}})
+7. Do a deep dive into [Open Data Fabric]({{<ref "odf">}}) protocol specification
