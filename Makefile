@@ -10,4 +10,4 @@ build:
 publish: build
 	aws s3 rm --recursive s3://docs.kamu.dev
 	aws s3 cp public/ s3://docs.kamu.dev/ --recursive
-	aws cloudfront create-invalidation --distribution-id E3LHDIU5YENQ3U --paths '/*'
+	aws --no-cli-pager cloudfront create-invalidation --distribution-id E3LHDIU5YENQ3U --paths '/*'
