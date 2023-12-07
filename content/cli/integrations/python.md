@@ -18,14 +18,16 @@ This guide explains how to connect Python application and scripts to Kamu.
 Example:
 ```python
 import flightsql.sqlalchemy
-from sqlalchemy import func, select
-from sqlalchemy.engine import create_engine
-from sqlalchemy.schema import MetaData, Table
+import sqlalchemy.engine
+import pandas as pd
 
-engine = create_engine("datafusion+flightsql://kamu:kamu@localhost:50050?insecure=True")
-runs = Table("co.alphavantage.tickers.daily.spy", MetaData(bind=engine), autoload=True)
-count = select([func.count("*")], from_obj=runs).scalar()
-print([(r.name, r.type) for r in runs.columns])
+engine = sqlalchemy.engine.create_engine("datafusion+flightsql://kamu:kamu@localhost:50050?insecure=True")
+
+df = pd.read_sql("show tables", engine)
+print(df)
+
+df = pd.read_sql("select * from 'co.alphavantage.tickers.daily.spy' limit 10", engine)
+print(df)
 ```
 
 

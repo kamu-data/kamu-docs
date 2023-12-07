@@ -19,7 +19,7 @@ aliases:
 | [Overdue Order Shipments]({{<relref "overdue-shipments">}}) | Intermediate |                stream-to-stream joins, watermarks                 |
 | [Web3 Data]({{<relref "web3-data">}})                       | Intermediate | repositories, temporal-table joins, stream processing, watermarks |
 
-To work with examples we recommend you to clone this repo and use directories in `examples/` as your workspaces. 
+To work with examples we recommend you to clone the [kamu-cli repo](https://github.com/kamu-data/kamu-cli) and use directories in `examples/` as your workspaces.
 
 For instance:
 
