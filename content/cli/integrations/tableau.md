@@ -24,9 +24,9 @@ To connect `Tableau` to `kamu` follow these simple steps:
     kamu sql server --flight-sql --address 127.0.0.1 --port 50050
     ```
 4. Create a new connection in `Tableau` using `Other Databases (JDBC)` as a source:
-   1. Select `PostgreSQL` in the dialect selector
-   2. As URL specify:
+   - Select `PostgreSQL` in the dialect selector
+   - As URL specify:
         ```bash
         jdbc:arrow-flight-sql://127.0.0.1:50050?useEncryption=false
         ```
-   3. Use `"kamu"` as username and password
+   - Use `"kamu"` as username and password
