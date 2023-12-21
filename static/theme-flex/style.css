@@ -1858,7 +1858,7 @@ div.notices {
   height: 13px;
   background-size: 13px;
   display: inline-block;
-  background-image: url(./img/anchor.svg);
+  background-image: url(/theme-flex/img/anchor.svg);
   background-repeat: no-repeat;
   position: relative;
   top: -2px;
