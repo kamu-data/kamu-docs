@@ -11,12 +11,12 @@ This topic is also covered in detail in this video:
 
 {{% youtube hN_vpHYmwi0 %}}
 
-With `kamu` sharing data becomes very easy, but with that problem out of the way you will soon start wondering "How can I trust the data I downloaded from someon else?". Let's first define what validity or trustworthiness of data means.
+With `kamu` sharing data becomes very easy, but with that problem out of the way you will soon start wondering "How can I trust the data I downloaded from someone else?". Let's first define what validity or trustworthiness of data means.
 
 ### Validity of Root Data
 Let's say you're about to use a root dataset containing historical weather information in your city. How can you be sure it's trustworthy?
 
-Because source data is non-reproducible, its validity depends entirely on its publisher. Publisher is in full control of the data they present, which also means that measuring and processing errors and even malicious data can easily make its way into the root dataset. Make sure that your publishers have good reputation and prefer data that comes from well-established organizations (government or NGOs) that directly collect or opertate the systems from which the data is gathered.
+Because source data is non-reproducible, its validity depends entirely on its publisher. Publisher is in full control of the data they present, which also means that measuring and processing errors and even malicious data can easily make its way into the root dataset. Make sure that your publishers have good reputation and prefer data that comes from well-established organizations (government or NGOs) that directly collect or operate the systems from which the data is gathered.
 
 Aside from external audits, another way to improve confidence in data is to correlate it with data from other similar sources. In our example we could compare it with the data from a weather station in the neighbouring city and look for anomalies.
 
@@ -46,7 +46,7 @@ kamu verify --recursive ca.vancouver.opendata.weather.aggregated-daily
 
 For every derivative dataset the `kamu verify` command does two things:
 - Compares hashes of data you downloaded to the ones stored in metadata (ensures data is not tampered or corrupted)
-- Executes the declared derivative transformations locally to compares the hash of the result to one stored in metadata (ensures that metadata was not spoofed to match the fake result)
+- Executes the declared derivative transformations locally to compare the hash of the result to one stored in metadata (ensures that metadata was not spoofed to match the fake result)
 
 {{<info>}}
 Remember that you are not alone in the fight for data validity. Other people will also be verifying these datasets, so the Open Data Fabric network can quickly detect and exclude the participants who distribute malicious data.
