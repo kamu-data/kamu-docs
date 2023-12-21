@@ -225,8 +225,12 @@ The specified container image is expected to conform to the following interface:
 - Use following environment variables:
   - `ODF_LAST_MODIFIED` - last modified time of data from the previous ingest run, if any (in RFC3339 format)
   - `ODF_ETAG` - caching tag of data from the previous ingest run, if any
+  - `ODF_BATCH_SIZE` - is the recommended number of records, for ingest scripts that provide continuous stream of data and can resume from previous state
+    - default value is 10 000, can be overridden via `env`
   - `ODF_NEW_LAST_MODIFIED_PATH` - path to a text file where ingest script may write new `Last-Modified` timestamp
   - `ODF_NEW_ETAG_PATH` - path to a text file where ingest script may write new `eTag`
+  - `ODF_NEW_HAS_MORE_DATA_PATH` - path to a text file which ingest script can create to indicate about having more data for the next batch
+    - **⚠️ Please note:** if the file is created, one of the following output marks must also be present: `eTag` or `Last-Modified` timestamp
 
 
 # Need More Examples?
