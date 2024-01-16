@@ -42,27 +42,30 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: cities-population
-  kind: root
+  kind: Root
   metadata:
-    - kind: setPollingSource
+    - kind: SetPollingSource
       ...
       merge:
-        kind: ledger
+        kind: Ledger
         primaryKey:
+          - year
           - country
           - city
-    - kind: setVocab
+    - kind: SetVocab
       eventTimeColumn: year
 ```
 
-Notice that we specify `ledger` merge strategy with composite primary key `(country, city)`, and also set `eventTimeColumn` to use `year` as the source of event times.
+Notice that we specify `ledger` merge strategy with composite primary key `(year, country, city)`, meaning that we expect only one record per city per year. We also set `eventTimeColumn` to use `year` as the source of event times.
 
 The resulting dataset when ingested will look like this:
 
-| system_time | event_time | country |   city    | population |
-| :---------: | :--------: | :-----: | :-------: | :--------: |
-|     s1      |    2019    |   CA    | Vancouver |  2581000   |
-|     s1      |    2019    |   US    |  Seattle  |  3433000   |
+|  op   | system_time | event_time | country |   city    | population |
+| :---: | :---------: | :--------: | :-----: | :-------: | :--------: |
+|  +A   |     s1      |    2019    |   CA    | Vancouver |  2581000   |
+|  +A   |     s1      |    2019    |   US    |  Seattle  |  3433000   |
+
+`+A` in `op` column identifies the [Operation Type](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#operation-type) and in this case all we have is `Append` operations.
 
 Now let's say after a census in Vancouver our source data changes to:
 
@@ -77,18 +80,18 @@ So far this is a valid ledger data - history is preserved and changes are append
 
 Pulling the dataset will now result in the following history:
 
-| system_time | event_time | country |   city    | population |
-| :---------: | :--------: | :-----: | :-------: | :--------: |
-|     s1      |    2019    |   CA    | Vancouver |  2581000   |
-|     s1      |    2019    |   US    |  Seattle  |  3433000   |
-|     s1      |    2020    |   CA    | Vancouver |  2606000   |
+|   op   | system_time | event_time | country |     city      | population  |
+| :----: | :---------: | :--------: | :-----: | :-----------: | :---------: |
+|   +A   |     s1      |    2019    |   CA    |   Vancouver   |   2581000   |
+|   +A   |     s1      |    2019    |   US    |    Seattle    |   3433000   |
+| **+A** |   **s1**    |  **2020**  | **CA**  | **Vancouver** | **2606000** |
 
 Note that the old events from 2019 were recognized as ones we already seen and were not added again.
 
 ## Snapshot
 This strategy can be used for data exports that are taken periodically and contain only the latest state snapshot of the observed entity or system. Over time such exports can have new rows added, and old rows either removed or modified.
 
-It's important to understand that publishers that use such formats routinely lose information. When a record in the database is updated, or one DB dump is replaced with another we not only lose the history of previous values, but you also lose the context of why those changes happened. This is a really bad default!
+It's important to understand that publishers that use such formats **routinely lose information**. When a record in the database is updated, or one DB dump is replaced with another we not only lose the history of previous values, but you also lose the context of why those changes happened. This is a really bad default!
 
 The `snapshot` strategy transforms such data sources into a history of changes by performing the [change data capture](https://en.wikipedia.org/wiki/Change_data_capture). It relies on a user-specified primary key to correlate the rows between the two snapshots.
 
@@ -98,9 +101,9 @@ A new event is added into the output stream whenever:
 - A row with a certain key disappears from the snapshot
 - A row data associated with a certain key has changed
 
-Each event will have an additional column that signifies the kind of observation that was encountered.
+In case of removal or changes in data this strategy will issue explicit **retraction** (`-R`) and **correction** (`-C` / `+C`) events.
 
-The Snapshot strategy also requires special treatment in regards to the event time. Since snapshot-style data exports represent the state of some system at a certain time - it is important to know what that time was. This time is usually captured in some form of metadata (e.g. in the name of the snapshot file, in the URL, or the HTTP caching headers. It should be possible to extract and propagate this time into a data column.
+The Snapshot strategy also requires special treatment in regards to the event time. Since snapshot-style data exports represent the state of some system at a certain time - it is important to know what that time was. This time is usually captured in some form of metadata (e.g. in the name of the file, in the URL, or the HTTP caching headers. It should be possible to extract and propagate this time into a data column.
 
 <!-- TODO: Describe event time sources --->
 
@@ -125,32 +128,32 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: cities-population
-  kind: root
+  kind: Root
   metadata:
-    - kind: setPollingSource
+    - kind: SetPollingSource
       fetch:
-        kind: url
+        kind: Url
         url: https://...
         eventTime:
-          kind: fromMetadata
+          kind: FromMetadata
       ...
       merge:
-        kind: snapshot
+        kind: Snapshot
         primaryKey:
         - country
         - city
 ```
 
-Notice that we specify `snapshot` merge strategy with composite primary key `(country, city)`. We also specify the `eventTime` of kind `fromMetadata`, instructing the ingest to use time from the caching headers as the event time of new records.
+Notice that we specify `snapshot` merge strategy with composite primary key `(country, city)`. We also specify the `eventTime` of kind `FromMetadata`, instructing the ingest to use time from the caching headers as the event time of new records.
 
 The resulting dataset when ingested will look like this:
 
-| system_time | event_time | observed | country |   city    | population |
-| :---------: | :--------: | :------: | :-----: | :-------: | :--------: |
-|     s1      |     e1     |    I     |   CA    | Vancouver |  2581000   |
-|     s1      |     e1     |    I     |   US    |  Seattle  |  3433000   |
+|  op   | system_time | event_time | country |   city    | population |
+| :---: | :---------: | :--------: | :-----: | :-------: | :--------: |
+|  +A   |     s1      |     e1     |   CA    | Vancouver |  2581000   |
+|  +A   |     s1      |     e1     |   US    |  Seattle  |  3433000   |
 
-Notice that since it's the first time we ingested data both records have `observed == 'I'` values, i.e. "insert".
+Notice that since it's the first time we ingested data both records have `op == '+A'` values, i.e. "append" operation.
 
 Now let's say after a census in Vancouver our source data changes to:
 
@@ -162,14 +165,19 @@ US,Seattle,3433000
 
 Pulling the dataset will now result in the following history:
 
-| system_time | event_time | observed | country |   city    | population |
-| :---------: | :--------: | :------: | :-----: | :-------: | :--------: |
-|     s1      |     e1     |    I     |   CA    | Vancouver |  2581000   |
-|     s1      |     e1     |    I     |   US    |  Seattle  |  3433000   |
-|     s2      |     e2     |    U     |   CA    | Vancouver |  2606000   |
+|   op   | system_time | event_time | country |     city      | population  |
+| :----: | :---------: | :--------: | :-----: | :-----------: | :---------: |
+|   +A   |     s1      |     e1     |   CA    |   Vancouver   |   2581000   |
+|   +A   |     s1      |     e1     |   US    |    Seattle    |   3433000   |
+| **-C** |   **s2**    |   **e1**   | **CA**  | **Vancouver** | **2581000** |
+| **+C** |   **s2**    |   **e2**   | **CA**  | **Vancouver** | **2606000** |
+
+The two added rows represent the `'-C' correct-from` event that carries the old value that was changed, and `'+C' correct-to` event that carries the new value that was observed. Similarly the `'-R' retract` event can be issued for a record that disappeared in the source data.
+
+This model is extremely powerful, as it not only provides us the full history of how data was evolving over time, but allows all downstream computations to **automatically react to corrections and retractions**.
 
 
 ## Append
-Under this strategy, the new data will be appended to the Dataset in its original form without any modifications.
+Under this strategy, all observed input data will be appended to the Dataset in its original form, without any modifications.
 
-This strategy is rarely used in real datasets and mostly present for testing.
+This strategy is rarely used in datasets that poll data from a remote source, but can be useful for datasets that get data pushed into them (e.g. from an IoT device).

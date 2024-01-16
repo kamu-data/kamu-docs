@@ -21,15 +21,14 @@ To follow this example checkout `kamu-cli` repository and navigate into [example
 Create a temporary kamu workspace in that folder using:
 
 ```sh
-$ kamu init
+kamu init
 ```
 
 You can either follow the example steps below or fast-track through it by running:
 
 ```sh
-# Add all dataset manifests found in the current directory
-$ kamu add . --recursive
-$ kamu pull --all
+kamu add --recursive .
+kamu pull --all
 ```
 
 ### Root Datasets
@@ -42,22 +41,24 @@ The `my.trading.transactions` is sourcing its data from a file located in `data/
 Let's add the root datasets and ingest data:
 
 ```sh
-$ kamu add ca.bankofcanada.exchange-rates.daily.yaml my.trading.transactions.yaml
-$ kamu pull --all
+kamu add ca.bankofcanada.exchange-rates.daily.yaml my.trading.transactions.yaml
+kamu pull --all
 ```
 
 You can verify the result using `tail` command or the SQL shell:
 
 ```bash
-$ kamu tail ca.bankofcanada.exchange-rates.daily
+kamu tail ca.bankofcanada.exchange-rates.daily
 ```
 
-OR:
+Or explore the dataset via SQL shell:
+
+```bash
+kamu sql
+```
 
 ```sql
-$ kamu sql
-
-0: kamu> select * from `ca.bankofcanada.exchange-rates.daily` limit 5;
+select * from `ca.bankofcanada.exchange-rates.daily` limit 5;
 ```
 
 ```sql
@@ -72,21 +73,23 @@ $ kamu sql
 +-------------+------------+---------------+-----------------+--------------+
 ```
 
-Remember that after adding a dataset from a `yaml` file - `kamu` creates an internal representation of it in the workspace `.kamu` directory, so if you want to make any changes to the dataset you will need to re-add the dataset again after changing the `yaml` file.
+Remember, that after adding a dataset from a `yaml` file `kamu` creates an internal representation of it in the workspace `.kamu` directory, so if you want to make any changes to the dataset you will need to re-add the dataset again after changing the `yaml` file.
 
 ```sh
-$ kamu delete my.trading.transactions
+kamu delete my.trading.transactions
 # ... Make changes to the yaml file ...
-$ kamu add my.trading.transactions.yaml
+kamu add my.trading.transactions.yaml
 
 # Or alternatively
-$ kamu add --replace my.trading.transactions.yaml
+kamu add --replace my.trading.transactions.yaml
 ```
 
 ### Converting transaction values into CAD
 If you look at `my.trading.transactions` dataset - it contains the trading activity of a US account, so all prices and settlement amounts there are listed in US Dollars (`USD`). But let's imagine that you live in Canada and all of your other accounts and your credit cards are all in Canadian Dollars (`CAD`). It would be a lot easier for you to monitor your financials if they were in one currency.
 
-If you analyze your financials on a quarterly or yearly basis you might've dealt with this problem by looking up an average exchange rate for a certain time period and used it in your calculations. This is of course an oversimplification that may give misleading results - your transactions are most likely not distributed uniformly throughout the time period, and if you live in a country with volatile economy the exchange rate might've fluctuated significantly. Ideally we would like to take every single transaction and convert the price using the exchange rate for the corresponding date. Thankfully, `kamu` can make this process very easy using the **temporal table joins**.
+If you analyze your financials on a quarterly or yearly basis you might've dealt with this problem by looking up an **average exchange rate** for a certain time period and used it in your calculations. This is of course an **oversimplification** that may give **misleading** results - your transactions are most likely not distributed uniformly throughout the time period, and if you live in a country with volatile economy or trading crypto - the exchange rate may fluctuate significantly.
+
+Ideally we would like to take **every single transaction** and convert the price using the exchange rate for the corresponding date. Thankfully, `kamu` can make this process very easy using the **temporal table joins**.
 
 Temporal table joins (see this [great explanation in Apache Flink's blog](https://flink.apache.org/2019/05/14/temporal-tables.html)) take one of the streams and represent it as a three-dimensional table. When joining to such a table you need to pass in the time argument to tell join to consider the version of the table that would exist at that point in time.
 
@@ -97,20 +100,20 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: my.trading.transactions.cad
-  kind: derivative
+  kind: Derivative
   metadata:
-    - kind: setTransform
+    - kind: SetTransform
       inputs:
-        - name: ca.bankofcanada.exchange-rates.daily
-        - name: my.trading.transactions
+        - datasetRef: ca.bankofcanada.exchange-rates.daily
+        - datasetRef: my.trading.transactions
       transform:
-        kind: sql
+        kind: Sql
         engine: flink
         temporalTables:
           - name: ca.bankofcanada.exchange-rates.daily
             primaryKey:
               - currency_base
-        query: >
+        query: |
           SELECT
             tr.`event_time`,
             tr.`symbol`,
@@ -120,11 +123,12 @@ content:
             tr.`settlement` as `settlement_usd`,
             tr.`settlement` * exc.`rate` as `settlement_cad`
           FROM `my.trading.transactions` as tr
-          LEFT JOIN `ca.bankofcanada.exchange-rates.daily` FOR SYSTEM_TIME AS OF tr.`event_time` AS exc
+          LEFT JOIN `ca.bankofcanada.exchange-rates.daily` FOR SYSTEM_TIME AS OF tr.`event_time` as exc
           ON tr.`currency` = exc.`currency_base` AND exc.`currency_target` = 'CAD'
 ```
-
-> Note: The excessive use of back ticks is currently caused by the SQL parser used by Apache Flink which is overly sensitive to reserved words - this should improve in future versions.
+{{<note>}}
+The excessive use of back ticks is currently caused by the SQL parser used by Apache Flink which is overly sensitive to reserved words - this should improve in future versions.
+{{</note>}}
 
 Using the `temporalTables` section we instruct the Flink engine to use `ca.bankofcanada.exchange-rates.daily` event stream to create a temporal table of the same name.
 
@@ -159,19 +163,21 @@ It basically remembers the last observed value of every column grouped by the pr
 
 The `LEFT JOIN ca.bankofcanada.exchange-rates.daily FOR SYSTEM_TIME AS OF tr.event_time` part can be interpreted as us taking every transaction event from `my.trading.transactions`, indexing the temporal table `ca.bankofcanada.exchange-rates.daily` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
 
-> Note that `SYSTEM_TIME AS OF` syntax is a relic of SQL:2011 standard and should not be confused with Kamu's `system_time` column. The actual join is perforemed in the event time space. You can learn more about temporal event time joins in [Flink documentation](https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/queries/joins/#temporal-joins).
+{{<note>}}
+Note that `SYSTEM_TIME AS OF` syntax is a relic of SQL:2011 standard and should not be confused with Kamu's `system_time` column. The actual join is perforemed in the **event time space**. You can learn more about temporal event time joins in [Flink documentation](https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/queries/joins/#temporal-joins).
+{{</note>}}
 
 With theory out of the way, it's time to give this a try:
 
 ```sh
-$ kamu add my.trading.transactions.cad.yaml
-$ kamu pull my.trading.transactions.cad
+kamu add my.trading.transactions.cad.yaml
+kamu pull my.trading.transactions.cad
 ```
 
 The results should be:
 
 ```bash
-$ kamu tail my.trading.transactions.cad
+kamu tail my.trading.transactions.cad
 ```
 ```sql
 +-------------+------------+--------+----------+-----------+---------------------+
@@ -185,4 +191,6 @@ $ kamu tail my.trading.transactions.cad
 +-------------+------------+--------+----------+-----------+---------------------+
 ```
 
-The best thing about this is that you may never have to touch this SQL query again. Each time you run `kamu pull` in future the latest transaction data will be ingested along with latest exchange rates, producing new transactions with converted prices. This is the "write once - run forever" philosophy of `kamu` that combines best propagation times with the accuracy of solving temporal problems without taking any shortcuts.
+The best thing about this is that *you may never have to touch this SQL query again*. Each time you run `kamu pull` in the future the latest transaction data will be ingested along with latest exchange rates, producing new transactions with converted prices. This is the "write once - run forever" philosophy of `kamu` that combines best propagation times with the accuracy of solving temporal problems without taking any shortcuts.
+
+Once you master this example - make sure to check out the [Stock Market Trading example]({{<ref "stock-trading">}}) that introduces another really important mechanism related to temporal joins - the **watermark**.

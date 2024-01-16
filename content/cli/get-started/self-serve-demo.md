@@ -1,6 +1,6 @@
 ---
 Title: Demo
-description: A detailed self-guded tour of the took and its features
+description: A detailed self-guided tour of the took and its features
 weight: 15
 categories: []
 aliases:

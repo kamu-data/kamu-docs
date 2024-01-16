@@ -12,14 +12,14 @@ While `kamu` focuses primarily on the problem of data management, you often may 
 To quickly view a sample of last events in a dataset:
 
 ```bash
-$ kamu tail ca.bccdc.covid19.case-details
+kamu tail ca.bccdc.covid19.case-details
 ```
 
 ## Inspect Command Group
 A set of `kamu inspect *` commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
 
 ```bash
-$ kamu inspect lineage ca.covid19.daily-cases -b
+kamu inspect lineage ca.covid19.daily-cases -b
 ```
 
 {{<image filename="/images/cli/first-steps/lineage.png" alt="kamu sql">}}
@@ -31,21 +31,21 @@ $ kamu inspect lineage ca.covid19.daily-cases -b
 
 Following comand will drop you into the SQL shell:
 ```bash
-$ kamu sql
+kamu sql
 ```
 
 SQL console by default uses the [Apache Spark](https://spark.apache.org/) engine.
 
 All datasets in your workspace should be available to you as tables:
 
-```bash
-kamu> show tables;
+```sql
+show tables;
 ```
 
 You can use `describe` to inspect the dataset's schema:
 
-```bash
-kamu> describe `us.cityofnewyork.data.zipcode-boundaries`;
+```sql
+describe `us.cityofnewyork.data.zipcode-boundaries`;
 ```
 
 {{<note>}}
@@ -54,23 +54,19 @@ The extra back ticks needed to treat the dataset ID containing dots as a table n
 
 For brevity you can create aliases:
 
-```bash
-kamu> create temp view zipcodes as (select * from `us.cityofnewyork.data.zipcode-boundaries`);
+```sql
+create temp view zipcodes as (select * from `us.cityofnewyork.data.zipcode-boundaries`);
 ```
 
 And of course you can run queries against any dataset:
 
-```bash
-0: kamu> select po_name, sum(population) from zipcodes group by po_name;
+```sql
+select po_name, sum(population) from zipcodes group by po_name;
 ```
 
 Use `Ctrl+D` to exit the SQL shell.
 
-SQL is a widely supported language, so `kamu` can be used in conjuction with many other tools that support it, such as Tableau and Power BI. Use following command to expose `kamu` data through the JDBC server:
-
-```bash
-$ kamu sql server
-```
+SQL is a widely supported language, so `kamu` can be used in conjuction with many other tools that support it, such as Tableau and Power BI. See [integrations]({{<ref "integrations">}}) for details.
 
 The `kamu sql` is a very powerful command that you can use both interactively or for scripting. We encourage you to explore more of its options through `kamu sql --help`.
 
@@ -79,7 +75,7 @@ The `kamu sql` is a very powerful command that you can use both interactively or
 `kamu` also connects the power of Apache Spark with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
 
 ```bash
-$ kamu notebook
+kamu notebook
 ```
 
 {{<tip>}}
@@ -106,10 +102,12 @@ This will take a few seconds as in the background it creates Apache Spark sessio
 
 You can then start using the `zipcodes` dataframe in the exact same way you would in an interactive `spark-shell`.
 
-There few very important things to understand here:
+{{<note>}}
+A few very important things to understand here:
 - Spark and Jupyter are running in separate processes
 - The commands you execute in the notebook are executed "remotely" and the results are transferred back
 - This means that it doesn't really matter if your data is located on your machine or somewhere else - the notebook will work the same
+{{</note>}}
 
 The dataframe is automatically exposed in the SQL engine too, and you can run SQL queries using `%%sql` annotation:
 
@@ -133,5 +131,5 @@ And finally, `kamu` comes with embedded Web UI that you can use to explore your 
 You can launch it by running:
 
 ```bash
-$ kamu ui
+kamu ui
 ```

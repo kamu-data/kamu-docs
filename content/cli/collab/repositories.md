@@ -10,12 +10,13 @@ aliases:
 ## Supported Repository Types
 Data in `kamu` is shared via repositories. There are multiple types of repositories that differ by the kinds of services they provide. The most basic repository allows you to simply upload ("push") and download ("pull") data.
 
-|   Type   | Description                                                                                             |   Capabilities    | URL Examples                                                                                                              |
-| :------: | ------------------------------------------------------------------------------------------------------- | :---------------: | ------------------------------------------------------------------------------------------------------------------------- |
-| Local FS | A basic repository that uses the local file system folder. Mainly used for examples and testing.        | `pull`<br/>`push` | `file:///home/me/example/repository`<br/>`file:///c:/Users/me/example/repository`                                         |
-| HTTP(s)  | A basic repository that provides read-only access to data.                                              |      `pull`       | `https://example.org/dataset`                                                                                             |
-|    S3    | A basic repository that stores data in Amazon S3 bucket. Can be used with any S3-compatible storage API | `pull`<br/>`push` | `s3://bucket.my-company.example`<br/>`s3+http://my-minio-server:9000/bucket`<br/>`s3+https://my-minio-server:9000/bucket` |
-|   IPFS   | Uses IPFS HTTP Gateway for reading. Push is only possible via IPNS (see [details]({{<ref "ipfs">}})).   | `pull`<br/>`push` | `ipfs://bafy...vqhe`<br/>`ipns://k51q...v7mn`                                                                             |
+|   Type   | Description                                                                                             |                Capabilities                | URL Examples                                                                                                              |
+| :------: | ------------------------------------------------------------------------------------------------------- | :----------------------------------------: | ------------------------------------------------------------------------------------------------------------------------- |
+| Local FS | A basic repository that uses the local file system folder. Mainly used for examples and testing.        |             `pull`<br/>`push`              | `file:///home/me/example/repository`<br/>`file:///c:/Users/me/example/repository`                                         |
+| HTTP(s)  | A basic repository that provides read-only access to data.                                              |                   `pull`                   | `https://example.org/dataset`                                                                                             |
+|    S3    | A basic repository that stores data in Amazon S3 bucket. Can be used with any S3-compatible storage API |             `pull`<br/>`push`              | `s3://bucket.my-company.example`<br/>`s3+http://my-minio-server:9000/bucket`<br/>`s3+https://my-minio-server:9000/bucket` |
+|   IPFS   | Uses IPFS HTTP Gateway for reading. Push is only possible via IPNS (see [details]({{<ref "ipfs">}})).   |             `pull`<br/>`push`              | `ipfs://bafy...vqhe`<br/>`ipns://k51q...v7mn`                                                                             |
+|   ODF    | ODF-native repositories types that support very fast data transfer and querying data in-place           | `pull`<br/>`push`<br/>`query`<br/>`search` | `odf+http://odf.acme.com`<br/>`odf+https://kamu.dev`                                                                      |
 
 
 ## Push / Pull Aliases

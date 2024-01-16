@@ -33,9 +33,9 @@ Quite often when ingesting GIS data you will need to deal with different project
 
 ```yaml
 preprocess:
-  kind: sql
+  kind: Sql
   engine: spark
-  query: >
+  query: |
     SELECT
       ST_Transform(geometry, "epsg:3157", "epsg:4326") as geometry
     FROM input
@@ -48,16 +48,15 @@ The `ST_Transform` function here comes from [Apache Sedona](http://sedona.apache
 Lets add all these datasets to our workspace and ingest them:
 
 ```sh
-
 # Create a kamu workspace in the example folder
-$ kamu init
+kamu init
 
 # Add all dataset manifests found in the current directory
-$ kamu add . --recursive
-$ kamu pull --all
+kamu add --recursive .
+kamu pull --all
 
 # Alternatively: Pull datasets in ODF format from Kamu's repository
-$ ./init-s3.sh
+./init-s3.sh
 ```
 
 {{<warning>}}

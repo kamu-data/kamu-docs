@@ -18,7 +18,7 @@ For example, a tab-separated file can be read as:
 
 ```yaml
 read:
-  kind: csv
+  kind: Csv
   separator: "\t"
   quote: '"'
 ```
@@ -46,7 +46,7 @@ If not, use:
 
 ```yaml
 read:
-  kind: json
+  kind: Json
   subPath: nested.values
 ```
 
@@ -67,7 +67,7 @@ Can be read using:
 
 ```yaml
 read:
-  kind: ndJson
+  kind: NdJson
   schema:
   - id BIGINT
   - key STRING
@@ -81,7 +81,7 @@ Simply use:
 
 ```yaml
 read:
-  kind: geoJson
+  kind: GeoJson
 ```
 
 The reader expects one `FeatureCollection` object in the root and will create a record per each `Feature` inside it, extracting the properties into individual columns and leaving the feature `geometry` in its own column.
@@ -94,7 +94,7 @@ Simply use:
 
 ```yaml
 read:
-  kind: ndGeoJson
+  kind: NdGeoJson
 ```
 
 It is similar to [GeoJSON](#geojson-document) format but instead of `FeatureCollection` object in the root it expects every individual `Feature` to appear on its own line.
@@ -107,13 +107,13 @@ GIS data in ESRI format can be read as:
 
 ```yaml
 read:
-  kind: esriShapefile
+  kind: EsriShapefile
   subPath: specific_data-*.shp
 # Use preprocess to optionally convert between different projections
 preprocess:
-  kind: sql
+  kind: Sql
   engine: spark
-  query: >
+  query: |
     SELECT
       ST_Transform(geometry, "epsg:3157", "epsg:4326") as geometry,
       ...
@@ -128,16 +128,16 @@ Use `decompress` preparation step to extract data from `gzip`, `zip` archives.
 
 ```yaml
 prepare:
-- kind: decompress
-  format: gzip
+- kind: Decompress
+  format: Gzip
 ```
 
 In case of a multi-file archive you can specify which file should be extracted:
 
 ```yaml
 prepare:
-- kind: decompress
-  format: zip
+- kind: Decompress
+  format: Zip
   subPath: specific-file-*.csv  # Note: can contain glob patterns
 ```
 
@@ -153,13 +153,13 @@ For example here's how transcoding a JSON document into CSV using `jq` may look 
 
 ```yaml
 prepare:
-- kind: pipe
+- kind: Pipe
   command:
   - 'jq'
   - '-r'
   - '.values[] | [.id, .key] | @csv'
 read:
-  kind: csv
+  kind: Csv
   schema:
   - id BIGINT
   - key STRING
@@ -185,26 +185,25 @@ Fetch step:
 
 ```yaml
 fetch:
-  kind: filesGlob
+  kind: FilesGlob
   path: /home/username/data/db-table-dump-*.csv
   eventTime:
-    kind: fromPath
+    kind: FromPath
     pattern: 'db-table-dump-(\d+-\d+-\d+)\.csv'
     timestampFormat: '%Y-%m-%d'
   cache:
-    kind: forever
+    kind: Forever
 ```
 
 See: [FetchStep::FilesGlob](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#fetchstep-filesglob-schema)
 
 
 # Dealing with API Keys
-
 Sometimes you may want to parametrize the URL to include things like API keys and auth tokens. For this `kamu` supports basic variable substitution:
 
 ```yaml
 fetch:
-  kind: url
+  kind: Url
   url: "https://api.etherscan.io/api?apikey=${{ env.ETHERSCAN_API_KEY }}"
 ```
 
@@ -213,7 +212,7 @@ Sometimes you may need the power of a general purpose programming language to de
 
 ```yaml
 fetch:
-  kind: container
+  kind: Container
   image: "ghcr.io/kamu-data/fetch-my-dataset:0.1.0"
   env:
     - name: ETH_NODE_PROVIDER_URL

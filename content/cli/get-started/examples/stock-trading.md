@@ -23,15 +23,15 @@ To follow this example checkout `kamu-cli` repository and navigate into [example
 Create a temporary kamu workspace in that folder using:
 
 ```sh
-$ kamu init
+kamu init
 ```
 
 You can either follow the example steps below or fast-track through it by running:
 
 ```sh
 # Add all dataset manifests found in the current directory
-$ kamu add . --recursive
-$ kamu pull --all
+kamu add --recursive .
+kamu pull --all
 ```
 
 ### Root Datasets
@@ -44,14 +44,16 @@ Both datasets are sourcing their data from files located in `data/` sub-director
 Let's add the root datasets and ingest data:
 
 ```sh
-$ kamu add com.yahoo.finance.tickers.daily.yaml my.trading.transactions.yaml
-$ kamu pull --all
+kamu add com.yahoo.finance.tickers.daily.yaml my.trading.transactions.yaml
+kamu pull --all
 ```
 
 You can verify the result using `tail` command or the SQL shell:
 
+```sh
+kamu sql
+```
 ```sql
-$ kamu sql
 0: kamu> select * from `com.yahoo.finance.tickers.daily` limit 5;
 +-------------+------------+---------+------------+-----------+-----------+-----------+-----------+-----------------+
 | system_time | event_time | symbol  | close_adj  |   close   |   high    |    low    |   open    |     volume      |
@@ -67,12 +69,12 @@ $ kamu sql
 Remember that after adding a dataset from a `yaml` file - `kamu` creates an internal representation of it in the workspace `.kamu` directory, so if you want to make any changes to the dataset you will need to re-add the dataset again after changing the `yaml` file.
 
 ```sh
-$ kamu delete com.yahoo.finance.tickers.daily
+kamu delete com.yahoo.finance.tickers.daily
 # ... Make changes to the yaml file ...
-$ kamu add com.yahoo.finance.tickers.daily.yaml
+kamu add com.yahoo.finance.tickers.daily.yaml
 
 # Or alternatively
-$ kamu add --replace com.yahoo.finance.tickers.daily.yaml
+kamu add --replace com.yahoo.finance.tickers.daily.yaml
 ```
 
 ### Deriving current holdings from the transaction log
@@ -89,17 +91,21 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: my.trading.holdings
-  kind: derivative
+  kind: Derivative
   metadata:
-    - kind: setPollingSource
+    - kind: SetTransform
       inputs:
-        - name: my.trading.transactions
+        - datasetRef: my.trading.transactions
       transform:
-        kind: sql
+        kind: Sql
         engine: flink
-        query: >
+        query: |
           SELECT
-            *,
+            event_time,
+            symbol,
+            quantity,
+            price,
+            settlement,
             sum(quantity) over(partition by symbol order by event_time rows unbounded preceding) as cum_quantity,
             sum(settlement) over(partition by symbol order by event_time rows unbounded preceding) as cum_balance
           FROM `my.trading.transactions`
@@ -115,7 +121,7 @@ kamu pull my.trading.holdings
 The result should look something like:
 
 ```sh
-$ kamu tail my.trading.holdings
+kamu tail my.trading.holdings
 ```
 ```sql
 +-------------+------------+---------+-----------+-----------+-------------+---------------+--------------+
@@ -184,29 +190,29 @@ kind: DatasetSnapshot
 version: 1
 content:
   name: my.trading.holdings.market-value
-  kind: derivative
+  kind: Derivative
   metadata:
-  - kind: setTransform
-    inputs:
-      - name: com.yahoo.finance.tickers.daily
-      - name: my.trading.holdings
-    transform:
-      kind: sql
-      engine: flink
-      temporalTables:
-        - name: my.trading.holdings
-          primaryKey:
-            - symbol
-      query: >
-        SELECT
-          tickers.`event_time`,
-          holdings.`symbol`,
-          holdings.`cum_quantity`,
-          holdings.`quantity` as `quantity`,
-          tickers.`close_adj` * holdings.`cum_quantity` as `market_value`
-        FROM `com.yahoo.finance.tickers.daily` as tickers
-        JOIN `my.trading.holdings` FOR SYSTEM_TIME AS OF tickers.`event_time` AS holdings
-        ON tickers.`symbol` = holdings.`symbol`
+    - kind: SetTransform
+      inputs:
+        - datasetRef: com.yahoo.finance.tickers.daily
+        - datasetRef: my.trading.holdings
+      transform:
+        kind: Sql
+        engine: flink
+        temporalTables:
+          - name: my.trading.holdings
+            primaryKey:
+              - symbol
+        query: |
+          SELECT
+            tickers.`event_time`,
+            holdings.`symbol`,
+            holdings.`cum_quantity`,
+            holdings.`quantity` as `quantity`,
+            tickers.`close_adj` * holdings.`cum_quantity` as `market_value`
+          FROM `com.yahoo.finance.tickers.daily` as tickers
+          JOIN `my.trading.holdings` FOR SYSTEM_TIME AS OF tickers.`event_time` AS holdings
+          ON tickers.`symbol` = holdings.`symbol`
 ```
 
 Using `temporalTables` section we instruct the Flink engine to use `my.trading.holdings` event stream to create a virtual temporal table of the same name.
@@ -245,14 +251,14 @@ The `JOIN my.trading.holdings FOR SYSTEM_TIME AS OF tickers.event_time` part can
 With theory out of the way, time to give this a try:
 
 ```sh
-$ kamu add my.trading.holdings.market-value.yaml
-$ kamu pull my.trading.holdings.market-value
+kamu add my.trading.holdings.market-value.yaml
+kamu pull my.trading.holdings.market-value
 ```
 
 To view the results you can use the provided `trading.ipynb` notebook and see the actual graph:
 
 ```sh
-$ kamu notebook
+kamu notebook
 ```
 
 {{<image filename="/images/cli/examples/stock-trading/market_value.png" alt="Market value graph as viewed in the notebook" width="50%">}}
@@ -264,17 +270,20 @@ Congratulations, you have just stumbled onto one of the most important features 
 
 When joining two streams `kamu` and its engines can't make any guesses about how complete the data in your dataset is. The streams you are joining can have vastly different intervals with which data is added. Ticker data might be added daily, while you, as the owner of transactions dataset, might be exporting your trading data semi-regularly, once in a month or two. Therefore when the transaction data stops coming on `Dec 2 2019` it means that `kamu` can't tell whether you are not actively trading any more or you simply forgot to import the recent transaction history. It therefore **pauses the processing** until this ambiguity is resolved (effectively by starting to buffer the ticker data).
 
-The property behind this mechanism is called **watermark**. The watermark is a simple timestamp `T` that tells that with a high probability all events before `T` have already been ingested into the system. You can take a look at your datasets' watermarks using the `log` command:
+The property behind this mechanism is called **watermark**. The watermark is a simple timestamp `T` that tells that with a high probability all events before `T` have already been ingested into the system. You can take a look at your dataset's watermarks using the `log` command:
 
 ```sh
-$ kamu log my.trading.transactions
-Block: 42012470e20e90036b3098da71e1056ce0e561031bc41fa47faa1d1269f93a2e
-Date: 2020-09-28 01:36:39.855 UTC
-Output.Records: 48
-Output.Interval: [2020-09-28T01:36:39.855Z, 2020-09-28T01:36:39.855Z]
-Output.Hash: ...
-Output.Watermark: 2019-12-02 00:00:00 UTC
-...
+kamu log my.trading.transactions
+
+Block #3: f16201cfd3c1822add90232665e78e94092d027ec87f93dd7410fc59104262cfbf378
+SystemTime: 2024-01-16T00:42:57.722238098Z
+Kind: AddData
+NewData:
+  NumRecords: 48
+  Size: 3564
+  ...
+NewSourceState: ...
+NewWatermark: 2019-12-02T00:00:00Z
 ```
 
 There are two ways to resolve the "no data vs. stale data" ambiguity and advance the watermark:
@@ -286,28 +295,34 @@ There are two ways to resolve the "no data vs. stale data" ambiguity and advance
 Let's put this into practice and tell `kamu` that transaction data is complete as of `2020-09-01`:
 
 ```sh
-$ kamu pull my.trading.transactions --set-watermark 2020-09-01T00:00:00Z
-# As you can see, this commits a watermark-only metadata block
-$ kamu log my.trading.transactions
-Block: b6bab439fa2f9c5657655cee5f5b4d9c5d7cc3ebf39b1885df2005c8483d0573
-Date: 2020-09-28 02:14:51.909 UTC
-Output.Watermark: 2020-09-01 00:00:00 UTC
+kamu pull my.trading.transactions --set-watermark 2020-09-01T00:00:00Z
+```
+
+As you can see, this commits a watermark-only metadata block:
+```sh
+kamu log my.trading.transactions
+
+Block #4: f1620c4951a20fccd02e9125497b7c1e032f4d22de8c71b1cade3824c15bf61258161
+SystemTime: 2024-01-16T00:45:22.998784847Z
+Kind: AddData
+PrevOffset: 47
+NewWatermark: 2020-09-01T00:00:00Z
 ```
 
 You can also use the short-hand forms like:
 
 ```sh
-$ kamu pull my.trading.transactions --set-watermark '1 month ago'
+kamu pull my.trading.transactions --set-watermark '1 month ago'
 ```
 
 If we now pull the market value dataset we will see new data emitted:
 
 ```sh
-$ kamu pull my.trading.holdings.market-value --recursive
+kamu pull my.trading.holdings.market-value --recursive
 ```
 
 You can now reload the notebook and see that the graph extends to our watermark date.
 
 {{<note>}}
-Watermarks and many other stream processing concepts make temporal data processing much simpler. Take a minute to imagine how the queries we wrote above would look like in the batch processing form. How many edge cases associated with varying cadences, late and out-of-order arrivals the equivalent batch processing code would have to handle and how error-prone it would be to write.
+Watermarks and many other stream processing concepts make temporal data processing much simpler. Take a minute to imagine how the queries we wrote above would look like in the batch processing form, how many edge cases associated with varying cadences, late and out-of-order arrivals the equivalent batch processing code would have to handle, and how **error-prone** it would be to write.
 {{</note>}}

@@ -23,15 +23,15 @@ To follow this example checkout `kamu-cli` repository and navigate into [example
 Create a temporary kamu workspace in that folder using:
 
 ```sh
-$ kamu init
+kamu init
 ```
 
 You can either follow the example steps below or fast-track through it by running:
 
 ```sh
 # Add all dataset manifests found in the current directory
-$ kamu add . --recursive
-$ kamu pull --all
+kamu add -recursive .
+kamu pull --all
 ```
 
 ### Root Datasets
@@ -44,14 +44,16 @@ Both datasets are sourcing their data from files located in `data/` sub-director
 Let's add the root datasets and ingest the data:
 
 ```sh
-$ kamu add com.acme.orders.yaml com.acme.shipments.yaml
-$ kamu pull --all
+kamu add com.acme.orders.yaml com.acme.shipments.yaml
+kamu pull --all
 ```
 
 You can verify the result using `tail` command or the SQL shell:
 
+```bash
+kamu sql
+```
 ```sql
-$ kamu sql
 0: kamu> select * from `com.acme.orders`;
 +-------------+------------+-----------+-----------+
 | system_time | event_time | order_id  | quantity  |
@@ -138,35 +140,39 @@ WHERE order_quantity <> shipped_quantity_total
 Putting all of this together, our final dataset will look like this:
 
 ```yaml
-kind: DatasetSnapshot
 version: 1
+kind: DatasetSnapshot
 content:
   name: com.acme.shipments.overdue
-  kind: derivative
+  kind: Derivative
   metadata:
-    - kind: setTransform
+    - kind: SetTransform
       inputs:
-        - name: com.acme.orders
-        - name: com.acme.shipments
+        - datasetRef: com.acme.orders
+        - datasetRef: com.acme.shipments
       transform:
-        kind: sql
+        kind: Sql
         engine: flink
         queries:
+          # This is a Stream-to-Stream join that matches orders and shipments on order_id, 
+          # restricting the shipment.event_time to a time interval [order.event_time, order.event_time + 2 DAYS).
+          # Note that the cast of s.event_time is necessary to tell Flink to no longer treat it as `rowtime`.
           - alias: order_shipments
-            query: >
+            query: |
               SELECT
                 o.event_time as order_time,
                 o.order_id,
                 o.quantity as order_quantity,
-                CAST(s.event_time as TIMESTAMP) as shipped_time,
+                CAST(s.event_time as TIMESTAMP(3)) as shipped_time,
                 COALESCE(s.quantity, 0) as shipped_quantity
               FROM `com.acme.orders` as o
               LEFT JOIN `com.acme.shipments` as s
               ON
                 o.order_id = s.order_id
                 AND s.event_time BETWEEN o.event_time AND o.event_time + INTERVAL '2' DAY
+          # This is a windowed aggregation that computes the total quantity of shipped product
           - alias: order_shipments_agg
-            query: >
+            query: |
               SELECT
                 TUMBLE_START(order_time, INTERVAL '1' DAY) as order_time,
                 order_id,
@@ -177,12 +183,12 @@ content:
                 sum(shipped_quantity) as shipped_quantity_total
               FROM order_shipments
               GROUP BY TUMBLE(order_time, INTERVAL '1' DAY), order_id
-          - alias: com.acme.shipments.overdue
-            query: >
+          # Return only records for orders that were not fully fulfilled
+          - query: |
               SELECT *
               FROM order_shipments_agg
               WHERE order_quantity <> shipped_quantity_total
-    - kind: setVocab
+    - kind: SetVocab
       eventTimeColumn: order_time
 ```
 

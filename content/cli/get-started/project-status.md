@@ -9,7 +9,7 @@ aliases:
 ## Documentation
 Our code and documentation is **actively evolving**, so many topics (those in lighter gray color) have not been covered yet. 
 
-While some formal documentation is missing, we are focusing on prividing **good quality examples, tutorials, and reference documentation**, so you can learn a lot from those.
+While some formal documentation is missing, we are focusing on providing **good quality examples, tutorials, and reference documentation**, so you can learn a lot from those.
 
 ## Project Status Disclaimer
 `kamu` is at the MVP stage of maturity, but have not reached a stable release yet. Before `v1.0` we reserve the right to break compatibility between the releases.
