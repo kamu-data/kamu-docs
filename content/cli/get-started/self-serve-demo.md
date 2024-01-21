@@ -1,23 +1,26 @@
 ---
 Title: Demo
 description: A detailed self-guided tour of the took and its features
-weight: 15
+weight: 11
 categories: []
 aliases:
 ---
 
-This demo guides you through the basics of using `kamu` and its key concepts. It lets you try out most of the tool's features without having to install it.
+Check out this video for a quick overview of key functionality:
+{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
 
-## Try Online
+The demo described below will guide you through the basics of using `kamu` and let you try out most of the tool's features without having to install it.
 
+
+## Run in a Browser
 The demo is also available online at: https://demo.kamu.dev
 
 {{<info>}}
-for financial reasons the capacity of this environment is limited
+The capacity of this environment is limited and you may experience a worse performance than running it on your machine.
 {{</info>}}
 
-## Run It Yourself
 
+## Run It Yourself
 ### Requirements
 To run this demo you'll only need:
 * `docker`

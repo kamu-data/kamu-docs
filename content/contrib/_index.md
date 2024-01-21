@@ -1,7 +1,8 @@
 ---
 Title: Contributing
 description:
-weight: 200
+weight: 60
+topLevelElement: true
 alwaysopen: false
 categories: []
 aliases:
@@ -20,5 +21,7 @@ Besides code you can contribute in many different ways:
 - Working with the [community](https://discord.gg/aSpVjWwu)
 - Mentoring others
 - and much more...
+
+Technical contributors can get started by referring to [DEVELOPER.md](https://github.com/kamu-data/kamu-cli/blob/master/DEVELOPER.md) files that exist in all of our top-level repositories.
 
 {{% children style="h2" description="true" %}}

@@ -32,7 +32,7 @@ As opposed to the "open-core" model, we believe BSL license also avoids wasting 
 
 
 ## Who else is using BSL?
-Unfortunately, there are many precedents where the work of Open Source companies was blantly exploited. This not only prevents the developers of the technology from reaping the well-deserved rewards, but also prevents them from **re-investing the resources into improving the tech**, which leads to stagnation. Many such companies have successfully adopted the BSL license as a way to restore the balance:
+Unfortunately, there are many precedents where the work of Open Source companies was bluntly exploited. This not only prevents the developers of the technology from reaping the well-deserved rewards, but also prevents them from **re-investing the resources into improving the tech**, which leads to stagnation. Many such companies have successfully adopted the BSL license as a way to restore the balance:
 
 - [MariaDB](https://mariadb.com/bsl-faq-adopting/)
 - [CockroachDB](https://www.cockroachlabs.com/blog/oss-relicensing-cockroachdb/)

@@ -2,7 +2,8 @@
 Title: Open Data Fabric
 description:
 weight: 10
-projectRoot: true
+topLevelElement: true
+topLevelProject: true
 alwaysopen: false
 categories: []
 aliases:

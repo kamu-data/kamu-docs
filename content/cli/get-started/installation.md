@@ -1,7 +1,7 @@
 ---
 Title: Installation
 description: Covers installation steps to get kamu-cli running on your computer
-weight: 20
+weight: 15
 categories: []
 aliases:
   - /cli/install

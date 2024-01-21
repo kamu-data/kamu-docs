@@ -2,7 +2,8 @@
 Title: Kamu CLI
 description:
 weight: 20
-projectRoot: true
+topLevelElement: true
+topLevelProject: true
 alwaysopen: false
 categories: ["CLI"]
 aliases:

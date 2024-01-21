@@ -6,37 +6,24 @@ alwaysopen: false
 categories: []
 ---
 
-## Media
+This section provides examples of all style elements available to documentation authors and the guidelines on using them.
 
-### Static Image
 
-Input:
-
-```markdown
-{{</*image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%"*/>}}
-```
-
-Result:
-
-{{<image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%">}}
-
-## Tables
+## Code Blocks
 
 Input:
 
-```markdown
-| Name | Description |
-| ---- | :---------: |
-| Foo  |    Test     |
-| Bar  |    Test     |
+<pre>
+```js
+const client = OdfClient::new("odf+https://localhost:8080");
 ```
+</pre>
 
 Result:
 
-| Name | Description |
-| ---- | :---------: |
-| Foo  |    Test     |
-| Bar  |    Test     |
+```js
+const client = OdfClient::new("odf+https://localhost:8080");
+```
 
 
 ## Text Blocks
@@ -86,3 +73,115 @@ Warning block
 {{<danger>}}
 Danger block
 {{</danger>}}
+
+
+## Tables
+
+Input:
+
+```markdown
+| Name | Description |
+| ---- | :---------: |
+| Foo  |    Test     |
+| Bar  |    Test     |
+```
+
+Result:
+
+| Name | Description |
+| ---- | :---------: |
+| Foo  |    Test     |
+| Bar  |    Test     |
+
+
+## Tabs
+
+Input:
+
+```markdown
+{{</*tabs
+    tabTotal="3"
+    tabID="1"
+    tabName1="Tab 1"
+    tabName2="Tab 2"
+    tabName3="Tab 3"*/>}} 
+
+{{</*tab tabNum="1"*/>}}
+Tab 1 content as text
+{{</*/tab*/>}}
+
+{{</* tab tabNum="2"*/>}}
+Tab 2 content
+- as
+- list
+{{</*/tab*/>}}
+
+{{</* tab tabNum="3"*/>}}
+{{</*info*/>}}
+Tab 3 content as rich elements
+{{</*/info*/>}}
+{{</*/tab*/>}}
+
+{{</*/tabs*/>}}
+```
+
+Result:
+
+{{<tabs tabTotal="3" tabID="1" tabName1="Tab 1" tabName2="Tab 2" tabName3="Tab 3">}}
+
+{{<tab tabNum="1">}}
+Tab 1 content as text
+{{</tab>}}
+
+{{<tab tabNum="2">}}
+Tab 2 content
+- as
+- list
+{{</tab>}}
+
+{{<tab tabNum="3">}}
+{{<info>}}
+Tab 3 content as rich elements
+{{</info>}}
+{{</tab>}}
+
+{{</tabs>}}
+
+
+## Static Image
+
+Input:
+
+```markdown
+{{</*image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%"*/>}}
+```
+
+Result:
+
+{{<image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%">}}
+
+
+## YouTube Video
+
+Input:
+
+```markdown
+{{</*youtube hN_vpHYmwi0*/>}}
+```
+
+Result:
+
+{{<youtube hN_vpHYmwi0>}}
+
+
+## YouTube Playlist
+
+Input:
+
+```markdown
+{{</*youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk*/>}}
+```
+
+Result:
+
+{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
