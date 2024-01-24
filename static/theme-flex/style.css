@@ -1222,10 +1222,13 @@ article section.page img.inline {
 article section.page code {
   font-family: "RobotoMono", monospace;
 }
+/*
 article section.page p > code,
 article section.page li code,
 article section.page table code {
-  padding: 0 0.25rem; }
+  padding: 0 0.25rem; 
+}
+*/
 
 /* Code source and copy */
 article section.page pre {
