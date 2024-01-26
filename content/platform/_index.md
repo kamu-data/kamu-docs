@@ -28,4 +28,4 @@ aliases:
 
 
 ## Contributing
-See [Contribution Guidelines]({{<ref "contrib">}})
+

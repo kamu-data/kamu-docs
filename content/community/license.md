@@ -4,6 +4,8 @@ description:
 weight: 30
 alwaysopen: false
 categories: []
+aliases:
+  - /contrib/license
 ---
 
 ## Brief explanation of Kamu's license

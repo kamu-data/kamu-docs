@@ -200,11 +200,7 @@ We also scrape a lot of websites to make smarter purchasing decisions. `kamu` le
 
 If you like what we're doing - support us by [starring the repo](https://github.com/kamu-data/kamu-cli), this helps us a lot!
 
-Subscribe to our [YouTube channel](https://www.youtube.com/channel/UCWciDIWI_HsJ6Md_DdyJPIQ) to get fresh tech talks and deep dives.
-
-Stop by and say "hi" in our [Discord Server](https://discord.gg/nU6TXRQNXC) - we're always happy to chat about data.
-
-If you'd like to contribute [start here]({{<ref "contrib">}}).
+For the list of our community resource and guides on how to contribute [start here]({{<ref "community">}}).
 
 
 [Repository]: https://github.com/kamu-data/kamu-cli

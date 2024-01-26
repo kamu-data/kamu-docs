@@ -77,4 +77,7 @@ The specification is currently in the **EXPERIMENTAL** stage and welcomes feedba
 The specification was originally developed by [Kamu](https://kamu.dev) as part of the [kamu-cli](https://github.com/kamu-data/kamu-cli/) data management tool. While developing it, we quickly realized that the very essence of what we're trying to build - a collaborative open data processing pipeline based on verifiable trust - requires full transparency and openness on our part. We strongly believe in the potential of our ideas to bring data management to the next level, to provide better quality data faster to the people who need it to innovate, fight diseases, build better businesses, and make informed political decisions. Therefore, we saw it as our duty to share these ideas with the community and make the system as inclusive as possible for the existing technologies and future innovations, and work together to build momentum needed to achieve such radical change.
 
 ## Contributing
-See [Contribution Guidelines]({{<ref "contrib">}})
+
+If you like what we're doing - support us by [starring the repo](https://github.com/kamu-data/kamu-cli), this helps us a lot!
+
+For the list of our community resource and guides on how to contribute [start here]({{<ref "community">}}).
