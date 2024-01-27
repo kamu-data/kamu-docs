@@ -387,6 +387,7 @@ article > aside .menu > label {
   font-size: 130%;
   margin-left: 1rem; }
 article > aside .menu ul {
+  margin: 0;
   display: none; }
 article > aside .menu > .dd-item {
   /* margin: 0.5rem 0px 0.5rem 20px; */
@@ -403,6 +404,8 @@ article > aside .menu .dd-item.parent > ul {
 article > aside .menu .dd-item.active > ul {
   display: block; }
 article > aside .menu .dd-item.active > div {
+  color: #5961ff; }
+article > aside .menu .dd-item.active > a {
   color: #5961ff; }
 
 article > aside .menu .dd-item.haschildren > div {
@@ -421,12 +424,17 @@ article > aside .menu .dd-item div i.category-icon {
   order: 1;
   width: 20px;
   cursor: pointer; }
+article > aside .menu .dd-item div i.under-construction-icon {
+  order: 3;
+  color: #9f9f9f !important
+}
 article > aside .menu .dd-item div a {
   display: flex;
   flex: 1;
   order: 2;
-  padding: 0.6rem 0.1rem;
-  line-height: 1.3rem;
+  /* padding: 0.6rem 0.1rem;
+  line-height: 1.3rem; */
+  margin: 3px 0 3px 0;
   text-decoration: none;
 }
 article > aside .menu .dd-item div a:hover, article > aside .menu .dd-item div a:focus, article > aside .menu .dd-item div a:active {
@@ -442,11 +450,12 @@ article > aside section {
 
 /* Expand/Collapse Menu */
 .SideMenuToggle {
+  /* position: absolute;
   left: 20px;
-  position: absolute;
-  top: 30px;
+  top: 30px;*/
   display: flex;
   width: 50%;
+  margin-left: 20px;
 }
 
 .SideMenuToggle:hover {
@@ -1287,10 +1296,11 @@ article section.page pre[class*="language-"] {
   padding-right: 25px; /* to make room for copy icon once scrolled fully to the right   */
   overflow-x: auto;
 }
-
+/*
 ul.menu > li.dd-item:not(.parent) i {
   opacity: 0 !important;
 }
+*/
 .nav-column a:hover {
   color: white;
 }
@@ -1964,6 +1974,8 @@ ul.children.children-card > span p {
 nav#toc.fixed-pos {
   position: fixed;
   top: 100px;
+  bottom: 0;
+  overflow-y: auto;
 }
 .post-bottom .edit-link a:hover {
   color: white;
@@ -2065,12 +2077,14 @@ div#navigation a {
   background: #ababab;
 }
 nav#toc ul > li > ul {
-  padding-left: 15;
+  padding-left: 15px;
 }
 
+
 nav#toc > ul > li {
-  padding-bottom: 10px;
+  margin-bottom: 5px;
 }
+
 
 .youtube-container {
   margin-bottom: 50px;
@@ -2081,7 +2095,11 @@ span.links > a:first-child {
 nav#toc > ul > li > ul > li {
   list-style-type: none;
   /* list-style-position: inside; */
-  margin: 8px 0 8px 10px;
+  margin-bottom: 5px;
+}
+nav#toc > ul > li > ul > li > ul > li {
+  list-style-type: none;
+  margin-bottom: 5px;
 }
 footer .nav-wrapper {
   max-width: 1180px;
@@ -2138,20 +2156,23 @@ button.close-button {
   min-width: 340px;
   padding-left: 20px;
 }
+/*
 article > aside .menu > li.parent {
   grid-area: 1;
   border-bottom: 1px solid #5d6876;
   padding-bottom: 30px;
   margin-bottom: 20px;
-}
+}*/
 
 ul.menu > li  ul li {
   padding-left: 15px;
 }
 
+/*
 ul.menu > li.dd-item:not(.parent) i {
   pointer-events: none;
 }
+*/
 
 nav.main_navigation {
   /* display: flex; */
@@ -2528,14 +2549,16 @@ article > aside .menu > li .menu-divider {
   width: calc(100% - 20px);
 }
 
-article > aside .menu > li > .children {
+/*article > aside .menu > li > .children {
   display: none;
-}
+}*/
 
 article > aside .menu > li.parent > .children {
   display: flex;
+  /*
   position: relative;
   padding-top: 60px;
+  */
 }
 
 article > aside .menu .dd-item .highlight:hover {
@@ -3273,9 +3296,11 @@ article section.page table.hot-topics-table tbody tr:last-of-type td {
   button.hamburger.hamburger--spring {
     display: none;
   }
+  /*
   ul.menu > li.dd-item:not(.parent) i {
     opacity: 0 !important;
   }
+  */
 
   article > aside {
     display: none;

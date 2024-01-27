@@ -1,7 +1,7 @@
 ---
-draft: false
 Title: FAQ
 description: Frequently asked questions
+topLevelElement: true
 weight: 100
 alwaysopen: false
 categories: []
