@@ -10,7 +10,7 @@ Hi, and welcome to `kamu` - the world's first **planet-scale data pipeline** tha
 
 `kamu` is an innovative project with unique design - it takes some time to wrap your head around. To help you in this journey we have outlined the recommended sequence of steps for you below.
 
-If you need help or want to share your feedback along the way - please consider joining our [community channels]({{<relref "community">}})!
+You can always get help or share feedback along the way in our [community channels]({{<relref "community">}}).
 
 To get started:
 1. Acknowledge the [current project status]({{<ref "project-status">}})

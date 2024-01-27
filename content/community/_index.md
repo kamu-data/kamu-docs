@@ -13,6 +13,8 @@ We welcome participation from everyone - join, ask questions, and get involved!
 ## Discord
 Stop by and say "Hi" in our [Discord Server](https://discord.gg/nU6TXRQNXC) - we're always happy to chat about data, and value your feedback.
 
+[![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
+
 ## YouTube
 Subscribe to our [YouTube channel](https://www.youtube.com/channel/UCWciDIWI_HsJ6Md_DdyJPIQ) to get fresh tech talks and deep dives.
 
