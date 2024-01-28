@@ -18,3 +18,4 @@ docgen:
 	python utilities/gen_glossary.py > content/glossary/_index.md
 	python utilities/gen_spec.py > content/odf/spec.md
 	python utilities/gen_rfcs.py content/odf/rfcs/
+	python utilities/gen_cli_reference.py > content/cli/cli-reference.md

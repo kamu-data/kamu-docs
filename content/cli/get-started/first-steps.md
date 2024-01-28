@@ -37,6 +37,8 @@ Note that some command also have sub-commands, e.g. `kamu repo {add,list,...}`, 
 kamu repo add -h
 ```
 
+Command help is also available online on [CLI Reference]({{<relref "cli-reference">}}) page.
+
 ## Ingesting data
 
 Throughout this tutorial we will be using the [Modified Zip Code Areas](https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk) dataset from New York Open Data Portal.

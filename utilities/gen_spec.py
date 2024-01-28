@@ -15,7 +15,7 @@ ODF_PATH = os.path.normpath(
 if not os.path.exists(ODF_PATH):
     raise Exception(
         f"Expecting to have `open-data-fabric` repository checked "
-        f"out side by side, but couldn't find path: {odf_tools_path}")
+        f"out side by side, but couldn't find path: {ODF_PATH}")
 
 IMAGES_DIR = "static/images/pages/spec"
 IMAGES_URL = "/images/pages/spec/"
