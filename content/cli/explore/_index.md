@@ -29,12 +29,16 @@ kamu inspect lineage ca.covid19.daily-cases -b
 
 {{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
 
-Following comand will drop you into the SQL shell:
+Following command will drop you into the SQL shell:
 ```bash
 kamu sql
 ```
 
-SQL console by default uses the [Apache Spark](https://spark.apache.org/) engine.
+By default this command uses the [Apache Datafusion](https://arrow.apache.org/datafusion/) engine, so its [powerful SQL](https://arrow.apache.org/datafusion/user-guide/sql/index.html) is now available to you.
+
+{{<tip>}}
+You can also select other engines, e.g. [Apache Spark](https://spark.apache.org/)!
+{{</tip>}}
 
 All datasets in your workspace should be available to you as tables:
 
@@ -45,34 +49,32 @@ show tables;
 You can use `describe` to inspect the dataset's schema:
 
 ```sql
-describe `us.cityofnewyork.data.zipcode-boundaries`;
+describe "us.cityofnewyork.data.zipcode-boundaries";
 ```
 
 {{<note>}}
-The extra back ticks needed to treat the dataset ID containing dots as a table name.
+The extra quotes needed to treat the dataset name containing dots as a table name.
 {{</note>}}
-
-For brevity you can create aliases:
-
-```sql
-create temp view zipcodes as (select * from `us.cityofnewyork.data.zipcode-boundaries`);
-```
 
 And of course you can run queries against any dataset:
 
 ```sql
-select po_name, sum(population) from zipcodes group by po_name;
+select
+  *
+from "us.cityofnewyork.data.zipcode-boundaries"
+order by pop_est desc
+limit 5;
 ```
 
 Use `Ctrl+D` to exit the SQL shell.
 
-SQL is a widely supported language, so `kamu` can be used in conjuction with many other tools that support it, such as Tableau and Power BI. See [integrations]({{<ref "integrations">}}) for details.
+SQL is a widely supported language, so `kamu` can be used in conjunction with many other tools that support it, such as Tableau and Power BI. See [integrations]({{<ref "integrations">}}) for details.
 
 The `kamu sql` is a very powerful command that you can use both interactively or for scripting. We encourage you to explore more of its options through `kamu sql --help`.
 
 
 ## Jupyter Notebooks
-`kamu` also connects the power of Apache Spark with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
+Kamu also connects the power of [Apache Spark](https://spark.apache.org/) with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
 
 ```bash
 kamu notebook
@@ -84,7 +86,7 @@ You can use `-e ENV_VAR` option to pass additional environment variable into the
 
 Executing this should open your default browser with a Jupyter running in it.
 
-From here create a `PySpark` notebook. We start all notebooks by loading `kamu` extension:
+From here let's create a `PySpark` notebook. We start our notebook by loading `kamu` extension:
 
 ```
 %load_ext kamu

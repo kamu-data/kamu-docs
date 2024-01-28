@@ -19,10 +19,10 @@ We assume that you have already followed the [installation steps]({{<ref "instal
 Try `kamu` in this [self-serve demo]({{<ref "self-serve-demo">}}) without needing to install anything.
 {{</info>}}
 
-Don't forget to set up **shell completions** - they make `kamu` a lot more fun to use!
+Don't forget to set up **shell completions** - they make using `kamu` a lot more fun!
 
 
-## Using the help command
+## The help command
 When you execute `kamu` or `kamu -h` - the help message about all top-level commands will be displayed.
 
 To get help on individual commands type:
@@ -37,12 +37,12 @@ Note that some command also have sub-commands, e.g. `kamu repo {add,list,...}`, 
 kamu repo add -h
 ```
 
-## Getting data in
+## Ingesting data
 
 Throughout this tutorial we will be using the [Modified Zip Code Areas](https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk) dataset from New York Open Data Portal.
 
 ### Initializing the workspace
-To work with `kamu` you first need a **workspace** - this is where kamu will store the important information about datasets and the cached data. Let's create one:
+To work with `kamu` you first need a {{<term "workspace">}}. Workspace is where kamu will store important information about {{<term "datasets" "dataset">}} and cached data. Let's create one:
 
 {{<image filename="/images/cli/first-steps/init.gif" alt="kamu init">}}
 
@@ -52,19 +52,23 @@ cd my_workspace
 kamu init
 ```
 
-A workspace is just a directory with `.kamu` folder where all sorts of data and metadata are stored.
+A {{<term "workspace">}} is just a directory with `.kamu` folder where all sorts of {{<term "data">}} and {{<term "metadata">}} are stored. It behaves very similarly to `.git` directory version-controlled repositories.
 
-As you'd expect the workspace is currently empty:
+As you'd expect the {{<term "workspace">}} is currently empty:
 ```bash
 kamu list
 ```
 
-### Adding a dataset
-One of the design principles of `kamu` is to always know exactly where any piece of data came from, so it never simply copies data - instead we create links to an external data (we'll get into the details of that later). For now let's create such link.
+### Creating a dataset
+One of the design principles of `kamu` is to know exactly where any piece of data came from. So it never blindly copies data around - instead we establish ownership and links to external sources.
+
+We'll get into the details of that later, but for now let's create such link.
 
 {{<image filename="/images/cli/first-steps/pull.gif" alt="kamu pull">}}
 
-Datasets that ingest external data in `kamu` are called **root** datasets. To create one, we will use a `DatasetSnapshot` manifest from the [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) which looks like this:
+{{<term "Datasets" "dataset">}} are created from {{<term "dataset snapshots" "dataset-snapshot">}} - special files that describe the **desired state** of the metadata upon creation.
+
+We will use a {{<schema "DatasetSnapshot">}} file from [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) that looks like this:
 
 ```yaml
 kind: DatasetSnapshot
@@ -86,35 +90,68 @@ content:
           # Modified ZIP Code Tabulation Area (ZCTA)
           # See for explanation: https://nychealth.github.io/covid-maps/modzcta-geo/about.html
           - modzcta
-
 ```
 
-A `DatasetSnapshot` manifest contains a `name` of the dataset, its `kind` (`Root` or `Derivative`) and a series of `metadata` events that define dataset's desired state. 
+You can either copy the above into a `example.yaml` file and run:
 
-In this example we only have one such event - `SetPollingSource`, which describes how `kamu` can ingest external data by performing following operations:
-- `fetch` - downloading the data from some external source (e.g. HTTP/FTP)
-- `prepare` (optional) - steps for preparing data for ingestion (e.g. extracting an archive or converting between formats)
-- `read` - reading the data into a structured form
-- `preprocess` (optional) - shaping the structured data and converting types into best suited form using query engines
-- `merge` - merging the new data from the source with the **history of previously seen data**
+```bash
+kamu add example.yaml
+```
 
-You can find more information about the ingest types and stages in [ingest documentation]({{<ref "ingest">}}).
+Or add it directly from URL like so:
+
+```bash
+kamu add https://raw.githubusercontent.com/kamu-data/kamu-contrib/master/us.cityofnewyork.data/zipcode-boundaries.yaml
+```
+
+Such YAML files are called {{<term "manifests" "manifest">}}. First two lines specify that the file contains {{<schema "DatasetSnapshot">}} object and then specify the version of the schema, for upgradeability:
+
+```yaml
+kind: DatasetSnapshot
+version: 1
+content: ...
+```
+
+Next we give dataset a name and declare its kind:
+
+```yaml
+name: us.cityofnewyork.data.zipcode-boundaries
+kind: Root
+```
+
+{{<term "Datasets" "dataset">}} that ingest external data in `kamu` are called {{<term "Root" "root-dataset">}} datasets.
+
+Next we have:
+
+```yaml
+metadata:
+  - kind: ...
+    ...
+  - kind: ...
+    ...
+```
+
+This section contains one or many {{<term "metadata events" "metadata-chain">}} that can describe different aspects of a dataset, like:
+- where data comes from
+- its schema
+- license
+- relevant documentation
+- query examples
+- data quality checks
+- and much more.
 
 {{<tip>}}
-To create your own dataset manifests use `kamu new` command - it outputs a well-annotated template that you can customize for your needs.
+To create your own snapshot file use `kamu new` command - it outputs a well-annotated template that you can customize for your needs.
 {{</tip>}}
 
-Note that the data file we are ingesting is in ESRI Shapefile format, which is a common format for geo-spatial data, so we are using a special `EsriShapefile` reader in our dataset manifest.
 
-You can either copy this file content or add it directly to workspace from URL like so:
+### Fetching data
+At this point our new dataset is still empty:
 
 ```bash
-$ kamu add https://raw.githubusercontent.com/kamu-data/kamu-contrib/master/us.cityofnewyork.data/zipcode-boundaries.yaml
+kamu list
 ```
-
-At this point no data was yet loaded from the source:
-```bash
-$ kamu list
+```
 ┌──────────────────────────────────────────┬──────┬────────┬─────────┬──────┐
 │                   Name                   │ Kind │ Pulled │ Records │ Size │
 ├──────────────────────────────────────────┼──────┼────────┼─────────┼──────┤
@@ -122,7 +159,20 @@ $ kamu list
 └──────────────────────────────────────────┴──────┴────────┴─────────┴──────┘
 ```
 
-To fetch it run:
+But the {{<schema "SetPollingSource">}} event that we specified in the snapshot describes where from and how `kamu` can ingest external data.
+
+Polling sources perform following steps:
+- `fetch` - downloading the data from some external source (e.g. HTTP/FTP)
+- `prepare` (optional) - preparing raw binary data for ingestion (e.g. extracting an archive or converting between formats)
+- `read` - reading the data into a structured form (e.g. from CSV or Parquet)
+- `preprocess` (optional) - shaping the structured data with queries (e.g. to convert types into best suited form)
+- `merge` - merging the new data from the source with the **history of previously seen data**
+
+You can find more information about data sources and ingestion stages in [this section]({{<ref "ingest">}}).
+
+Note that the data file we are ingesting is in [ESRI Shapefile](https://en.wikipedia.org/wiki/Shapefile) format, which is a widespread format for geo-spatial data, so we are using a special {{<schema "EsriShapefile" "ReadStep::EsriShapefile">}} reader.
+
+To fetch data from the source run:
 
 ```bash
 kamu pull --all
@@ -130,7 +180,18 @@ kamu pull --all
 
 At this point the source data will be downloaded, decompressed, parsed into the structured form, preprocessed and saved locally.
 
-Note that when you `pull` a dataset, only the new records that `kamu` haven't previously seen will be added. In fact `kamu` preserves the complete history of all data - this is what enables you to have stable references to data, lets you "time travel", and establish from where and how certain data was obtained (provenance). We will discuss this in depth in further tutorials.
+```bash
+kamu list
+```
+```
+┌──────────────────────────────────────────┬──────┬───────────────┬─────────┬──────────┐
+│                   Name                   │ Kind │    Pulled     │ Records │   Size   │
+├──────────────────────────────────────────┼──────┼───────────────┼─────────┼──────────┤
+│ us.cityofnewyork.data.zipcode-boundaries │ Root │ X seconds ago │     178 │ 1.87 MiB │
+└──────────────────────────────────────────┴──────┴───────────────┴─────────┴──────────┘
+```
+
+Note that when you `pull` a dataset, only the new records that `kamu` hasn't previously seen will be added. In fact `kamu` preserves the complete history of all data - this is what enables you to have stable references to data, lets you "time travel", and establish from where and how certain data was obtained (provenance). We will discuss this in depth in further tutorials.
 
 For now it suffices to say that all data is tracked by `kamu` in a series of blocks. The `Committed new block X` message you've seen during the `pull` tells us that the new data block was appended. You can inspect these blocks using `log` command:
 
@@ -150,7 +211,7 @@ For this `kamu` provides many tools (from basic to advanced):
 
 
 ### Tail command
-To quickly preview few last events of any dataset use `tail` command:
+To quickly preview few last {{<term "events" "event">}} of any dataset use `tail` command:
 
 ```bash
 $ kamu tail us.cityofnewyork.data.zipcode-boundaries
@@ -162,37 +223,41 @@ SQL is the _lingua franca_ of the data science and `kamu` uses it extensively. S
 
 {{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
 
-Following comand will drop you into the SQL shell:
+Following command will drop you into the SQL shell:
 ```bash
 kamu sql
 ```
 
-Under the hood it starts [Apache Spark](https://spark.apache.org/), so its [powerful SQL](https://spark.apache.org/docs/latest/sql-ref.html) engine is now available to you.
+By default this command uses the [Apache Datafusion](https://arrow.apache.org/datafusion/) {{<term "engine">}}, so its [powerful SQL](https://arrow.apache.org/datafusion/user-guide/sql/index.html) is now available to you.
 
-All datasets in your workspace should be available to you as tables:
+{{<tip>}}
+You can also select other engines, e.g. [Apache Spark](https://spark.apache.org/)!
+{{</tip>}}
+
+All datasets in your {{<term "workspace">}} should be available to you as tables:
 
 ```sql
 show tables;
 ```
 
-You can use `describe` to inspect the dataset's schema:
+You can use `describe` to inspect the dataset schema:
 
 ```sql
-describe `us.cityofnewyork.data.zipcode-boundaries`;
+describe "us.cityofnewyork.data.zipcode-boundaries";
 ```
 
-> Note the extra back ticks needed to treat the dataset ID containing dots as a table name.
-
-For brevity you can create aliases as:
-
-```sql
-create temp view zipcodes as (select * from `us.cityofnewyork.data.zipcode-boundaries`);
-```
+{{<note>}}
+The extra quotes are needed to treat the dataset name containing dots as a table name.
+{{</note>}}
 
 And of course you can run queries against any dataset:
 
 ```sql
-select * from zipcodes order by pop_est desc limit 5;
+select
+  *
+from "us.cityofnewyork.data.zipcode-boundaries"
+order by pop_est desc
+limit 5;
 ```
 
 Use `Ctrl+D` to exit the SQL shell.
@@ -203,7 +268,7 @@ The `kamu sql` is a very powerful command that you can use both interactively or
 
 
 ### Notebooks
-Kamu also connects the power of Apache Spark with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
+Kamu also connects the power of [Apache Spark](https://spark.apache.org/) with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
 
 ```bash
 kamu notebook -e MAPBOX_ACCESS_TOKEN=<your mapbox token>
@@ -273,7 +338,7 @@ Web UI is especially useful once you start developing complex stream processing 
 ## Conclusion
 We hope this quick overview inspires you to give `kamu` a try! 
 
-Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **reproducible an verifiable** way. 
+Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **{{<term "reproducible an verifiable" "verifiability">}}** way. 
 
 
 Please continue to the [self-serve demo]({{<ref "self-serve-demo">}}) for some hands-on walkthroughs and tutorials, and check out our other [learning materials]({{<ref "learning-materials">}}).

@@ -11,7 +11,7 @@ aliases:
 
 <div align="center">
 
-<img src="/images/odf_logo_2.svg" alt="Open Data Fabric Logo" width="500">
+<img src="/images/odf-logo.png" alt="Open Data Fabric Logo">
 
 <p><strong>Open protocol for decentralized exchange and transformation of data</strong></p>
 
@@ -47,8 +47,9 @@ The goal of this specification is to develop a method of data exchange that woul
 
 `ODF` protocol is a **Web 3.0 technology** that powers a distributed structured data supply chain for providing timely, high-quality, and verifiable data for data science, smart contracts, web and applications.
 
+<div align="center">
 {{<image filename="/images/odf/distributed_world.png" alt="Web 3.0" width="50%">}}
-
+</div>
 
 ### Introductory materials
 - [Original Whitepaper (July 2020)](https://arxiv.org/abs/2111.06364)

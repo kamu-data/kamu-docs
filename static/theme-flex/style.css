@@ -3681,4 +3681,18 @@ article section.page table {
 .gdpr-modal {
   z-index: 9999;
 }
-  
+
+.glossary-link {
+  color: inherit;
+  background-color: #f3f3f3;
+  border-radius: 7px;
+  padding: 3px;
+}
+
+.schema-link {
+  font-family: "RobotoMono", monospace;
+  color: inherit;
+  background-color: #e5f4ff;
+  border-radius: 7px;
+  padding: 3px;
+}

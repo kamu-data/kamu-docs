@@ -13,12 +13,14 @@ This topic is also covered in detail in this video:
 
 With `kamu` sharing data becomes very easy, but with that problem out of the way you will soon start wondering "How can I trust the data I downloaded from someone else?". Let's first define what validity or trustworthiness of data means.
 
+For a more technical description see {{<term "verifiability">}}.
+
 ### Validity of Root Data
 Let's say you're about to use a root dataset containing historical weather information in your city. How can you be sure it's trustworthy?
 
 Because source data is non-reproducible, its validity depends entirely on its publisher. Publisher is in full control of the data they present, which also means that measuring and processing errors and even malicious data can easily make its way into the root dataset. Make sure that your publishers have good reputation and prefer data that comes from well-established organizations (government or NGOs) that directly collect or operate the systems from which the data is gathered.
 
-Aside from external audits, another way to improve confidence in data is to correlate it with data from other similar sources. In our example we could compare it with the data from a weather station in the neighbouring city and look for anomalies.
+Aside from external audits, another way to improve confidence in data is to correlate it with data from other similar sources. In our example we could compare it with the data from a weather station in the neighboring city and look for anomalies.
 
 ### Validity of Derivative Data
 Derivative data in `kamu` is created purely through transformations that are recorded in metadata. These transformations can still be malicious, but since they are usually small (e.g. a few SQL queries) we can easily audit them to ensure they are sound and done in good faith. Repeating this process for the entire transformation chain, starting with root datasets, will give you confidence in trustworthiness of derivative data.

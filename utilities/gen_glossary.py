@@ -17,6 +17,8 @@ if not os.path.exists(ODF_PATH):
         f"Expecting to have `open-data-fabric` repository checked "
         f"out side by side, but couldn't find path: {odf_tools_path}")
 
+GLOSSARY_EXTRA_PATH = "content/glossary/extra.md"
+
 IMAGES_DIR = "static/images/pages/glossary"
 IMAGES_URL = "/images/pages/glossary/"
 
@@ -57,7 +59,22 @@ if __name__ == "__main__":
 
     section = spec[start:end].strip()
 
-    # Fix all links to the rest of the spec
+    # Read the extra glossary terms
+    with open(GLOSSARY_EXTRA_PATH) as f:
+        extra = f.read()
+
+        # Strip YAML header
+        extra = extra.split("---", 2)[-1].strip()
+    
+    # Combine ODF terms and extra
+    section = f"""
+# Open Data Fabric
+{section}
+
+{extra}"""
+
+    # Substitute or glossary links with a styled version
+    # Fix the rest of the links to point to the spec document
     terms = {
         m.group(1)
         for m in re.finditer(r"^###? (.+)", section, flags=re.MULTILINE)
@@ -67,14 +84,23 @@ if __name__ == "__main__":
         for t in terms
     }
 
-    def sub_spec_refs(m):
-        link = m.group(2)
-        if link in term_links:
-            return m.group(0)
+    def sub_refs(m):
+        t = m.group(1)
+        url = m.group(2)
+        if url in term_links:
+            return f'{{{{<term "{t}" "{url}">}}}}'
+        elif url.endswith("-schema") and url != "common-data-schema":
+            t = t.strip('`')
+            schema = url.removesuffix("-schema").removeprefix("#")
+            return f'{{{{<schema "{t}" "{schema}">}}}}'
+        elif url.startswith("reference-"):
+            t = t.strip('`')
+            schema = url.removeprefix("reference-")
+            return f'{{{{<schema "{t}" "{schema}">}}}}'
         else:
-            return f'[{m.group(1)}]({{{{<relref "spec#{m.group(2)}">}}}})'
+            return f'[{t}]({{{{<relref "spec#{url}">}}}})'
 
-    section = re.sub(r"\[([a-zA-Z0-9 :/]+)\]\(#([-a-zA-Z0-9]+)\)", sub_spec_refs, section)
+    section = re.sub(r"\[([^]]+)\]\(#([^)]+)\)", sub_refs, section)
 
     # Clean up old images
     subprocess.run(

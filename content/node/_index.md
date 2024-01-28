@@ -1,5 +1,5 @@
 ---
-Title: Kamu Compute Node
+Title: Kamu Node
 description:
 weight: 30
 topLevelElement: true

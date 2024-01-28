@@ -9,6 +9,23 @@ categories: []
 This section provides examples of all style elements available to documentation authors and the guidelines on using them.
 
 
+## Links
+
+We have special types of links to refer readers to:
+- definitions of terms in the [Glossary]({{<relref "glossary">}})
+- schemas in the [Reference]({{<relref "reference">}})
+
+Input:
+
+```
+Raw data is stored in {{</*term "slices" "data-slice"*/>}} that are linked from {{</*schema "MetadataBlock"*/>}}s.
+```
+
+Result:
+
+Raw data is stored in {{<term "slices" "data-slice">}} that are linked from {{<schema "MetadataBlock">}}s.
+
+
 ## Code Blocks
 
 Input:

@@ -12,7 +12,7 @@ aliases:
 Therefore, we don't recommend using `kamu` in production yet. When you use it for projects, make sure to **maintain your source data separately** and not rely on `kamu` for durable long-term data storage. This way any time a new version comes out that breaks some compatibility you can simply delete your workspace and re-create it from scratch in a matter of seconds.
 
 ### Note on Performance
-Please be patient with current performance and resource usage. Stream processing technologies is a relatively new area, and some of the data processing engines `kamu` uses (e.g. Apache Spark and Flink) are tailored to run in large clusters, not on a laptop. They take a lot of resources to just boot up, so the *start-stop* nature of `kamu`'s transformations is at odds with their design. We are hoping that the industry will recognize our use-case and expect to see a better support for it in future. We are committed to continuously improving the performance and user experience.
+Please be patient with current performance and resource usage. Stream processing technologies is a relatively new area, and some of the data processing {{<term "engines" "engine">}} used by `kamu` (e.g. Apache Spark and Flink) are tailored to run in large clusters, and not on a laptop. They take a lot of resources to just boot up, so the *start-stop* nature of `kamu`'s transformations is at odds with their design. We are hoping that the industry will recognize our use-case and expect to see a better support for it in future. We are committed to continuously improving the performance and user experience.
 
 
 ## Feature Coverage

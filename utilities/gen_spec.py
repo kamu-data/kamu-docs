@@ -69,6 +69,14 @@ if __name__ == "__main__":
         if url.startswith("/rfcs/"):
             rfc = url.removeprefix("/rfcs/")
             return f'[{t}]({{{{<relref "{rfc}">}}}})'
+        elif url.startswith("#") and url.endswith("-schema") and url != "#common-data-schema":
+            t = t.strip('`')
+            schema = url.removesuffix("-schema").removeprefix("#")
+            return f'{{{{<schema "{t}" "{schema}">}}}}'
+        elif url.startswith("#reference-"):
+            t = t.strip('`')
+            schema = url.removeprefix("#reference-")
+            return f'{{{{<schema "{t}" "{schema}">}}}}'
         else:
             return f'[{t}]({url})'
 

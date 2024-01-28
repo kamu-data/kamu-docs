@@ -6,9 +6,9 @@ categories: []
 aliases:
 ---
 
-`kamu` supports multiple [data sources](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#fetchstep-schema) and [data formats](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#readstep) that in combination with custom [preparation steps](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#prepstep-schema) can be used ingest all kinds of data.
+`kamu` supports multiple {{<schema "data sources" "FetchStep">}} and {{<schema "data formats" "ReadStep">}} that in combination with custom {{<schema "preparation steps" "PrepStep">}} can be used ingest all kinds of data.
 
-Note that `kamu` is not intened to be or replace data masaging tool like Apache Airflow or Ni-Fi, or data extraction tool like Debezium. Utilities described below are here only to simplify the initial data ingestion step - the very first step in the data's journey through a web of structured stream processing pipelines.
+Note that `kamu` is not made to be or replace data workflow tools like [Apache Airflow](https://airflow.apache.org/) or [Apache Ni-Fi](https://nifi.apache.org/), or data extraction tool like [Debezium](https://debezium.io/). Utilities described below are here only to simplify the initial data ingestion step - the very first step in the data's journey through a web of structured stream processing pipelines.
 
 
 # CSV Variants
@@ -23,7 +23,7 @@ read:
   quote: '"'
 ```
 
-See: [ReadStep::Csv](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-csv-schema)
+See: {{<schema "ReadStep::Csv">}}
 
 
 # JSON Document
@@ -52,7 +52,7 @@ read:
 
 Where `subPath` points at the array of records withing the document.
 
-See: [ReadStep::Json](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-json-schema)
+See: {{<schema "ReadStep::Json">}}
 
 
 # NDJSON
@@ -73,7 +73,7 @@ read:
   - key STRING
 ```
 
-See: [ReadStep::NdJson](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-ndjson-schema)
+See: {{<schema "ReadStep::NdJson">}}
 
 
 # GeoJSON Document
@@ -86,7 +86,7 @@ read:
 
 The reader expects one `FeatureCollection` object in the root and will create a record per each `Feature` inside it, extracting the properties into individual columns and leaving the feature `geometry` in its own column.
 
-See: [ReadStep::GeoJson](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-geojson-schema)
+See: {{<schema "ReadStep::GeoJson">}}
 
 
 # NDGeoJSON Document
@@ -99,7 +99,7 @@ read:
 
 It is similar to [GeoJSON](#geojson-document) format but instead of `FeatureCollection` object in the root it expects every individual `Feature` to appear on its own line.
 
-See: [ReadStep::NdGeoJson](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#readstep-ndgeojson-schema)
+See: {{<schema "ReadStep::NdGeoJson">}}
 
 
 # Esri Shapefile
@@ -120,7 +120,7 @@ preprocess:
     FROM input
 ```
 
-See: [ReadStep::EsriShapefile](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#readstep-esrishapefile-schema)
+See: {{<schema "ReadStep::EsriShapefile">}}
 
 
 # Compressed Data & Archives
@@ -141,7 +141,7 @@ prepare:
   subPath: specific-file-*.csv  # Note: can contain glob patterns
 ```
 
-See: [PrepStep::Decompress](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#prepstep-decompress-schema)
+See: {{<schema "PrepStep::Decompress">}}
 
 
 # Other Formats
@@ -165,11 +165,11 @@ read:
   - key STRING
 ```
 
-See: [PrepStep::Pipe](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#prepstep-pipe-schema)
+See: {{<schema "PrepStep::Pipe">}}
 
 
 # Directory of Timestamped Files
-The [FetchStep::FilesGlob](https://github.com/kamu-data/open-data-fabric/blob/master/open-data-fabric.md#fetchstep-filesglob-schema) is used in cases where directory contains a growing set of files. Files can be periodic snapshots of your database or represent batches of new data in a ledger. In either case file content should never change - once `kamu` processes a file it will not consider it again. It's OK for files to disappear - `kamu` will remember the name of the file it ingested last and will only consider files that are higher in order than that one (lexicographically based on file name, or based on event time as shown below).
+The {{<schema "FetchStep::FilesGlob">}} is used in cases where directory contains a growing set of files. Files can be periodic snapshots of your database or represent batches of new data in a ledger. In either case file content should never change - once `kamu` processes a file it will not consider it again. It's OK for files to disappear - `kamu` will remember the name of the file it ingested last and will only consider files that are higher in order than that one (lexicographically based on file name, or based on event time as shown below).
 
 In the example below data inside the files is in snapshot format, and to complicate things it does not itself contain an event time - the event time is written into the file's name.
 
@@ -195,7 +195,7 @@ fetch:
     kind: Forever
 ```
 
-See: [FetchStep::FilesGlob](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md#fetchstep-filesglob-schema)
+See: {{<schema "FetchStep::FilesGlob">}}
 
 
 # Dealing with API Keys

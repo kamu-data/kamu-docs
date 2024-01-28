@@ -18,7 +18,7 @@ Currency conversion is a great example of a problem that cannot be solved withou
 ### Getting Started
 To follow this example checkout `kamu-cli` repository and navigate into [examples/currency_conversion](https://github.com/kamu-data/kamu-cli/tree/master/examples/currency_conversion) sub-directory.
 
-Create a temporary kamu workspace in that folder using:
+Create a temporary kamu {{<term "workspace">}} in that folder using:
 
 ```sh
 kamu init
@@ -34,11 +34,11 @@ kamu pull --all
 ### Root Datasets
 We will be using two root datasets:
 - `ca.bankofcanada.exchange-rates.daily` - contains daily exchange rates between `USD` and `CAD`.
-- `my.trading.transactions` - contains a log of transaction from a fake trading account similar to what you'd get in data export from your trading platform.
+- `my.trading.transactions` - contains a transaction ledger from a fake trading account similar to what you'd get in data export from your trading platform.
 
 The `my.trading.transactions` is sourcing its data from a file located in `data/` sub-directory, while the exchange rates are obtained from an external source - the [Bank of Canada historical exchange rates](https://www.bankofcanada.ca/rates/exchange/) dataset.
 
-Let's add the root datasets and ingest data:
+Let's add the {{<term "root datasets" "root-dataset">}} and ingest data:
 
 ```sh
 kamu add ca.bankofcanada.exchange-rates.daily.yaml my.trading.transactions.yaml
@@ -58,7 +58,7 @@ kamu sql
 ```
 
 ```sql
-select * from `ca.bankofcanada.exchange-rates.daily` limit 5;
+select * from "ca.bankofcanada.exchange-rates.daily" limit 5;
 ```
 
 ```sql
@@ -73,14 +73,14 @@ select * from `ca.bankofcanada.exchange-rates.daily` limit 5;
 +-------------+------------+---------------+-----------------+--------------+
 ```
 
-Remember, that after adding a dataset from a `yaml` file `kamu` creates an internal representation of it in the workspace `.kamu` directory, so if you want to make any changes to the dataset you will need to re-add the dataset again after changing the `yaml` file.
+Remember, that after adding a dataset from a `yaml` file `kamu` creates an internal representation of it in the {{<term "workspace">}} `.kamu` directory, so **to make any changes** to the dataset you will need to **re-add** the dataset again after changing the `yaml` file.
 
 ```sh
 kamu delete my.trading.transactions
-# ... Make changes to the yaml file ...
+# <Make changes to the yaml file>
 kamu add my.trading.transactions.yaml
 
-# Or alternatively
+# Alternatively
 kamu add --replace my.trading.transactions.yaml
 ```
 
@@ -164,7 +164,7 @@ It basically remembers the last observed value of every column grouped by the pr
 The `LEFT JOIN ca.bankofcanada.exchange-rates.daily FOR SYSTEM_TIME AS OF tr.event_time` part can be interpreted as us taking every transaction event from `my.trading.transactions`, indexing the temporal table `ca.bankofcanada.exchange-rates.daily` at this event's `event_time` and then joining the same event with the resulting (now ordinary two-dimensional) table.
 
 {{<note>}}
-Note that `SYSTEM_TIME AS OF` syntax is a relic of SQL:2011 standard and should not be confused with Kamu's `system_time` column. The actual join is perforemed in the **event time space**. You can learn more about temporal event time joins in [Flink documentation](https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/queries/joins/#temporal-joins).
+Note that `SYSTEM_TIME AS OF` syntax is a relic of SQL:2011 standard and should not be confused with Kamu's `system_time` column. The actual join is performed in the **{{<term "event time space" "event-time">}}**. You can learn more about temporal event time joins in [Flink documentation](https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/dev/table/sql/queries/joins/#temporal-joins).
 {{</note>}}
 
 With theory out of the way, it's time to give this a try:
@@ -193,4 +193,4 @@ kamu tail my.trading.transactions.cad
 
 The best thing about this is that *you may never have to touch this SQL query again*. Each time you run `kamu pull` in the future the latest transaction data will be ingested along with latest exchange rates, producing new transactions with converted prices. This is the "write once - run forever" philosophy of `kamu` that combines best propagation times with the accuracy of solving temporal problems without taking any shortcuts.
 
-Once you master this example - make sure to check out the [Stock Market Trading example]({{<ref "stock-trading">}}) that introduces another really important mechanism related to temporal joins - the **watermark**.
+Once you master this example - make sure to check out the [Stock Market Trading example]({{<ref "stock-trading">}}) that introduces another really important mechanism related to temporal joins - the **{{<term "watermark">}}**.

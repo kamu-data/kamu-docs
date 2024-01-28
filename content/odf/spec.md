@@ -222,6 +222,9 @@ More formally, a slice is a:
 
 {{<image filename="/images/pages/spec/metadata.svg" alt="Diagram: Data Slices and Metadata">}}
 
+## Metadata
+Refers to information about a [Dataset](#dataset) stored in its [Metadata Chain](#metadata-chain).
+
 ## Metadata Chain
 Metadata Chain captures all essential information about the [Dataset](#dataset), including:
 - Where the data comes from (see [Data Ingestion](#data-ingestion))
@@ -230,7 +233,7 @@ Metadata Chain captures all essential information about the [Dataset](#dataset),
 - Log of all modifications made to the data, including information used to verify the integrity of data
 - Current [Watermark](#watermark)
 
-Just like [Data](#data), the metadata chain also has a temporal nature. It consists of individual **Metadata Blocks** that refer to the previous block in the chain, forming a singly-linked list. Every block carries one of [Metadata Events](#reference-metadata-events) that describes how data evolved over time.
+Just like [Data](#data), the metadata chain also has a temporal nature. It consists of individual **Metadata Blocks** that refer to the previous block in the chain, forming a singly-linked list. Every block carries one of {{<schema "Metadata Events" "metadata-events">}} that describes how data evolved over time.
 
 {{<image filename="/images/pages/spec/metadata-chain.svg" alt="Diagram: Metadata Chain">}}
 
@@ -251,7 +254,7 @@ These extensions are out of scope of this document.
 
 See also:
 - [Metadata Format](#metadata-format)
-- [Metadata Events Reference](#reference-metadata-events)
+- {{<schema "Metadata Events Reference" "metadata-events">}}
 
 ## Dataset
 Dataset is the main unit of data exchange in the system. It's simply a combination of:
@@ -414,6 +417,43 @@ See also:
 - [Provenance in Databases: Why, How, and Where](http://homepages.inf.ed.ac.uk/jcheney/publications/provdbsurvey.pdf)
 - [Engine Contract: Derive Provenance](#derive-provenance)
 
+## Verifiability
+In the scope of this specification, verifiability of data means the ability to establish:
+- The ultimate source(s) of data:
+  - Which [Root Datasets](#root-dataset) the data is coming from
+  - Who these datasets belong to (ownership)
+  - And which actor has added the specific records (accountability)
+- The transformations performed to create this data:
+  - The graph of [Derivative Datasets](#derivative-dataset) upstream to the one being verified
+  - Authorship of those datasets (accountability)
+- And finally, that the data in fact corresponds to performing declared transformations on the source data.
+
+In other words, having root datasets `A`, `B` and a derivative dataset `C = f(A, B)`:
+- The data in `A` (and similarly in `B`) is verifiable if:
+  - [Metadata Chain](#metadata-chain) of `A` is valid
+    - Metadata block hashes are valid, forming a valid chain
+    - Blocks point to [Data Slices](#data-slice) and [Checkpoints](#checkpoint) with valid hashes
+- The data in `C` is verifiable if:
+  - [Metadata Chain](#metadata-chain) of `C` is valid
+  - Data in `C` corresponds to applying `f(A, B)` according to all transformation steps declared in the [Metadata Chain](#metadata-chain).
+
+The last step of ensuring that `f(A, B) = C` can be achieved by several means:
+- Reproducibility - by applying same transformations and comparing the results
+- Verifiable computing - different types of proofs that can attest to validity of results without redoing the computations.
+
+Examples of verifiable computing can include:
+- [Trusted Execution Environments](https://en.wikipedia.org/wiki/Trusted_execution_environment) (TEEs)
+- [Non-interactive Proofs](https://en.wikipedia.org/wiki/Non-interactive_zero-knowledge_proof) (including "zero-knowledge").
+
+Verifiability should not be confused with *trustworthiness* or *reality* of data. Verifying a dataset doesn't prove that the data in it is either truthful or more "real" than other data. The value of verifiability comes from establishing the provenance of data so that:
+- One could understand whether data is coming from reputable sources - sources they can trust (attribution)
+- One could review all derivative transformations applied to the data by intermediate actors (auditability).
+
+Verifiability provides the foundation upon which *trust* in data can be built:
+- First in the form **authority** - organizations putting their name behind the data they publish
+- Secondly in the form of **reputation** - trusting the sources or pipelines used by large parts of the community
+- Thirdly in the form of **cross-validation** - e.g. performing outlier detection on data from several similar publishers to establish common truth.
+
 ## Time
 The system applies the idea of [bitemporal data modelling](https://en.wikipedia.org/wiki/Bitemporal_Modeling) to the event streams. It differentiates two kinds of time:
 - [System time](#system-time) - tells us when some event was observed by the system
@@ -502,6 +542,9 @@ Understanding the difference between these projections is essential when working
 See also:
 - [A Brief History of Time in Data Modelling: OLAP Systems](https://www.kamu.dev/blog/a-brief-history-of-time-in-data-modelling-olap-systems/)
 
+## Manifest
+When [Metadata](#metadata) objects are saved on disk or transmitted on the network the typically wrapped in an extra {{<schema "Manifest" "manifest">}} layer.
+
 # Specification
 
 ## Dataset Identity
@@ -540,7 +583,7 @@ did-odf-format := 'did:odf:' + MULTIBASE(
 )
 </pre>
 
-The resulting DID is stored in the first [MetadataBlock](#metadata-chain) in the chain of every [Dataset](#dataset), called [Seed](#seed-schema).
+The resulting DID is stored in the first [MetadataBlock](#metadata-chain) in the chain of every [Dataset](#dataset), called {{<schema "Seed" "seed">}}.
 
 Tying the identity of a dataset to a cryptographic key pair provides a way to create unique identity in a fully decentralized way. The corresponding private key can be used to prove ownership and control over a [Dataset](#dataset) and to delegate access.
 
@@ -676,11 +719,11 @@ Supported types:
 ## Common Data Schema
 All data in the system is guaranteed to have the following columns:
 
-|    Column     | Description                                                                                                                                                                                                                                                                                                                                      |
-| :-----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|   `offset`    | [Offset](#offset) is a sequential identifier of a row relative to the start of the dataset (first row has an offset of `0`)                                                                                                                                                                                                                      |
-|     `op`      | [Operation Type](#operation-type) is used to differentiate regular append events from retractions and corrections                                                                                                                                                                                                                                |
-| `system_time` | [System Time](#system-time) denotes when an event first appeared in the dataset. This will be an ingestion time for events in the [Root Dataset](#root-dataset) or transformation time in the [Derivative Dataset](#derivative-dataset)                                                                                                          |
+|    Column     | Description                                                                                                                                                                                                                                                                                                                                       |
+| :-----------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   `offset`    | [Offset](#offset) is a sequential identifier of a row relative to the start of the dataset (first row has an offset of `0`)                                                                                                                                                                                                                       |
+|     `op`      | [Operation Type](#operation-type) is used to differentiate regular append events from retractions and corrections                                                                                                                                                                                                                                 |
+| `system_time` | [System Time](#system-time) denotes when an event first appeared in the dataset. This will be an ingestion time for events in the [Root Dataset](#root-dataset) or transformation time in the [Derivative Dataset](#derivative-dataset)                                                                                                           |
 | `event_time`  | [Event Time](#event-time) denotes when to our best knowledge an event has occurred in the real world. By default all temporal computations (windowing, aggregations, joins) are done in the event time space thus giving the user query an appearance of a regular flow of events even when data is backfilled or frequently arrives out-of-order |
 
 Representation:
@@ -916,13 +959,13 @@ See also:
 #### Metadata Block Hashing
 Blocks of the [MetadataChain](#metadata-chain) are referred to and linked together using their cryptographic hashes. The process of serializing and computing a stable hash is as follows:
 
-1. The [MetadataBlock](#metadatablock-schema) is serialized into [FlatBuffers](https://google.github.io/flatbuffers/) format following a two-step process to ensure that all variable-size buffers are laid out in memory in a consistent order:
+1. The {{<schema "MetadataBlock" "metadatablock">}} is serialized into [FlatBuffers](https://google.github.io/flatbuffers/) format following a two-step process to ensure that all variable-size buffers are laid out in memory in a consistent order:
    1. First, we iterate over all fields of the block in the same order they appear in the [schemas](#metadata-reference) serializing into buffers all vector-like and variable-size fields and recursing into nested data structures (tables) in the depth-first order.
    2. Second, we iterate over all fields again this time serializing all leftover fixed-size fields
-2. Block content is then nested into a [Manifest](#manifest-schema) object using same serialization rules as above
+2. Block content is then nested into a {{<schema "Manifest" "manifest">}} object using same serialization rules as above
 3. The resulting `flatbuffer` data is fed into [SHA3-256](https://en.wikipedia.org/wiki/SHA-3) digest algorithm.
 
-For use in the [Manifest](#manifest-schema)'s `kind` field the `multicodec` table is extended with the following codes in the "private use area":
+For use in the {{<schema "Manifest" "manifest">}}'s `kind` field the `multicodec` table is extended with the following codes in the "private use area":
 
 | Codec                | Code       |
 | -------------------- | ---------- |
@@ -1049,8 +1092,8 @@ To describe the protocol we will use HTTP `GET {object-key}` notation below, but
 
 1) Process begins with `GET /refs/head` to get the hash of the last [Metadata Block](#metadata-chain)
 2) The "metadata walking" process starts with `GET /blocks/{blockHash}` and continues following the `prevBlockHash` links
-3) Data part files can be downloaded by using [`DataSlice::physicalHash`](#dataslice-schema) links with `GET /data/{physicalHash}`
-4) Checkpoints are similarly downloaded using [`Checkpoint::physicalHash`](#checkpoint-schema) links with `GET /checkpoints/{physicalHash}`
+3) Data part files can be downloaded by using {{<schema "DataSlice::physicalHash" "dataslice">}} links with `GET /data/{physicalHash}`
+4) Checkpoints are similarly downloaded using {{<schema "Checkpoint::physicalHash" "checkpoint">}} links with `GET /checkpoints/{physicalHash}`
 5) The process continues until reaching the first block of the dataset or other termination condition (e.g. reaching the block that has already been synced previously)
 
 See also:

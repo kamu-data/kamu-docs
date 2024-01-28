@@ -26,12 +26,19 @@ aliases:
 
 ## Publications
 
-| Name                                                                                     | Level    | Description                                         |
-| ---------------------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
-| [Kamu Blog: Introducing Open Data Fabric](https://www.kamu.dev/blog/introducing-odf/)    | Beginner | Initial announcement of the ODF project             |
-| [Whitepaper: Open Data Fabric](https://arxiv.org/abs/2111.06364)                         | Beginner | Original ODF protocol whitepaper                    |
-| [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)           | Beginner | Why we are using stream processing instead of batch |
-| [Open Data Fabric protocol specification](https://github.com/kamu-data/open-data-fabric) | Advanced | Specification itself, for tech-savvy readers        |
+| Name                                                                                  | Level    | Description                                         |
+| ------------------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
+| [Kamu Blog: Introducing Open Data Fabric](https://www.kamu.dev/blog/introducing-odf/) | Beginner | Initial announcement of the ODF project             |
+| [Whitepaper: Open Data Fabric](https://arxiv.org/abs/2111.06364)                      | Beginner | Original ODF protocol whitepaper                    |
+| [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)        | Beginner | Why we are using stream processing instead of batch |
+| [Open Data Fabric protocol specification]({{<relref "odf/spec">}})                    | Advanced | Specification itself, for tech-savvy readers        |
+
+## External Resources
+
+| Name                                                                                                                         | Level    | Description                                                              |
+| ---------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------ |
+| [The World Beyond Batch: Streaming 101 by Tyler Akidau](https://www.oreilly.com/radar/the-world-beyond-batch-streaming-101/) | Beginner | Fundamental ideas behind stream (temporal) processing                    |
+| [Foundations of streaming SQL by Tyler Akidau](https://youtu.be/UlPsp7LaA38?si=lZyAVZ6Gew5Mr-wl)                             | Beginner | A great visual way to develop intuition in streaming and bitemporal data |
 
 
 See also:

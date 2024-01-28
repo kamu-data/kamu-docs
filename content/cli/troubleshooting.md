@@ -13,14 +13,15 @@ This command can be used to verify your environment setup:
 
 ```sh
 kamu system diagnose
-
-docker installed .. ok
-docker can pull images .. ok
-docker can run without sudo .. ok
-docker can mount volumes .. ok
-workspace consistency check .. ok
-...
 ```
+<pre><i>
+docker installed .. <span style="color:green">ok</span>
+docker can pull images .. <span style="color:green">ok</span>
+docker can run without sudo .. <span style="color:green">ok</span>
+docker can mount volumes .. <span style="color:green">ok</span>
+workspace consistency check .. <span style="color:green">ok</span>
+...
+</i></pre>
 
 ## Standard Logging
 When `kamu` runs, it logs into `.kamu/run` directory. This directory is **cleaned up on every run**, so if you encounter an error make sure to copy important logs before running next `kamu` command.
