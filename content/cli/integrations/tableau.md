@@ -9,7 +9,7 @@ aliases:
 [Tableau](https://www.tableau.com/) is a professional business intelligence tool. It can be connected to `kamu` using a JDBC driver.
 
 In this setup:
-- `kamu` runs a Flight SQL server - a high-performance protocol for data transfer
+- `kamu` runs an [Arrow Flight SQL](https://arrow.apache.org/docs/format/FlightSql.html) server - a high-performance protocol for data transfer
 - `Tableau` loads a special JDBC driver - a Java software module that implements an abstract database interface
 - JDBC driver translates `Tableau`'s commands into efficient Flight SQL calls in `kamu`
 

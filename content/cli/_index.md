@@ -11,9 +11,7 @@ aliases:
 
 <div align="center">
 
-![Kamu Logo](/images/kamu_logo.svg)
-
-<p><strong>Planet-scale data pipeline</strong></p>
+{{<image filename="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%">}}
 
 [Repository] | [Demo] | [Tutorials] | [Examples] | [FAQ] | [Chat]
 

@@ -6,7 +6,7 @@ categories: []
 aliases:
 ---
 
-[Apache Superset](https://superset.apache.org/) is an modern open-source data exploration and visualization platform. It can be connected to `kamu` via native Flight SQL protocol using Python client.
+[Apache Superset](https://superset.apache.org/) is an modern open-source data exploration and visualization platform. It can be connected to `kamu` via native [Arrow Flight SQL](https://arrow.apache.org/docs/format/FlightSql.html) protocol using Python client.
 
 In this setup:
 - `kamu` runs a Flight SQL server - a high-performance protocol for data transfer

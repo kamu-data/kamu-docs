@@ -11,7 +11,7 @@ aliases:
 
 <div align="center">
 
-<img src="/images/odf-logo.png" alt="Open Data Fabric Logo">
+{{<image filename="/images/odf-logo.png" alt="Open Data Fabric logo" width="50%">}}
 
 <p><strong>Open protocol for decentralized exchange and transformation of data</strong></p>
 
