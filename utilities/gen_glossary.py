@@ -17,7 +17,7 @@ if not os.path.exists(ODF_PATH):
         f"Expecting to have `open-data-fabric` repository checked "
         f"out side by side, but couldn't find path: {ODF_PATH}")
 
-GLOSSARY_EXTRA_PATH = "content/glossary/extra.md"
+GLOSSARY_EXTRA_PATH = "content/glossary/extra.md.tpl"
 
 IMAGES_DIR = "static/images/pages/glossary"
 IMAGES_URL = "/images/pages/glossary/"

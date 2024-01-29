@@ -33,4 +33,6 @@ Before you begin you should configure `kubectl` to be able to access the target 
 
 
 ## Local Deployment with Minikube
+{{<warning>}}
 WIP: We are working on extracting our deployment examples into a separate repository. Please check back later!
+{{</warning>}}

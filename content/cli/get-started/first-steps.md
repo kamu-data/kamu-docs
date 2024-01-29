@@ -44,7 +44,7 @@ Command help is also available online on [CLI Reference]({{<relref "cli-referenc
 Throughout this tutorial we will be using the [Modified Zip Code Areas](https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk) dataset from New York Open Data Portal.
 
 ### Initializing the workspace
-To work with `kamu` you first need a {{<term "workspace">}}. Workspace is where kamu will store important information about {{<term "datasets" "dataset">}} and cached data. Let's create one:
+To work with `kamu` you first need a **workspace**. {{<term "Workspace">}} is where kamu will store important information about {{<term "datasets" "dataset">}} and cached data. Let's create one:
 
 {{<image filename="/images/cli/first-steps/init.gif" alt="kamu init">}}
 

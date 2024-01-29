@@ -18,7 +18,9 @@ When you run the `api-server` node component you can open its HTTP interface in 
 
 
 ## HTTP REST
+{{<warning>}}
 WIP: We are working on generating our REST API docs. Please check back later!
+{{</warning>}}
 
 
 ## ODF
