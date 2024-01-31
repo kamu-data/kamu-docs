@@ -30,10 +30,6 @@ if __name__ == "__main__":
     # Read the source
     with open(os.path.join(KAMU_CLI_PATH, "resources/cli-reference.md")) as f:
         text = f.read()
-    
-    text = text.replace("### Examples ###", "**Examples:**")
-    text = text.replace("#### BASH ####", "**Bash:**")
-    text = text.replace("#### ZSH ####", "**Zsh:**")
 
     print(PAGE_HEADER)
     print(text)

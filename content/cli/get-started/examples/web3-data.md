@@ -17,4 +17,6 @@ aliases:
 
 This example currently exists as part of the [self-serve demo]({{<relref "self-serve-demo">}}).
 
-The dataset files can be found in the [examples/reth-vs-snp500](https://github.com/kamu-data/kamu-cli/tree/master/examples/reth-vs-snp500) directory.
+The dataset files can be found in the [examples/reth-vs-snp500](https://github.com/kamu-data/kamu-cli/tree/master/examples/reth-vs-snp500) directory and creates a pretty complex streaming pipeline:
+
+{{<image filename="/images/cli/examples/reth-vs-snp500/pipeline.png" alt="Web3 data pipeline">}}

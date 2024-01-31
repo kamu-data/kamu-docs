@@ -1,9 +1,10 @@
 ---
-Title: Examples
+Title: Input Formats
 description: Examples of handling tricky formats during ingestion
-weight: 30
+weight: 20
 categories: []
 aliases:
+  - /cli/ingest/ingest-examples
 ---
 
 `kamu` supports multiple {{<schema "data sources" "FetchStep">}} and {{<schema "data formats" "ReadStep">}} that in combination with custom {{<schema "preparation steps" "PrepStep">}} can be used ingest all kinds of data.

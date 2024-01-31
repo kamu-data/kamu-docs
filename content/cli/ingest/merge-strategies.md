@@ -1,7 +1,7 @@
 ---
 Title: Merge Strategies
 description: Describes the process of historization used depending on the nature of source data
-weight: 20
+weight: 50
 categories: []
 aliases:
 ---
@@ -138,8 +138,8 @@ content:
       merge:
         kind: Snapshot
         primaryKey:
-        - country
-        - city
+          - country
+          - city
 ```
 
 Notice that we specify `snapshot` merge strategy with composite primary key `(country, city)`. We also specify the `eventTime` of kind `FromMetadata`, instructing the ingest to use time from the caching headers as the event time of new records.
@@ -172,7 +172,7 @@ Pulling the dataset will now result in the following history:
 
 The two added rows represent the `'-C' correct-from` event that carries the old value that was changed, and `'+C' correct-to` event that carries the new value that was observed. Similarly the `'-R' retract` event can be issued for a record that disappeared in the source data.
 
-This model is extremely powerful, as it not only provides us the full history of how data was evolving over time, but allows all downstream computations to **automatically react to corrections and retractions**.
+This model is extremely powerful, as it not only provides us the full history of how data was evolving over time, but allows all downstream computations to [automatically react to corrections and retractions]({{<relref "retractions-corrections">}}).
 
 
 ## `Append`
