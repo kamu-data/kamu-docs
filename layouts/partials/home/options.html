@@ -1,5 +1,26 @@
 <section class="home-options">
     <div class="home-options__option">
+        <a href="/odf" style="text-decoration: none">
+            <div>
+                <img src="/images/odf_logo_2_icon.svg" alt="ODF Icon" style="height:70px; margin: 20px">
+                <h5>Open Data Fabric</h5>
+            </div>
+        </a>
+        <p>An open protocol specification for decentralized exchange and transformation of semi-structured data.</p>
+        <hr>
+        <ul>
+            <section>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "odf" }}">Introduction</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "spec" }}">Specification</a></li>
+            </section>
+            <section>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "reference" }}">Reference</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "rfcs" }}">RFCs</a></li>
+            </section>
+        </ul>
+    </div>
+
+    <div class="home-options__option">
         <a href="/cli" style="text-decoration: none">
             <div>
                 <img src="/images/kamu_logo_icon.svg" alt="Kamu Icon" style="height: 70px; margin: 20px">
@@ -21,21 +42,42 @@
     </div>
 
     <div class="home-options__option">
-        <a href="/odf" style="text-decoration: none">
+        <a href="/node" style="text-decoration: none">
             <div>
-                <img src="/images/odf_logo_2_icon.svg" alt="ODF Icon" style="height:70px; margin: 20px">
-                <h5>Open Data Fabric</h5>
+                <img src="/images/kamu_logo_icon.svg" alt="Kamu Icon" style="height: 70px; margin: 20px">
+                <h5>Kamu Node</h5>
             </div>
         </a>
-        <p>An open protocol specification for decentralized exchange and transformation of semi-structured data.</p>
+        <p>A set of scalable Kubernetes applications for operating data pipelines, verifying computations, and executing queries.</p>
         <hr>
         <ul>
             <section>
-                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "odf" }}">Introduction</a></li>
-                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "spec" }}">Specification</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "node" }}">Overview</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "architecture" }}">Architecture</a></li>
             </section>
             <section>
-                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "reference" }}">Reference</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "deploy" }}">Deploying</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "operator" }}">Operating</a></li>
+            </section>
+        </ul>
+    </div>
+
+    <div class="home-options__option">
+        <a href="/platform" style="text-decoration: none">
+            <div>
+                <img src="/images/kamu_logo_icon.svg" alt="Kamu Icon" style="height: 70px; margin: 20px">
+                <h5>Kamu Web Platform</h5>
+            </div>
+        </a>
+        <p>A front-end app that acts as a window into the decentralized ODF data network.</p>
+        <hr>
+        <ul>
+            <section>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "node" }}">Overview</a></li>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "platform/get-started" }}">Get Started</a></li>
+            </section>
+            <section>
+                <li><i class="fa fa-angle-right fa-lg category-icon"></i><a href="{{ relref . "admin" }}">Administration</a></li>
             </section>
         </ul>
     </div>

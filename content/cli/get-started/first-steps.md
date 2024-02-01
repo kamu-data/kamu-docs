@@ -147,6 +147,44 @@ To create your own snapshot file use `kamu new` command - it outputs a well-anno
 {{</tip>}}
 
 
+### Dataset Identity
+During the dataset creation it is assigned a very special identifier.
+
+You can see it by running:
+
+```sh
+kamu list -w
+```
+```
+┌───────────────────────────────────────────────────────────────────────────────┬──────────────────────────────────────────┬─────┐
+│                                      ID                                       │                   Name                   │ ... │
+├───────────────────────────────────────────────────────────────────────────────┼──────────────────────────────────────────┼─────┤
+│ did:odf:fed01057c94fb0378e3222704bb70a261d3ebeaa0d1b38c056a0bdd476360b8548db1 │ us.cityofnewyork.data.zipcode-boundaries │ ... │
+└───────────────────────────────────────────────────────────────────────────────┴──────────────────────────────────────────┴─────┘
+```
+
+Or:
+
+```sh
+kamu log us.cityofnewyork.data.zipcode-boundaries
+```
+```
+Block #0: ...
+SystemTime: ...
+Kind: Seed
+DatasetKind: Root
+DatasetID: did:odf:fed01057c94fb0378e3222704bb70a261d3ebeaa0d1b38c056a0bdd476360b8548db1
+```
+
+This is a [globally unique identity]({{<relref "spec#dataset-identity">}}) which is based on a cryptographic key-pair that only you control.
+
+Thus by creating an ODF dataset you get both:
+- a way to **uniquely identify** it on the web
+- and a way to **prove ownership** over it.
+
+This will be extremely useful when we get to [sharing data with others]({{<relref "cli/collab">}}).
+
+
 ### Fetching data
 At this point our new dataset is still empty:
 
