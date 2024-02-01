@@ -13,45 +13,21 @@
 {{- define "menu-nav" }}
 {{- $currentNode := .currentnode }}
 {{- $level := .level }}
- {{- with .sect}}
-  {{- if .IsSection}}
-    <option value="{{ .Permalink}}" {{if eq .RelPermalink $currentNode.RelPermalink}} selected{{end}}>
-  {{if gt $level 1 }}
-    {{- range after 1 (seq $level)}}-{{ end }} 
-  {{end}} {{.Title}}</option>
-  
-  {{- if or (.IsAncestor $currentNode) (.Params.alwaysopen) }} <!-- dig into sub levels only if active or menu is always ON-->
+{{- with .sect}}
+{{- $isCurrent := eq .RelPermalink $currentNode.RelPermalink }}
+{{- $isAncestor := .IsAncestor $currentNode }}
+  <option value="{{ .Permalink}}" {{if eq .RelPermalink $currentNode.RelPermalink}} selected {{end}}>
+    {{- range after 1 (seq $level)}}—{{ end }} 
+    {{.Title}}
+  </option>
 
-      {{- $numberOfPages := (add (len .Pages) (len .Sections)) }}
-      {{- if ne $numberOfPages 0 }}
-          {{- $pages := .Pages }}
-          {{- if .Sections}}
-            {{- $pages = (.Pages | union .Sections) }}
-          {{- end}}
-
-        {{- if eq .Site.Params.ordersectionsby "title"}}
-          {{- range $pages.ByTitle }}
-            {{- if and .Params.hidden (not $.showhidden) }}
-            {{- else}}
-            {{- template "menu-nav" dict "sect" . "currentnode" $currentNode  }}
-            {{- end}}
-          {{- end}}
-        {{- else}}
-          {{- range $pages.ByWeight }}
-            {{- if and .Params.hidden (not $.showhidden) }}
-            {{- else}}
-            {{- template "menu-nav" dict "sect" . "currentnode" $currentNode "level" (add $level 1) }}
-            {{- end}}
-          {{- end}}
-        {{- end}}
-
-      {{- end}}
-  {{end}}
-  {{- else}}
-    {{- if not .Params.Hidden }}
-      <option value="{{ .Permalink}}" {{if eq .RelPermalink $currentNode.RelPermalink}} selected{{end}}> 
-{{- range after 1 (seq $level)}}-{{ end }} {{.Title}}</option>
-    {{- end}}
-  {{- end}}
- {{- end}}
-{{- end}}
+  <!-- dig into sub levels only if active or menu is always ON-->
+  {{- if or ($isAncestor) ($isCurrent) (.Params.alwaysopen) }}
+    {{- range .Pages.ByWeight }}
+      {{- if or (not .Params.hidden) ($.showhidden) }}
+      {{- template "menu-nav" dict "sect" . "currentnode" $currentNode "level" (add $level 1) }}
+      {{- end }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}

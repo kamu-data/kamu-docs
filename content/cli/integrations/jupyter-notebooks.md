@@ -6,7 +6,7 @@ categories: []
 aliases:
 ---
 
-Please see [Exploring Data section]({{<ref "explore">}}/#jupyter-notebooks) for how to run an integrated Jupyter Notebooks environment with `kamu`.
+Please see [Exploring Data section]({{<ref "explore#jupyter-notebooks">}}) for how to run an integrated Jupyter Notebooks environment with `kamu`.
 
 Soon we will be releasing the `kamu` Jupyter extension as a stand-alone library to let you fetch data from any ODF-compliant server.
 

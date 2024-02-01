@@ -16,16 +16,15 @@
           <li class="" role="">
             <a id="search-toggle">
               <i class="fa fa-search"></i>
-              Press "/" to search
             </a>
           </li>
           <li class="" role="">
-            <a href="{{ "self-serve-demo" | relref . }}">
+            <a href="{{ relref . "self-serve-demo" }}">
               <label>Demo</label>
             </a>
           </li>
           <li class="" role="">
-            <a href="https://github.com/kamu-data/kamu-cli/releases/latest">
+            <a href="{{ relref . "installation" }}">
               <label>Download</label>
             </a>
           </li>

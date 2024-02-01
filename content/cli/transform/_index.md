@@ -5,7 +5,7 @@ weight: 40
 categories: []
 ---
 
-## Metal Model
+## Conceptual Model
 Open Data Fabric clearly separates two types of data:
 - **Source** - represented by {{<term "root datasets" "root-dataset">}} this data comes directly from external systems, with party that owns the dataset having complete authority over the data and fully accountable for its veracity
 - **Derivative** - represented by {{<term "derivative datasets" "derivative-dataset">}} this data is produced by transforming and combining other datasets (root or derivative).

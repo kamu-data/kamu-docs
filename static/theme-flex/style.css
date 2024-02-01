@@ -3159,7 +3159,7 @@ article section.page table.hot-topics-table tbody tr:last-of-type td {
     height: 73px;
   }
 
-  header nav.shortcuts {
+  header nav.shortcuts:not(.shortcuts-right) {
     display: none;
   }
 
@@ -3705,6 +3705,21 @@ a#search-toggle {
   background: #eee;
   border-radius: 10px;
   padding: 0 30px 0 5px;
+}
+
+a#search-toggle::after {
+  content: "Press '/' to search";
+}
+
+@media (max-width: 1024px) {
+  a#search-toggle {
+    font-size: smaller;
+    padding: 10px;
+  }
+
+  a#search-toggle::after {
+    content: "";
+  }
 }
 
 div#search-overlay {
