@@ -14,7 +14,7 @@ aliases:
 {{<image filename="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%">}}
 
 [![Repository](https://img.shields.io/github/v/tag/kamu-data/kamu-web-ui?include_prereleases&logo=github&logoColor=white&label=Repository&style=for-the-badge)](https://github.com/kamu-data/kamu-web-ui/)
-[![Release](https://img.shields.io/github/v/release/kamu-data/kamu-web-ui?include_prereleases&logo=rust&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-web-ui/releases/latest)
+[![Release](https://img.shields.io/github/v/release/kamu-data/kamu-web-ui?include_prereleases&logo=angular&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-web-ui/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-web-ui/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master)](https://github.com/kamu-data/kamu-web-ui/actions)
 [![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
 
