@@ -24,17 +24,17 @@ aliases:
 
 ## About
 
-Kamu Web Platform - this is a **front-end application** that acts as a window into the decentralized [Open Data Fabric network]({{<relref "odf">}}).
+Kamu Web Platform is a **front-end application** that acts as a window into the decentralized [Open Data Fabric]({{<relref "odf">}}) (ODF) network.
 
 {{<image filename="/images/platform/kamu-web-ui-screenshot-cloud.png" alt="Kamu Platform screenshots">}}
 
 Think of it as [Etherscan](https://etherscan.io/) for ODF or [GitHub](https://github.com) for data pipelines. It can be used in multiple setups:
-- You can run it on a laptop to explore and build pipelines together with [Kamu CLI]({{<relref "cli">}})
-- It can be deployed as a private cloud or on-premise data platform in combination with [Kamu Node]({{<relref "node">}})
-- Or it can be used as a window into the global ODF network to interact with millions of decentralized data sources and supply chains.
+- On a laptop to explore and build pipelines together with [Kamu CLI]({{<relref "cli">}})
+- Deployed as a private cloud or on-premise data platform in combination with [Kamu Node]({{<relref "node">}})
+- As a window into the global ODF network to interact with millions of decentralized data sources and supply chains.
 
 ## Get Started
-By far the simplest way to try it out is using [Kamu CLI]({{<relref "cli">}}) - simply [install it]({{<relref "installation">}}) run this command in your {{<term "workspace">}}:
+By far the simplest way to try it out is using [Kamu CLI]({{<relref "cli">}}) - simply [install]({{<relref "installation">}}) it and run this command in your {{<term "workspace">}}:
 
 ```sh
 kamu ui
@@ -43,4 +43,4 @@ kamu ui
 ## Helm Chart
 You can deploy Kamu Web platform into a [Kubernetes](https://kubernetes.io/) cluster using [Helm](https://helm.sh/) and our latest chart from [ArtifactHub](https://artifacthub.io/packages/search?org=kamu).
 
-See [deployment manual]({{<relref "deploy">}}) on how to deploy Web Platform alongside the [Kamu Node]({{<relref "node">}}).
+See [deployment manual]({{<relref "deploy">}}) on how to deploy the Web Platform alongside [Kamu Node]({{<relref "node">}}).
