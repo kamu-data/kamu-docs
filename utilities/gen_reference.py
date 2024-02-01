@@ -62,8 +62,7 @@ class Ctx:
         return f"reference-{id}"
     
     def schema_id(self, name):
-        id = name.lower().replace("::", "-")
-        return f"{id}-schema"
+        return name.lower().replace("::", "")
 
 
 def render_type(ctx, sch):
@@ -101,7 +100,7 @@ def render_format(sch):
 
 
 def render_union(ctx, sch, name):
-    render_header(ctx, name, ctx.schema_id(name), code=True)
+    render_header(ctx, name, code=True)
     ctx.out.write(sch.get("description", ""))
     ctx.out.write("\n\n")
 
@@ -143,7 +142,7 @@ def render_union(ctx, sch, name):
 
 
 def render_enum(ctx, sch, name):
-    render_header(ctx, name, ctx.schema_id(name), code=True)
+    render_header(ctx, name, code=True)
     ctx.out.write(sch.get("description", ""))
     ctx.out.write("\n\n")
 
@@ -178,11 +177,10 @@ def render_schema_links(ctx, name):
         f"[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)]"
         f"({ODF_URL}tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)\n"
     )
-    # ctx.out.write("[^](#reference-information)\n")
 
 
 def render_object(ctx, sch, name):
-    render_header(ctx, name, ctx.schema_id(name), code=True)
+    render_header(ctx, name, code=True)
     ctx.out.write(sch.get("description", ""))
     ctx.out.write("\n\n")
 
@@ -215,10 +213,7 @@ def render_schema(ctx, sch):
         raise Exception(f"Unsupported type: {sch}")
 
 
-def render_header(ctx, name, id=None, code=False):
-    if id is None:
-        id = ctx.section_id(name)
-    ctx.out.write(f"<a name=\"{id}\"></a>\n")
+def render_header(ctx, name, code=False):
     ctx.out.write("#" * ctx.header_level)
     if code:
         ctx.out.write(f" `{name}`\n")
