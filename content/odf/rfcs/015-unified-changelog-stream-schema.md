@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-015: Unified changelog stream schema"
 linkTitle: "RFC-015: Unified changelog stream schema"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

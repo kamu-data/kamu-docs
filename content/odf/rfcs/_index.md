@@ -1,6 +1,6 @@
 ---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Protocol Evolution Proposals
+Title: RFCs
 linkTitle: RFCs
 weight: 30
 categories: []

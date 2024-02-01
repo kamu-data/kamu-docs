@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-006: Store Checkpoints as Files"
 linkTitle: "RFC-006: Store Checkpoints as Files"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

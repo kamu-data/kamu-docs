@@ -21,7 +21,7 @@ PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "{title}"
 linkTitle: "{title}"
-description:
+searchWeight: 0.5
 categories: []
 ---
 
@@ -29,7 +29,7 @@ categories: []
 
 INDEX_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Protocol Evolution Proposals
+Title: RFCs
 linkTitle: RFCs
 weight: 30
 categories: []

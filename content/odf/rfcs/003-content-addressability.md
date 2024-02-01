@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-003: Content Addressability"
 linkTitle: "RFC-003: Content Addressability"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    {{ partial "flex/head" . }}
+  </head>
 
-<head>
-  {{ partial "flex/head" . }}
-</head>
-
-<body data-url="{{ .RelPermalink }}">
-  {{ partial "flex/body-beforecontent" . }}
-
-  {{if .IsHome}}
-  {{ partial "home/hero" . }}
-  {{ partial "home/options" . }}
-  {{end}}
-
-  {{if not .IsHome}}
-  <div class="main-content">
-    <div class="main-content-left">
-      {{ if .Params.underConstruction }}
-      {{ partial "under-construction" . }}
-      {{ end }}
-      {{ block "main" . }}
-      {{ end }}
+  <body data-url="{{ .RelPermalink }}">
+    {{ partial "flex/body-beforecontent" . }} {{if .IsHome}} {{ partial
+    "home/hero" . }} {{ partial "home/options" . }} {{end}} {{if not .IsHome}}
+    <div class="main-content">
+      <div
+        class="main-content-left"
+        data-pagefind-body
+        {{ if .Params.searchWeight }} data-pagefind-weight="{{ .Params.searchWeight }}" {{ end }}
+        {{ if .Params.underConstruction }} data-pagefind-weight="0.5" {{ end }}
+      >
+        {{ if .Params.underConstruction }} {{ partial "under-construction" . }}
+        {{ end }} {{ block "main" . }} {{ end }}
+      </div>
+      <div class="main-content-right">{{ partial "mini-toc" . }}</div>
     </div>
-    <div class="main-content-right">
-      {{ partial "mini-toc" . }}
+    <div class="main-content-bottom">{{ partial "post-bottom" . }}</div>
+    {{end}} {{ partial "flex/body-aftercontent" . }} {{ block "footer" . }} {{
+    end }} {{ partial "custom-footer" . }}
+
+    <div id="search-overlay" style="display: none">
+      <div id="search-modal">
+        <div id="search"></div>
+      </div>
     </div>
-  </div>
-  <div class="main-content-bottom">
-    {{ partial "post-bottom" . }}
-  </div>
-  {{end}}
-  {{ partial "flex/body-aftercontent" . }}
 
-  {{ block "footer" . }}
-  {{ end }}
+    <script>
+      window.addEventListener("DOMContentLoaded", (event) => {
+        new PagefindUI({
+          element: "#search",
+          showImages: false,
+          showSubResults: true,
+          highlightParam: "highlight",
+        });
+      });
 
-  {{ partial "custom-footer" . }}
-</body>
+      document.addEventListener("DOMContentLoaded", () => {
+        var overlay = document.getElementById("search-overlay");
+        var search = document.getElementById("search-modal");
+        var trigger = document.getElementById("search-toggle");
 
+        trigger.addEventListener("click", () => {
+          if (overlay.style.display == "none") {
+            overlay.style.display = "flex";
+            overlay.querySelector("input").value = "";
+            overlay.querySelector("input").focus();
+          } else {
+            overlay.style.display == "none";
+          }
+        });
+
+        overlay.addEventListener("click", function (event) {
+          overlay.style.display = "none";
+        });
+        search.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && overlay.style.display != "none") {
+            overlay.style.display = "none";
+          } else if (event.key === "/" && overlay.style.display == "none") {
+            overlay.style.display = "flex";
+            overlay.querySelector("input").value = "";
+            overlay.querySelector("input").focus();
+            event.preventDefault();
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

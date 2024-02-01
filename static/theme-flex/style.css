@@ -97,7 +97,7 @@ header nav.shortcuts li {
   opacity: 1;
   display: inline-block;
   padding: 0 10px;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   font-family: 'Graphik Web', sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -126,9 +126,9 @@ header nav.shortcuts-right li a label:hover {
   color: #3e41a0;
 }
 
-header nav.shortcuts-right li a {
+/*header nav.shortcuts-right li a {
   padding: 0 !important;
-}
+}*/
 
 header nav.shortcuts-right li:last-child a label {
   color: #5961ff;
@@ -320,7 +320,7 @@ header nav.shortcuts li a {
   display: -ms-flexbox;
   display: flex;
   height: 2.9rem;
-  padding: 12.8px 16px;
+  /*padding: 12.8px 16px;*/
 }
 
 .main-content {
@@ -569,7 +569,7 @@ section a {
 
 /* Home */
 .home-hero {
-  padding-top: 5rem;
+  /*padding-top: 5rem;*/
 }
 
 .home-hero h1 {
@@ -3695,4 +3695,38 @@ article section.page table {
   background-color: #e5f4ff;
   border-radius: 7px;
   padding: 3px;
+}
+
+a#search-toggle {
+  color: #555555;
+  text-transform: none; 
+  font-weight: normal;
+  border: 1px solid #aaa;
+  background: #eee;
+  border-radius: 10px;
+  padding: 0 30px 0 5px;
+}
+
+div#search-overlay {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000aa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+div#search-modal {
+  margin-top: 10vh;
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+  width: 80vw;
+  max-height: 80vh;
+  overflow: auto;
 }

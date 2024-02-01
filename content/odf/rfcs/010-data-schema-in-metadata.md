@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-010: Data Schema in Metadata"
 linkTitle: "RFC-010: Data Schema in Metadata"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

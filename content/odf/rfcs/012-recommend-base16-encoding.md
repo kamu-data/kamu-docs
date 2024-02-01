@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-012: Recommend `base16` encoding for textual representation of hashes and DIDs"
 linkTitle: "RFC-012: Recommend `base16` encoding for textual representation of hashes and DIDs"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

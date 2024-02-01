@@ -1,10 +1,17 @@
 .PHONY: dev
 dev:
-	hugo server -D
+	hugo server -D -p 1414
+
+.PHONY: dev-with-search
+dev-with-search:
+	@# TODO: Figure out how to run dev server with pagefind static files
+	hugo -D
+	npx -y pagefind --site public --serve
 
 .PHONY: build
 build:
-	HUGO_ENV=production hugo
+	HUGO_ENV=production hugo --minify
+	npx -y pagefind --site public
 
 .PHONY: publish
 publish: build
@@ -19,3 +26,7 @@ docgen:
 	python utilities/gen_spec.py > content/odf/spec.md
 	python utilities/gen_rfcs.py content/odf/rfcs/
 	python utilities/gen_cli_reference.py > content/cli/cli-reference.md
+
+.PHONY: clean
+clean:
+	rm -rf public node_modules

@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-008: Smart Transfer Protocol"
 linkTitle: "RFC-008: Smart Transfer Protocol"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

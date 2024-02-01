@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-009: Ingestion Source State"
 linkTitle: "RFC-009: Ingestion Source State"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

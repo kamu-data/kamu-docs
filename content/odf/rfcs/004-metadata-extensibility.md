@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-004: Metadata Extensibility"
 linkTitle: "RFC-004: Metadata Extensibility"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

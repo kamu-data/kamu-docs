@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-005: New Annotation Metadata Events"
 linkTitle: "RFC-005: New Annotation Metadata Events"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

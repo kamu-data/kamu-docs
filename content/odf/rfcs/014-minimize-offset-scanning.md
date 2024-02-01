@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-014: Minimizing scanning for last offset and block "
 linkTitle: "RFC-014: Minimizing scanning for last offset and block "
-description:
+searchWeight: 0.5
 categories: []
 ---
 

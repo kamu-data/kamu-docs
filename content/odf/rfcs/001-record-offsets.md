@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-001: Record Offsets"
 linkTitle: "RFC-001: Record Offsets"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-002: Logical Data Digests"
 linkTitle: "RFC-002: Logical Data Digests"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

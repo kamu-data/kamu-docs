@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-007: Simple Transfer Protocol"
 linkTitle: "RFC-007: Simple Transfer Protocol"
-description:
+searchWeight: 0.5
 categories: []
 ---
 

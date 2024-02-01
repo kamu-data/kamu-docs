@@ -2,7 +2,7 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: "RFC-013: Enum representation in YAML encoding"
 linkTitle: "RFC-013: Enum representation in YAML encoding"
-description:
+searchWeight: 0.5
 categories: []
 ---
 
