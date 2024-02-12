@@ -43,7 +43,7 @@ See also:
 - [Using Podman instead of Docker]({{<relref "#using-podman-instead-of-docker">}})
 
 ### MacOS X
-To install `kamu` on MacOS X please follow these steps:
+We fully support Intel and M-series Macs, to install `kamu` please follow these steps:
 1. Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
    1. Consider allocating more CPUs and memory to the Docker VM in the settings
    2. If you want to run `kamu` outside of your user home directory - you may need to add additional mounts to the Docker VM. For example if your workspace is in `/opt/myworkspace` you'll need to mount it under the same name into the VM in Docker settings.
@@ -55,10 +55,6 @@ To install `kamu` on MacOS X please follow these steps:
     ```bash
     kamu system diagnose
     ```
-
-{{<warning>}}
-We don't yet fully support Apple's ARM series (M1, M2) of processors and you'll need [`qemu`](https://www.qemu.org/) to run `kamu` and some of our engine images. See [tracking issue](https://github.com/kamu-data/kamu-cli/issues/246) for ARM architecture support.
-{{</warning>}}
 
 See also:
 <!-- no toc -->
