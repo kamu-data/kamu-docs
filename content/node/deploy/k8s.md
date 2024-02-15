@@ -7,3 +7,5 @@ categories: []
 aliases:
 ---
 
+- Persistent volumes
+- Ingress controller

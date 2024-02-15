@@ -54,6 +54,7 @@ While we could deploy all components by running `helm install` commands, we will
 Go ahead and clone the example repo:
 ```sh
 git clone https://github.com/kamu-data/kamu-deploy-example.git
+cd kamu-deploy-example
 ```
 
 ## Deploy Kamu Node
@@ -61,7 +62,6 @@ git clone https://github.com/kamu-data/kamu-deploy-example.git
 ### Using convenience script
 To get all components installed and running you can use a convenience script:
 ```sh
-cd kamu-deploy-example
 ./deploy-minikube.sh
 ```
 ```
@@ -82,6 +82,20 @@ export MINIKUBE_HOST=$(minikube ip)
 helmfile -e minikube sync
 ```
 
+Either way you will now have multiple `kamu` component pods running:
+
+```sh
+kubectl get pods
+```
+```
+NAME                               READY   STATUS      RESTARTS   AGE
+kamu-api-server-79974ff49c-5bb7s   1/1     Running     0          1h
+kamu-web-ui-85fb7b7957-vb5kf       1/1     Running     0          1h
+minio-58c59dd784-4jkfk             1/1     Running     0          1h
+minio-provisioning-zfz5n           0/1     Completed   0          1h
+...
+```
+
 ## Making changes
 After the initial deployment, if you modify any configuration you can easily **apply** your changes to the deployment using:
 ```sh
@@ -99,4 +113,6 @@ The skeleton `helmfile.yaml` provided in this example is simple yet very capable
 
 
 ## What's Next?
-Once you get familiar and comfortable with this local setup, proceed to the [Deployment Manual]({{<relref "deploy">}}) for instructions on setting up a production-grade environment.
+See [Architecture]({{<relref "node/architecture">}}) section for the description of all components we have installed and how they interoperate.
+
+Once you get familiar and comfortable with this local setup - proceed to the [Deployment Manual]({{<relref "node/deploy">}}) for instructions on setting up a production-grade environment.

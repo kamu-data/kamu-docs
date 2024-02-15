@@ -7,6 +7,14 @@ categories: []
 aliases:
 ---
 
+{{<info>}}
+Want to try out Kamu Node in a **local environment**?
+<br/>
+<br/>
+Then check out the [Quick Start]({{<relref "quick-start">}}) guide.
+{{</info>}}
+
+
 ## Helm Charts
 Latest Helm charts can be found in the [ArtifactHub](https://artifacthub.io/packages/search?org=kamu).
 
@@ -30,9 +38,3 @@ Latest Helm charts can be found in the [ArtifactHub](https://artifacthub.io/pack
 - (optional) [`k9s`](https://k9scli.io/) - for fancy TUI of Kubernetes cluster
 
 Before you begin you should configure `kubectl` to be able to access the target k8s cluster.
-
-
-## Local Deployment with Minikube
-{{<warning>}}
-WIP: We are working on extracting our deployment examples into a separate repository. Please check back later!
-{{</warning>}}
