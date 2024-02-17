@@ -21,6 +21,7 @@ Before we begin, you will need the following tools installed:
 3. [**`kubectl`**](https://kubernetes.io/docs/reference/kubectl/) - client for interacting with Kubernetes cluster
 4. [**`helm`**](https://helm.sh/) - software management tool for Kubernetes
 5. [**`helmfile`**](https://helmfile.readthedocs.io) - "infrastructure-as-code" wrapper for `helm`
+6. [**`aws-cli`**](https://aws.amazon.com/cli/) (optional) - needed to download example datasets
 
 
 ## Start your cluster
@@ -62,14 +63,14 @@ cd kamu-deploy-example
 ### Using convenience script
 To get all components installed and running you can use a convenience script:
 ```sh
-./deploy-minikube.sh
+./deploy.sh
 ```
 ```
 ===========================================================
                       KAMU                                 
 -----------------------------------------------------------
-Kamu API:         http://192.168.XX.YY:30201
 Kamu Web UI:      http://192.168.XX.YY:30211
+Kamu API:         http://192.168.XX.YY:30201
 ```
 
 You can now open the provided `Kamu Web UI` URL in your browser and see the [Kamu Web Platform]({{<relref "platform">}}) interface.
@@ -96,11 +97,23 @@ minio-provisioning-zfz5n           0/1     Completed   0          1h
 ...
 ```
 
+## Example Content
+If you open the `Kamu Web UI` URL in your browser you will see a functional but very empty platform.
+
+To load some example data to play with use:
+```sh
+./bootstrap-examples.sh
+```
+
+Refresh the browser tab and you should see a lot of new pipelines to explore.
+
+
 ## Making changes
 After the initial deployment, if you modify any configuration you can easily **apply** your changes to the deployment using:
 ```sh
 helmfile -e minikube apply
 ```
+
 
 ## Under the hood
 Main entry point of this repository is `helmfile.yaml` which:
@@ -116,3 +129,8 @@ The skeleton `helmfile.yaml` provided in this example is simple yet very capable
 See [Architecture]({{<relref "node/architecture">}}) section for the description of all components we have installed and how they interoperate.
 
 Once you get familiar and comfortable with this local setup - proceed to the [Deployment Manual]({{<relref "node/deploy">}}) for instructions on setting up a production-grade environment.
+
+Oh, and don't forget to clean up your `minikube` environment:
+```sh
+minikube delete
+```
