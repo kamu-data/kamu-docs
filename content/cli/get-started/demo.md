@@ -4,20 +4,24 @@ description: A detailed self-guided tour of the took and its features
 weight: 11
 categories: []
 aliases:
+  - /cli/demo
+  - /cli/self-serve-demo
+  - /cli/get-started/self-serve-demo
 ---
 
-Check out this video for a quick overview of key functionality:
-{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
-
-The demo described below will guide you through the basics of using `kamu` and let you try out most of the tool's features without having to install it.
-
-
-## Run in a Browser
-The demo is also available online at: https://demo.kamu.dev
+## Online Demo Environment
+The self-guided demo is available online at: https://demo.kamu.dev
 
 {{<info>}}
 The capacity of this environment is limited and you may experience a worse performance than running it on your machine.
 {{</info>}}
+
+
+## Video Intro
+Check out this video for a quick overview of key functionality:
+{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
+
+The demo described below will guide you through the basics of using `kamu` and let you try out most of the tool's features without having to install it.
 
 
 ## Run It Yourself

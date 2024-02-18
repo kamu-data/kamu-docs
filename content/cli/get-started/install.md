@@ -5,6 +5,8 @@ weight: 15
 categories: []
 aliases:
   - /cli/install
+  - /cli/installation
+  - /cli/get-started/installation
 ---
 
 {{<info>}}

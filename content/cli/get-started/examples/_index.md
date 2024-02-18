@@ -11,7 +11,7 @@ aliases:
 
 | Name                                                        |    Level     |                              Topics                               |
 | ----------------------------------------------------------- | :----------: | :---------------------------------------------------------------: |
-| [Self-serve Demo]({{<relref "self-serve-demo">}})           |   Beginner   |                          basic commands                           |
+| [Self-serve Demo]({{<relref "demo">}})                      |   Beginner   |                          basic commands                           |
 | [Currency Conversion]({{<relref "currency-conversion">}})   |   Beginner   |                       temporal-table joins                        |
 | [COVID-19 Daily Cases]({{<relref "covid19">}})              |   Beginner   |          harmonization, unions, aggregations, notebooks           |
 | [Housing Prices]({{<relref "housing-prices">}})             |   Beginner   |           GIS data, GIS functions, GIS joins, notebooks           |

@@ -11,12 +11,12 @@ For a quick overview of key functionality you can also view this tutorial:
 
 This tutorial will give you a high-level tour of `kamu` and show you how it works through examples.
 
-We assume that you have already followed the [installation steps]({{<ref "installation">}}) and have `kamu` tool ready.
+We assume that you have already followed the [installation steps]({{<ref "install">}}) and have `kamu` tool ready.
 
 {{<info>}}
 **Not ready to install just yet?**
 
-Try `kamu` in this [self-serve demo]({{<ref "self-serve-demo">}}) without needing to install anything.
+Try `kamu` in this [self-serve demo]({{<ref "demo">}}) without needing to install anything.
 {{</info>}}
 
 Don't forget to set up **shell completions** - they make using `kamu` a lot more fun!
@@ -381,4 +381,4 @@ We hope this quick overview inspires you to give `kamu` a try!
 Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **{{<term "reproducible an verifiable" "verifiability">}}** way. 
 
 
-Please continue to the [self-serve demo]({{<ref "self-serve-demo">}}) for some hands-on walkthroughs and tutorials, and check out our other [learning materials]({{<ref "learning-materials">}}).
+Please continue to the [self-serve demo]({{<ref "demo">}}) for some hands-on walkthroughs and tutorials, and check out our other [learning materials]({{<ref "learning-materials">}}).

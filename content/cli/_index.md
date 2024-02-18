@@ -33,7 +33,7 @@ curl -s "https://get.kamu.dev" | sh
 ## Get Started
 
 * Watch [this introductory video](https://www.youtube.com/watch?v=oUTiWW6W78A&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk) to see `kamu` in action.
-* Learn how to use `kamu` with this [self-serve demo]({{<ref "self-serve-demo">}}) without needing to install anything.
+* Learn how to use `kamu` with this [self-serve demo]({{<ref "demo">}}) without needing to install anything.
 * Then follow the ["Getting Started"]({{<ref "get-started">}}) steps to install the tool and try a bunch of examples.
 
 ## About
@@ -202,7 +202,7 @@ For the list of our community resource and guides on how to contribute [start he
 
 
 [Repository]: https://github.com/kamu-data/kamu-cli
-[Demo]: {{<ref "self-serve-demo">}}
+[Demo]: {{<ref "demo">}}
 [Tutorials]: {{<ref "get-started/learning-materials">}}
 [Examples]: {{<ref "examples">}}
 [FAQ]: {{<ref "faq">}}

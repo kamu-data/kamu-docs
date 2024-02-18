@@ -34,7 +34,7 @@ Think of it as [Etherscan](https://etherscan.io/) for ODF or [GitHub](https://gi
 - As a window into the global ODF network to interact with millions of decentralized data sources and supply chains.
 
 ## Get Started
-By far the simplest way to try it out is using [Kamu CLI]({{<relref "cli">}}) - simply [install]({{<relref "installation">}}) it and run this command in your {{<term "workspace">}}:
+By far the simplest way to try it out is using [Kamu CLI]({{<relref "cli">}}) - simply [install]({{<relref "install">}}) it and run this command in your {{<term "workspace">}}:
 
 ```sh
 kamu ui

@@ -15,7 +15,7 @@ aliases:
 
 ## Summary
 
-This example currently exists as part of the [self-serve demo]({{<relref "self-serve-demo">}}).
+This example currently exists as part of the [self-serve demo]({{<relref "demo">}}).
 
 While we're working on the text version try the demo and watch this video:
 
