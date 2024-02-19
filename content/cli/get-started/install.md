@@ -170,6 +170,7 @@ It is sometimes convenient to get `kamu-cli` in a Docker/Podman image. For this 
 
 - [`ghcr.io/kamu-data/kamu-base:latest`](https://github.com/kamu-data/kamu-cli/tree/master/images/kamu-base) - comes with just `podman` and `kamu-cli` pre-installed
 - [`ghcr.io/kamu-data/kamu-base:latest-with-data`](https://github.com/kamu-data/kamu-cli/tree/master/images/kamu-base-with-data) - comes with a sample data pipeline that you can use to test different features with
+- [`ghcr.io/kamu-data/kamu-base:latest-with-data-mt`](https://github.com/kamu-data/kamu-cli/tree/master/images/kamu-base-with-data-mt) - comes with a sample multi-tenant dataset repository
 
 For example, try running:
 

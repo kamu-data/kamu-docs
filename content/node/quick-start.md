@@ -31,7 +31,11 @@ minikube start
 ```
 
 {{<info>}}
-This command allows you to specify how much resources to allocate to the cluster. Here we proceed with default settings, but you can add more CPU cores or RAM if needed.
+You can also specify how much resources to allocate to the cluster. For example, we can let it use all available resources as:
+```sh
+minikube start --cpu no-limit --memory no-limit
+```
+
 {{</info>}}
 
 Once command finishes you should have a fully functional Kubernetes cluster running on your local machine!
