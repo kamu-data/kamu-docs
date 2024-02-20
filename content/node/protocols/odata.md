@@ -1,7 +1,7 @@
 ---
-Title: Helm Charts
+Title: OData
 description:
-weight: 40
+weight: 10
 underConstruction: true
 categories: []
 aliases:

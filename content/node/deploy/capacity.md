@@ -1,7 +1,7 @@
 ---
 Title: Capacity Planning
 description:
-weight: 100
+weight: 60
 underConstruction: true
 categories: []
 aliases:

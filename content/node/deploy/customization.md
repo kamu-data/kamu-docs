@@ -1,7 +1,7 @@
 ---
 Title: Customization
 description:
-weight: 60
+weight: 80
 underConstruction: true
 categories: []
 aliases:
