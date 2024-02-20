@@ -16,7 +16,7 @@ Use it to familiarize yourself with the process of deploying all components in a
 Kamu Node is a **Kubernetes-native application** and this guide assumes basic familiarity with Kubernetes. If you worked with `docker-compose` before - you will see a few new tools, but shouldn't encounter any problems.
 
 Before we begin, you will need the following tools installed:
-1. [**`git`**](https://git-scm.com/) - to clone the example deploy repo
+1. [**`git`**](https://git-scm.com/) - to clone the [`kamu-deploy-example`](https://github.com/kamu-data/kamu-deploy-example) repo
 2. [**`minikube`**](https://minikube.sigs.k8s.io/docs/) - to create a local Kubernetes cluster
 3. [**`kubectl`**](https://kubernetes.io/docs/reference/kubectl/) - client for interacting with Kubernetes cluster
 4. [**`helm`**](https://helm.sh/) - software management tool for Kubernetes
@@ -56,7 +56,7 @@ kube-system   etcd-minikube                      1/1     Running   0         2m7
 ## Clone the example repo
 While we could deploy all components by running `helm install` commands, we will use "infrastructure-as-code" approach where the entire state of our deployment is described by files in a `git` repository.
 
-Go ahead and clone the example repo:
+Go ahead and clone the [`kamu-deploy-example`](https://github.com/kamu-data/kamu-deploy-example) repo:
 ```sh
 git clone https://github.com/kamu-data/kamu-deploy-example.git
 cd kamu-deploy-example

@@ -74,7 +74,7 @@ This repo will now be visible in `kamu repo list`.
 To pull/push a dataset from/to this repo you can now use remote references like `<repo-name>/<dataset-name>`:
 ```bash
 kamu pull my-s3-bucket/example-dataset
-kamu pull example-dataset --to my-s3-bucket
+kamu push example-dataset --to my-s3-bucket
 ```
 
 
