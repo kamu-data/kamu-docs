@@ -7,7 +7,7 @@ categories: []
 aliases:
 ---
 
-**Ready to give Kamu Node a try?** This guide will help you deploy all components of Kamu Node and [Kamu Web Platform]({{<relref "platform">}}) on your local machine in four simple steps.
+**Ready to give Kamu Node a try?** This guide will help you deploy all components of Kamu Node and [Kamu Web Platform]({{<relref "platform">}}) on your local machine in a few simple steps.
 
 Use it to familiarize yourself with the process of deploying all components in a minimalistic configuration. Once you are ready to deploy a production-ready node instance please refer to the [Deployment Manual]({{<relref "deploy">}}).
 
@@ -62,19 +62,56 @@ git clone https://github.com/kamu-data/kamu-deploy-example.git
 cd kamu-deploy-example
 ```
 
+## Select components
+By default all components are enabled, but if, for example, you don't need JupyterHub open:
+```
+environments/minikube/environment.yaml
+```
+and modify it to:
+```yaml
+jupyterHub:
+  enabled: false
+```
+
 ## Deploy Kamu Node
 
 ### Using convenience script
 To get all components installed and running you can use a convenience script:
 ```sh
-./deploy.sh
+./sync.sh
+```
+
+{{<warning>}}
+Multiple container images will be downloaded in the process, so if script times-out it's safe to re-run again.
+{{</warning>}}
+
+Once it completes it's just a matter of exposing a few ports:
+
+```sh
+./port-forward.sh
 ```
 ```
-===========================================================
-                      KAMU                                 
------------------------------------------------------------
-Kamu Web UI:      http://192.168.XX.YY:30211
-Kamu API:         http://192.168.XX.YY:30201
+=============== Kamu Web UI ===============
+Web UI (fwd):     http://localhost:4200
+Web UI:           http://192.168.X.X:30211
+
+=============== JupyterHub ================
+Web UI (fwd):     http://localhost:4300
+Web UI:           http://192.168.X.X:30230
+
+================ Kamu Node ================
+GraphQL / REST:   http://192.168.X.X:30201
+FlightSQL:        http://192.168.X.X:31402
+
+================== Minio ==================
+Minio API:        http://192.168.X.X:30401
+Minio Console:    http://192.168.X.X:30402
+Username:         admin
+Password:         password123
+
+Forwarding from 127.0.0.1:4200 -> 8080
+Forwarding from 127.0.0.1:4300 -> 8000
+Press Ctrl+C to exit
 ```
 
 You can now open the provided `Kamu Web UI` URL in your browser and see the [Kamu Web Platform]({{<relref "platform">}}) interface.
@@ -113,7 +150,11 @@ Refresh the browser tab and you should see a lot of new pipelines to explore.
 
 
 ## Making changes
-After the initial deployment, if you modify any configuration you can easily **apply** your changes to the deployment using:
+After the initial deployment, if you modify any configuration you can easily **apply** your changes to the deployment using a convenience script:
+```sh
+./apply.sh
+```
+Or manually:
 ```sh
 helmfile -e minikube apply
 ```

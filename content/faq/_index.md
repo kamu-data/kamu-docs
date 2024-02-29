@@ -6,6 +6,7 @@ weight: 100
 alwaysopen: false
 categories: []
 aliases:
+  - /cli/get-started/faq/
 ---
 
 ## How Kamu is different from X?
@@ -13,7 +14,7 @@ aliases:
 We have [entire section]({{<ref "compare">}}) dedicated to direct comparisons.
 
 
-## Can I create derivative datasets with Pandas (or other data procesing library)?
+## Can I create derivative datasets with Pandas or other data processing library?
 
 `kamu`'s goal is to be as inclusive of different ways to process data as possible, but also **uphold certain key properties** of data pipelines like autonomy, low latency, and reproducibility. 
 
