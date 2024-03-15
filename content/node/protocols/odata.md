@@ -10,16 +10,23 @@ aliases:
 
 Kamu Node has an experimental support for [OData](https://www.odata.org/) protocol.
 
-Endpoints include:
+The endpoints structured with one OData service root per every account:
 ```
-/odata/{account}/  - Service root
-/odata/{account}/$metadata  - Metadata
-/odata/{account}/{dataset}  - Collections
+/odata/{account}/
+/odata/{account}/$metadata
+```
+
+Every dataset in the account has a corresponding collection endpoint:
+```
+/odata/{account}/{dataset}
 ```
 
 Examples:
 ```
-https://node.demo.kamu.dev/odf/kamu/com.cryptocompare.ohlcv.eth-usd?$orderby=offset&$top=5
+https://node.demo.kamu.dev/odata/kamu/
+https://node.demo.kamu.dev/odata/kamu/$metadata
+https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy
+https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy?$select=offset,close&$orderby=offset+asc&$top=10
 ```
 
 Current limitations:
