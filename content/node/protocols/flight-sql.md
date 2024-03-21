@@ -1,7 +1,6 @@
 ---
 Title: FlightSQL
 description:
-weight: 10
 categories: []
 aliases:
 ---

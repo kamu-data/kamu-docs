@@ -1,7 +1,6 @@
 ---
 Title: GraphQL API
 description:
-weight: 10
 categories: []
 aliases:
 ---

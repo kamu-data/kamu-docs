@@ -1,7 +1,6 @@
 ---
 Title: ODF
 description:
-weight: 10
 categories: []
 aliases:
 ---

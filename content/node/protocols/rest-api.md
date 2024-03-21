@@ -1,7 +1,6 @@
 ---
 Title: REST API
 description:
-weight: 20
 categories: []
 aliases:
 ---
