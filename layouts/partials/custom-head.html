@@ -1,5 +1,0 @@
-{{ if eq (getenv "HUGO_ENV") "production" }}
-  {{ with .Site.Params.googleTagManager }}
-    {{ partial "gtm-head" . | safeHTML }}
-  {{ end }}
-{{ end }}
