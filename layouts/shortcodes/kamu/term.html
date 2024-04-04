@@ -1,0 +1,4 @@
+{{- $glossary := "glossary" | relref .Page -}}
+{{- $text := (.Get 0) -}}
+{{- $term := replace ((.Get 1) | default $text | lower) " " "-" -}}
+<a class="glossary-link" href="{{ $glossary }}#{{ $term }}">{{ $text }}</a>

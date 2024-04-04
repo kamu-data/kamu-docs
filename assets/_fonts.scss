@@ -1,0 +1,17 @@
+// Replace this with your own font imports!
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+:root {
+  --font-body: "IBM Plex Sans", sans-serif;
+  --font-header: "IBM Plex Sans", sans-serif;
+  --font-mono: "Fira Code", monospace;
+}
+
+// Example local font declaration
+
+// @font-face {
+//   font-family: "PP Mori";
+//   font-style: normal;
+//   font-weight: normal;
+//   src: url('fonts/PPMori-SemiBold.woff2');
+// }

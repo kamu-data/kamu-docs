@@ -1,32 +1,24 @@
-.PHONY: dev
-dev:
-	hugo server -D -p 1414
+.DEFAULT_GOAL := serve
 
-.PHONY: dev-with-search
-dev-with-search:
-	@# TODO: Figure out how to run dev server with pagefind static files
-	hugo -D
-	npx -y pagefind --site public --serve
+help: ## Show all Makefile targets
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: build
-build:
-	HUGO_ENV=production hugo --minify
-	npx -y pagefind --site public
+update: ## Update Quartz to the latest version on Github
+	go install github.com/jackyzha0/hugo-obsidian@latest
+	@git remote show upstream || (echo "remote 'upstream' not present, setting 'upstream'" && git remote add upstream https://github.com/jackyzha0/quartz.git)
+	git fetch upstream
+	git log --oneline --decorate --graph ..upstream/hugo
+	git checkout -p upstream/hugo -- layouts .github Makefile assets/js assets/styles/base.scss assets/styles/darkmode.scss config.toml data
 
-.PHONY: publish
-publish: build
-	aws s3 rm --recursive s3://docs.kamu.dev
-	aws s3 cp public/ s3://docs.kamu.dev/ --recursive
-	aws --no-cli-pager cloudfront create-invalidation --distribution-id E3LHDIU5YENQ3U --paths '/*'
+update-force: ## Forcefully pull all changes and don't ask to patch
+	go install github.com/jackyzha0/hugo-obsidian@latest
+	@git remote show upstream || (echo "remote 'upstream' not present, setting 'upstream'" && git remote add upstream https://github.com/jackyzha0/quartz.git)
+	git fetch upstream
+	git checkout upstream/hugo -- layouts .github Makefile assets/js assets/styles/base.scss assets/styles/darkmode.scss config.toml data
 
-.PHONY: docgen
-docgen:
-	python utilities/gen_reference.py > content/odf/reference.md
-	python utilities/gen_glossary.py > content/glossary/_index.md
-	python utilities/gen_spec.py > content/odf/spec.md
-	python utilities/gen_rfcs.py content/odf/rfcs/
-	python utilities/gen_cli_reference.py > content/cli/cli-reference.md
+serve: ## Serve Quartz locally
+	hugo-obsidian -input=content -output=assets/indices -index -root=.
+	hugo server --enableGitInfo --minify --bind=$(or $(HUGO_BIND),0.0.0.0) --baseURL=$(or $(HUGO_BASEURL),http://localhost) --port=$(or $(HUGO_PORT),1313) --appendPort=$(or $(HUGO_APPENDPORT),true)
 
-.PHONY: clean
-clean:
-	rm -rf public node_modules
+docker: ## Serve locally using Docker
+	docker run -it --volume=$(shell pwd):/quartz -p 1313:1313 ghcr.io/jackyzha0/quartz:hugo

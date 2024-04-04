@@ -1,0 +1,3 @@
+{{- $reference := "reference" | relref .Page -}} {{- $text := (.Get 0) -}} {{-
+$schema := replace ((.Get 1) | default $text | lower) ":" "" -}}
+<a class="schema-link" href="{{ $reference }}#{{ $schema }}">{{ $text }}</a>

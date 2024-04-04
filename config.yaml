@@ -1,0 +1,147 @@
+baseURL: https://amethyst.bencuan.me
+
+# Book configuration
+disablePathToLower: true
+enableGitInfo: true
+
+# # Needed for mermaid/katex shortcodes
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+
+# Multi-lingual mode config
+# There are different options to translate files
+# See https://gohugo.io/content-management/multilingual/#translation-by-filename
+# And https://gohugo.io/content-management/multilingual/#translation-by-content-directory
+
+# Sidebar menu additional links
+menu:
+  # before:
+  #   - name: "Sample"
+  #     url: "https://google.com"
+  #     weight: 10
+  after:
+    - name: "Github"
+      url: "https://github.com/64bitpandas/amethyst"
+      weight: 10
+
+params:
+
+  name: Ben Cuan
+  title: 📓 Amethyst
+
+  # OPTIONAL: custom favicon location
+  # favicon: 'location/to/favicon.png'
+
+  # whether to display on-hover link preview cards
+  enableLinkPreview: true
+
+  # Enable rendering of LaTeX blocks
+  # (surrounded by either single or double dollar signs)
+  enableLatex: true
+
+  # whether to render titles for code blocks
+  enableCodeBlockTitle: true
+
+  # whether to render copy buttons for code blocks
+  enableCodeBlockCopy: true
+
+  # whether to render callouts
+  enableCallouts: true
+
+  # Show footer, including backlinks and graph view
+  enableFooter: true
+
+  # whether backlinks of pages should show the context in which
+  # they were mentioned
+  enableContextualBacklinks: true
+
+  # whether to show a section of recent notes on the home page
+  enableRecentNotes: false
+
+  # whether to display an 'edit' button next to the last edited field
+  # that links to github
+  enableGitHubEdit: true
+
+  # whether to render mermaid diagrams
+  enableMermaid: true
+
+  # Link to your Github repo
+  GitHubLink: https://github.com/64bitpandas/amethyst
+
+  # Search (WIP)
+  search:
+    enableSemanticSearch: false
+    operandApiKey: "REPLACE-WITH-YOUR-OPERAND-API-KEY"
+    operandIndexId: "REPLACE-WITH-YOUR-OPERAND-INDEX-ID"
+
+  # Site description and title
+  description:
+    Notes, hosted by bencuan
+
+  
+  # Footer links
+  links:
+    - link_name: Website
+      link: https://bencuan.me
+    - link_name: Blog
+      link: https://blog.bencuan.me
+
+  # (Optional, default true) Controls table of contents visibility on right side of pages.
+  # Start and end levels can be controlled with markup.tableOfContents setting.
+  # You can also specify this parameter per page in front matter.
+  BookToC: true
+
+  # (Optional, default none) Set the path to a logo for the book. If the logo is
+  # /static/logo.png then the path would be logo.png
+  # BookLogo: /logo.png
+
+  # (Optional, default none) Set leaf bundle to render as side menu
+  # When not specified file structure and weights will be used
+  # BookMenuBundle: /menu
+
+  # (Optional, default docs) Specify root page to render child pages as menu.
+  # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
+  # For backward compatibility you can set '*' to render all sections to menu. Acts same as '/'
+  BookSection: "/"
+
+  # Set source repository location.
+  # Used for 'Last Modified' and 'Edit this page' links.
+  BookRepo: https://github.com/64bitpandas/amethyst
+
+  # (Optional, default 'commit') Specifies commit portion of the link to the page's last modified
+  # commit hash for 'doc' page type.
+  # Requires 'BookRepo' param.
+  # Value used to construct a URL consisting of BookRepo/BookCommitPath/<commit-hash>
+  # Github uses 'commit', Bitbucket uses 'commits'
+  # BookCommitPath: commit
+
+  # Enable "Edit this page" links for 'doc' page type.
+  # Disabled by default. Uncomment to enable. Requires 'BookRepo' param.
+  # Edit path must point to root directory of repo.
+  BookEditPath: edit/main/exampleSite
+
+  # Configure the date format used on the pages
+  # - In git information
+  # - In blog posts
+  BookDateFormat: "January 2, 2006"
+
+
+  # (Optional, default true) Enables comments template on pages
+  # By default partals/docs/comments.html includes Disqus template
+  # See https://gohugo.io/content-management/comments/#configure-disqus
+  # Can be overwritten by same param in page frontmatter
+  BookComments: true
+
+  # /!\ This is an experimental feature, might be removed or changed at any time
+  # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
+  BookTranslatedOnly: false
+
+  # Don't change this
+  enableSPA: false
+  BookSearch: false
+  BookServiceWorker: false
+  BookPortableLinks: false
