@@ -400,8 +400,9 @@ Shows the dataset schema
 
 * `-o`, `--output-format <FMT>` — Format of an output
 
-  Possible values: `ddl`, `parquet`, `json`
+  Possible values: `ddl`, `parquet`, `parquet-json`, `arrow-json`
 
+* `--from-data-file`
 
 Displays the schema of the dataset. Note that dataset schemas can evolve over time and by default the latest schema will be shown.
 
@@ -660,7 +661,7 @@ Push local data into a repository
 
 Use this command to share your new dataset or new data with others. All changes performed by this command are atomic and non-destructive. This command will analyze the state of the dataset at the repository and will only upload data and metadata that wasn't previously seen.
 
-Similarly to git, if someone else modified the dataset concurrently with you - your push will be rejected and you will have to resolve the conflict.
+Similarly to git, if someone else modified the dataset concurrently with you - your push will be rejected, and you will have to resolve the conflict.
 
 **Examples:**
 
@@ -702,7 +703,7 @@ Use this command to rename a dataset in your local workspace. Renaming is safe i
 
 **Examples:**
 
-Renaming is often useful when you pull a remote dataset by URL and it gets auto-assigned not the most convenient name:
+Renaming is often useful when you pull a remote dataset by URL, and it gets auto-assigned not the most convenient name:
 
     kamu pull ipfs://bafy...a0da
     kamu rename bafy...a0da my.dataset
@@ -834,7 +835,7 @@ Manage set of remote aliases associated with datasets
 * `add` — Adds a remote alias to a dataset
 * `delete` — Deletes a remote alias associated with a dataset
 
-When you pull and push datasets from repositories kamu uses aliases to let you avoid specifying the full remote referente each time. Aliases are usually created the first time you do a push or pull and saved for later. If you have an unusual setup (e.g. pushing to multiple repositories) you can use this command to manage the aliases.
+When you pull and push datasets from repositories kamu uses aliases to let you avoid specifying the full remote reference each time. Aliases are usually created the first time you do a push or pull and saved for later. If you have an unusual setup (e.g. pushing to multiple repositories) you can use this command to manage the aliases.
 
 **Examples:**
 
@@ -954,7 +955,7 @@ Executes an SQL query or drops you into an SQL shell
 
 **Options:**
 
-* `--url <URL>` — URL of a running JDBC server (e.g jdbc:hive2://example.com:10000)
+* `--url <URL>` — URL of a running JDBC server (e.g. jdbc:hive2://example.com:10000)
 * `-c`, `--command <CMD>` — SQL command to run
 * `--script <FILE>` — SQL script file to execute
 * `--engine <ENG>` — Engine type to use for this SQL session
@@ -1028,6 +1029,7 @@ Command group for system-level functionality
 * `ipfs` — IPFS helpers
 * `check-token` — Validate a Kamu token
 * `generate-token` — Generate a platform token from a known secret for debugging
+* `compact` — Compact a dataset
 
 
 
@@ -1168,12 +1170,53 @@ Validate a Kamu token
 
 Generate a platform token from a known secret for debugging
 
-**Usage:** `kamu system generate-token --gh-login <gh-login> --gh-access-token <gh-access-token>`
+**Usage:** `kamu system generate-token [OPTIONS] --login <login>`
 
 **Options:**
 
-* `--gh-login <GH-LOGIN>` — GitHub account login
+* `--login <LOGIN>` — Account name
 * `--gh-access-token <GH-ACCESS-TOKEN>` — An existing GitHub access token
+* `--expiration-time-sec <EXPIRATION-TIME-SEC>` — Token expiration time in seconds
+
+  Default value: `3600`
+
+
+
+## `kamu system compact`
+
+Compact a dataset
+
+**Usage:** `kamu system compact [OPTIONS] <dataset>...`
+
+**Arguments:**
+
+* `<DATASET>` — Local dataset reference(s)
+
+**Options:**
+
+* `--max-slice-size <SIZE>` — Maximum size of a single data slice file in bytes
+
+  Default value: `1073741824`
+* `--max-slice-records <RECORDS>` — Maximum amount of records in a single data slice file
+
+  Default value: `10000`
+* `--hard` — Perform 'hard' compaction that rewrites the history of a dataset
+* `--verify` — Perform verification of the dataset before running a compaction
+
+For datasets that get frequent small appends the number of data slices can grow over time and affect the performance of querying. This command allows to merge multiple small data slices into a few large files, which can be beneficial in terms of size from more compact encoding, and in query performance, as data engines will have to scan through far fewer file headers.
+
+There are two types of compactions: soft and hard.
+
+Soft compactions produce new files while leaving the old blocks intact. This allows for faster queries, while still preserving the accurate history of how dataset evolved over time.
+
+Hard compactions rewrite the history of the dataset as if data was originally written in big batches. They allow to shrink the history of a dataset to just a few blocks, reclaim the space used by old data files, but at the expense of history loss. Hard compactions will rewrite the metadata chain, changing block hashes. Therefore, they will **break all downstream datasets** that depend on them.
+
+**Examples:**
+
+Perform a history-altering hard compaction:
+
+    kamu system compact --hard my.dataset
+
 
 
 
