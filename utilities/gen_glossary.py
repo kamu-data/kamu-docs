@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 import os
 import re
-import sys
 import subprocess
 
 # Locate `open-data-fabric` repo
 ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
 ODF_PATH = os.path.normpath(
     os.path.join(
-        os.path.dirname(__file__), 
+        os.path.dirname(__file__),
         "../../open-data-fabric"
     )
 )
@@ -34,7 +33,7 @@ aliases:
 """
 
 
-def id_of(name):
+def id_of(name: str) -> str:
     return name.lower().replace(" ", "-")
 
 
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     # Read the spec source
     with open(os.path.join(ODF_PATH, "src/open-data-fabric.md")) as f:
         spec = f.read()
-    
+
     # Extract "Concepts" section
     section_name = "# Concepts and Components"
     following_section_name = "# Specification"
@@ -52,7 +51,7 @@ if __name__ == "__main__":
         raise Exception(f"Unable to find section '{section_name}'")
     else:
         start = start + len(section_name)
-    
+
     end = spec.find(following_section_name)
     if end < 0:
         raise Exception(f"Unable to find section '{following_section_name}'")
@@ -65,7 +64,7 @@ if __name__ == "__main__":
 
         # Strip YAML header
         extra = extra.split("---", 2)[-1].strip()
-    
+
     # Combine ODF terms and extra
     section = f"""
 # Open Data Fabric
@@ -84,7 +83,8 @@ if __name__ == "__main__":
         for t in terms
     }
 
-    def sub_refs(m):
+
+    def sub_refs(m: re.Match[str]) -> str:
         t = m.group(1)
         url = m.group(2)
         if url in term_links:
@@ -100,7 +100,8 @@ if __name__ == "__main__":
         else:
             return f'[{t}]({{{{<relref "spec#{url}">}}}})'
 
-    section = re.sub(r"\[([^]]+)\]\(#([^)]+)\)", sub_refs, section)
+
+    section = re.sub(r"\[([^]]+)]\(#([^)]+)\)", sub_refs, section)
 
     # Clean up old images
     subprocess.run(
@@ -114,8 +115,9 @@ if __name__ == "__main__":
         check=True,
     )
 
+
     # Copy images and fix up URLs
-    def sub_images(m):
+    def sub_images(m: re.Match[str]) -> str:
         alt = m.group(1)
         file_name = os.path.basename(m.group(2))
         src_path = os.path.join(ODF_PATH, m.group(2))
@@ -127,7 +129,8 @@ if __name__ == "__main__":
         )
         return f'{{{{<image filename="{IMAGES_URL}{file_name}" alt="{alt}">}}}}'
 
-    section = re.sub(r"!\[(.+)\]\((.+)\)", sub_images, section)
+
+    section = re.sub(r"!\[(.+)]\((.+)\)", sub_images, section)
 
     print(PAGE_HEADER)
     print(section)
