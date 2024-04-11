@@ -20,7 +20,7 @@ An enhanced read/write transfer protocol that can be used to efficiently synchro
 
 ## Motivation
 
-The performance limitations of the [Simple Transfer Protocol](./007-simple-transfer-protocol.md) are significant:
+The performance limitations of the [Simple Transfer Protocol]({{<relref "007-simple-transfer-protocol.md">}}) are significant:
 - the exchange becomes noticeably slow on datasets with >200 files, there is no use of batching, compression
 - proxied push/pull are not allowed (being able to read/write directly from/to S3 instead of overloading the servers)
 
@@ -78,7 +78,7 @@ Smart Transfer Protocol defines 2 kinds of APIs:
  - `AsyncAPI` [description of the protocol messages](../protocols/smart-transfer-protocol.asyncapi.yaml).
 
 `OpenAPI` is a superset of REST API endpoints as defined in the 
-[Simple Transfer Protocol](./007-simple-transfer-protocol.md), with extensions to establish 
+[Simple Transfer Protocol]({{<relref "007-simple-transfer-protocol.md">}}), with extensions to establish 
 asynchronous duplex messaging channel as defined by `AsyncAPI`.
 
 ### Push flow
