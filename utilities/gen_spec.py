@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 import os
 import re
-import sys
 import subprocess
+
+from typing import Optional
 
 # Locate `open-data-fabric` repo
 ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
 ODF_PATH = os.path.normpath(
     os.path.join(
-        os.path.dirname(__file__), 
+        os.path.dirname(__file__),
         "../../open-data-fabric"
     )
 )
@@ -31,14 +32,15 @@ categories: []
 """
 
 
-def id_of(name):
+def id_of(name: str) -> str:
     return name.lower().replace(" ", "-")
 
-def remove_section(spec, section_name, following_section_name=None):
+
+def remove_section(spec: str, section_name: str, following_section_name: Optional[str] = None) -> str:
     start = spec.find(section_name)
     if start < 0:
         raise Exception(f"Unable to find section '{section_name}'")
-    
+
     if following_section_name is not None:
         end = spec.find(following_section_name)
         if end < 0:
@@ -53,16 +55,15 @@ if __name__ == "__main__":
     # Read the spec source
     with open(os.path.join(ODF_PATH, "src/open-data-fabric.md")) as f:
         text = f.read()
-    
+
     # Remove title
     text = text.removeprefix("# Open Data Fabric").strip()
-
     text = remove_section(text, "# Table of Contents", "# Requirements")
-
     text = remove_section(text, "# Reference Information")
-    
+
+
     # Fix up links
-    def map_link(m):
+    def map_link(m: re.Match[str]) -> str:
         t = m.group(1)
         url = m.group(2)
 
@@ -77,10 +78,13 @@ if __name__ == "__main__":
             t = t.strip('`')
             schema = url.removeprefix("#reference-")
             return f'{{{{<schema "{t}" "{schema}">}}}}'
+        elif url.startswith("/protocols/"):
+            return f'[{t}](https://github.com/open-data-fabric/open-data-fabric/blob/master{url})'
         else:
             return f'[{t}]({url})'
 
-    text = re.sub(r"\[([^]]+)\]\(([^)]+)\)", map_link, text)
+
+    text = re.sub(r"\[([^]]+)]\(([^)]+)\)", map_link, text)
 
     # Clean up old images
     subprocess.run(
@@ -94,8 +98,9 @@ if __name__ == "__main__":
         check=True,
     )
 
+
     # Copy images and fix up URLs
-    def sub_images(m):
+    def sub_images(m: re.Match[str]) -> str:
         alt = m.group(1)
         file_name = os.path.basename(m.group(2))
         src_path = os.path.join(ODF_PATH, m.group(2))
@@ -107,7 +112,8 @@ if __name__ == "__main__":
         )
         return f'{{{{<image filename="{IMAGES_URL}{file_name}" alt="{alt}">}}}}'
 
-    text = re.sub(r"!\[(.+)\]\((.+)\)", sub_images, text)
+
+    text = re.sub(r"!\[(.+)]\((.+)\)", sub_images, text)
 
     print(PAGE_HEADER)
     print(text)

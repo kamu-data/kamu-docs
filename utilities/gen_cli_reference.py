@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 import os
-import re
-import sys
-import subprocess
 
 # Locate `kamu-cli` repo
 KAMU_CLI_PATH = os.path.normpath(
     os.path.join(
-        os.path.dirname(__file__), 
+        os.path.dirname(__file__),
         "../../kamu-cli"
     )
 )
@@ -24,7 +21,6 @@ weight: 100
 categories: []
 ---
 """
-
 
 if __name__ == "__main__":
     # Read the source

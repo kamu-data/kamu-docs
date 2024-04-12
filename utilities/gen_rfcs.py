@@ -2,13 +2,12 @@
 import os
 import re
 import sys
-import subprocess
 
 # Locate `open-data-fabric` repo
 ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
 ODF_PATH = os.path.normpath(
     os.path.join(
-        os.path.dirname(__file__), 
+        os.path.dirname(__file__),
         "../../open-data-fabric"
     )
 )
@@ -40,24 +39,24 @@ Protocol design evolution proposals:
 """
 
 
-def get_summary(text):
+def get_summary(text: str) -> str:
     section_name = "## Summary"
     start = text.find(section_name)
     if start < 0:
         raise Exception(f"Unable to find section '## Summary'")
-    
+
     start += len(section_name)
-    
+
     end = text.find("##", start + 2)
     if end < 0:
         raise Exception(f"Unable to find section end")
-    
+
     return text[start:end].strip()
 
 
 if __name__ == "__main__":
     rfcs_dir = os.path.join(ODF_PATH, "rfcs")
-    
+
     file_names = list(os.listdir(rfcs_dir))
     file_names.sort()
 
@@ -81,16 +80,37 @@ if __name__ == "__main__":
         # Remove title
         text = text[len(m.group(0)):].strip()
 
+
+        # Fix up links
+        def map_link(m: re.Match[str]) -> str:
+            t = m.group(1)
+            url = m.group(2)
+
+            rfc_match = re.search(r"(\d{3}-.*\.md)", url)
+
+            # print(f"rfc_match {rfc_match}", file=sys.stderr)
+
+            if rfc_match:
+                # print(f"+++", file=sys.stderr)
+
+                rfc = rfc_match[0]
+                return f'[{t}]({{{{<relref "{rfc}">}}}})'
+            else:
+                return f'[{t}]({url})'
+
+
+        text = re.sub(r"\[([^]]+)]\(([^)]+)\)", map_link, text)
+
         with open(dst_path, "w") as f:
             f.write(PAGE_HEADER.format(title=title))
             f.write(text)
-        
+
         summaries.append((
             fname,
             title,
             get_summary(text)
         ))
-    
+
     # Write index
     with open(os.path.join(sys.argv[1], "_index.md"), "w") as f:
         f.write(INDEX_HEADER)
