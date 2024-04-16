@@ -13,7 +13,8 @@ aliases:
 | ----------------------------------------------------------- | :----------: | :---------------------------------------------------------------: |
 | [Self-serve Demo]({{<relref "demo">}})                      |   Beginner   |                          basic commands                           |
 | [Currency Conversion]({{<relref "currency-conversion">}})   |   Beginner   |                       temporal-table joins                        |
-| [COVID-19 Daily Cases]({{<relref "covid19">}})              |   Beginner   |          harmonization, unions, aggregations, notebooks           |
+| [COVID-19 Daily Cases]({{<relref "covid19">}})              |   Beginner   |  harmonization, unions, tumbling window aggregations, notebooks   |
+| [Leaderboard]({{<relref "leaderboard">}})                   |   Beginner   |                  top-n aggregations, push ingest                  |
 | [Housing Prices]({{<relref "housing-prices">}})             |   Beginner   |           GIS data, GIS functions, GIS joins, notebooks           |
 | [Stock Market Trading]({{<relref "stock-trading">}})        | Intermediate |     aggregations, temporal-table joins, watermarks, notebooks     |
 | [Overdue Order Shipments]({{<relref "overdue-shipments">}}) | Intermediate |                stream-to-stream joins, watermarks                 |
