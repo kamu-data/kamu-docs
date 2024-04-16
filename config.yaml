@@ -1,4 +1,4 @@
-baseURL: https://amethyst.bencuan.me
+baseURL: https://docs.kamu.dev/
 
 # Book configuration
 disablePathToLower: true
@@ -23,18 +23,26 @@ menu:
   #   - name: "Sample"
   #     url: "https://google.com"
   #     weight: 10
-  after:
-    - name: "Github"
-      url: "https://github.com/64bitpandas/amethyst"
-      weight: 10
+  # after:
+  #   - name: "Github"
+  #     url: "https://github.com/64bitpandas/amethyst"
+  #     weight: 10
 
 params:
 
   name: Ben Cuan
-  title: 📓 Amethyst
+  title: Kamu Docs
+
+
+  # Header links
+  headerLinks:
+    docsURL: https://docs.kamu.dev/
+    mainURL: https://www.kamu.dev/
+    demoURL: https://docs.kamu.dev/cli/get-started/demo/
+    downloadURL: https://docs.kamu.dev/cli/get-started/install/
 
   # OPTIONAL: custom favicon location
-  # favicon: 'location/to/favicon.png'
+  #favicon: 'static/favicon.png'
 
   # whether to display on-hover link preview cards
   enableLinkPreview: true

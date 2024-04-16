@@ -1,14 +1,53 @@
 <header class="book-header">
-    {{/*  <input type="checkbox" class="toggle" id="menu-control" />  */}}
+  <div class="book-header__nav">
     <label for="menu-control">
       <img src="{{ "svg/menu.svg" | relURL }}" class="book-icon" alt="Menu" />
+      {{/* <input type="checkbox" class="toggle" id="menu-control" /> */}}
     </label>
-    <h1 id="page-title"><a href="{{ "" | absLangURL }}">{{ .Site.Params.Title }}</a></h1>
-    <div class="spacer"></div>
+    <h1 class="book-header__title" id="page-title">
+      <!-- <a href="{{ "" | absLangURL }}">{{ .Site.Params.Title }}</a> -->
+      <a class="book-header__primary-logo" href="{{ $.Site.Params.headerLinks.mainURL }}"><img src="{{ "images/logo.svg" | relURL }}" class="logo" alt="Logo" /></a>
+      <a class="book-header__secondary-logo" href="{{ $.Site.Params.headerLinks.docsURL }}">:: docs</a>
+    </h1>
+    <!-- <div class="spacer"></div> -->
+    <nav class="primary-menu">
+      <ul class="primary-menu-list">
+        <li class="primary-menu-list__item">
+          <a href="#">Projects</a>
+        </li>
+        <li class="primary-menu-list__item">
+          <a href="https://kamu.dev/whitepaper/">Whitepaper</a>
+        </li>
+        <li class="primary-menu-list__item">
+          <a href="https://kamu.dev/blog/">Blog</a>
+        </li>
+        <li class="primary-menu-list__item">
+          <a href="https://kamu.dev/contact/">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="book-header__actions">
     <div id="search-icon" class="quartz-search">
       <p>{{ i18n "search" }}</p>
-      <svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">{{ i18n "search_icon" }}</title><desc id="desc">{{ i18n "icon_search" }}</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg>
+      <svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 19.9 19.7">
+        <title id="title">{{ i18n "search_icon" }}</title>
+        <desc id="desc">{{ i18n "icon_search" }}</desc>
+        <g class="search-path" fill="none">
+          <path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4" />
+          <circle cx="8" cy="8" r="7" />
+        </g>
+      </svg>
     </div>
     {{partial "quartz/darkmode" .}}
+    <ul class="actions-list">
+      <li class="actions-list__item">
+        <a href="{{ $.Site.Params.headerLinks.demoURL }}">Demo</a>
+      </li>
+      <li class="actions-list__item actions-list__item--button">
+        <a href="{{ $.Site.Params.headerLinks.demoURL }}">Download</a>
+      </li>
+    </ul>
+  </div>
 </header>
-

@@ -1,0 +1,21 @@
+.primary-menu {
+    &-list {
+        display: flex;
+        align-items: center;
+        gap: 0 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        &__item {
+            &>a {
+                color: var(--alto);
+                text-decoration: none;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: var(--tango);
+                }
+            }
+        }
+    }
+}

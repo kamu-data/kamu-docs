@@ -5,7 +5,7 @@ header {
     width: 100%;
     padding: 0px 80px;
     z-index: 9999;
-    background-color: var(--header);
+    background-color: var(--blackRock);
     margin: 0 !important;
     height: $header-height;
 }
@@ -18,17 +18,60 @@ header {
 }
 
 .book-header {
+    min-height: 80px;
     display: flex;
-    padding: 30px;
+    justify-content: space-between;
+    padding: 10px 15px;
+
+    &__nav {
+        display: flex;
+        align-items: center;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        gap: 0 10px;
+    }
+
+    &__primary-logo {
+        display: flex;
+        img {
+            margin: 0;
+        }
+    }
+
+    &__secondary-logo {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navada);
+        text-transform: uppercase;
+        transition: color 0.3 ease;
+
+        &:hover {
+            color: var(--tango);
+        }
+    }
 }
 
-#page-title a {
-    color: var(--dark);
+.book-menu-content {
+    .actions-list {
+        display: none;
+    }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
     .book-header {
         justify-content: space-between;
+
+        .actions-list {
+            display: none;
+        }
     }
 
     #page-title {
@@ -49,9 +92,32 @@ header {
     header #search-icon {
         display: none !important;
     }
+
+    .book-menu-content {
+        .actions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px 0;
+    
+            &__item {
+                width: 100%;
+    
+                a {
+                    min-height: 36px;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: $mobile-breakpoint) {
+
+    .book-header {
+        .actions-list {
+            margin-left: 30px;
+        }
+    }
+
     .book-icon {
         display: none;
     }

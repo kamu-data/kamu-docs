@@ -1,0 +1,50 @@
+@media screen and (max-width: $mobile-breakpoint) {
+    .book-header {
+
+        &__nav {
+            &>label {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                background-color: var(--alto);
+                margin-right: 30px;
+
+                img {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: $mobile-breakpoint) {
+}
+
+@media screen and (max-width: 1200px) {
+    .book-header {
+
+        &__nav {
+            .primary-menu {
+                display: none;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .book-header {
+        &__title {
+            margin-right: 80px !important;
+        }
+
+        &__nav {
+            .primary-menu {
+                display: flex;
+            }
+        }
+    }
+}
