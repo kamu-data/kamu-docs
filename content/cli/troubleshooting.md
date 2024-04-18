@@ -34,7 +34,7 @@ Using `kamu --trace` flag allows you to record the execution of the program and 
 
 > Note: If you are using Brave or a similar high-security browser and get an error from Perfetto when loading the trace - try disabling the security features to allow the UI app fetch data from `http://localhost:9001`.
 
-{{<image filename="/images/cli/index/trace-perfetto.png" alt="Perfetto UI displaying a trace">}}
+{{ <image filename="/images/cli/index/trace-perfetto.png" alt="Perfetto UI displaying a trace"> }}
 
 ## Engine Errors
 In this early stages of development `kamu` does a minimal amount of error reporting from engines, so you might definitely encounter some issues that will require an ability to read exception information logged by the engines.

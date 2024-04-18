@@ -10,6 +10,6 @@ aliases:
 
 Please follow the instructions for your specific application:
 
-{{% children style="" description="" %}}
+{{ % children style="" description="" % }}
 
 Don't see an integration you need? Please [file an issue](https://github.com/kamu-data/kamu-cli/issues) in our repository.

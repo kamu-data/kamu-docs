@@ -261,7 +261,7 @@ To view the results you can use the provided `trading.ipynb` notebook and see th
 kamu notebook
 ```
 
-{{<image filename="/images/cli/examples/stock-trading/market_value.png" alt="Market value graph as viewed in the notebook" width="50%">}}
+{{ <image filename="/images/cli/examples/stock-trading/market_value.png" alt="Market value graph as viewed in the notebook" width="50%"> }}
 
 ### The role of watermarks
 If you look closely at the previous graph you will notice that the last event there is dated `2019-12-02`. This might be surprising because even though our account has stopped actively trading on that date, the ticker data still keeps coming, so we should be seeing the market value change over the course of 2020 and onwards...

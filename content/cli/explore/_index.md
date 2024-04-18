@@ -22,12 +22,12 @@ A set of [`kamu inspect *`]({{<relref "cli-reference#kamu-inspect">}}) commands 
 kamu inspect lineage ca.covid19.daily-cases -b
 ```
 
-{{<image filename="/images/cli/first-steps/lineage.png" alt="kamu sql">}}
+{{ <image filename="/images/cli/first-steps/lineage.png" alt="kamu sql"> }}
 
 ## SQL Console
 [`kamu sql`]({{<relref "cli-reference#kamu-sql">}}) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
 
-{{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
+{{ <image filename="/images/cli/first-steps/sql.gif" alt="kamu sql"> }}
 
 Following command will drop you into the SQL shell:
 ```bash
@@ -98,7 +98,7 @@ After this the `import_dataset` command becomes available and we can load the da
 %import_dataset us.cityofnewyork.data.zipcode-boundaries --alias zipcodes
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-001.png" alt="kamu notebook 001">}}
+{{ <image filename="/images/cli/first-steps/notebook-001.png" alt="kamu notebook 001"> }}
 
 This will take a few seconds as in the background it creates Apache Spark session, and it is Spark that loads the dataset into what it calls a "dataframe".
 
@@ -113,22 +113,22 @@ A few very important things to understand here:
 
 The dataframe is automatically exposed in the SQL engine too, and you can run SQL queries using `%%sql` annotation:
 
-{{<image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002">}}
+{{ <image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002"> }}
 
 Thanks to the [sparkmagic](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
 
-{{<image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003">}}
+{{ <image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003"> }}
 
 After you are done joining, filtering, and shaping the data you can choose to get it out of the Spark into the Jupyter notebook kernel using `%%sql -o alias` command
 
-{{<image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004">}}
+{{ <image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004"> }}
 
 Now that you have the data in Jupyter - you can use any of your favorite tools and libraries to further process it or visualize it.
 
 ## Web UI
 And finally, `kamu` comes with embedded Web UI that you can use to explore your pipelines and run SQL queries on data from the comfort of your browser:
 
-{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}
+{{ <image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI"> }}
 
 You can launch it by running:
 

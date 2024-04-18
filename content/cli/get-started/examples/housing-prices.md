@@ -110,7 +110,7 @@ The `-n 100000` parameter here overrides the default limit on the dataframe size
 
 We can then use the resulting GeoJson data and render the heatmap using the [mapboxgl-jupyter](https://github.com/mapbox/mapboxgl-jupyter) library which comes pre-installed with `kamu`'s notebook server image.
 
-{{<image filename="/images/cli/examples/housing-prices/heatmap.png" alt="heatmap">}}
+{{ <image filename="/images/cli/examples/housing-prices/heatmap.png" alt="heatmap"> }}
 
 
 ### Spatial Joins
