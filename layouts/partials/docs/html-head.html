@@ -21,9 +21,54 @@
 {{- end -}}
 
 <!-- Theme stylesheet, you can customize scss by creating `assets/custom.scss` in your website -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.13/featherlight.min.css" integrity="sha512-56GJrpSgHk6Mc9Fltt+bQKcICJoEpxtvozXPA5n5OT0rfWiqGlJmJCI/vl16kctf/0XbBloh03vl7OF2xFnR8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{- $styles := resources.Get "book.scss" | resources.ExecuteAsTemplate "book.scss" . | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" {{ template "integrity" $styles }}>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.13/featherlight.min.js" integrity="sha512-0UbR6HN0dY8fWN9T7fF658896tsPgnbRREHCNq46J9/JSn8GonXDZmqtTc3qS879GM0zV49b9LPhdc/maKP8Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  jQuery(document).ready(function() {
+    // Images
+    // Execute actions on images generated from Markdown pages
+    var images = $("article img").not(".inline");
+    // Wrap image inside a featherlight (to get a full size view in a popup)
+    images.wrap(function () {
+        var image = $(this);
+        if (!image.parent("a").length) {
+            return "<a href='" + image[0].src + "' data-featherlight='image'></a>";
+        }
+    });
+    // Change styles, depending on parameters set to the image
+    images.each(function (index) {
+        var image = $(this);
+        var o = getUrlParameter(image[0].src);
+        if (typeof o !== "undefined") {
+            var h = o["height"];
+            var w = o["width"];
+            var c = o["classes"];
+            image.css({
+                width: function () {
+                    if (typeof w !== "undefined") {
+                        return w;
+                    }
+                },
+                height: function () {
+                    if (typeof h !== "undefined") {
+                        return h;
+                    }
+                }
+            });
+            if (typeof c !== "undefined") {
+                var classes = c.split(',');
+                $.each(classes, function(i) {
+                    image.addClass(classes[i]);
+                });
+            }
+        }
+    });
+  });
+</script>
 {{- if default true .Site.Params.BookSearch -}}
   {{- $searchJSFile := printf "%s.search.js" .Language.Lang }}
   {{- $searchJS := resources.Get "search.js" | resources.ExecuteAsTemplate $searchJSFile . | resources.Minify | resources.Fingerprint }}

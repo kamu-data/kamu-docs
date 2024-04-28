@@ -2,6 +2,7 @@
 Title: Examples
 description: Sample data projects executed with kamu
 weight: 50
+bookCollapseSection: true
 categories: []
 aliases:
   - /cli/learn/examples

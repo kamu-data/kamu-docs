@@ -2,6 +2,7 @@
 Title: Getting Started
 description: Understand what this project is about and where to begin
 weight: 10
+bookCollapseSection: true
 alwaysopen: false
 categories: []
 ---

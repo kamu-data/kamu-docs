@@ -1,19 +1,47 @@
 <!-- set data/config yaml file based on website language -->
 {{/*  {{ $config := cond (eq $.Site.Language.Lang "en") "config" (printf "config.%s" $.Site.Language.Lang) }}  */}}
 {{ $data := $.Site.Params }}
-<!-- Contact Info -->
-<div id="contact_buttons">
-    <footer>
-        {{ $name := $data.name | default $.Site.Params.name }}
-        {{ $year := dateFormat "2006" now }}
-        <p>{{ i18n "copyright" (dict "name" $name "year" $year) | safeHTML}}</p>
-        <ul>
-            {{ if not .IsHome }}
-            <li><a href="{{ $.Site.BaseURL}}">{{ i18n "home" }}</a></li>
-            {{end}}
-            {{- range $data.links | default $.Site.Params.links -}}
-            <li><a href="{{.link}}">{{.link_name}}</a></li>
-            {{- end -}}
+<!-- Footer -->
+
+<footer class="footer">
+    {{ $name := $data.name | default $.Site.Params.name }}
+    {{ $year := dateFormat "2006" now }}
+    <div class="footer__info">
+        <h2 class="footer__title">Kamu</h2>
+        <ul class="footer__nav">
+            <li>
+                <a href="{{ $.Site.BaseURL}}">{{ i18n "home" }}</a>
+            </li>
+            <li>
+                <a href="{{ $.Site.BaseURL}}">{{ i18n "blog" }}</a>
+            </li>
+            <li>
+                <a href="{{ $.Site.BaseURL}}">{{ i18n "careers" }}</a>
+            </li>
+            <li>
+                <a href="{{ $.Site.BaseURL}}">{{ i18n "team" }}</a>
+            </li>
         </ul>
-    </footer>
-</div>
+        <p class="footer__subtitle">World's first planet-scale data pipeline</p>
+        <!-- <ul class="footer__social">
+            <li>
+                <a href="#"></a>
+            </li>
+        </ul> -->
+        <span class="footer__copyright">{{ i18n "copyright" (dict "name" $name "year" $year) | safeHTML}}</span>
+    </div>
+    <ul class="footer__nav">
+        <li>
+            <a href="{{ $.Site.BaseURL}}">{{ i18n "home" }}</a>
+        </li>
+        <li>
+            <a href="{{ $.Site.BaseURL}}">{{ i18n "blog" }}</a>
+        </li>
+        <li>
+            <a href="{{ $.Site.BaseURL}}">{{ i18n "careers" }}</a>
+        </li>
+        <li>
+            <a href="{{ $.Site.BaseURL}}">{{ i18n "team" }}</a>
+        </li>
+    </ul>
+</footer>

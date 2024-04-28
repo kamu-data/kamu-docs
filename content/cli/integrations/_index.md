@@ -2,6 +2,7 @@
 Title: Integrations With Other Systems
 description: Preparing data to be used by external systems and further processing.
 weight: 70
+bookCollapseSection: true
 categories: []
 aliases:
 ---
@@ -10,6 +11,6 @@ aliases:
 
 Please follow the instructions for your specific application:
 
-{{ % children style="" description="" % }}
+{{ children style="" description="" }}
 
 Don't see an integration you need? Please [file an issue](https://github.com/kamu-data/kamu-cli/issues) in our repository.

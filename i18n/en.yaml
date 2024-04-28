@@ -43,6 +43,15 @@
 - id: home
   translation: "Home"
 
+- id: blog
+  translation: "Blog"
+
+- id: careers
+  translation: "Careers"
+
+- id: team
+  translation: "Team"
+
 - id: light_mode
   translation: "Light Mode"
 
@@ -77,4 +86,4 @@
   translation: "Table of Contents"
 
 - id: copyright
-  translation: "Made with <a href=\"https://github.com/64bitpandas/amethyst\">Amethyst</a>, © {{ .year }} {{ .name }}"
+  translation: "© {{ .name }} {{ .year }}"
