@@ -15,6 +15,7 @@ We are limiting the **official support** to these types of artifacts as the most
 ## Helm Charts
 Latest Helm charts can be found in the [ArtifactHub](https://artifacthub.io/packages/search?org=kamu):
 - [**`kamu-api-server`**](https://artifacthub.io/packages/helm/kamu/kamu-api-server)
+- [**`kamu-oracle-provider`**](https://artifacthub.io/packages/helm/kamu/kamu-oracle-provider)
 - [**`kamu-web-ui`**](https://artifacthub.io/packages/helm/kamu/kamu-web-ui)
 
 You can use ArtifactHub to explore the configuration parameters schema for each chart as well as the default values.

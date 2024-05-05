@@ -28,7 +28,7 @@ To regenerate this schema from existing code, use the following command:
 * `inspect` — Group of commands for exploring dataset metadata
 * `list` — List all datasets in the workspace
 * `log` — Shows dataset metadata history
-* `login` — Logs in to a remote Kamu server
+* `login` — Logs in to a remote Kamu server interactively
 * `logout` — Logs out from a remote Kamu server
 * `new` — Creates a new dataset manifest from a template
 * `notebook` — Starts the notebook server for exploring the data in the workspace
@@ -50,6 +50,7 @@ To regenerate this schema from existing code, use the following command:
 * `-v` — Sets the level of verbosity (repeat for more)
 * `-q`, `--quiet` — Suppress all non-essential output
 * `--trace` — Record and visualize the command execution as perfetto.dev trace
+* `--system-time <T>` — Overrides system time clock with provided value
 * `-a`, `--account <ACCOUNT>`
 
 To get help for individual commands use:
@@ -274,6 +275,7 @@ Adds data to the root dataset according to its push source configuration
 **Options:**
 
 * `--source-name <SRC>` — Name of the push source to use for ingestion
+* `--event-time <T>` — Event time to be used if data does not contain one
 * `--stdin` — Read data from the standard input
 * `-r`, `--recursive` — Recursively propagate the updates into all downstream datasets
 * `--input-format <FMT>` — Overrides the media type of the data expected by the push source
@@ -294,6 +296,10 @@ Ingest data from standard input (assumes source is defined to use NDJSON):
 Ingest data with format conversion:
 
     echo '[{"key": "value1"}, {"key": "value2"}]' | kamu ingest org.example.data --stdin --input-format json
+
+Ingest data with event time hint:
+
+    kamu ingest org.example.data data.json --event-time 2050-01-02T12:00:00Z
 
 
 
@@ -432,7 +438,7 @@ List all datasets in the workspace
 * `--all-accounts`
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 **Examples:**
@@ -502,9 +508,14 @@ Using a filter to inspect blocks containing query changes of a derivative datase
 
 ## `kamu login`
 
-Logs in to a remote Kamu server
+Logs in to a remote Kamu server interactively
 
-**Usage:** `kamu login [OPTIONS] [server]`
+**Usage:** `kamu login [OPTIONS] [server] [COMMAND]`
+
+**Subcommands:**
+
+* `oauth` — Performs non-interactive login to a remote Kamu server via OAuth provider token
+* `password` — Performs non-interactive login to a remote Kamu server via login and password
 
 **Arguments:**
 
@@ -515,6 +526,42 @@ Logs in to a remote Kamu server
 * `--user` — Store access token in the user home folder rather than in the workspace
 * `--check` — Check whether existing authorization is still valid without triggering a login flow
 * `--access-token <ACCESS-TOKEN>` — Provide an existing access token
+
+
+
+## `kamu login oauth`
+
+Performs non-interactive login to a remote Kamu server via OAuth provider token
+
+**Usage:** `kamu login oauth [OPTIONS] <provider> <access-token> [server]`
+
+**Arguments:**
+
+* `<PROVIDER>` — Name of the OAuth provider, i.e. 'github'
+* `<ACCESS-TOKEN>` — OAuth provider access token
+* `<SERVER>` — ODF backend server URL (defaults to kamu.dev)
+
+**Options:**
+
+* `--user` — Store access token in the user home folder rather than in the workspace
+
+
+
+## `kamu login password`
+
+Performs non-interactive login to a remote Kamu server via login and password
+
+**Usage:** `kamu login password [OPTIONS] <login> <password> [server]`
+
+**Arguments:**
+
+* `<LOGIN>` — Specify user name
+* `<PASSWORD>` — Specify password
+* `<SERVER>` — ODF backend server URL (defaults to kamu.dev)
+
+**Options:**
+
+* `--user` — Store access token in the user home folder rather than in the workspace
 
 
 
@@ -818,7 +865,7 @@ Lists known repositories
 
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 
@@ -868,7 +915,7 @@ Lists remote aliases
 
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 
@@ -925,7 +972,7 @@ Searches for datasets in the registered repositories
 * `--repo <REPO>` — Repository name(s) to search in
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 Search is delegated to the repository implementations and its capabilities depend on the type of the repo. Whereas smart repos may support advanced full-text search, simple storage-only repos may be limited to a substring search by dataset name.
@@ -964,7 +1011,7 @@ Executes an SQL query or drops you into an SQL shell
 
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 SQL shell allows you to explore data of all dataset in your workspace using one of the supported data processing engines. This can be a great way to prepare and test a query that you cal later turn into derivative dataset.
@@ -1175,7 +1222,6 @@ Generate a platform token from a known secret for debugging
 **Options:**
 
 * `--login <LOGIN>` — Account name
-* `--gh-access-token <GH-ACCESS-TOKEN>` — An existing GitHub access token
 * `--expiration-time-sec <EXPIRATION-TIME-SEC>` — Token expiration time in seconds
 
   Default value: `3600`
@@ -1200,20 +1246,20 @@ Compact a dataset
 * `--max-slice-records <RECORDS>` — Maximum amount of records in a single data slice file
 
   Default value: `10000`
-* `--hard` — Perform 'hard' compaction that rewrites the history of a dataset
-* `--verify` — Perform verification of the dataset before running a compaction
+* `--hard` — Perform 'hard' compacting that rewrites the history of a dataset
+* `--verify` — Perform verification of the dataset before running a compacting
 
 For datasets that get frequent small appends the number of data slices can grow over time and affect the performance of querying. This command allows to merge multiple small data slices into a few large files, which can be beneficial in terms of size from more compact encoding, and in query performance, as data engines will have to scan through far fewer file headers.
 
-There are two types of compactions: soft and hard.
+There are two types of compactings: soft and hard.
 
-Soft compactions produce new files while leaving the old blocks intact. This allows for faster queries, while still preserving the accurate history of how dataset evolved over time.
+Soft compactings produce new files while leaving the old blocks intact. This allows for faster queries, while still preserving the accurate history of how dataset evolved over time.
 
-Hard compactions rewrite the history of the dataset as if data was originally written in big batches. They allow to shrink the history of a dataset to just a few blocks, reclaim the space used by old data files, but at the expense of history loss. Hard compactions will rewrite the metadata chain, changing block hashes. Therefore, they will **break all downstream datasets** that depend on them.
+Hard compactings rewrite the history of the dataset as if data was originally written in big batches. They allow to shrink the history of a dataset to just a few blocks, reclaim the space used by old data files, but at the expense of history loss. Hard compactings will rewrite the metadata chain, changing block hashes. Therefore, they will **break all downstream datasets** that depend on them.
 
 **Examples:**
 
-Perform a history-altering hard compaction:
+Perform a history-altering hard compacting:
 
     kamu system compact --hard my.dataset
 
@@ -1240,7 +1286,7 @@ Displays a sample of most recent records in a dataset
   Default value: `0`
 * `-o`, `--output-format <FMT>` — Format to display the results in
 
-  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`
+  Possible values: `table`, `csv`, `json`, `ndjson`, `json-soa`, `json-aoa`
 
 
 This command can be thought of as a shortcut for:

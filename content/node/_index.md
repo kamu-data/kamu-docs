@@ -27,12 +27,15 @@ aliases:
 Kamu Compute Node is a set of [Kubernetes](https://kubernetes.io/)-native applications that can be deployed in any cloud or on-prem to:
 
 - Operate the stream processing pipelines for a certain set of data flows
-- Continuously verify datasets that you are interested it to catch malicious behavior
-- Execute queries on co-located data
+- Continuously ingest external data into signed root datasets
+- Continuously verify a configured set of pipelines to catch malicious behavior
+- Execute queries on co-located data and provide data via variety of protocols
+- Provide data to smart contracts via multi-chain ODF Oracle mechanism
 
 Nodes are the building pieces of the [Open Data Fabric](https://docs.kamu.dev/odf/) and the primary way of contributing resources to the network. Unlike blockchain nodes that maintain a single ledger, Kamu nodes can form loosely connected clusters based on vested interests of their operators in certain data pipelines.
 
-If you are new to ODF - we recommend you to start with [Kamu CLI](https://github.com/kamu-data/kamu-cli/) instead for a gradual introduction. You should consider Kamu Node when you want to:
+If you are new to ODF - we recommend you to start with [Kamu CLI](https://github.com/kamu-data/kamu-cli/) instead, for a gradual introduction. You should consider Kamu Node when you want to:
 - Build a horizontally-scalable data lake for your data
 - Need a decentralized infrastructure for sharing data with your partners or globally without intermediaries
 - Want to continuously operate ODF data pipelines or verify data
+- Want to operate your own oracle data provider

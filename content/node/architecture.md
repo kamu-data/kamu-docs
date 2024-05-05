@@ -37,7 +37,11 @@ This set of storage systems is needed for operating the node and web platform.
 ### Data Processing Layer
 To perform data-intensive operations on datasets the node maintains a **pool of engines** of needed type and version (see also [Supported Engines]({{<relref "supported-engines">}})). Acting as a [Kubernetes controller](https://kubernetes.io/docs/concepts/architecture/controller/) the **Engine Provisioner** decides when to start and stop individual **engine pods** based on demand, configuration, and available capacity in the cluster.
 
-The current demand for data processing is managed by the **Task Scheduler** that prioritizes individual tasks and hands them over to executors.
+Unlike many streaming data processing engines Kamu Node does not keep pipelines in memory, running all the time. Slow-moving pipelines get suspended into checkpoints and spawned only when needed. This allows Kamu Node to use even very limited resources to switch between many thousands of concurrent pipelines based on defined priorities.
+
+The current demand for data processing is managed by the **Task Scheduler** that understands which datasets need to be updated, prioritizes individual tasks, and hands them over to executors.
+
+Another interesting aspect is that multiple different versions of the same engine type can be used at the same time to ensure reproducibility of derivative data.
 
 ### API Layer
 These services are the "brain" of the node. They serve API requests as well as decide when to perform various processing and maintenance tasks on datasets and pipelines.
@@ -47,6 +51,8 @@ Data-intensive operations like push ingest and SQL queries are handled by the **
 All other kinds of requests are handled by the pool of **API Server** components that provide access to all functionality of the node via GraphQL and REST APIs.
 
 Services communicate with one-another via **Event Bus** component.
+
+The **Oracle Provider** is an optional component of the API layer that can supply data to various blockchains. See {{<term "Oracle">}} for explanation of its function. Provider has to be configured with the address(es) of the blockchain nodes to get requests from, the address of the API server to use for executing queries, and the wallet key for executing transactions that carry data into smart contracts.
 
 ## Web Platform
 [Kamu Web Platform]({{<relref "platform">}}) is a browser application that is served to the browser as a set of static files. The **Web Server** pods are stateless and linearly scalable. Since application files change infrequently, they can be fronted by a CDN to optimize loading times and decrease the traffic to the deployment.
