@@ -148,6 +148,24 @@ To load some example data to play with use:
 
 Refresh the browser tab and you should see a lot of new pipelines to explore.
 
+### Superset example
+We are still working on automated Superset examples setup, so to see some data follow these simple steps:
+1. Run `port-forward.sh` script
+2. Open Superset Web UI and login
+3. Go to "Settings" > "Database connections"
+4. Select "+ Database" using type "Other"
+5. Display name: `kamu`
+6. For Sqlalchemy URL use:
+   ```
+   datafusion+flightsql://kamu:kamu@192.168.49.2:30241?insecure=True
+   ```
+   replacing the IP/port with the output of `port-forward.sh` script for `FlightSQL` protocol
+7. Now go to `Datasets` tab and create one for `kamu/co.alphavantage.tickers.daily.spy`
+8. Create a `Line Chart` by:
+   1. dropping `event_time` onto `X-Axis`
+   2. dropping `close` onto `Metrics`
+   3. hitting `Create chart` at the bottom
+
 
 ## Making changes
 After the initial deployment, if you modify any configuration you can easily **apply** your changes to the deployment using a convenience script:
