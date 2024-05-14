@@ -539,6 +539,7 @@ Defines the external source of data.
 | [`FetchStep::Url`](#fetchstepurl) | Pulls data from one of the supported sources by its URL. |
 | [`FetchStep::FilesGlob`](#fetchstepfilesglob) | Uses glob operator to match files on the local file system. |
 | [`FetchStep::Container`](#fetchstepcontainer) | Runs the specified OCI container to fetch data from an arbitrary source. |
+| [`FetchStep::Mqtt`](#fetchstepmqtt) | Connects to an MQTT broker to fetch events from the specified topic. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -578,6 +579,20 @@ Runs the specified OCI container to fetch data from an arbitrary source.
 | `command` | `array(string)` |  |  | Specifies the entrypoint. Not executed within a shell. The default OCI image's ENTRYPOINT is used if this is not provided. |
 | `args` | `array(string)` |  |  | Arguments to the entrypoint. The OCI image's CMD is used if this is not provided. |
 | `env` | `array(`[`EnvVar`](#envvar)`)` |  |  | Environment variables to propagate into or set in the container. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `FetchStep::Mqtt`
+Connects to an MQTT broker to fetch events from the specified topic.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `host` | `string` | ✔️ |  | Hostname of the MQTT broker. |
+| `port` | `integer` | ✔️ |  | Port of the MQTT broker. |
+| `username` | `string` |  |  | Username to use for auth with the broker. |
+| `password` | `string` |  |  | Password to use for auth with the broker (can be templated). |
+| `topics` | `array(`[`MqttTopicSubscription`](#mqtttopicsubscription)`)` | ✔️ |  | List of topic subscription parameters. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -640,6 +655,17 @@ To identify whether a row has changed this strategy will compare all other colum
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
+
+## `MqttTopicSubscription`
+MQTT topic subscription parameters.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `path` | `string` | ✔️ |  | Name of the topic (may include patterns). |
+| `qos` | `string` |  |  | Quality of service class |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MqttTopicSubscription.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `OffsetInterval`
 Describes a range of data as a closed arithmetic interval of offsets
