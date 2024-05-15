@@ -7,14 +7,15 @@ aliases:
 
 **🚧 This page is under construction 🚧**
 
-Kamu Node supports ingesting data using the [MQTT](https://mqtt.org/) protocol.
+Kamu Node supports ingesting data using the [MQTT](https://mqtt.org/) protocol. See {{<schema "FetchStep::Mqtt">}} and this [example](https://github.com/kamu-data/kamu-cli/tree/master/examples/mqtt).
 
-In current implementation Kamu Node acts as an MQTT client that subscribes to a given set of topics (see {{<schema "FetchStep::Mqtt">}}), meaning that an external broker is required to ingest MQTT data, and this broker needs to be accessible to wherever environment Kamu Node is running.
+In current implementation Kamu Node acts as an MQTT **client** that subscribes to a given set of topics , meaning that an external broker is required to ingest MQTT data, and this broker needs to be accessible to wherever environment Kamu Node is running.
 
-In future versions we are planning to add support for a simple publish-only broker in Kamu Node itself, allowing you to connect MQTT devices to it directly. If your use case requires this - let us know!
+In future versions we are planning to add support for a simple publish-only **broker** in Kamu Node itself, allowing you to connect MQTT devices to it directly. If your use case requires this - let us know!
 
 ## Data Delivery Guarantees
 Kamu Node may not have perfect connectivity with MQTT broker, so prolonged periods of disconnects should be accounted for. Additionally, MQTT sources can be used even with [kamu-cli]({{<ref "/cli">}}) tool, and since the tool doesn't use any background processes it will connect to MQTT broker only when you run:
+
 ```sh
 kamu pull my-mqtt-device
 ```
