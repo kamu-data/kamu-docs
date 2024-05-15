@@ -33,12 +33,20 @@ kamu add . -r
 kamu pull --all
 ```
 
+## Miscellaneous
+
+| Name                                                                                   | Description                                                                                  |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| [MQTT ingest](https://github.com/kamu-data/kamu-cli/tree/master/examples/mqtt)         | Shows how to ingest MQTT data using publicly available Mosquitto broker                      |
+| [FlightSQL API](https://github.com/kamu-data/kamu-cli/tree/master/examples/flight-sql) | Examples of connecting to Kamu via FlightSQL protocol using a variety of different libraries |
+
+
 ## Need More Examples?
 
 The wild variety of formats and ways to model data used by the data publishers today often makes ingesting data a challenge. When you work with the data that is already in the ODF network you feel like a productive data scientist, but until publishers start using this format directly we'll have to continue wasting time on dull tasks like parsing CSVs, inferring schemas, and cleaning data.
 
-To give you more examples on how to deal with **different ingest scenarios** we've created an experimental repository where we publish Root Dataset manifests for a variety of Open Data sources.
+To give you more examples on how to deal with **different ingest scenarios** we've created an [experimental repository](https://github.com/kamu-data/kamu-contrib) where we publish dataset manifests for a variety of Open Data sources.
 
-*Stuck on parsing a yet another variety of timestamps? Or confused on how to change projection of the GIS data when reading ESRI file?* 
-
-Then check out [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib).
+{{<tip>}}
+Stuck on parsing a yet another variety of timestamps? Confused on how to change projection of the GIS data when reading ESRI file? Then check out [`kamu-contrib`](https://github.com/kamu-data/kamu-contrib) repo.
+{{</tip>}}
