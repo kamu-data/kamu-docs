@@ -656,13 +656,25 @@ To identify whether a row has changed this strategy will compare all other colum
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 
+## `MqttQos`
+MQTT quality of service class.
+
+| Enum Value |
+| :---: |
+| `AtMostOnce` |
+| `AtLeastOnce` |
+| `ExactlyOnce` |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MqttQos.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
 ## `MqttTopicSubscription`
 MQTT topic subscription parameters.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `path` | `string` | ✔️ |  | Name of the topic (may include patterns). |
-| `qos` | `string` |  |  | Quality of service class |
+| `qos` | [`MqttQos`](#mqttqos) |  |  | Quality of service class. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MqttTopicSubscription.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
