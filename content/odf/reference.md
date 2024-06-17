@@ -540,6 +540,7 @@ Defines the external source of data.
 | [`FetchStep::FilesGlob`](#fetchstepfilesglob) | Uses glob operator to match files on the local file system. |
 | [`FetchStep::Container`](#fetchstepcontainer) | Runs the specified OCI container to fetch data from an arbitrary source. |
 | [`FetchStep::Mqtt`](#fetchstepmqtt) | Connects to an MQTT broker to fetch events from the specified topic. |
+| [`FetchStep::EthereumLogs`](#fetchstepethereumlogs) | Connects to an Ethereum node to stream transaction logs. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -593,6 +594,19 @@ Connects to an MQTT broker to fetch events from the specified topic.
 | `username` | `string` |  |  | Username to use for auth with the broker. |
 | `password` | `string` |  |  | Password to use for auth with the broker (can be templated). |
 | `topics` | `array(`[`MqttTopicSubscription`](#mqtttopicsubscription)`)` | ✔️ |  | List of topic subscription parameters. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `FetchStep::EthereumLogs`
+Connects to an Ethereum node to stream transaction logs.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `chainId` | `integer` |  | `uint64` | Identifier of the chain to scan logs from. This parameter may be used for RPC endpoint lookup as well as asserting that provided `nodeUrl` corresponds to the expected chain. |
+| `nodeUrl` | `string` |  | `url` | Url of the node. |
+| `filter` | `string` |  |  | An SQL WHERE clause that can be used to pre-filter the logs before fetching them from the ETH node. |
+| `signature` | `string` |  |  | Solidity log event signature to use for decoding. Using this field adds `event` to the output containing decoded log as JSON. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)

@@ -7,7 +7,7 @@ weight: 10
 categories: []
 ---
 
-Version: 0.35.0
+Version: 0.36.0
 
 # Abstract
 **Open Data Fabric** is an open protocol specification for decentralized exchange and transformation of semi-structured data that aims to holistically address many shortcomings of the modern data management systems and workflows.
