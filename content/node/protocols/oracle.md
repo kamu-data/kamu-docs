@@ -41,7 +41,7 @@ contract TestConsumer {
         // Repeat this call for multiple inputs.
         req.dataset(
             "covid19.canada.case-details",
-            "did:odf:fed014895afeb476d5d94c1af0668f30ab661c8561760bba6744e43225ba52e099595"
+            "did:odf:fed01c8788dc7825dc95dfaa6c67f989b758d3ebcb1efcb9f47ea914470bd1f7f2bbb"
         );
 
         // Specify an arbitrary complex SQL query.
