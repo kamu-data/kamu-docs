@@ -100,11 +100,12 @@ More examples, documentation, and tests can be found in the [contracts repositor
 
 ## Supported Networks
 
-| Network                  | Contract Address                                                                                                                       | Oracle Fee |
-| :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| Ethereum Mainnet         | *coming soon*                                                                                                                          | 0          |
-| Ethereum Sepolia Testnet | [`0xf1960569d1b4a23c34109d9341af6496ed90c0c3`](https://sepolia.etherscan.io/address/0xf1960569d1b4A23c34109D9341Af6496Ed90C0c3#events) | 0          |
-| Optimism                 | *coming soon*                                                                                                                          | 0          |
+| Network                                                          | Contract Address                                                                                                                       | Oracle Fee |
+| :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| [Ethereum Sepolia Testnet](https://chainlist.org/chain/11155111) | [`0xf1960569d1b4a23c34109d9341af6496ed90c0c3`](https://sepolia.etherscan.io/address/0xf1960569d1b4A23c34109D9341Af6496Ed90C0c3#events) | 0          |
+| [BNB Smart Chain Testnet](https://chainlist.org/chain/97)        | [`0x83857865971e941933dd36ebbf9475a867f67ca6`](https://testnet.bscscan.com/address/0x83857865971e941933dd36ebbf9475a867f67ca6#events)  | 0          |
+| Ethereum Mainnet                                                 | *coming soon*                                                                                                                          | 0          |
+| Optimism                                                         | *coming soon*                                                                                                                          | 0          |
 
 ODF oracle can be deployed on any EVM-compatible chain - you can request network support by filing an issue on the [contracts repository](https://github.com/kamu-data/kamu-contracts).
 
