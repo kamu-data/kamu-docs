@@ -155,5 +155,36 @@ The reproducibility and verifiability of queries therefore make ODF the first of
 - Without going through a complex consensus mechanism
 - While validity of data can still be ensured through the dispute resolution and sampling mechanisms along with staking and slashing.
 
+## Troubleshooting
+
+To better understand what oracle providers return find the incoming oracle transaction in the block explorer e.g. [0x0f3a..4ff6](https://sepolia.etherscan.io/tx/0x0f3af200610ee2a11b13afda14eea808b04cbe012197a352ec95b558bbce4ff6).
+
+Find the `ProvideResults` log:
+
+{{<image filename="/images/node/protocols/oracle-provider-result-data.jpg" alt="ProvideResults event data">}}
+
+Copy the data field and paste it in https://cbor.me/ to get something like this:
+
+{{<image filename="/images/node/protocols/oracle-provider-cbor.jpg" alt="Decoded CBOR data">}}
+
+The first three fields are: `version`, `success`, `data`. Refer to [`OdfResponse`](https://github.com/kamu-data/kamu-contracts/blob/e25e896ede177fdac7d34e9a4a3330094d23cc6f/src/OdfResponse.sol#L9) to understand the layout of the other fields.
+
+Once you have one oracle response - you can use it as input in your unit tests to fully debug the decoding and processing logic without constantly re-deploying the contract and spending a lot of gas.
+
+Here's an example of one such tests in `foundry`:
+
+```solidity
+function testResponseDecoding() public pure {
+    bytes memory responseBytes = hex"8501F58A826..92AFE32";
+    OdfResponse.Res memory res = OdfResponse.fromBytes(0, responseBytes);
+    assertEq(res.numRecords(), 10);
+    CborReader.CBOR[] memory record = res.record(0);
+    string memory voiceId = record[0].readString();
+    int256 playtimeTotal = record[1].readInt();
+    assertEq(voiceId, "lana-del-rey");
+    assertEq(playtimeTotal, 6449);
+}
+```
+
 ## Registering Your Own Provider
 **🚧 Under construction 🚧** - contact us if you'd like to use ODF oracle contract along with your private ODF node.
