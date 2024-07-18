@@ -5,7 +5,7 @@ weight: 30
 categories: []
 ---
 
-Ingestion is the process by which external data is added into Open Data Fabric's {{<term "root datasets" "root-dataset">}}. Below we will describe why this process is necessary and how it works.
+Ingestion is the process by which external data is added into Open Data Fabric's {{<term "root datasets" "root-dataset">}}. Kamu supports a wide variety of sources including resources on the web and [blockchains]({{<ref "blockchain-source">}}). Below we will describe why this process is necessary and how it works.
 
 ## Motivation
 When interacting with data on the web we usually cannot make any assumptions about guarantees that its publisher provides:

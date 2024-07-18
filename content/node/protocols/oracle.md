@@ -1,5 +1,5 @@
 ---
-Title: Oracle (blockchain)
+Title: Blockchain Oracle
 description:
 categories: []
 aliases:
