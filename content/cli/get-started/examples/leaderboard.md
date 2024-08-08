@@ -166,10 +166,10 @@ content:
 Create this dataset:
 
 ```sh
-kamu add player-scores.yaml
+kamu add leaderboard.yaml
 ```
 
-Let's process all data that is already in `player-scores` and see the results:
+Let's process all data that is already in `leaderboard` and see the results:
 
 ```sh
 kamu pull leaderboard
