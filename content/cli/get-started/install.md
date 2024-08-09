@@ -65,22 +65,35 @@ See also:
 
 ### Windows (using WSL2)
 1. Install WSL2 following [these steps](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+   Make sure you can at least open Linux shell before proceeding
 2. Install `docker`
-   1. We recommend you to install Docker Desktop for Windows with WSL2 backend (see [instructions](https://docs.docker.com/desktop/windows/wsl/))
-   2. Ensure that from your linux distribution you can launch containers without `sudo`
-3. Inside your WSL2 distribution of choice:
-4. Install `kamu` via installer script by running:
-    ```bash
-    curl -s "https://get.kamu.dev" | sh
-    ```
-5. Verify your setup by running:
+   1. We recommend installing [Docker Desktop for Windows](https://docker.com) and [enable WSL2 backend](https://docs.docker.com/desktop/windows/wsl/)
+   2. Ensure that from your linux distribution you can launch containers without `sudo` and the following works:
+      ```sh
+      docker run -it hello-world
+      ```
+3. Inside WSL2 distribution install `kamu` via installer script by running:
+   ```bash
+   curl -s "https://get.kamu.dev" | sh
+   ```
+4. Follow installer instructions to update `PATH` and install completions:
+   ```sh
+   # Add to the end of your ~/.bashrc
+   PATH="$PATH:/home/$USER/.local/bin
+   source <(kamu completions bash)
+   ```
+5. After restarting the shell confirm that this works:
+   ```sh
+   # Executable can be found
+   kamu
+
+   # Should auto-complete to `kamu version`
+   kamu vers<press TAB>
+   ```
+6. Verify your setup by running:
     ```bash
     kamu system diagnose
     ```
-
-To get the best experience using `kamu` with WSL2 we recommend you to also:
-- Use [Windows Terminal](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701) that supports unicode symbols and full colors
-- Configure [shell completions]({{<relref "#installing-shell-completions">}})
 
 See also:
 <!-- no toc -->
