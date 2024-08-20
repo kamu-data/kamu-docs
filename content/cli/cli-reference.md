@@ -48,6 +48,7 @@ To regenerate this schema from existing code, use the following command:
 **Options:**
 
 * `-v` — Sets the level of verbosity (repeat for more)
+* `--no-color` — Disable color output in the terminal
 * `-q`, `--quiet` — Suppress all non-essential output
 * `--trace` — Record and visualize the command execution as perfetto.dev trace
 
@@ -73,6 +74,7 @@ Add a new dataset or modify an existing one
 * `-r`, `--recursive` — Recursively search for all manifest in the specified directory
 * `--replace` — Delete and re-add datasets that already exist
 * `--stdin` — Read manifests from standard input
+* `--name <N>` — Overrides the name in a loaded manifest
 
 This command creates a new dataset from the provided DatasetSnapshot manifest.
 
