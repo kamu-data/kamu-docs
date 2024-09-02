@@ -10,10 +10,11 @@ aliases:
 
 ## Explainer Videos
 
-| Name                                                                                                                           |  Level   | Description                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------ | :------: | ------------------------------------------------------------------------------------ |
-| [Kamu 101: Basics](https://www.youtube.com/watch?v=oUTiWW6W78A&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk)                        | Beginner | Quick overview of the purpose and basic features of the tool                         |
-| [Kamu 101: Trust & Collaboration](https://www.youtube.com/watch?v=hN_vpHYmwi0&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk&index=2) | Beginner | Theory of what makes data trustworthy and how to verify datasets you get from others |
+| Name                                                                                                                                     |  Level   | Description                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | :------: | ------------------------------------------------------------------------------------ |
+| [Kamu 101: Basics](https://www.youtube.com/watch?v=oUTiWW6W78A&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk)                                  | Beginner | Quick overview of the purpose and basic features of the tool                         |
+| [Kamu 101: Trust & Collaboration](https://www.youtube.com/watch?v=hN_vpHYmwi0&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk&index=2)           | Beginner | Theory of what makes data trustworthy and how to verify datasets you get from others |
+| [Unified On & Off-Chain Analytics Tutorial](https://www.youtube.com/watch?v=M7DyV-QUZbk&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk&index=3) | Advanced | How to query off-chain data from blockchain and do analytics on blockchain logs      |
 
 ## Talks
 
@@ -27,12 +28,13 @@ aliases:
 
 ## Publications
 
-| Name                                                                                  | Level    | Description                                         |
-| ------------------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
-| [Kamu Blog: Introducing Open Data Fabric](https://www.kamu.dev/blog/introducing-odf/) | Beginner | Initial announcement of the ODF project             |
-| [Whitepaper: Open Data Fabric](https://arxiv.org/abs/2111.06364)                      | Beginner | Original ODF protocol whitepaper                    |
-| [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)        | Beginner | Why we are using stream processing instead of batch |
-| [Open Data Fabric protocol specification]({{<relref "odf/spec">}})                    | Advanced | Specification itself, for tech-savvy readers        |
+| Name                                                                                                                  | Level    | Description                                                                     |
+| --------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| [Kamu Blog: Introducing Open Data Fabric](https://www.kamu.dev/blog/introducing-odf/)                                 | Beginner | Initial announcement of the ODF project                                         |
+| [Whitepaper: Open Data Fabric](https://arxiv.org/abs/2111.06364)                                                      | Beginner | Original ODF protocol whitepaper                                                |
+| [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)                                        | Beginner | Why we are using stream processing instead of batch                             |
+| [Course: Introduction to Web3 Data Engineering](https://www.kamu.dev/blog/2024-08-28-intro-to-web3-data-engineering/) | Beginner | How Web3 innovations can be applied to conventional data lakehouse architecture |
+| [Open Data Fabric protocol specification]({{<relref "odf/spec">}})                                                    | Advanced | Specification itself, for tech-savvy readers                                    |
 
 ## External Resources
 
