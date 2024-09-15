@@ -7,13 +7,21 @@ aliases:
 
 **🚧 This page is under construction 🚧**
 
-Kamu Node provides limited data query API for ingesting and extracting data.
+Kamu Node provides powerful REST APIs for querying and ingesting data.
 
-If you are considering to build applications on top of Kamu Node - please consider using [GraphQL API]({{<relref "gql-api">}}) instead.
+If you are considering to build applications on top of Kamu Node - also consider using [GraphQL API]({{<relref "gql-api">}}).
 
+We are working to provide full **OpenAPI specification** for our REST API - please check back soon!
+
+For accessing individual components of the datasets (blocks, references, data slices) you can use [ODF protocol]({{<relref "odf-protocol">}}).
 
 
 ## Reading Data
+To get dataset information like description, schema, etc. use `/metadata` endpoint:
+```
+https://node.demo.kamu.dev/kamu/com.cryptocompare.ohlcv.eth-usd/metadata?include=attachments,info,license,refs,schema,seed,vocab
+```
+
 To get sample data from any dataset use `/tail` endpoint:
 ```
 https://node.demo.kamu.dev/kamu/com.cryptocompare.ohlcv.eth-usd/tail?limit=10
@@ -21,47 +29,98 @@ https://node.demo.kamu.dev/kamu/com.cryptocompare.ohlcv.eth-usd/tail?limit=10
 
 To execute arbitrary SQL that can access multiple datasets at once use `/query` endpoint:
 ```
-https://node.demo.kamu.dev/query?query=select+1&skip=0&limit=10
+https://node.demo.kamu.dev/query?query=select+1&skip=0&limit=10&include=input,schema
 ```
 
-The `/query` endpoint also supports `POST` requests for fine control:
+The `/query` endpoint also supports `POST` requests for finer control:
 
 Example request body:
 ```json
 {
-  "query": "select offset, city, population from populations order by offset desc",
-  "dataFormat": "JsonAoA",
-  "aliases": [{
-    "alias": "populations",
-    "id": "did:odf:fed01df230b49615d175307d580c33d6fda61fc7b9aec91df0f5c1a5ebe3b8cbfee02"
-  }]
+    "query": "select event_time, from_symbol, to_symbol, close from \"kamu/com.cryptocompare.ohlcv.eth-usd\"",
+    "limit": 3,
+    "queryDialect": "SqlDataFusion",
+    "dataFormat": "JsonAoa",
+    "schemaFormat": "ArrowJson"
 }
 ```
 
 Example response:
 ```json
 {
-    "data": [
-        [1, "B", 200], 
-        [0, "A", 100]
-    ],
-    "schema": "...",
-    "resultHash": "f9680c001200b3483eecc3d5c6b50ee6b8cba11b51c08f89ea1f53d3a334c743199f5fe656e",
-    "state": {
-        "inputs": [{
-            "id": "did:odf:fed01df230b49615d175307d580c33d6fda61fc7b9aec91df0f5c1a5ebe3b8cbfee02",
-            "blockHash": "f16204cec6245fadfbf0663b0e9e9a01c73268cc13e29087b33ce3454af08eb4d3e0b",
-        }]
+    "output": {
+        "data": [
+            ["2024-09-02T21:50:00Z", "eth", "usd", 2537.07],
+            ["2024-09-02T21:51:00Z", "eth", "usd", 2541.37],
+            ["2024-09-02T21:52:00Z", "eth", "usd", 2542.66]
+        ],
+        "dataFormat": "JsonAoa",
+        "schema": {"fields": ["..."]},
+        "schemaFormat": "ArrowJson"
     }
 }
 ```
 
-We are working to provide full **OpenAPI specification** for our REST API - please check back later!
+### Proofs
+[Cryptographic proofs]({{<ref "node/commitments">}}) can be also requested to hold the node **forever accountable** for the provided result.
 
-For accessing individual components of the datasets you can use [ODF protocol]({{<relref "odf-protocol">}}).
+Example request body:
+```json
+{
+    "query": "select event_time, from_symbol, to_symbol, close from \"kamu/com.cryptocompare.ohlcv.eth-usd\"",
+    "limit": 3,
+    "queryDialect": "SqlDataFusion",
+    "dataFormat": "JsonAoA",
+    "schemaFormat": "ArrowJson",
+    "include": ["proof"]
+}
+```
+
+Example response:
+```json
+{
+    "input": {
+        "query": "select event_time, from_symbol, to_symbol, close from \"kamu/com.cryptocompare.ohlcv.eth-usd\"",
+        "queryDialect": "SqlDataFusion",
+        "dataFormat": "JsonAoa",
+        "include": ["Input", "Proof", "Schema"],
+        "schemaFormat": "ArrowJson",
+        "datasets": [{
+            "id": "did:odf:fed0119d20360650afd3d412c6b11529778b784c697559c0107d37ee5da61465726c4",
+            "alias": "kamu/com.cryptocompare.ohlcv.eth-usd",
+            "blockHash": "f1620708557a44c88d23c83f2b915abc10a41cc38d2a278e851e5dc6bb02b7e1f9a1a"
+        }],
+        "skip": 0,
+        "limit": 3
+    },
+    "output": {
+        "data": [
+            ["2024-09-02T21:50:00Z", "eth", "usd", 2537.07],
+            ["2024-09-02T21:51:00Z", "eth", "usd", 2541.37],
+            ["2024-09-02T21:52:00Z", "eth", "usd", 2542.66]
+        ],
+        "dataFormat": "JsonAoa",
+        "schema": {"fields": ["..."]},
+        "schemaFormat": "ArrowJson"
+    },
+    "subQueries": [],
+    "commitment": {
+        "inputHash": "f1620e23f7d8cdde7504eadb86f3cdf34b3b1a7d71f10fe5b54b528dd803387422efc",
+        "outputHash": "f1620e91f4d3fa26bc4ca0c49d681c8b630550239b64d3cbcfd7c6c2d6ff45998b088",
+        "subQueriesHash": "f1620ca4510738395af1429224dd785675309c344b2b549632e20275c69b15ed1d210"
+    },
+    "proof": {
+        "type": "Ed25519Signature2020",
+        "verificationMethod": "did:key:z6MkkhJQPHpA41mTPLFgBeygnjeeADUSwuGDoF9pbGQsfwZp",
+        "proofValue": "uJfY3_g03WbmqlQG8TL-WUxKYU8ZoJaP14MzOzbnJedNiu7jpoKnCTNnDI3TYuaXv89vKlirlGs-5AN06mBseCg"
+    }
+}
+```
+
+See [commitments documentation]({{<ref "node/commitments">}}) for details.
+
 
 ## Ingesting Data
-
 Example using `curl`:
 ```sh
 echo '[{"foo": "bar"}]' | curl -v -X POST \
