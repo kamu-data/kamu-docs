@@ -61,7 +61,7 @@ Example response:
 }
 ```
 
-### Proofs
+## Cryptographic Proofs
 [Cryptographic proofs]({{<ref "node/commitments">}}) can be also requested to hold the node **forever accountable** for the provided result.
 
 Example request body:
@@ -117,7 +117,58 @@ Example response:
 }
 ```
 
-See [commitments documentation]({{<ref "node/commitments">}}) for details.
+A client that gets a proof in response should perform [a few basic steps]({{<ref "node/commitments#response-validation">}}) to validate the proof integrity. For example making sure that the DID in `proof.verificationMethod` actually corresponds to the node you're querying data from and that the signature in `proof.proofValue` is actually valid. Only after this you can use this proof to hold the node accountable for the result.
+
+A proof can be stored long-term and then disputed at a later point using your own node or a 3rd party node you can trust via the `/verify` endpoint.
+
+Example request:
+```json
+{
+    "input": {
+        "query": "select event_time, from_symbol, to_symbol, close from \"kamu/com.cryptocompare.ohlcv.eth-usd\"",
+        "queryDialect": "SqlDataFusion",
+        "dataFormat": "JsonAoa",
+        "include": ["Input", "Proof", "Schema"],
+        "schemaFormat": "ArrowJson",
+        "datasets": [{
+            "id": "did:odf:fed0119d20360650afd3d412c6b11529778b784c697559c0107d37ee5da61465726c4",
+            "alias": "kamu/com.cryptocompare.ohlcv.eth-usd",
+            "blockHash": "f1620708557a44c88d23c83f2b915abc10a41cc38d2a278e851e5dc6bb02b7e1f9a1a"
+        }],
+        "skip": 0,
+        "limit": 3
+    },
+    "subQueries": [],
+    "commitment": {
+        "inputHash": "f1620e23f7d8cdde7504eadb86f3cdf34b3b1a7d71f10fe5b54b528dd803387422efc",
+        "outputHash": "f1620e91f4d3fa26bc4ca0c49d681c8b630550239b64d3cbcfd7c6c2d6ff45998b088",
+        "subQueriesHash": "f1620ca4510738395af1429224dd785675309c344b2b549632e20275c69b15ed1d210"
+    },
+    "proof": {
+        "type": "Ed25519Signature2020",
+        "verificationMethod": "did:key:z6MkkhJQPHpA41mTPLFgBeygnjeeADUSwuGDoF9pbGQsfwZp",
+        "proofValue": "uJfY3_g03WbmqlQG8TL-WUxKYU8ZoJaP14MzOzbnJedNiu7jpoKnCTNnDI3TYuaXv89vKlirlGs-5AN06mBseCg"
+    }
+}
+```
+
+Example response:
+```json
+{
+    "ok": false,
+    "error": {
+        "kind": "VerificationFailed::OutputMismatch",
+        "actual_hash": "f162..c12a",
+        "expected_hash": "f162..2a2d",
+        "message": "Query was reproduced but resulted in output hash different from expected.
+                    This means that the output was either falsified, or the query
+                    reproducibility was not guaranteed by the system.",
+    }
+}
+```
+
+
+See [commitments documentation]() for details.
 
 
 ## Ingesting Data
