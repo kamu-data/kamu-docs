@@ -208,6 +208,16 @@ fetch:
   url: "https://api.etherscan.io/api?apikey=${{ env.ETHERSCAN_API_KEY }}"
 ```
 
+You can use default values for parameters:
+```yaml
+fetch:
+  kind: Container
+  image: "ghcr.io/kamu-data/fetch-com.defillama:0.1.5"
+  args:
+    - --request-interval
+    - '${{ env.request_interval || 2 }}'
+```
+
 # Using Ingest Scripts
 Sometimes you may need the power of a general purpose programming language to deal with particularly complex API, or when doing web scraping. For this `kamu` supports containerized ingestion tasks:
 
