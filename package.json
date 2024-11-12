@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "pagefind": "^1.0.4"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^1.25.11"
   }
 }

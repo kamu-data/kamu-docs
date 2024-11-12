@@ -9,15 +9,25 @@ dev-with-search:
 	npx -y pagefind --site public --serve
 
 .PHONY: build
-build:
-	HUGO_ENV=production hugo --minify
-	npx -y pagefind --site public
+build: build-hugo build-pagefind build-openapi
 
 .PHONY: publish
 publish: build
 	aws s3 rm --recursive s3://docs.kamu.dev
 	aws s3 cp public/ s3://docs.kamu.dev/ --recursive
 	aws --no-cli-pager cloudfront create-invalidation --distribution-id E3LHDIU5YENQ3U --paths '/*'
+
+.PHONY: build-hugo
+build-hugo:
+	HUGO_ENV=production hugo --minify
+
+.PHONY: build-pagefind
+build-pagefind:
+	npx -y pagefind --site public
+
+.PHONY: build-openapi
+build-openapi:
+	npx @redocly/cli build-docs ../kamu-node/resources/openapi-mt.json -o public/node/api/rest/index.html --title "Kamu Node REST API"
 
 .PHONY: docgen
 docgen:

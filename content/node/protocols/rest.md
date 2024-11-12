@@ -1,17 +1,18 @@
 ---
-Title: REST API
+Title: REST
 description:
 categories: []
 aliases:
+  - /node/protocols/rest-api
 ---
 
-**🚧 This page is under construction 🚧**
+REST is our primary API for interacting with the node from scripts, libraries, and system-to-system integration.
 
-Kamu Node provides powerful REST APIs for querying and ingesting data.
+Here you can find the latest [OpenAPI documentation](/node/api/rest/) along with usage examples.
 
-If you are considering to build applications on top of Kamu Node - also consider using [GraphQL API]({{<relref "gql-api">}}).
+Interactive Swagger UI is also available on HTTP port of all running nodes.
 
-We are working to provide full **OpenAPI specification** for our REST API - please check back soon!
+If you are considering to build applications on top of Kamu Node - also consider using [GraphQL API]({{<relref "graphql">}}).
 
 For accessing individual components of the datasets (blocks, references, data slices) you can use [ODF protocol]({{<relref "odf-protocol">}}).
 

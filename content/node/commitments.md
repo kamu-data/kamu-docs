@@ -24,7 +24,7 @@ This mechanism is foundational to **automatic dispute resolution** mechanism of 
 - **Multi-protocol** - Ideally the commitment structure can be reused without significant alterations across multiple protocols like REST, Blockchain Oracle, FlightSQL, Kafka egress, WebSockets etc.
 
 ## Structured Recursive Commitments
-Let's explore how the commitment scheme works using a [REST batch query API]({{<relref "rest-api">}}):
+Let's explore how the commitment scheme works using a [REST batch query API]({{<relref "rest">}}):
 
 ```python
 POST /query

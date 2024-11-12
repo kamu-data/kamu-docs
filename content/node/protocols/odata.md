@@ -5,8 +5,6 @@ categories: []
 aliases:
 ---
 
-**🚧 This page is under construction 🚧**
-
 Kamu Node has an experimental support for [OData](https://www.odata.org/) protocol.
 
 The endpoints structured with one OData service root per every account:
@@ -28,11 +26,6 @@ https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy
 https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy?$select=offset,close&$orderby=offset+asc&$top=10
 ```
 
-Current limitations:
-- Only a subset of OData v3.0 spec is supported
-- Only supports `atom` format in responses
-- Collection resource supports following parameters
-  - `$select`
-  - `$orderby`
-  - `$skip`
-  - `$top`
+You can find more endpoint information in [OpenAPI documentation](/node/api/rest/).
+
+See documentation of our [datafusion-odata](https://github.com/kamu-data/datafusion-odata/) library for the list of limitations.
