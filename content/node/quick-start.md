@@ -41,7 +41,7 @@ minikube start
 {{<info>}}
 You can also specify how much resources to allocate to the cluster. For example, we can let it use all available resources as:
 ```sh
-minikube start --cpu no-limit --memory no-limit
+minikube start --cpus no-limit --memory no-limit
 ```
 
 {{</info>}}
