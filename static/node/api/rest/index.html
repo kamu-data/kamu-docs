@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kamu REST API Reference</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="shortcut icon"
+      href="/images/favicon-32x32.png"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="custom-header scalar-app">
+      <b>Kamu Node REST API</b>
+      <nav>
+        <a href="https://docs.kamu.dev/">Docs</a>
+        <a href="https://discord.gg/nU6TXRQNXC">Discord</a>
+      </nav>
+    </header>
+
+    <script id="api-reference"></script>
+
+    <script>
+      // See: https://github.com/scalar/scalar/blob/main/documentation/configuration.md
+      // See: https://github.com/scalar/scalar/blob/main/documentation/themes.md
+      var configuration = {
+        // theme: "alternate",
+        // theme: "default",
+        // theme: "moon",
+        theme: "purple",
+        // theme: "solarized",
+        // theme: "bluePlanet",
+        // theme: "saturn",
+        // theme: "kepler",
+        // theme: "mars",
+        // theme: "deepSpace",
+        // theme: "none",
+        spec: {
+          url: "https://raw.githubusercontent.com/kamu-data/kamu-node/refs/heads/master/resources/openapi-mt.json",
+        },
+        servers: [
+          {
+            url: "https://api.demo.kamu.dev",
+            description: "Demo Node",
+          },
+        ],
+      };
+
+      document.getElementById("api-reference").dataset.configuration =
+        JSON.stringify(configuration);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+  </body>
+</html>

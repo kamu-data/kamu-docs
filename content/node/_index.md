@@ -13,11 +13,11 @@ aliases:
 
 {{<image filename="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%">}}
 
-[![Repository](https://img.shields.io/github/v/tag/kamu-data/kamu-node?include_prereleases&logo=github&logoColor=white&label=Repository&style=for-the-badge)](https://github.com/kamu-data/kamu-node/)
+[![Repository](https://img.shields.io/static/v1?logo=github&logoColor=white&label=&message=Repository&color=gray&style=for-the-badge)](https://github.com/kamu-data/kamu-node/)
 [![Release](https://img.shields.io/github/v/release/kamu-data/kamu-node?include_prereleases&logo=rust&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-node/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-node/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master)](https://github.com/kamu-data/kamu-node/actions)
 [![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
-
+[![REST API](https://img.shields.io/static/v1?logo=openapiinitiative&logoColor=white&label=&message=REST%20API&color=gray&style=for-the-badge)](/node/api/rest/)
 
 </p>
 </div>
