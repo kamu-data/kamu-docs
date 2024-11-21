@@ -262,7 +262,7 @@ If you write services that batch-query data at specific points in time and distr
 
 These situations that we call "abnormal" are actually very frequent and in batch world require **highly error-prone manual intervention**.
 
-In the world of ODF streaming - late data, backfills, and input retractions are just normal occurrences. ODF pipeline know how to react to these events and can **automatically reconcile their state** without human intervention, and maintaining a **verifiable provenance**.
+In the world of ODF streaming - late data, backfills, and input retractions are just normal occurrences. ODF pipelines know how to react to these events and can **automatically reconcile their state** without human intervention, and maintaining a **verifiable provenance**.
 
 ---
 
