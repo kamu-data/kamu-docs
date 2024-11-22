@@ -5,6 +5,7 @@ weight: 30
 alwaysopen: false
 categories: []
 aliases:
+  - /license
   - /contrib/license
 ---
 
