@@ -17,7 +17,8 @@ aliases:
 [![Release](https://img.shields.io/github/v/release/kamu-data/kamu-node?include_prereleases&logo=rust&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-node/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-node/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master)](https://github.com/kamu-data/kamu-node/actions)
 [![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
-[![REST API](https://img.shields.io/static/v1?logo=openapiinitiative&logoColor=white&label=&message=REST%20API&color=gray&style=for-the-badge)](/node/api/rest/)
+[![REST API](https://img.shields.io/static/v1?logo=openapiinitiative&logoColor=6BFF39&label=&message=REST%20API&color=gray&style=for-the-badge)](/node/api/rest/)
+[![GraphQL API](https://img.shields.io/static/v1?logo=graphql&logoColor=F133A8&label=&message=GraphQL%20API&color=gray&style=for-the-badge)](https://api.demo.kamu.dev/graphql)
 
 </p>
 </div>

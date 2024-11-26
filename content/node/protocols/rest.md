@@ -6,6 +6,8 @@ aliases:
   - /node/protocols/rest-api
 ---
 
+[![REST API](https://img.shields.io/static/v1?logo=openapiinitiative&logoColor=6BFF39&label=&message=REST%20API&color=gray&style=for-the-badge)](/node/api/rest/)
+
 REST is our primary API for interacting with the node from scripts, libraries, and system-to-system integration.
 
 Here you can find the latest [OpenAPI documentation](/node/api/rest/) along with usage examples.
@@ -169,7 +171,7 @@ Example response:
 ```
 
 
-See [commitments documentation]() for details.
+See [commitments documentation]({{<ref "node/commitments">}}) for details.
 
 
 ## Ingesting Data
