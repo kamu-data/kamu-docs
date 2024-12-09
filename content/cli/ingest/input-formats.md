@@ -212,10 +212,20 @@ You can use default values for parameters:
 ```yaml
 fetch:
   kind: Container
-  image: "ghcr.io/kamu-data/fetch-com.defillama:0.1.5"
+  image: "ghcr.io/kamu-data/fetch-com.defillama:${{ env.IMAGE_VERSION || '0.1.5' }}"
   args:
     - --request-interval
     - '${{ env.request_interval || 2 }}'
+```
+
+Also, there's a possibility of specifying several possible options:
+```yaml
+fetch:
+  kind: Container
+  image: "ghcr.io/kamu-data/fetch-com.github.stats:0.1.0 }}"
+  args:
+    - --access-token
+    - ${{ env.GH_TOKEN || env.GITHUB_TOKEN || 'demo' }}
 ```
 
 # Using Ingest Scripts
