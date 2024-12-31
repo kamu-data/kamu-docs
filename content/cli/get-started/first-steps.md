@@ -308,54 +308,67 @@ The `kamu sql` is a very powerful command that you can use both interactively or
 
 
 ### Notebooks
-Kamu also connects the power of [Apache Spark](https://spark.apache.org/) with the [Jupyter Notebook](https://jupyter.org/) server. You can get started by running:
+Kamu lets you access the power of multiple data engines through a convenient interface of [Jupyter Notebooks](https://jupyter.org/).
+
+Get started by running:
 
 ```bash
 kamu notebook -e MAPBOX_ACCESS_TOKEN=<your mapbox token>
 ```
 
 {{<note>}}
-Above we also tell `kamu` to pass the [MapBox](https://www.mapbox.com/) access token as `MAPBOX_ACCESS_TOKEN` environment variable into Jupyter, which we will use for plotting. If you don't have a MapBox token - simply run `kamu notebook`.
+Above we also tell `kamu` to pass the [MapBox](https://www.mapbox.com/) access token as `MAPBOX_ACCESS_TOKEN` environment variable into Jupyter, which we will use for plotting. You can get the token for free or skip this step and simply run `kamu notebook`.
 {{</note>}}
 
 Executing this should open your default browser with a Jupyter running in it.
 
-From here let's create a `PySpark` notebook. We start our notebook by loading `kamu` extension:
+From here let's create a notebook and start it by loading `kamu` extension:
 
 ```
 %load_ext kamu
 ```
 
+We then need to create a connection:
+
+```python
+import kamu
+con = kamu.connect()
+```
+
+The `kamu` Python library will automatically connect to your local workspace node.
+
 After this the `import_dataset` command becomes available and we can load the dataset and alias it by doing:
 
+You can now query the datasets using the connection:
+
+```python
+con.query("select * from 'us.cityofnewyork.data.zipcode-boundaries' limit 3")
 ```
-%import_dataset us.cityofnewyork.data.zipcode-boundaries --alias zipcodes
+
+Or, more conveniently, using the `%%sql` cell magic:
+
+```sql
+%%sql
+select * from 'us.cityofnewyork.data.zipcode-boundaries' limit 3
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-001.png" alt="kamu notebook 001">}}
-
-This will take a few seconds as in the background it creates Apache Spark session, and it is Spark that loads the dataset into what it calls a "dataframe".
-
-You can then start using the `zipcodes` dataframe in the exact same way you would in an interactive `spark-shell`.
-
-{{<note>}}
-A few very important things to understand here:
-- Spark and Jupyter are running in separate processes
-- The commands you execute in the notebook are executed "remotely" and the results are transferred back
-- This means that it doesn't really matter if your data is located on your machine or somewhere else - the notebook will work the same
-{{</note>}}
-
-The dataframe is automatically exposed in the SQL engine too, and you can run SQL queries using `%%sql` annotation. You can copy and try some queries from [this existing notebook](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.density.ipynb).
+The queries return regular [Pandas](https://pandas.pydata.org/) dataframe.
 
 {{<image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002">}}
 
-Thanks to the [sparkmagic](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
+Thanks to the [autovizwidget](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
 
 {{<image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003">}}
 
-After you are done joining, filtering, and shaping the data via SQL or PySpark - you can choose to get it out into the Jupyter notebook kernel by adding `-o population_density` flag. This will transfer the results of the query into the notebook as [Pandas](https://pandas.pydata.org/) dataframe, which you can further process and visualize:
+To assign the result of `%%sql` cell to a variable use:
+```sql
+%%sql -o population_density
+select ...
+```
 
 {{<image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004">}}
+
+You can use any of your favorite libraries to further process and visualize it:
 
 Example of visualizing population density data as a *choropleth* chart using [mapboxgl](https://github.com/mapbox/mapboxgl-jupyter) library:
 

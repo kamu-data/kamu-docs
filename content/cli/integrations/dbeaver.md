@@ -1,7 +1,6 @@
 ---
 Title: DBeaver
 description: Connecting DBeaver via JDBC protocol.
-weight: 10
 categories: []
 aliases:
 ---
@@ -31,7 +30,7 @@ To connect `DBeaver` to `kamu` follow these simple steps:
     ```
 4. Create a new connection in `DBeaver` using the driver you created:
    - Specify host and port, e.g. `127.0.0.1:50050`
-   - Use `"kamu"` as username and password
+   - Use `"anonymous"` as username and password or specify a token for authentication
    - In `Driver properties` tab add user property:
      ```bash
      useEncryption=false

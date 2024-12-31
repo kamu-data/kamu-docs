@@ -1,83 +1,137 @@
 ---
-Title: Generic Python Clients
+Title: Python Scripts & Notebooks
 description: Connecting Python applications to Kamu.
-weight: 10040
 categories: []
-aliases:
+aliases: []
 ---
 
-This guide explains how to connect Python application and scripts to Kamu.
+This guide explains how to connect to Kamu from Python scripts, applications, and Notebook environments like Jupyter.
 
-## SQL API: Using ADBC
-***Coming soon!***
+## Official Client Library
+The easiest way to get started is the official [`kamu`](https://github.com/kamu-data/kamu-client-python) Python library available on [PyPi](https://pypi.org/project/kamu/).
+
+Insall:
+```sh
+pip install kamu
+```
+
+Connect and query data via SQL:
+```python
+import kamu
+
+# Create connection
+con = kamu.connect("grpc+tls://node.demo.kamu.dev:50050")
+
+# Returns a Pandas dataframe
+con.query("selec 1 as value")
+```
+
+Take a look at the [library documentation](https://github.com/kamu-data/kamu-client-python) for examples of authenticating, using different engines, and connecting to local workspaces.
 
 
-## SQL API: Using SQLAlchemy and FlightSQL
+## Jupyter Notebooks
+The official [`kamu`](https://github.com/kamu-data/kamu-client-python) Python library offers a few optional Jupyter integrations that you can install as:
+
+```sh
+pip install[jupyter-autoviz,jupyter-sql]
+```
+
+Import the extension at the beginning of your notebook:
+
+```python
+%load_ext kamu
+```
+
+Create a connection:
+```python
+import kamu
+con = kamu.connect("grpc+tls://node.demo.kamu.dev:50050")
+```
+
+You can now use `%%sql` cell magic:
+```sql
+%%sql
+select 1 as value
+```
+
+This extension is pre-installed in the integrated notebook environment you can run via `kamu notebook` command line command.
+
+See [Exploring Data]({{<ref "explore#jupyter-notebooks">}}) section for a tutorial on using notebooks.
+
+For more information on extensions see the [library documentation](https://github.com/kamu-data/kamu-client-python).
+
+
+## Alternative Options
+
+### SQL Using ADBC
+Kamu is based on the [ADBC](https://arrow.apache.org/docs/format/ADBC.html) client API standard and the [Flight SQL](https://arrow.apache.org/docs/format/FlightSql.html) protocol, so any library that can work with those should be able to connect.
+
+Example using the official ADBC library and Pandas:
+```python
+import adbc_driver_manager
+import adbc_driver_flightsql.dbapi
+import pandas
+
+con = adbc_driver_flightsql.dbapi.connect(
+    "grpc+tls://node.demo.kamu.dev:50050",
+    db_kwargs={
+        # Anonymous users have to authenticate using basic auth so they could be assigned a session token
+        adbc_driver_manager.DatabaseOptions.USERNAME.value: "anonymous",
+        adbc_driver_manager.DatabaseOptions.PASSWORD.value: "anonymous",
+        # Registered users can provide a bearer token directy
+        # adbc_driver_flightsql.DatabaseOptions.AUTHORIZATION_HEADER.value: "Bearer <token>",
+    },
+    autocommit=True,
+)
+
+with con:
+    # Pandas natively supports ADBC connections!
+    df = pandas.read_sql("select 1 as value", con)
+    print(df)
+```
+
+### SQL Using SQLAlchemy
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular ORM library for Python that you can use to access data in Kamu in a same way as dozens of other data sources. It is row-oriented, so may be less efficient than using ADBC client for certain use cases. To use it you'll need to install [flightsql-dbapi](https://github.com/influxdata/flightsql-dbapi) package.
 
 Example:
 ```python
 import flightsql.sqlalchemy
-import sqlalchemy.engine
+import sqlalchemy
 import pandas as pd
 
-engine = sqlalchemy.engine.create_engine("datafusion+flightsql://kamu:kamu@localhost:50050?insecure=True")
+# Secure remote connection
+engine = sqlalchemy.create_engine(
+    # Anonymous users have to authenticate using basic auth so they could be assigned a session token
+    "datafusion+flightsql://anonymous:anonymous@node.demo.kamu.dev:50050"
+    # Registered users can provide a bearer token directy
+    # "datafusion+flightsql://node.demo.kamu.dev:50050?token=kamu-token"
+)
 
-df = pd.read_sql("show tables", engine)
-print(df)
-
-df = pd.read_sql("select * from 'co.alphavantage.tickers.daily.spy' limit 10", engine)
-print(df)
+with engine.connect() as con:
+    df = pd.read_sql(sql="select 1 as value", con=con.connection)
+    print(df)
 ```
 
 
-## SQL API: Using DBAPI2 and FlightSQL
+### SQL Using DBAPI2
 DBAPI2 (aka [PEP-249](https://peps.python.org/pep-0249/)) is a standard DB access API in Python, but its row-oriented access to data may be less efficient than using ADBC client. To use it you'll need to install [flightsql-dbapi](https://github.com/influxdata/flightsql-dbapi) package.
 
 Example:
 ```python
 from flightsql import connect, FlightSQLClient
+import pandas
 
-client = FlightSQLClient(host='localhost', port=50050, user='kamu', password='kamu', insecure=True)
-conn = connect(client)
-cursor = conn.cursor()
-cursor.execute('select * from "co.alphavantage.tickers.daily.spy" limit 10')
-print([r for r in cursor])
-```
-
-
-## SQL API: Using JPype DBAPI2 and JDBC
-{{<warning>}}
-This method involves running Java process under the hood and in most cases is NOT recommended  - prefer using more efficient connectors listed above.
-{{</warning>}}
-
-You can connect to Kamu from Python via JDBC protocol using [Jpype](https://jpype.readthedocs.io/en/latest/) library.
-
-Example:
-```python
-import jpype
-import jpype.dbapi2
-import os
-
-jpype.startJVM(
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    # Include JDBC connector JAR on the class path
-    classpath=os.path.join(os.getcwd(), "./flight-sql-jdbc-driver-13.0.0.jar")
+# Secure remote connection
+client = FlightSQLClient(
+    host="node.demo.kamu.dev",
+    port=50050,
+    # Anonymous users have to authenticate using basic auth so they could be assigned a session token
+    user="anonymous",
+    password="anonymous",
+    # Registered users can provide a bearer token
+    # token="<kamu-token>",
 )
 
-conn = jpype.dbapi2.connect(
-    "jdbc:arrow-flight-sql://127.0.0.1:50050?useEncryption=false", 
-    driver_args={
-        'user': 'kamu', 
-        'password': 'kamu',
-    }
-)
-
-cursor = conn.cursor()
-res = cursor.execute("show tables").fetchall()
-
-print(res)
-
-cursor.close()
-conn.close()
+df = pandas.read_sql("select 1 as value", con)
+print(df)
 ```

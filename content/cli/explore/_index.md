@@ -86,44 +86,60 @@ You can use `-e ENV_VAR` option to pass additional environment variable into the
 
 Executing this should open your default browser with a Jupyter running in it.
 
-From here let's create a `PySpark` notebook. We start our notebook by loading `kamu` extension:
+From here let's create a new notebook. We start our notebook by loading `kamu` extension:
 
 ```
 %load_ext kamu
 ```
 
-After this the `import_dataset` command becomes available and we can load the dataset and alias it by doing:
+And creating `kamu` connection:
 
+```python
+import kamu
+con = kamu.connect()
 ```
-%import_dataset us.cityofnewyork.data.zipcode-boundaries --alias zipcodes
+
+The library will automatically connect to your local workspace node, but you can also provide a URL to mix local and remote connections (see the [library documentation](https://github.com/kamu-data/kamu-client-python) for details).
+
+You can now query the datasets using the connection:
+
+```python
+con.query("select * from 'my-dataset' limit 3")
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-001.png" alt="kamu notebook 001">}}
+Or, more conveniently, using the `%%sql` cell magic:
 
-This will take a few seconds as in the background it creates Apache Spark session, and it is Spark that loads the dataset into what it calls a "dataframe".
-
-You can then start using the `zipcodes` dataframe in the exact same way you would in an interactive `spark-shell`.
-
-{{<note>}}
-A few very important things to understand here:
-- Spark and Jupyter are running in separate processes
-- The commands you execute in the notebook are executed "remotely" and the results are transferred back
-- This means that it doesn't really matter if your data is located on your machine or somewhere else - the notebook will work the same
-{{</note>}}
-
-The dataframe is automatically exposed in the SQL engine too, and you can run SQL queries using `%%sql` annotation:
+```sql
+%%sql
+select * from 'my-dataset' limit 3
+```
 
 {{<image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002">}}
 
-Thanks to the [sparkmagic](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
+{{<note>}}
+By default the `notebook` command will use DataFusion engine. To start with Spark use:
+
+```sh
+kamu notebook --engine spark
+```
+{{</note>}}
+
+The queries return regular Pandas dataframe.
+
+Thanks to the [autovizwidget](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
 
 {{<image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003">}}
 
-After you are done joining, filtering, and shaping the data you can choose to get it out of the Spark into the Jupyter notebook kernel using `%%sql -o alias` command
+To assign the result of `%%sql` cell to a variable use:
+```sql
+%%sql -o my_dataframe
+select * from x
+```
 
 {{<image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004">}}
 
-Now that you have the data in Jupyter - you can use any of your favorite tools and libraries to further process it or visualize it.
+You can use any of your favorite libraries to further process and visualize it.
+
 
 ## Web UI
 And finally, `kamu` comes with embedded Web UI that you can use to explore your pipelines and run SQL queries on data from the comfort of your browser:

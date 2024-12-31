@@ -1,7 +1,6 @@
 ---
 Title: Tableau
 description: Connecting Tableau via JDBC protocol.
-weight: 70
 categories: []
 aliases:
 ---

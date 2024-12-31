@@ -1,7 +1,6 @@
 ---
 Title: Apache Superset
 description: Connecting Apache Superset to Kamu via Flight SQL.
-weight: 5
 categories: []
 aliases:
 ---
@@ -34,12 +33,17 @@ To connect `Superset` to `kamu` follow these simple steps:
 3. (Optional) Specify your MabBox API Token in `<superset repo>/docker/.env-non-dev`
 4. Run `kamu` Flight SQL server in a desired workspace:
    ```bash
-   kamu sql server --flight-sql --address 0.0.0.0 --port 50050
+   kamu sql server --address 0.0.0.0 --port 50050
    ```
 5. Start `Superset` via `docker-compose` again
 6. Create a new database connection in `Superset`
    - Use `"Other"` database kind
    - As URL specify:
      ```bash
-     datafusion+flightsql://kamu:kamu@<hostname or IP>:50050?insecure=True
+     datafusion+flightsql://anonymous:anonymous@<hostname or IP>:50050?insecure=True
+     ```
+  - Skip `insecure=True` when node is set up with TLS
+  - To authenticate via access token use:
+     ```bash
+     datafusion+flightsql://<hostname or IP>:50050?token=<TOKEN>
      ```
