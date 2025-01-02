@@ -61,6 +61,14 @@ See [Exploring Data]({{<ref "explore#jupyter-notebooks">}}) section for a tutori
 For more information on extensions see the [library documentation](https://github.com/kamu-data/kamu-client-python).
 
 
+## Google Colab
+To install `kamu` in Colab environment use:
+```python
+!pip install kamu
+```
+
+See also [example Google Colab notebook](https://colab.research.google.com/drive/1WQqZJsPQpipU4kW6SPea9H2qmHH4rF8k).
+
 ## Alternative Options
 
 ### SQL Using ADBC
