@@ -63,7 +63,7 @@ For more information on extensions see the [library documentation](https://githu
 
 ## Google Colab
 To install `kamu` in Colab environment use:
-```python
+```
 !pip install kamu
 ```
 
