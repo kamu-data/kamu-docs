@@ -23,6 +23,7 @@ To regenerate this schema from existing code, use the following command:
 * `completions` — Generate tab-completion scripts for your shell
 * `config` — Get or set configuration options
 * `delete [rm]` — Delete a dataset
+* `export` — Exports a dataset
 * `ingest` — Adds data to the root dataset according to its push source configuration
 * `init` — Initialize an empty workspace in the current directory
 * `inspect` — Group of commands for exploring dataset metadata
@@ -262,6 +263,35 @@ Delete local datasets matching pattern:
 
 
 
+## `kamu export`
+
+Exports a dataset
+
+**Usage:** `kamu export [OPTIONS] --output-format <OUTPUT_FORMAT> <DATASET>`
+
+**Arguments:**
+
+* `<DATASET>` — Local dataset reference
+
+**Options:**
+
+* `--output-path <OUTPUT_PATH>` — Export destination. Dafault is `<current workdir>/<dataset name>`
+* `--output-format <OUTPUT_FORMAT>` — Output format
+* `--records-per-file <RECORDS_PER_FILE>` — Number of records per file, if stored into a directory. It's a soft limit. For the sake of export performance the actual number of records may be slightly different
+
+This command exports a dataset to a file or set of files of a given format.
+
+Output path may be either file or directory.
+When a path contains extention, and no trailing separator, it is considered as a file.
+In all other cases a path is considered as a directory. Examples:
+ - `export/dataset.csv` is a file path
+ - `export/dataset.csv/` is a directory path
+ - `export/dataset/` is a directory path
+ - `export/dataset` is a directory path
+
+
+
+
 ## `kamu ingest`
 
 Adds data to the root dataset according to its push source configuration
@@ -446,6 +476,8 @@ List all datasets in the workspace
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 * `-w`, `--wide` — Show more details (repeat for more)
 
@@ -628,6 +660,10 @@ Starts the notebook server for exploring the data in the workspace
 
 * `--address <ADDRESS>` — Expose HTTP server on specific network interface
 * `--http-port <HTTP_PORT>` — Expose HTTP server on specific port
+* `--engine <ENG>` — Engine type to use for the notebook
+
+  Possible values: `datafusion`, `spark`
+
 * `-e`, `--env <VAR>` — Propagate or set an environment variable in the notebook (e.g. `-e VAR` or `-e VAR=foo`)
 
 This command will run the Jupyter server and the Spark engine connected together, letting you query data with SQL before pulling it into the notebook for final processing and visualization.
@@ -890,6 +926,8 @@ Lists known repositories
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 
 
@@ -989,6 +1027,8 @@ Lists remote aliases
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 
 
@@ -1020,6 +1060,8 @@ Searches for datasets in the registered repositories
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 * `--repo <REPO>` — Repository name(s) to search in
 
@@ -1046,7 +1088,7 @@ Executes an SQL query or drops you into an SQL shell
 
 **Subcommands:**
 
-* `server` — Run JDBC server only
+* `server` — Runs an SQL engine in a server mode
 
 **Options:**
 
@@ -1065,6 +1107,8 @@ Executes an SQL query or drops you into an SQL shell
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 * `--engine <ENG>` — Engine type to use for this SQL session
 
@@ -1073,8 +1117,18 @@ Executes an SQL query or drops you into an SQL shell
 * `--url <URL>` — URL of a running JDBC server (e.g. jdbc:hive2://example.com:10000)
 * `-c`, `--command <CMD>` — SQL command to run
 * `--script <FILE>` — SQL script file to execute
+* `--output-path <OUTPUT_PATH>` — When set, result will be stored to a given path instead of being printed to stdout
+* `--records-per-file <RECORDS_PER_FILE>` — Number of records per file, if stored into a directory. It's a soft limit. For the sake of export performance the actual number records may be slightly different
 
 SQL shell allows you to explore data of all dataset in your workspace using one of the supported data processing engines. This can be a great way to prepare and test a query that you cal later turn into derivative dataset.
+
+Output path may be either file or directory.
+When a path contains extention, and no trailing separator, it is considered as a file.
+In all other cases a path is considered as a directory. Examples:
+ - `export/dataset.csv` is a file path
+ - `export/dataset.csv/` is a directory path
+ - `export/dataset/` is a directory path
+ - `export/dataset` is a directory path
 
 **Examples:**
 
@@ -1103,16 +1157,38 @@ Note: Currently when connecting to a remote SQL kamu server you will need to man
 
 ## `kamu sql server`
 
-Run JDBC server only
+Runs an SQL engine in a server mode
 
 **Usage:** `kamu sql server [OPTIONS]`
 
 **Options:**
 
-* `--address <ADDRESS>` — Expose JDBC server on specific network interface
-* `--port <PORT>` — Expose JDBC server on specific port
-* `--livy` — Run Livy server instead of Spark JDBC
-* `--flight-sql` — Run Flight SQL server instead of Spark JDBC
+* `--address <ADDRESS>` — Expose server on specific network interface
+* `--port <PORT>` — Expose server on specific port
+* `--engine <ENG>` — Engine type to use for this server
+
+  Possible values: `datafusion`, `spark`
+
+* `--livy` — Run Livy server instead of JDBC
+
+**Examples:**
+
+By default runs the DataFusion engine exposing the FlightSQL protocol:
+
+    kamu sql server
+
+To customize interface and port:
+
+    kamu sql server --address 0.0.0.0 --port 50050
+
+To run with Spark engine:
+
+    kamu sql server --engine spark
+
+By default Spark runs with JDBC protocol, to instead run with Livy HTTP gateway:
+
+    kamu sql server --engine spark --livy
+
 
 
 
@@ -1127,6 +1203,7 @@ Command group for system-level functionality
 * `api-server` — Run HTTP + GraphQL server
 * `compact` — Compact a dataset
 * `debug-token` — Validate a Kamu token
+* `decode` — Decode a manifest file
 * `diagnose` — Run basic system diagnose check
 * `generate-token` — Generate a platform token from a known secret for debugging
 * `gc` — Runs garbage collection to clean up cached and unreachable objects in the workspace
@@ -1246,6 +1323,22 @@ Validate a Kamu token
 
 
 
+## `kamu system decode`
+
+Decode a manifest file
+
+**Usage:** `kamu system decode [OPTIONS] [MANIFEST]`
+
+**Arguments:**
+
+* `<MANIFEST>` — Manifest reference (path, or URL)
+
+**Options:**
+
+* `--stdin` — Read manifests from standard input
+
+
+
 ## `kamu system diagnose`
 
 Run basic system diagnose check
@@ -1352,6 +1445,8 @@ Displays a sample of most recent records in a dataset
     Array of arrays - compact and efficient and preserves column order
   - `table`:
     A pretty human-readable table
+  - `parquet`:
+    Parquet columnar storage. Only available when exporting to file(s)
 
 * `-n`, `--num-records <NUM>` — Number of records to display
 
