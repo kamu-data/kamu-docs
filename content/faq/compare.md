@@ -9,7 +9,6 @@ aliases:
 ---
 
 # Apache Iceberg, Delta Lake
-
 Apache Iceberg and Delta formats in modern data lakes serve the purpose of creating a logical representation of **data table** that abstracts the physical layout of data on disk.
 
 Their features include:
@@ -19,44 +18,50 @@ Their features include:
 - Compactions (merging small data files for query efficiency)
 - Evolution of schemas and partitions
 
-In `kamu` [ODF datasets]({{<ref "odf">}}) serve a similar purpose as a logical representation of **data stream** (a ledger of events).
+The [ODF format]({{<ref "odf">}}) plays a similar role to Iceber/Delta in traditional lakehouse systems, but instead of representing a table, it representats a **historical ledger of events** - a combination of data and metadata that in detail describe the evolution of a dataset over time. Below we list some of its most notable aspects.
 
-The greatest distinction is that these ledgers are **append-only**:
-- New data can only be added to the end
-- Unlike Iceberg, Delta and other formats created around Change-Data-Capture, ODF streams preserve **complete and unaltered history** of data (for reproducibility and verifiability)
-- Old records can only be affected by issuing explicit **corrections or retractions**
-- Data and metadata is cryptographically secured and signed
+ODF ledgers are mostly **append-only**:
+- Unlike Iceberg/Delta and similar formats created around Change-Data-Capture, ODF streams are intended to preserve **complete and unaltered history** of data for reproducibility, verifiability, and ultimate "time-travel" capabilities
+- New data is added to the end, while previous records can be revised by issuing explicit [retractions and corrections]({{<ref "retractions-corrections">}})
+- The format still offers non-destructive compaction for the sake of performance
+- The historical data can be pruned, but such actions are also communicated in the format explicitly.
 
-While Iceberg and Delta only work with conventional file systems and object storages (e.g. HDFS, S3), ODF datasets were designed to also work efficiently with **content-addressable storage** like IPFS and Arweave.
+ODF format puts emphasis on [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) - storing descriptive domain events instead of the "current state". CDC tables still can be expressed using ODF ledger as a changelog stream.
 
-The **rich metadata** of ODF streams is designed to carry much more information such as:
-- Applied transformation for lineage and provenance of derivative data
+While Iceberg/Delta only work with conventional file systems and object storages (e.g. HDFS, S3), ODF datasets were designed to also work efficiently with **decentralized content-addressable storages** like IPFS and Arweave.
+
+The **rich metadata** of ODF streams is designed to carry a lot more information, such as:
+- Applied transformations, for **lineage and provenance** of derivative data
 - License changes, semantics, governance information...
-- Attachments (data manuals, examples) etc.
+- Attachments (data readmes, charts, examples etc.)
 
-So while Iceberg and Delta fill the purpose of table abstractions in the enterprise data lakes, ODF dataset is a **Web3-native** dynamic structured data format and a building block for **multi-party exchange and transformation of data**.
+ODF datasets also include several **cryptographic features**:
+- Embedded global identity, allowing attribution
+- Metadata ledger is cryptographically secured and signed, for tamper-proofness and accountability
+- In the near future ODF will also support granular encryption, allowing to control access and permissions via key exchange. This will allow private data to be stored in open networks (e.g. IPFS, Filecoin) that do not offer any central point of control to enforce permissions.
+
+So while Iceberg and Delta fill the purpose of table abstractions in enterprise data lakehouses, ODF dataset is a **Web3-native** ledgerized data format that we see as a building block for **multi-party exchange and collaborative processing of data**.
 
 
 # Spark, Flink, Kafka Streaming
 
-`kamu` does not compete with enterprise data processing technologies - it uses them internally and builds on top:
+`kamu` does not replace or compete with enterprise data processing engines - it uses them as building blocks.
 
-- It specifies how data should be stored
-  - *e.g. making sure that data is never modified or deleted*
+Think of `kamu` as *"Kubernetes for Data"*, where [multiple different engines]({{<ref "supported-engines">}}) are just plug-in components, integrated together into a single **verifiable data processing framework**.
+
+While individual engines let you do almost anything with data, `kamu` is a lot more **opinionated**:
+- It tries to enforce many data management best practices like avoiding history loss
 - Provides stable references to data for reproducibility
-- Specifies how data & metadata are shared
-- Tracks every processing step executed
+- Specifies how data & metadata are shared/replicated over the network
+- Tracks every processing step executed and records provenance
   - *so that a person on another side of the world who downloaded your dataset could understand exactly where every single piece of data came from*
 - Handles dataset evolution
   - *so that you could update your processing steps over time without breaking other people's downstream pipelines that depend on your data*
 - And much more...
 
-So Spark and Flink to `kamu` are just building blocks, while `kamu` is a higher level and opinionated system.
-
 
 # Snowflake
-
-| [Snowflake](https://www.snowflake.com/)                                                                                                                                                         | [Kamu](https://kamu.dev)                                                                                                                                                                                                        |
+| Snowflake                                                                                                                                                                                       | Kamu                                                                                                                                                                                                                            |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Is a robust data platform and enterprise data warehouse                                                                                                                                         | Is a Web3-native data sharing and collaborative processing solution                                                                                                                                                             |
 | **Centralized**, cloud-only, and based on **proprietary** technology                                                                                                                            | **Decentralized** network with open protocol and code that scales from laptop to cluster, can span from edge to on-prem to multi-cloud                                                                                          |
@@ -69,37 +74,52 @@ So Spark and Flink to `kamu` are just building blocks, while `kamu` is a higher 
 | Only off-chain data, limited to **company-size silos**                                                                                                                                          | Seamlessly integrates **on and off-chain data**, and can provide data to blockchain as an **optimistic oracle**                                                                                                                 |
 
 
+# Databricks
+Databricks provide an amazing set of technologies for enterprise data, however, many of the limitations described in the [Snowflake](#snowflake) section in regards to centralization still apply.
+
+Unlike Databricks platform, `kamu` is:
+- **Local-first** - a person can start using `kamu` with nothing but their laptop, without any accounts or any cloud infrastructure, while having access to the same features a platform provides
+- **Streaming-frist** - we believe that modern stream processing is a [superior computational model](https://www.kamu.dev/blog/end-of-batch-era/) for automation and far less fragile than batch
+- Based on **cryptographic ledgers and verifiable processing** - we build from ground up to ensure reproducibility, auditability, and accurate provenance of data
+- **Decentralized** - we respect data ownership and sovereignty and want to enable the smallest organizations and individuals to store data on any inftastructure of their choice. Instead of creating monolyths we focus on enabling millions of small data publishers and processors work together efficiently in a global data economy
+- **Collaborative** - built-in verifiability and auditability allows allows data exchange and processing to function across company boundaries, and provides a reliable foundation for multi-party data exchange and processing.
+
+
 # Apache Airflow, Apache NiFi
-TBD
+These tools are "swiss army knives" of data processing. Their ultimate flexibility unfortunately also makes them easily misused, often resulting in [Rube Goldberg machines](https://en.wikipedia.org/wiki/Rube_Goldberg_machine) that are extremely convoluted and fragile.
+
+Our goal with `kamu` is to provide a more opinionated data management framework that:
+- Makes following best practices effortless
+- Provides configurable tradeoffs between consistency and latency
+- Can automatically react to (not-so-)special events like backfills, retractions, corrections
+- Captures provenance thoughout the entire pipeline
+- Can function across company boundaries
+- And much more!
+
+You can use these tools to prepare data for ingestion into `kamu`, but after that you should seriously consider the superior [stream processing computational model](https://www.kamu.dev/blog/end-of-batch-era/) for further proccessing.
 
 
-# Ceramic Network
-TBD
-
-
-# Ocean Network
-TBD
-
-
-# Dune Analytics
-TBD
-
-
-# The Graph
-TBD
-
-
-# Chainlink
-TBD
-
-
-# Space And Time
-TBD
-
-
-# JSON APIs
-TBD
+# JSON REST APIs
+| JSON REST                                                                                                                                                                                  | Kamu                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| No standard - diffrent auth mechanisms, data models, limits, pagination, error handling                                                                                                    | Simple and [open protocol]({{<ref "odf">}})                                          |
+| JSON can have very significant overhead for large amounts of data                                                                                                                          | Uses Apache Arrow for the most efficient and compact encoding of structured data     |
+| API has to be designed with specific use case in mind - this largely favors applications that have predictable access patterns rather than analytics that requires slicing and dicing data | Both application and analytics-friendly                                              |
+| Lack of flexibility in queries often monivates users to immediately dump all data                                                                                                          | Avoids adverse incentive by providing convinient access                              |
+| Have to be integrated on one-by-one basis - very time consuming and error prone                                                                                                            | Data is decentralized but can be accessed uniformly                                  |
+| Need software developers to integrate and maintain - expensive                                                                                                                             | Data can be accessed easily by anyone, without software development skills           |
+| Not reproducible or verifiabiable - impossible to prove that data came from a source                                                                                                       | 100% reproducible, verifiable, and allows holding data providers accountable         |
+| Not composable - after data is altered you'd need to build a new API infrastructure to share it                                                                                            | Infinitely composable - improved/enriched data can be shared with the network easily |
 
 
 # Blockchains
-TBD
+Although [ODF data format]({{<ref "odf">}}) is inspired by cryptographic ledgers used in blockchains, `kamu` is NOT a mesh connectivity network, it does NOT maintain a single ledger or run any kind of consensus between nodes.
+
+Nodes in `kamu` talk to each other only to execute a query that touches data spread across them, or to run a streaming data processing task.
+
+Network topology in `kamu` therefore corresponds directly to the data pipeline being executed. Data is replicated only between the nodes that explicitly want to replicate it, and processing tasks are dispatched to nodes that explicitly say they can perform them.
+
+We designed `kamu` to work well with blockchains:
+- Blockchain smart contracts can act as a OLTP (transactional) distributed services, delegating data storage and heavy computation tasks to `kamu`
+- Smart contracts can request data from `kamu` via [ODF oracle]({{<ref "oracle">}})
+- `kamu` can in turn [use data from blockchains]({{<ref "blockchain-source">}}) for processing and analytics.
