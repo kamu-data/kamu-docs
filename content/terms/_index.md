@@ -1,10 +1,12 @@
 ---
 Title: Terms of Service
 description:
-weight: 40
+weight: 100
 categories: []
 aliases:
+  - /community/terms-of-service
   - /terms-of-service
+  - /terms
   - /tos
 ---
 
