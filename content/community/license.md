@@ -10,19 +10,25 @@ aliases:
 ---
 
 ## Brief explanation of Kamu's license
-Kamu is using [Business Source License](https://mariadb.com/bsl-faq-adopting/) (BSL). We chose it as the closest thing to a fully Open Source license that allows us to build a sustainable business and continue to pursue our ambitious technology goals.
+Kamu is using [Business Source License](https://mariadb.com/bsl-faq-adopting/) (BSL).
+
+We chose it as the closest thing to a fully Open Source license that allows us to build a sustainable business and continue to pursue our ambitious technology goals.
 
 Under BSL:
 
 - All source **code is provided in the open**
 - All your **contributions benefit the community** in the same way as with any Open Source project
-- Most people and organizations can **use the product for free** in any environment and for any purpose
-  - The **only condition** as imposed by the "Additional Use Grant" is to **not provide product's functionality as a service** to third parties
-  - If you clearly don't fall into this category - you can stop reading here. It's that simple :)
+- Most people and organizations can still **use the product for free** in any environment and for any purpose **as long as**:
+  - You're not providing product's functionality as a service to third parties
+  - You're not distributing the product under a different name
+
+If you clearly don't fall into these categories - you can stop reading here - it's that simple :)
+
+Refer to "Additional Use Grant" section of the license for the exact terms.
+
 
 ## Understanding the Change Date
-
-If you look at the [LICENSE.txt](https://github.com/kamu-data/kamu-cli/blob/master/LICENSE.txt) you will see the "Change Date" that is roughly 4 years from now. It represents the date on which a _specific version_ of this software will automatically convert into permissive Apache 2.0 license ("Change License").
+If you look at the [LICENSE.txt](https://github.com/kamu-data/kamu-cli/blob/master/LICENSE.txt) you will see the "Change Date" that is roughly 4 years from now. It represents the date on which a _specific version_ of this software will automatically **convert into permissive Apache 2.0 license** ("Change License").
 
 We increment this date during every release, so earlier versions of our software are closer to becoming pure Open Source.
 
@@ -58,4 +64,4 @@ Yes, the way we look at it is:
 - Datasets are available online in [ODF format]({{<ref "odf">}}), which is an open protocol
 - Your clients independently can use `kamu` (or any other tool compatible with ODF) to download data
 
-Since you're not running `kamu` _for_ your customers - you're good according to the "Additional Use Grant".
+Since you're not operating `kamu` as a _service_ for your customers - you're not violating the "Additional Use Grant".
