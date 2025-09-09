@@ -14,7 +14,7 @@ An object that wraps the metadata resources providing versioning and type identi
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `kind` | `string` | ✔️ | [`multicodec`](https://github.com/multiformats/multicodec) | Type of the resource. |
-| `version` | `integer` | ✔️ |  | Major version number of the resource contained in this manifest. It provides the mechanism for introducing compatibility breaking changes. |
+| `version` | `integer` | ✔️ | `int32` | Major version number of the resource contained in this manifest. It provides the mechanism for introducing compatibility breaking changes. |
 | `content` | `string` | ✔️ | [`flatbuffers`](https://flatbuffers.dev/) | Resource data. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/Manifest.json)
@@ -81,6 +81,7 @@ Indicates that data has been ingested into a root dataset.
 | `newCheckpoint` | [`Checkpoint`](#checkpoint) |  |  | Describes checkpoint written during this transaction, if any. If an engine operation resulted in no updates to the checkpoint, but checkpoint is still relevant for subsequent runs - a hash of the previous checkpoint should be specified. |
 | `newWatermark` | `string` |  | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Last watermark of the output data stream, if any. Initial blocks may not have watermarks, but once watermark is set - all subsequent blocks should either carry the same watermark or specify a new (greater) one. Thus, watermarks are monotonically non-decreasing. |
 | `newSourceState` | [`SourceState`](#sourcestate) |  |  | The state of the source the data was added from to allow fast resuming. If the state did not change but is still relevant for subsequent runs it should be carried, i.e. only the last state per source is considered when resuming. |
+| `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/AddData.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -100,9 +101,6 @@ Describes how to ingest data into a root dataset from a certain logical source.
 
 ## `DisablePollingSource`
 Disables the previously defined polling source.
-
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/DisablePollingSource.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -158,7 +156,8 @@ Specifies the complete schema of Data Slices added to the Dataset following this
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `schema` | `string` | ✔️ | [`flatbuffers`](https://flatbuffers.dev/) | Apache Arrow schema encoded in its native flatbuffers representation. |
+| `rawArrowSchema` | `string` |  | [`flatbuffers`](https://flatbuffers.dev/) | DEPRECATED: Apache Arrow schema encoded in its native flatbuffers representation. |
+| `schema` | [`DataSchema`](#dataschema) |  |  | Defines the logical schema of the data files that follow this event. Will become a required field after migration. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/SetDataSchema.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -182,7 +181,7 @@ Defines a license that applies to this dataset.
 | `shortName` | `string` | ✔️ |  | Abbreviated name of the license. |
 | `name` | `string` | ✔️ |  | Full name of the license. |
 | `spdxId` | `string` |  |  | License identifier from the SPDX License List. |
-| `websiteUrl` | `string` | ✔️ | `url` |  |
+| `websiteUrl` | `string` | ✔️ | `url` | URL where licensing terms can be found. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/SetLicense.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -225,6 +224,262 @@ Lets you manipulate names of the system columns to avoid conflicts.
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/SetVocab.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
+# Data Schema
+## `DataSchema`
+This schema aims to be a human-friendly variant of Arrow. Arrow currently specifies only the [flatbuffer format](https://github.com/apache/arrow/blob/f9301c0ba8a7ed1b0b63275cfdd4c44c26b04675/format/Schema.fbs) which has many legacy to it and is not suited to be defined by humans, so we had to define our own schema format. While inspired by Arrow - this format makes a clear separation between logical data types and encoding (physical layout) of data in the chunks.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `fields` | `array(`[`DataField`](#datafield)`)` | ✔️ |  | Top-level fields (columns) of the schema. |
+| `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataSchema.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataField`
+Represents a named field (column) in a root or nested struct schema
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `name` | `string` | ✔️ |  | Name of the field |
+| `type` | [`DataType`](#datatype) | ✔️ |  | Logical type of the field that defines its semantic behavior and value ranges |
+| `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataField.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType`
+Defines a logical type of the field. Logical type determines the semantics and boudaries of a type and how it can be operated on, without a concern about encoding and physical layout of the data in chunks.
+
+| Union Type | Description |
+| --- | --- |
+| [`DataType::Binary`](#datatypebinary) | A sequence of bytes. Used for arbitrary binary data. |
+| [`DataType::Bool`](#datatypebool) | A boolean value representing true or false. |
+| [`DataType::Date`](#datatypedate) | A calendar date. |
+| [`DataType::Decimal`](#datatypedecimal) | A fixed-point decimal number with a specified precision and scale. |
+| [`DataType::Duration`](#datatypeduration) | An elapsed time interval with a specified time unit. |
+| [`DataType::Float16`](#datatypefloat16) | A floating-point number. |
+| [`DataType::Float32`](#datatypefloat32) | A floating-point number. |
+| [`DataType::Float64`](#datatypefloat64) | A floating-point number. |
+| [`DataType::Int8`](#datatypeint8) | An integer value. |
+| [`DataType::Int16`](#datatypeint16) | An integer value. |
+| [`DataType::Int32`](#datatypeint32) | An integer value. |
+| [`DataType::Int64`](#datatypeint64) | An integer value. |
+| [`DataType::UInt8`](#datatypeuint8) | An integer value. |
+| [`DataType::UInt16`](#datatypeuint16) | An integer value. |
+| [`DataType::UInt32`](#datatypeuint32) | An integer value. |
+| [`DataType::UInt64`](#datatypeuint64) | An integer value. |
+| [`DataType::List`](#datatypelist) | A list of values, all having the same data type. |
+| [`DataType::Map`](#datatypemap) | A map of key-value pairs, represented as a list of entries (structs with key and value fields). |
+| [`DataType::Null`](#datatypenull) | A type representing the absence of a value (null). |
+| [`DataType::Option`](#datatypeoption) | A type representing an optional (nullable) value of another data type. |
+| [`DataType::Struct`](#datatypestruct) | A collection of named fields, each with its own data type. |
+| [`DataType::Time`](#datatypetime) | A time of day value, without a date, with a specified unit of granularity. |
+| [`DataType::Timestamp`](#datatypetimestamp) | A point in time, represented as an offset from the Unix epoch, with optional timezone. |
+| [`DataType::String`](#datatypestring) | A Unicode string. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Binary`
+A sequence of bytes. Used for arbitrary binary data.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `fixedLength` | `integer` |  | `uint64` | Number of bytes per value for fixed-size binary. If omitted, the binary is variable-length. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Bool`
+A boolean value representing true or false.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Date`
+A calendar date.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Decimal`
+A fixed-point decimal number with a specified precision and scale.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `precision` | `integer` | ✔️ | `uint32` | Total number of decimal digits that can be stored. |
+| `scale` | `integer` | ✔️ | `int32` | Number of digits after the decimal point. In certain situations, scale could be negative number. For negative scale, it is the number of padding 0 to the right of the digits.<br/><br/>For example the number 12300 could be treated as a decimal has precision 3 and scale -2. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Duration`
+An elapsed time interval with a specified time unit.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `unit` | [`TimeUnit`](#timeunit) | ✔️ |  | The unit of the duration measurement. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Float16`
+A floating-point number.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Float32`
+A floating-point number.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Float64`
+A floating-point number.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Int8`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Int16`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Int32`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Int64`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::UInt8`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::UInt16`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::UInt32`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::UInt64`
+An integer value.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::List`
+A list of values, all having the same data type.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `itemType` | [`DataType`](#datatype) | ✔️ |  | Data type of list items. |
+| `fixedLength` | `integer` |  | `uint64` | Number of list items per value for fixed-size lists. If omitted, the list is variable-length. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Map`
+A map of key-value pairs, represented as a list of entries (structs with key and value fields).
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `keyType` | [`DataType`](#datatype) | ✔️ |  | Data type of the map's keys. |
+| `valueType` | [`DataType`](#datatype) | ✔️ |  | Data type of the map's values. |
+| `keysSorted` | `boolean` |  |  | Set to true if the keys within each value are sorted. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Null`
+A type representing the absence of a value (null).
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Option`
+A type representing an optional (nullable) value of another data type.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `inner` | [`DataType`](#datatype) | ✔️ |  | Inner data type for the optional value. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Struct`
+A collection of named fields, each with its own data type.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `fields` | `array(`[`DataField`](#datafield)`)` | ✔️ |  | Fields that make up the struct. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Time`
+A time of day value, without a date, with a specified unit of granularity.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `unit` | [`TimeUnit`](#timeunit) | ✔️ |  | The unit of the time value. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::Timestamp`
+A point in time, represented as an offset from the Unix epoch, with optional timezone.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `unit` | [`TimeUnit`](#timeunit) | ✔️ |  | The unit of the timestamp value that determines its precision. |
+| `timezone` | `string` |  |  | The timezone is an optional string indicating the name of a timezone<br/>one of<br/><br/>* As used in the Olson timezone database (the "tz database" or<br/>  "tzdata"), such as "America/New_York".<br/>* An absolute timezone offset of the form "+XX:XX" or "-XX:XX",<br/>  such as "+07:30".<br/><br/>Whether a timezone string is present indicates different semantics about<br/>the data (see above). |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `DataType::String`
+A Unicode string.
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/DataType.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+
+## `TimeUnit`
+Defines the unit of measurement of time
+
+| Enum Value |
+| :---: |
+| `Second` |
+| `Millisecond` |
+| `Microsecond` |
+| `Nanosecond` |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/schema/TimeUnit.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
 # Engine Protocol
 ## `RawQueryRequest`
 Sent by the coordinator to an engine to perform query on raw input data, usually as part of ingest preprocessing step
@@ -243,25 +498,22 @@ Sent by an engine to coordinator when performing the raw query operation
 
 | Union Type | Description |
 | --- | --- |
-| [`RawQueryResponse::Progress`](#rawqueryresponseprogress) |  |
-| [`RawQueryResponse::Success`](#rawqueryresponsesuccess) |  |
-| [`RawQueryResponse::InvalidQuery`](#rawqueryresponseinvalidquery) |  |
-| [`RawQueryResponse::InternalError`](#rawqueryresponseinternalerror) |  |
+| [`RawQueryResponse::Progress`](#rawqueryresponseprogress) | Reports query progress |
+| [`RawQueryResponse::Success`](#rawqueryresponsesuccess) | Query executed successfully |
+| [`RawQueryResponse::InvalidQuery`](#rawqueryresponseinvalidquery) | Query did not pass validation |
+| [`RawQueryResponse::InternalError`](#rawqueryresponseinternalerror) | Internal error during query execution |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine-ops/RawQueryResponse.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `RawQueryResponse::Progress`
-
-
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
+Reports query progress
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine-ops/RawQueryResponse.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `RawQueryResponse::Success`
-
+Query executed successfully
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -271,7 +523,7 @@ Sent by an engine to coordinator when performing the raw query operation
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `RawQueryResponse::InvalidQuery`
-
+Query did not pass validation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -281,7 +533,7 @@ Sent by an engine to coordinator when performing the raw query operation
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `RawQueryResponse::InternalError`
-
+Internal error during query execution
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -300,7 +552,7 @@ Sent by the coordinator to an engine to perform the next step of data transforma
 | `datasetId` | `string` | ✔️ | [`dataset-id`]({{<relref "spec#dataset-identity">}}) | Unique identifier of the output dataset. |
 | `datasetAlias` | `string` | ✔️ | [`dataset-alias`]({{<relref "spec#dataset-identity">}}) | Alias of the output dataset, for logging purposes only. |
 | `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | System time to use for new records. |
-| `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  |  |
+| `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the output dataset. |
 | `transform` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 | `queryInputs` | `array(`[`TransformRequestInput`](#transformrequestinput)`)` | ✔️ |  | Defines inputs used in this transaction. Slices corresponding to every input dataset must be present. |
 | `nextOffset` | `integer` | ✔️ | `uint64` | Starting offset to use for new data records. |
@@ -319,11 +571,11 @@ Sent as part of the engine transform request operation to describe the input
 | `datasetId` | `string` | ✔️ | [`dataset-id`]({{<relref "spec#dataset-identity">}}) | Unique identifier of the dataset. |
 | `datasetAlias` | `string` | ✔️ | [`dataset-alias`]({{<relref "spec#dataset-identity">}}) | Alias of the output dataset, for logging purposes only. |
 | `queryAlias` | `string` | ✔️ |  | An alias of this input to be used in queries. |
-| `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  |  |
+| `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the input dataset. |
 | `offsetInterval` | [`OffsetInterval`](#offsetinterval) |  |  | Subset of data that goes into this transaction. |
 | `dataPaths` | `array(string)` | ✔️ |  | TODO: This will be removed when coordinator will be slicing data for the engine. |
 | `schemaFile` | `string` | ✔️ | `path` | TODO: replace with actual DDL or Parquet schema. |
-| `explicitWatermarks` | `array(`[`Watermark`](#watermark)`)` | ✔️ |  |  |
+| `explicitWatermarks` | `array(`[`Watermark`](#watermark)`)` | ✔️ |  | Watermarks that should be injected into the stream to separate micro batches for reproducibility. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine-ops/TransformRequestInput.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -333,25 +585,22 @@ Sent by an engine to coordinator when performing the data transformation
 
 | Union Type | Description |
 | --- | --- |
-| [`TransformResponse::Progress`](#transformresponseprogress) |  |
-| [`TransformResponse::Success`](#transformresponsesuccess) |  |
-| [`TransformResponse::InvalidQuery`](#transformresponseinvalidquery) |  |
-| [`TransformResponse::InternalError`](#transformresponseinternalerror) |  |
+| [`TransformResponse::Progress`](#transformresponseprogress) | Reports query progress |
+| [`TransformResponse::Success`](#transformresponsesuccess) | Query executed successfully |
+| [`TransformResponse::InvalidQuery`](#transformresponseinvalidquery) | Query did not pass validation |
+| [`TransformResponse::InternalError`](#transformresponseinternalerror) | Internal error during query execution |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine-ops/TransformResponse.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `TransformResponse::Progress`
-
-
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
+Reports query progress
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine-ops/TransformResponse.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `TransformResponse::Success`
-
+Query executed successfully
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -362,7 +611,7 @@ Sent by an engine to coordinator when performing the data transformation
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `TransformResponse::InvalidQuery`
-
+Query did not pass validation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -372,7 +621,7 @@ Sent by an engine to coordinator when performing the data transformation
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `TransformResponse::InternalError`
-
+Internal error during query execution
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
@@ -410,7 +659,7 @@ For attachments that are specified inline and are embedded in the metadata.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `items` | `array(`[`AttachmentEmbedded`](#attachmentembedded)`)` | ✔️ |  |  |
+| `items` | `array(`[`AttachmentEmbedded`](#attachmentembedded)`)` | ✔️ |  | List of embedded items. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/Attachments.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -425,6 +674,17 @@ Describes a checkpoint produced by an engine
 | `size` | `integer` | ✔️ | `uint64` | Size of checkpoint file in bytes. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/Checkpoint.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `CompressionFormat`
+Defines a compression algorithm.
+
+| Enum Value |
+| :---: |
+| `Gzip` |
+| `Zip` |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/CompressionFormat.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `DataSlice`
@@ -490,17 +750,11 @@ Defines the external source of data.
 ## `EventTimeSource::FromMetadata`
 Extracts event time from the source's metadata.
 
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
-
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/EventTimeSource.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `EventTimeSource::FromSystemTime`
 Assigns event time from the system time source.
-
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/EventTimeSource.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -529,6 +783,31 @@ Describes a slice of the input dataset used during a transformation
 | `newOffset` | `integer` |  | `uint64` | Offset of the last data record that will be incorporated into the derivative transformation, if any. When present, defines a half-open `(prevOffset, newOffset]` interval of data records that will be considered in this transaction. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/ExecuteTransformInput.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `ExtraAttributes`
+Container for custom key-value extension attributes. Every key must be in the form of `<domain>/<path>` (e.g. `kamu.dev/archetype`) in order to fully disambiguate the value in the face of multiple extensions. Values may be any valid JSON including nested objects.
+
+### Known Extensions
+
+| Extension | Description |
+| --- | --- |
+| `opendatafabric.net/description` | Used for human readable schema field descriptions |
+| `opendatafabric.net/type` | An extended set of logical types that ODF recommends but does not require every implementation to support |
+| `opendatafabric.org/linkedObjects` | When attached to `AddData` event contains a summary of how many external objects were associated with a certain transaction as well as their size |
+| `arrow.apache.org/bufferEncoding` | Used to accurately represent buffer encoding type when converting Arrow schema to ODF schema |
+| `arrow.apache.org/dateEncoding` | Used to accurately represent date encoding type when converting Arrow schema to ODF schema |
+| `arrow.apache.org/decimalEncoding` | Used to accurately represent decimal encoding type when converting Arrow schema to ODF schema |
+
+### Known Extended Types
+
+| Extended Type | Core Type | Description |
+| --- | --- | --- |
+| `Did` | `String` | Decentralized identifier `did:<method>:<id>` |
+| `Multihash` | `String` | Hash in self-describing [multihash](https://github.com/multiformats/multihash) format |
+| `ObjectLink` | `String` | Signifies that the value references an external object. The mandatory `linkType` property defines the type of the link (e.g. `Multihash`). |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/ExtraAttributes.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `FetchStep`
@@ -566,7 +845,7 @@ Uses glob operator to match files on the local file system.
 | `path` | `string` | ✔️ |  | Path with a glob pattern. |
 | `eventTime` | [`EventTimeSource`](#eventtimesource) |  |  | Describes how event time is extracted from the source metadata. |
 | `cache` | [`SourceCaching`](#sourcecaching) |  |  | Describes the caching settings used for this source. |
-| `order` | `string` |  |  | Specifies how input files should be ordered before ingestion.<br/>Order is important as every file will be processed individually<br/>and will advance the dataset's watermark. |
+| `order` | [`SourceOrdering`](#sourceordering) |  |  | Specifies how input files should be ordered before ingestion.<br/>Order is important as every file will be processed individually<br/>and will advance the dataset's watermark. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/FetchStep.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -590,7 +869,7 @@ Connects to an MQTT broker to fetch events from the specified topic.
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `host` | `string` | ✔️ |  | Hostname of the MQTT broker. |
-| `port` | `integer` | ✔️ |  | Port of the MQTT broker. |
+| `port` | `integer` | ✔️ | `int32` | Port of the MQTT broker. |
 | `username` | `string` |  |  | Username to use for auth with the broker. |
 | `password` | `string` |  |  | Password to use for auth with the broker (can be templated). |
 | `topics` | `array(`[`MqttTopicSubscription`](#mqtttopicsubscription)`)` | ✔️ |  | List of topic subscription parameters. |
@@ -620,6 +899,8 @@ Merge strategy determines how newly ingested data should be combined with the da
 | [`MergeStrategy::Append`](#mergestrategyappend) | Append merge strategy. |
 | [`MergeStrategy::Ledger`](#mergestrategyledger) | Ledger merge strategy. |
 | [`MergeStrategy::Snapshot`](#mergestrategysnapshot) | Snapshot merge strategy. |
+| [`MergeStrategy::ChangelogStream`](#mergestrategychangelogstream) | Changelog stream merge strategy. |
+| [`MergeStrategy::UpsertStream`](#mergestrategyupsertstream) | Upsert stream merge strategy. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -629,8 +910,17 @@ Append merge strategy.
 
 Under this strategy new data will be appended to the dataset in its entirety, without any deduplication.
 
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `MergeStrategy::ChangelogStream`
+Changelog stream merge strategy.
+
+This is the native stream format for ODF that accurately describes the evolution of all event records including appends, retractions, and corrections as per RFC-015. No pre-processing except for format validation is done.
+
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
+| `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -665,6 +955,18 @@ To identify whether a row has changed this strategy will compare all other colum
 | --- | --- | :---: | :---: | --- |
 | `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime. |
 | `compareColumns` | `array(string)` |  |  | Names of the columns to compared to determine if a row has changed between two snapshots. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
+
+## `MergeStrategy::UpsertStream`
+Upsert stream merge strategy.
+
+This strategy should be used for data sources containing ledgers of insert-or-update and delete events. Unlike ChangelogStream the insert-or-update events only carry the new values, so this strategy will use primary key to re-classify the events into an append or a correction from/to pair, looking up the previous values.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/MergeStrategy.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
@@ -720,7 +1022,7 @@ Pulls data from one of the supported sources by its URL.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `format` | `string` | ✔️ |  | Name of a compression algorithm used on data. |
+| `format` | [`CompressionFormat`](#compressionformat) | ✔️ |  | Name of a compression algorithm used on data. |
 | `subPath` | `string` |  |  | Path to a data file within a multi-file archive. Can contain glob patterns. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/PrepStep.json)
@@ -865,12 +1167,20 @@ Defines how external data should be cached.
 ## `SourceCaching::Forever`
 After source was processed once it will never be ingested again.
 
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
-
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/SourceCaching.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
+
+## `SourceOrdering`
+Specifies how input files should be ordered before ingestion.
+
+| Enum Value |
+| :---: |
+| `ByEventTime` |
+| `ByName` |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/SourceOrdering.json)
+[![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)
 
 ## `SourceState`
 The state of the source the data was added from to allow fast resuming.
@@ -947,8 +1257,8 @@ Represents a watermark in the event stream.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) |  |
-| `eventTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) |  |
+| `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Moment in processing time when watermark was emitted. |
+| `eventTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Moment in event time which watermark has reached. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/Watermark.json)
 [![Flatbuffers Schema](https://img.shields.io/badge/schema-flatbuffers-blue)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas-generated/flatbuffers/opendatafabric.fbs)

@@ -23,3 +23,5 @@ Protocol design evolution proposals:
 - [RFC-013: Enum representation in YAML encoding]({{<relref "013-yaml-enum-representation.md">}})
 - [RFC-014: Minimizing scanning for last offset and block ]({{<relref "014-minimize-offset-scanning.md">}})
 - [RFC-015: Unified changelog stream schema]({{<relref "015-unified-changelog-stream-schema.md">}})
+- [RFC-016: ODF Schema Format]({{<relref "016-odf-schema.md">}})
+- [RFC-017: Large Files Linking]({{<relref "017-large-files-linking.md">}})

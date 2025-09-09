@@ -92,7 +92,7 @@ def render_format(sch):
         return f"[`{fmt}`]({url})"
     elif fmt in ("dataset-id", "dataset-name", "dataset-alias", "dataset-ref", "dataset-ref-any"):
         return f"[`{fmt}`]({{{{<relref \"spec#dataset-identity\">}}}})"
-    elif fmt in ("int64", "uint64", "path", "regex", "url", "flatbuffers"):
+    elif fmt in ("int32", "uint32", "int64", "uint64", "path", "regex", "url", "flatbuffers"):
         return f"`{fmt}`"
     else:
         raise Exception(f"Unknown format: {fmt}")
@@ -183,26 +183,62 @@ def render_object(ctx, sch, name):
     ctx.out.write(sch.get("description", ""))
     ctx.out.write("\n\n")
 
-    render_table(
-        ctx,
-        header=["Property", "Type", "Required", "Format", "Description"],
-        header_fmt=["---", "---", ":---:", ":---:", "---"],
-        rows=[[
-            f"`{pname}`",
-            render_type(ctx, psch),
-            "✔️" if pname in sch["required"] else "",
-            render_format(psch),
-            psch.get("description", "")
-        ]
-            for pname, psch in sch["properties"].items()
-        ]
-    )
+    if sch["properties"]:
+        render_table(
+            ctx,
+            header=["Property", "Type", "Required", "Format", "Description"],
+            header_fmt=["---", "---", ":---:", ":---:", "---"],
+            rows=[[
+                f"`{pname}`",
+                render_type(ctx, psch),
+                "✔️" if pname in sch["required"] else "",
+                render_format(psch),
+                psch.get("description", "")
+            ]
+                for pname, psch in sch["properties"].items()
+            ]
+        )
+        ctx.out.write("\n")
+
+    render_schema_links(ctx, name)
+
+
+def render_extensions(ctx, sch, name):
+    render_header(ctx, name, code=True)
+    ctx.out.write(sch.get("description", ""))
+    ctx.out.write("\n")
+
+    ctx.out.write("""
+### Known Extensions
+
+| Extension | Description |
+| --- | --- |
+| `opendatafabric.net/description` | Used for human readable schema field descriptions |
+| `opendatafabric.net/type` | An extended set of logical types that ODF recommends but does not require every implementation to support |
+| `opendatafabric.org/linkedObjects` | When attached to `AddData` event contains a summary of how many external objects were associated with a certain transaction as well as their size |
+| `arrow.apache.org/bufferEncoding` | Used to accurately represent buffer encoding type when converting Arrow schema to ODF schema |
+| `arrow.apache.org/dateEncoding` | Used to accurately represent date encoding type when converting Arrow schema to ODF schema |
+| `arrow.apache.org/decimalEncoding` | Used to accurately represent decimal encoding type when converting Arrow schema to ODF schema |
+""")
+    
+    ctx.out.write("""
+### Known Extended Types
+
+| Extended Type | Core Type | Description |
+| --- | --- | --- |
+| `Did` | `String` | Decentralized identifier `did:<method>:<id>` |
+| `Multihash` | `String` | Hash in self-describing [multihash](https://github.com/multiformats/multihash) format |
+| `ObjectLink` | `String` | Signifies that the value references an external object. The mandatory `linkType` property defines the type of the link (e.g. `Multihash`). |
+""")
+    
     ctx.out.write("\n")
     render_schema_links(ctx, name)
 
 
 def render_schema(ctx, sch):
-    if sch.schema.get("type") == "object":
+    if "patternProperties" in sch.schema:
+        render_extensions(ctx, sch.schema, sch.name)
+    elif sch.schema.get("type") == "object":
         render_object(ctx, sch.schema, sch.name)
     elif "oneOf" in sch.schema:
         render_union(ctx, sch.schema, sch.name)
@@ -224,7 +260,7 @@ def schemas_by_kind(schemas, kind, priority=()):
     filtered = [s for s in schemas.values() if s.kind == kind]
     filtered.sort(key=lambda x: x.name)
 
-    for p in priority:
+    for p in reversed(priority):
         for i in range(len(filtered)):
             if filtered[i].name == p:
                 s = filtered.pop(i)
@@ -240,14 +276,18 @@ def render_all(ctx, schemas_dir):
     def render_section(ctx, name, kind, priority=()):
         render_header(ctx, name)
         for sch in schemas_by_kind(ctx.schemas, kind, priority):
-            render_schema(ctx.nest().with_schema(sch), sch)
-            ctx.out.write("\n")
+            try:
+                render_schema(ctx.nest().with_schema(sch), sch)
+                ctx.out.write("\n")
+            except Exception as ex:
+                raise Exception(f"Failed to render schema: {sch.name}") from ex
 
     schemas = utils.schemas.read_schemas(schemas_dir)
     ctx.schemas = schemas
 
     render_section(ctx, "Manifests", "root", ["Manifest"])
     render_section(ctx, "Metadata Events", "metadata-event", ["MetadataEvent"])
+    render_section(ctx, "Data Schema", "data-schema", ["DataSchema", "DataField"])
     render_section(ctx, "Engine Protocol", "engine-op")
     render_section(ctx, "Fragments", "fragment")
 
