@@ -13,6 +13,10 @@ dev-with-search:
 .PHONY: build
 build: build-hugo build-pagefind
 
+.PHONY: build-nix
+build-nix:
+	nix develop ./utilities/nix -c make build
+
 
 .PHONY: build-hugo
 build-hugo:
@@ -29,6 +33,10 @@ publish: build
 	aws s3 rm --recursive s3://docs.kamu.dev
 	aws s3 cp public/ s3://docs.kamu.dev/ --recursive
 	aws --no-cli-pager cloudfront create-invalidation --distribution-id E3LHDIU5YENQ3U --paths '/*'
+
+.PHONY: publish-nix
+publish-nix:
+	nix develop ./utilities/nix -c make publish
 
 
 .PHONY: docgen
