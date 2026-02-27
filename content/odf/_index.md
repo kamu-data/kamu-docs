@@ -15,6 +15,7 @@ aliases:
 
 <p><strong>Open protocol for decentralized exchange and transformation of data</strong></p>
 
+[Website](https://opendatafabric.org) |
 [Repository](https://github.com/kamu-data/open-data-fabric) |
 [Reference Implementation]({{<ref "cli">}}) |
 [Original Whitepaper](https://arxiv.org/abs/2111.06364) |
@@ -33,7 +34,14 @@ While we are in the process of automating our documentation pipeline please refe
 
 
 ## Introduction
-**Open Data Fabric** (ODF) is an open protocol specification for decentralized exchange and transformation of semi-structured data, that aims to holistically address many shortcomings of the modern data management systems and workflows.
+[Open Data Fabric](https://opendatafabric.org) (ODF) is an open protocol specification for decentralized exchange and transformation of semi-structured data, that aims to holistically address many shortcomings of the modern data management systems and workflows.
+
+<div align="center">
+<a href="https://www.youtube.com/watch?v=ZyiZVfuVM9E" target="_blank">
+<img alt="Open Data Fabric: Building Block of Collaborative Data" src="https://img.youtube.com/vi/ZyiZVfuVM9E/maxresdefault.jpg" width="60%"/>
+</a>
+<p><i>Introductory video</i></p>
+</div>
 
 The goal of this specification is to develop a method of data exchange that would:
 - Enable worldwide collaboration around data cleaning, enrichment, and derivation

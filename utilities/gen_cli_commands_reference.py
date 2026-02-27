@@ -15,7 +15,7 @@ if not os.path.exists(KAMU_CLI_PATH):
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: CLI Reference
+Title: Commands Reference
 description:
 weight: 100
 categories: []

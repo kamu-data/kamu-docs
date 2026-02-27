@@ -1,7 +1,7 @@
 ---
 Title: Troubleshooting
 description: Diagnosing the errors and reporting issues.
-weight: 100
+weight: 1000
 categories: []
 aliases:
 ---

@@ -23,10 +23,16 @@ aliases:
 </p>
 </div>
 
-## About
-`kamu` *(pronounced [kæmˈuː](https://en.wikipedia.org/wiki/Albert_Camus))* is a command-line tool for management and verifiable processing of structured data.
+`kamu` *(pronounced [kæmˈuː](https://en.wikipedia.org/wiki/Albert_Camus))* is a command-line tool for management and verifiable processing of dynamic structured data. It's a green-field project that aims to enable **global collaboration on data** on the same scale as seen today in software.
 
-It's a green-field project that aims to enable **global collaboration on data** on the same scale as seen today in software.
+## Intro
+`kamu` is based on [Open Data Fabric](https://opendatafabric.org) protocol.
+<div align="center">
+<a href="https://www.youtube.com/watch?v=ZyiZVfuVM9E" target="_blank">
+<img alt="Open Data Fabric: Building Block of Collaborative Data" src="https://img.youtube.com/vi/ZyiZVfuVM9E/maxresdefault.jpg" width="60%"/>
+</a>
+<p><i>Introductory video</i></p>
+</div>
 
 You can think of `kamu` as:
 - ***Local-first data lakehouse*** - a free alternative to Databricks / Snowflake / Microsoft Fabric that can run on your laptop without any accounts, and scale to a large on-prem cluster
@@ -37,12 +43,6 @@ You can think of `kamu` as:
   - Non-custodial data sharing
   - Federated querying of global data as if one giant database
   - Processing pipelines that can span across multiple organizations.
-
-
-### Featured Video
-<div align="center">
-<a href="https://www.youtube.com/watch?v=M7DyV-QUZbk&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"><img alt="Kamu: Unified On/Off-Chain Analytics Tutorial" src="https://img.youtube.com/vi/M7DyV-QUZbk/0.jpg" width="50%"/></a>
-</div>
 
 
 ## Quick Start
