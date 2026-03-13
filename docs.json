@@ -1,0 +1,84 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Kamu Docs",
+  "theme": "mint",
+  "colors": {
+    "primary": "#ec6e2a",
+    "light": "#ec6e2a",
+    "dark": "#ec6e2a"
+  },
+  "background": {
+    "color": {
+      "dark": "#050C1E"
+    }
+  },
+  "favicon": "/static/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Kamu",
+        "groups": [
+          {
+            "group": "Typography",
+            "icon": "book-open-cover",
+            "pages": [
+              "community/typography"
+            ]
+          },
+          {
+            "group": "Glossary",
+            "icon": "book-open-cover",
+            "root": "content/glossary"
+          }
+        ]
+      },
+      {
+        "tab": "Reference",
+        "groups": []
+      }
+    ],
+    "global": {
+      "anchors": []
+    }
+  },
+  "logo": {
+    "light": "/static/kamu-logo--bg-none--icon-colored--text-colored.svg",
+    "dark": "/static/kamu-logo--bg-none--icon-colored--text-white.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:hello@kamu.dev"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Install",
+      "href": "/cli/get-started/install/"
+    }
+  },
+  "contextual": {
+    "options": [
+     "copy",
+     "view",
+     "chatgpt",
+     "claude",
+     "perplexity",
+     "mcp",
+     "cursor",
+     "vscode"
+   ]
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/kamu-data",
+      "discord": "https://discord.gg/nU6TXRQNXC",
+      "youtube": "https://www.youtube.com/@kamudata",
+      "linkedin": "https://www.linkedin.com/company/kamu-data/",
+      "medium": "https://medium.com/kamu-data",
+      "bluesky": "https://bsky.app/profile/kamu.dev",
+      "x": "https://x.com/kamu_data"
+    }
+  }
+}
