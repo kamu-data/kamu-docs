@@ -1,4 +1,4 @@
-/public
-/resources
-/node_modules
-.hugo_build.lock
+/.archive/public
+/.archive/resources
+/.archive/node_modules
+/.archive/.hugo_build.lock
