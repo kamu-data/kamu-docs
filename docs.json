@@ -29,6 +29,11 @@
             "group": "Glossary",
             "icon": "book-open-cover",
             "root": "glossary"
+          },
+          {
+            "group": "Reference",
+            "icon": "book-open-cover",
+            "root": "reference"
           }
         ]
       },

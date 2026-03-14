@@ -25,9 +25,6 @@ PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 Title: Reference
 description: Schemas of common metadata objects
-weight: 20
-categories: []
-aliases:
 ---
 
 """
@@ -91,7 +88,7 @@ def render_format(sch):
         url = external_formats[fmt]
         return f"[`{fmt}`]({url})"
     elif fmt in ("dataset-id", "dataset-name", "dataset-alias", "dataset-ref", "dataset-ref-any"):
-        return f"[`{fmt}`]({{{{<relref \"spec#dataset-identity\">}}}})"
+        return f"[`{fmt}`](/spec#dataset-identity)"
     elif fmt in ("int32", "uint32", "int64", "uint64", "path", "regex", "url", "flatbuffers"):
         return f"`{fmt}`"
     else:
