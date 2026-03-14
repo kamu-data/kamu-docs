@@ -1,5 +1,6 @@
 ---
 title: "Welcome to Kamu!"
+sidebarTitle: Welcome
 mode: wide
 ---
 

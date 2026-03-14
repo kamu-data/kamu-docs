@@ -19,6 +19,13 @@
         "tab": "Guides",
         "groups": [
           {
+            "group": "Getting Started",
+            "icon": "book-open-cover",
+            "pages": [
+              "/welcome"
+            ]
+          },
+          {
             "group": "Open Data Fabric",
             "icon": "book-open-cover",
             "pages": [
