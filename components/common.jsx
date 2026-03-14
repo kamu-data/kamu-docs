@@ -14,6 +14,14 @@ export const Schema = ({ t, id }) => {
 };
 
 
+export const Diagram = ({ src, alt }) => {
+  return <div style={{display: "flex", "flex-direction": "column", "align-items": "center"}}>
+    <img src={src} alt={alt} style={{background: "#dddddd", "margin-bottom": 0}}/>
+    <span>{alt}</span>
+  </div>;
+};
+
+
 export const YouTube = ({ id }) => {
   const src = `https://www.youtube.com/embed/${id}`;
 

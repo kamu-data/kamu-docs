@@ -16,9 +16,9 @@ if not os.path.exists(ODF_PATH):
         f"Expecting to have `open-data-fabric` repository checked "
         f"out side by side, but couldn't find path: {ODF_PATH}")
 
-GLOSSARY_EXTRA_PATH = "content/glossary/extra.md.tpl"
+GLOSSARY_EXTRA_PATH = "utils/glossary-extra.md"
 
-IMAGES_DIR = "static/images/pages/glossary"
+IMAGES_DIR = "images/pages/glossary"
 IMAGES_URL = "/images/pages/glossary/"
 
 PAGE_HEADER = """---
@@ -30,6 +30,9 @@ topLevelElement: true
 categories: []
 aliases:
 ---
+
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 """
 
 
@@ -88,17 +91,17 @@ if __name__ == "__main__":
         t = m.group(1)
         url = m.group(2)
         if url in term_links:
-            return f'{{{{<term "{t}" "{url}">}}}}'
+            return f'<Term t="{t}" id="{url}"/>'
         elif url.endswith("-schema") and url != "common-data-schema":
             t = t.strip('`')
             schema = url.removesuffix("-schema").removeprefix("#")
-            return f'{{{{<schema "{t}" "{schema}">}}}}'
+            return f'<Schema t="{t}" id="{schema}"/>'
         elif url.startswith("reference-"):
             t = t.strip('`')
             schema = url.removeprefix("reference-")
-            return f'{{{{<schema "{t}" "{schema}">}}}}'
+            return f'<Schema t="{t}" id="{schema}"/>'
         else:
-            return f'[{t}]({{{{<relref "spec#{url}">}}}})'
+            return f'[{t}](/spec#{url})'
 
 
     section = re.sub(r"\[([^]]+)]\(#([^)]+)\)", sub_refs, section)
@@ -127,7 +130,7 @@ if __name__ == "__main__":
             shell=True,
             check=True,
         )
-        return f'{{{{<image filename="{IMAGES_URL}{file_name}" alt="{alt}">}}}}'
+        return f'<Diagram src="{IMAGES_URL}{file_name}" alt="{alt}"/>'
 
 
     section = re.sub(r"!\[(.+)]\((.+)\)", sub_images, section)

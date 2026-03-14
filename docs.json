@@ -12,7 +12,7 @@
       "dark": "#050C1E"
     }
   },
-  "favicon": "/static/favicon.svg",
+  "favicon": "/images/favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -28,7 +28,7 @@
           {
             "group": "Glossary",
             "icon": "book-open-cover",
-            "root": "content/glossary"
+            "root": "glossary"
           }
         ]
       },
@@ -42,8 +42,8 @@
     }
   },
   "logo": {
-    "light": "/static/kamu-logo-light.svg",
-    "dark": "/static/kamu-logo-dark.svg"
+    "light": "/images/kamu-logo-light.svg",
+    "dark": "/images/kamu-logo-dark.svg"
   },
   "navbar": {
     "links": [
@@ -79,6 +79,15 @@
       "medium": "https://medium.com/kamu-data",
       "bluesky": "https://bsky.app/profile/kamu.dev",
       "x": "https://x.com/kamu_data"
-    }
+    },
+    "links": [
+      {
+        "header": "Company",
+        "items": [
+          { "label": "Blog", "href": "https://kamu.dev/blog/" },
+          { "label": "Careers", "href": "https://kamu.dev/jobs/" }
+        ]
+      }
+    ]
   }
 }
