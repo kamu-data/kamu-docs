@@ -10,9 +10,9 @@ lint:
 
 .PHONY: docgen
 docgen:
-	python utils/gen_reference.py > reference.md
+	python utils/gen_reference.py > odf/reference.md
 	python utils/gen_glossary.py > glossary.md
-	# python utilities/gen_spec.py > content/odf/spec.md
+	python utils/gen_spec.py > odf/spec.md
 	# python utilities/gen_rfcs.py content/odf/rfcs/
 	# python utilities/gen_cli_commands_reference.py > content/cli/cli-reference.md
 	# python utilities/gen_cli_config_reference.py > content/cli/config-reference.md

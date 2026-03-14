@@ -23,7 +23,7 @@ ODF_SCHEMAS_PATH = os.path.join(ODF_PATH, "schemas")
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Reference
+title: Reference
 description: Schemas of common metadata objects
 ---
 

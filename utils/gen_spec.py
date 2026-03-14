@@ -18,17 +18,16 @@ if not os.path.exists(ODF_PATH):
         f"Expecting to have `open-data-fabric` repository checked "
         f"out side by side, but couldn't find path: {ODF_PATH}")
 
-IMAGES_DIR = "static/images/pages/spec"
+IMAGES_DIR = "images/pages/spec"
 IMAGES_URL = "/images/pages/spec/"
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Open Data Fabric
-linkTitle: Specification
-description:
-weight: 10
-categories: []
+title: Specification
 ---
+
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 """
 
 
@@ -69,15 +68,15 @@ if __name__ == "__main__":
 
         if url.startswith("/rfcs/"):
             rfc = url.removeprefix("/rfcs/")
-            return f'[{t}]({{{{<relref "{rfc}">}}}})'
+            return f'[{t}](/odf/rfcs/{rfc})'
         elif url.startswith("#") and url.endswith("-schema") and url != "#common-data-schema":
             t = t.strip('`')
             schema = url.removesuffix("-schema").removeprefix("#")
-            return f'{{{{<schema "{t}" "{schema}">}}}}'
+            return f'<Schema t="{t}" id="{schema}"/>'
         elif url.startswith("#reference-"):
             t = t.strip('`')
             schema = url.removeprefix("#reference-")
-            return f'{{{{<schema "{t}" "{schema}">}}}}'
+            return f'<Schema t="{t}" id="{schema}"/>'
         elif url.startswith("/protocols/"):
             return f'[{t}](https://github.com/open-data-fabric/open-data-fabric/blob/master{url})'
         else:
@@ -110,7 +109,7 @@ if __name__ == "__main__":
             shell=True,
             check=True,
         )
-        return f'{{{{<image filename="{IMAGES_URL}{file_name}" alt="{alt}">}}}}'
+        return f'<Diagram src="{IMAGES_URL}{file_name}" alt="{alt}"/>'
 
 
     text = re.sub(r"!\[(.+)]\((.+)\)", sub_images, text)

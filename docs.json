@@ -19,6 +19,14 @@
         "tab": "Kamu",
         "groups": [
           {
+            "group": "Open Data Fabric",
+            "icon": "book-open-cover",
+            "pages": [
+              "/odf/spec",
+              "/odf/reference"
+            ]
+          },
+          {
             "group": "Typography",
             "icon": "book-open-cover",
             "pages": [
@@ -29,11 +37,6 @@
             "group": "Glossary",
             "icon": "book-open-cover",
             "root": "glossary"
-          },
-          {
-            "group": "Reference",
-            "icon": "book-open-cover",
-            "root": "reference"
           }
         ]
       },
