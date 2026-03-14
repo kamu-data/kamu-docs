@@ -1,6 +1,7 @@
 ---
 title: FAQ
 description: Frequently asked questions
+icon: question
 ---
 
 import {Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'

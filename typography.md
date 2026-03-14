@@ -1,6 +1,7 @@
 ---
 Title: Typography
 description: Common UI elements used in documentation
+icon: pen
 ---
 
 import {Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'

@@ -1,13 +1,6 @@
 ---
-Title: Terms of Service
-description:
-weight: 100
-categories: []
-aliases:
-  - /community/terms-of-service
-  - /terms-of-service
-  - /terms
-  - /tos
+title: Terms of Service
+icon: scale-balanced
 ---
 
 ## 1. Definitions

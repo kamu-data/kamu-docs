@@ -60,6 +60,7 @@
             "group": "Other",
             "icon": "book-open-cover",
             "pages": [
+              "terms",
               "faq",
               "glossary",
               "typography"
@@ -130,5 +131,15 @@
         ]
       }
     ]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/tos",
+      "destination": "/terms"
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms"
+    }
+  ]
 }
