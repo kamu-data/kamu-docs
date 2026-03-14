@@ -57,6 +57,12 @@
             ]
           },
           {
+            "group": "Kamu Web Platform",
+            "pages": [
+              "platform/about"
+            ]
+          },
+          {
             "group": "Other",
             "icon": "book-open-cover",
             "pages": [
