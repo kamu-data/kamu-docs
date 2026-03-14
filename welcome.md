@@ -14,7 +14,7 @@ mode: wide
 </Card>
 
 ## Projects
-Our documentation is organized around 4 closely related projects:
+Our documentation is organized around four closely related projects:
 
 <Columns cols={2}>
   <Card href="/odf">
