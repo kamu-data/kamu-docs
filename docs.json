@@ -59,7 +59,40 @@
           {
             "group": "Kamu Web Platform",
             "pages": [
-              "platform/about"
+              "platform/about",
+              "platform/accounts",
+              {
+                "group": "Datasets",
+                "icon": "wrench",
+                "pages": [
+                  "platform/datasets/attachments",
+                  "platform/datasets/licenses"
+                ]
+              },
+              {
+                "group": "Data Exploration",
+                "icon": "wrench",
+                "pages": [
+                  "platform/data/querying",
+                  "platform/data/notebooks"
+                ]
+              },
+              "platform/privacy",
+              {
+                "group": "Flow System",
+                "icon": "wrench",
+                "pages": [
+                  "platform/flows/overview"
+                ]
+              },
+              {
+                "group": "Administration",
+                "icon": "wrench",
+                "pages": [
+                  "platform/admin/monitoring",
+                  "platform/admin/tasks-executors"
+                ]
+              }
             ]
           },
           {

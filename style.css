@@ -1,3 +1,28 @@
+/* Theme tweaks */
+a.card:is(.dark *) {
+    background: #09162d;
+}
+
+/* Pages with wrench icon are considered "under construction" and made unclickable */
+a:has(svg[style*="wrench.svg"]) {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+button:has(svg[style*="wrench.svg"]) {
+  opacity: 0.7;
+}
+
+a:has(svg[style*="wrench.svg"]) > div:first-child,
+button:has(svg[style*="wrench.svg"]) > svg[style*="wrench.svg"] {
+  order: 2;
+  margin-left: auto;
+}
+
+
+/* Shortcodes / Snippets */
+
+/* <Term/> */
 .prose a.glossary-term:is(.dark *) {
     color: #ff0000;
 }
@@ -5,7 +30,7 @@
     color: #aa0000;
 }
 
-
+/* <Schema/> */
 .prose a.schema-object:is(.dark *) {
     color: #00ff00;
 }
@@ -14,6 +39,7 @@
 }
 
 
+/* Welcome page */
 h4.project-title:is(.dark *, .light *) {
     display: block;
     text-align: center;
@@ -26,12 +52,8 @@ a.project-quicklink:is(.dark *, .light *) {
     color: #ec6e2a;
 }
 
-a.card:is(.dark *) {
-    background: #09162d;
-}
 
-
-
+/* Welcome page project icons have special treatment */
 .prose a img:is(
     [src*="odf.svg"],
     [src*="kamu-cli.svg"],

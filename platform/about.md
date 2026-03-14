@@ -1,6 +1,5 @@
 ---
 title: About
-tag: Under Construction
 ---
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
