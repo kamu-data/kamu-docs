@@ -12,3 +12,22 @@
 .prose a.schema-object:is(.light *) {
     color: #00aa00;
 }
+
+
+a.card:is(.dark *) {
+    background: #09162d;
+}
+
+
+
+.prose a img:is(
+    [src*="odf.svg"],
+    [src*="kamu-cli.svg"],
+    [src*="kamu-node.svg"],
+    [src*="kamu-platform.svg"]
+ ) {
+  display: block;
+  margin: 30px auto 0 auto;
+  height: 100px;
+  width: auto;
+}

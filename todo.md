@@ -1,5 +1,6 @@
 # TODO
 
+- use <Tooltip> for glossary and schema items?
 - snippet for diagram image
 - open graph / social preview
 - fix search
