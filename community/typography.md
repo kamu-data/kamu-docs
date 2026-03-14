@@ -179,7 +179,7 @@ Result:
 
 ## YouTube Video
 
-Input:
+**Input:**
 
 ```markdown
 import {YouTube} from '/components/common.jsx'
@@ -187,14 +187,14 @@ import {YouTube} from '/components/common.jsx'
 <YouTube id="hN_vpHYmwi0"/>
 ```
 
-Result:
+**Result:**
 
 <YouTube id="hN_vpHYmwi0"/>
 
 
 ## YouTube Playlist
 
-Input:
+**Input:**
 
 ```markdown
 import {YouTubeList} from '/components/common.jsx'
@@ -202,14 +202,14 @@ import {YouTubeList} from '/components/common.jsx'
 <YouTubeList id="PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"/>
 ```
 
-Result:
+**Result:**
 
 <YouTubeList id="PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"/>
 
 
 ## Mermaid Diagrams
 
-Input:
+**Input:**
 
 ````mdx theme={null}
 ```mermaid
@@ -225,7 +225,7 @@ sequenceDiagram
 ```
 ````
 
-Result:
+**Result:**
 
 ```mermaid
 sequenceDiagram

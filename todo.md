@@ -1,7 +1,8 @@
 # TODO
 
 - use Tooltip for glossary and schema items?
-- snippet for diagram image
+- Spec ToC ident issues
+- Diagram background when zoomed in
 - open graph / social preview
 - fix search
 - improve `allchildren` preview
