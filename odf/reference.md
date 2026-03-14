@@ -4,6 +4,8 @@ title: Reference
 description: Schemas of common metadata objects
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 # Manifests
 ## `Manifest`
 An object that wraps the metadata resources providing versioning and type identification. All root-level resources are wrapped with a manifest when serialized to disk.

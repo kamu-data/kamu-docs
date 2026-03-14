@@ -27,6 +27,8 @@ title: Reference
 description: Schemas of common metadata objects
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 """
 
 

@@ -16,14 +16,37 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Kamu",
+        "tab": "Guides",
         "groups": [
           {
             "group": "Open Data Fabric",
             "icon": "book-open-cover",
             "pages": [
               "/odf/spec",
-              "/odf/reference"
+              "/odf/reference",
+              {
+                "group": "RFCs",
+                "root": "/odf/rfcs/index",
+                "pages": [
+                  "/odf/rfcs/001-record-offsets",
+                  "/odf/rfcs/002-logical-data-hashes",
+                  "/odf/rfcs/003-content-addressability",
+                  "/odf/rfcs/004-metadata-extensibility",
+                  "/odf/rfcs/005-dataset-annotations",
+                  "/odf/rfcs/006-checkpoints-as-files",
+                  "/odf/rfcs/007-simple-transfer-protocol",
+                  "/odf/rfcs/008-smart-transfer-protocol",
+                  "/odf/rfcs/009-ingest-source-state",
+                  "/odf/rfcs/010-data-schema-in-metadata",
+                  "/odf/rfcs/011-push-ingest-sources",
+                  "/odf/rfcs/012-recommend-base16-encoding",
+                  "/odf/rfcs/013-yaml-enum-representation",
+                  "/odf/rfcs/014-minimize-offset-scanning",
+                  "/odf/rfcs/015-unified-changelog-stream-schema",
+                  "/odf/rfcs/016-odf-schema",
+                  "/odf/rfcs/017-large-files-linking"
+                ]
+              }
             ]
           },
           {
@@ -68,15 +91,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
@@ -92,8 +115,14 @@
       {
         "header": "Company",
         "items": [
-          { "label": "Blog", "href": "https://kamu.dev/blog/" },
-          { "label": "Careers", "href": "https://kamu.dev/jobs/" }
+          {
+            "label": "Blog",
+            "href": "https://kamu.dev/blog/"
+          },
+          {
+            "label": "Careers",
+            "href": "https://kamu.dev/jobs/"
+          }
         ]
       }
     ]

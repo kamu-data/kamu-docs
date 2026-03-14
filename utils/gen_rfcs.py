@@ -2,6 +2,7 @@
 import os
 import re
 import sys
+import json
 
 # Locate `open-data-fabric` repo
 ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
@@ -18,10 +19,7 @@ if not os.path.exists(ODF_PATH):
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: "{title}"
-linkTitle: "{title}"
-searchWeight: 0.5
-categories: []
+title: "{title}"
 ---
 
 """
@@ -34,6 +32,8 @@ weight: 30
 categories: []
 aliases:
 ---
+
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
 Protocol design evolution proposals:
 """
@@ -80,13 +80,15 @@ if __name__ == "__main__":
         # Remove title
         text = text[len(m.group(0)):].strip()
 
+        # Convert comments
+        text = text.replace("<!--", "{/*").replace("-->", "*/}")
 
         # Fix up links
         def map_link(m: re.Match[str]) -> str:
             t = m.group(1)
             url = m.group(2)
 
-            rfc_match = re.search(r"(\d{3}-.*\.md)", url)
+            rfc_match = re.search(r"(\d{3}-.*)\.md", url)
 
             # print(f"rfc_match {rfc_match}", file=sys.stderr)
 
@@ -94,7 +96,7 @@ if __name__ == "__main__":
                 # print(f"+++", file=sys.stderr)
 
                 rfc = rfc_match[0]
-                return f'[{t}]({{{{<relref "{rfc}">}}}})'
+                return f'[{t}]({rfc})'
             else:
                 return f'[{t}]({url})'
 
@@ -112,8 +114,21 @@ if __name__ == "__main__":
         ))
 
     # Write index
-    with open(os.path.join(sys.argv[1], "_index.md"), "w") as f:
+    with open(os.path.join(sys.argv[1], "index.md"), "w") as f:
         f.write(INDEX_HEADER)
 
         for fname, title, summary in summaries:
-            f.write(f'- [{title}]({{{{<relref "{fname}">}}}})\n')
+            f.write(f'- [{title}]({fname[:-3]})\n')
+    
+    # Update docs.json
+    with open("docs.json") as f:
+        cfg = json.load(f)
+
+    odf = cfg["navigation"]["tabs"][0]["groups"][0]
+    assert odf["group"] == "Open Data Fabric"
+    rfcs = odf["pages"][2]
+    assert rfcs["group"] == "RFCs"
+    rfcs["pages"] = [f"/odf/rfcs/{fname[:-3]}" for fname, _, _ in summaries]
+
+    with open("docs.json", "w") as f:
+        json.dump(cfg, f, indent=2)
