@@ -2,3 +2,5 @@
 /.archive/resources
 /.archive/node_modules
 /.archive/.hugo_build.lock
+
+/node_modules

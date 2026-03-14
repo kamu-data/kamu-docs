@@ -1,6 +1,6 @@
 # TODO
 
-- consider migrating to https://getdoks.org/
+- snippet for diagram image
 - open graph / social preview
 - fix search
 - improve `allchildren` preview

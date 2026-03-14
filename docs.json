@@ -42,8 +42,8 @@
     }
   },
   "logo": {
-    "light": "/static/kamu-logo--bg-none--icon-colored--text-colored.svg",
-    "dark": "/static/kamu-logo--bg-none--icon-colored--text-white.svg"
+    "light": "/static/kamu-logo-light.svg",
+    "dark": "/static/kamu-logo-dark.svg"
   },
   "navbar": {
     "links": [

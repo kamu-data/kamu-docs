@@ -1,10 +1,9 @@
 ---
 Title: Typography
 description: Common UI elements used in documentation
-weight: 1000
-alwaysopen: false
-categories: []
 ---
+
+import {Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
 This section provides examples of all style elements available to documentation authors and the guidelines on using them.
 
@@ -12,31 +11,34 @@ This section provides examples of all style elements available to documentation 
 ## Links
 
 We have special types of links to refer readers to:
-- definitions of terms in the [Glossary]({{<relref "glossary">}})
-- schemas in the [Reference]({{<relref "reference">}})
+- definitions of terms in the [Glossary](/glossary)
+- schemas in the [Reference](/reference)
 
-Input:
+**Input:**
 
 ```
-Raw data is stored in {{</*term "slices" "data-slice"*/>}} that are linked from {{</*schema "MetadataBlock"*/>}}s.
+import {Term, Schema} from '/components/common.jsx'
+
+Raw data is stored in <Term t="slices" id="data-slice"/> that
+are linked from <Schema t="MetadataBlock"/>s.
 ```
 
-Result:
+**Result:**
 
-Raw data is stored in {{<term "slices" "data-slice">}} that are linked from {{<schema "MetadataBlock">}}s.
+Raw data is stored in <Term t="slices" id="data-slice"/> that are linked from <Schema t="MetadataBlock"/>s.
 
 
 ## Code Blocks
 
-Input:
+**Input:**
 
-<pre>
+````mdx theme={null}
 ```js
 const client = OdfClient::new("odf+https://localhost:8080");
 ```
-</pre>
+````
 
-Result:
+**Result:**
 
 ```js
 const client = OdfClient::new("odf+https://localhost:8080");
@@ -45,51 +47,51 @@ const client = OdfClient::new("odf+https://localhost:8080");
 
 ## Text Blocks
 
-Input:
+**Input:**
 
 ```markdown
-{{</*tip*/>}}
+<Tip>
 Tip block
-{{</*/tip*/>}}
+</Tip>
 
-{{</*note*/>}}
+<Note>
 Note block
-{{</*/note*/>}}
+</Note>
 
-{{</*info*/>}}
+<Info>
 Info block
-{{</*/info*/>}}
+</Info>
 
-{{</*warning*/>}}
+<Warning>
 Warning block
-{{</*/warning*/>}}
+</Warning>
 
-{{</*danger*/>}}
+<Danger>
 Danger block
-{{</*/danger*/>}}
+</Danger>
 ```
 
-Result:
+**Result:**
 
-{{<tip>}}
+<Tip>
 Tip block
-{{</tip>}}
+</Tip>
 
-{{<note>}}
+<Note>
 Note block
-{{</note>}}
+</Note>
 
-{{<info>}}
+<Info>
 Info block
-{{</info>}}
+</Info>
 
-{{<warning>}}
+<Warning>
 Warning block
-{{</warning>}}
+</Warning>
 
-{{<danger>}}
+<Danger>
 Danger block
-{{</danger>}}
+</Danger>
 
 
 ## Tables
@@ -113,69 +115,66 @@ Result:
 
 ## Tabs
 
-Input:
+**Input:**
 
 ```markdown
-{{</*tabs
-    tabTotal="3"
-    tabID="1"
-    tabName1="Tab 1"
-    tabName2="Tab 2"
-    tabName3="Tab 3"*/>}} 
+<Tabs>
+  <Tab title="First tab">
+    Tab 1 content with plain text
+  </Tab>
 
-{{</*tab tabNum="1"*/>}}
-Tab 1 content as text
-{{</*/tab*/>}}
+  <Tab title="Second tab">
+    Tab 2 with markdown
+    - as
+    - list
+  </Tab>
 
-{{</* tab tabNum="2"*/>}}
-Tab 2 content
-- as
-- list
-{{</*/tab*/>}}
-
-{{</* tab tabNum="3"*/>}}
-{{</*info*/>}}
-Tab 3 content as rich elements
-{{</*/info*/>}}
-{{</*/tab*/>}}
-
-{{</*/tabs*/>}}
+  <Tab title="Third tab">
+    <Info>Tab 3 content with rich elements</Info>
+  </Tab>
+</Tabs>
 ```
 
-Result:
+**Result:**
 
-{{<tabs tabTotal="3" tabID="1" tabName1="Tab 1" tabName2="Tab 2" tabName3="Tab 3">}}
+<Tabs>
+  <Tab title="First tab">
+    Tab 1 content with plain text
+  </Tab>
 
-{{<tab tabNum="1">}}
-Tab 1 content as text
-{{</tab>}}
+  <Tab title="Second tab">
+    Tab 2 with markdown
+    - as
+    - list
+  </Tab>
 
-{{<tab tabNum="2">}}
-Tab 2 content
-- as
-- list
-{{</tab>}}
-
-{{<tab tabNum="3">}}
-{{<info>}}
-Tab 3 content as rich elements
-{{</info>}}
-{{</tab>}}
-
-{{</tabs>}}
+  <Tab title="Third tab">
+    <Info>Tab 3 content with rich elements</Info>
+  </Tab>
+</Tabs>
 
 
 ## Static Image
 
-Input:
+**Input:**
 
 ```markdown
-{{</*image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%"*/>}}
+<img 
+  src="/static/kamu-logo-dark.svg" 
+  alt="Kamu logo"
+  style={{width: "30%"}}
+  className="rounded-lg"
+/>
 ```
 
 Result:
 
-{{<image filename="/images/kamu_logo.svg" alt="Kamu logo" width="30%">}}
+<img 
+  src="/static/kamu-logo-dark.svg" 
+  alt="Kamu logo"
+  style={{width: "30%"}}
+  className="rounded-lg"
+/>
 
 
 ## YouTube Video
@@ -183,12 +182,14 @@ Result:
 Input:
 
 ```markdown
-{{</*youtube hN_vpHYmwi0*/>}}
+import {YouTube} from '/components/common.jsx'
+
+<YouTube id="hN_vpHYmwi0"/>
 ```
 
 Result:
 
-{{<youtube hN_vpHYmwi0>}}
+<YouTube id="hN_vpHYmwi0"/>
 
 
 ## YouTube Playlist
@@ -196,48 +197,21 @@ Result:
 Input:
 
 ```markdown
-{{</*youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk*/>}}
+import {YouTubeList} from '/components/common.jsx'
+
+<YouTubeList id="PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"/>
 ```
 
 Result:
 
-{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
+<YouTubeList id="PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"/>
 
-## GOAT Diagrams
-
-Input:
-
-<pre>
-```goat
-      .               .                .               .--- 1          .-- 1     / 1
-     / \              |                |           .---+            .-+         +
-    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
-   +     +        |       |        |       |    ---+            ---+          +
-  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
- /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
- 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
-```
-</pre>
-
-Result:
-
-```goat
-      .               .                .               .--- 1          .-- 1     / 1
-     / \              |                |           .---+            .-+         +
-    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
-   +     +        |       |        |       |    ---+            ---+          +
-  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
- /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
- 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
-```
-
-See more examples [here](https://gohugo.io/content-management/diagrams/).
 
 ## Mermaid Diagrams
 
 Input:
 
-<pre>
+````mdx theme={null}
 ```mermaid
 sequenceDiagram
     Alice ->> Bob: Hello Bob, how are you?
@@ -248,9 +222,8 @@ sequenceDiagram
 
     Bob-->Alice: Checking with John...
     Alice->John: Yes... John, how are you?
-
 ```
-</pre>
+````
 
 Result:
 
