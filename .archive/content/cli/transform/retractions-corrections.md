@@ -8,9 +8,9 @@ aliases:
 ---
 
 ## Motivation
-Errors in source data are inevitable and require a mechanism for correcting them post factum. Unlike databases, where one could issue `DELETE` or `UPDATE` queries, our core data model is an [immutable append-only stream]({{<relref "spec#nature-of-data">}}), and thus requires a different mechanism to issue **retractions and corrections** for past events.
+Errors in source data are inevitable and require a mechanism for correcting them post factum. Unlike databases, where one could issue `DELETE` or `UPDATE` queries, our core data model is an [immutable append-only stream](/spec#nature-of-data), and thus requires a different mechanism to issue **retractions and corrections** for past events.
 
-In cases when stream processing operations encounter late data (beyond the current {{<term "watermark">}}), or retractions and corrections in the input, they may also need to issue corrections or retractions for previously produced results that were influenced by these events.
+In cases when stream processing operations encounter late data (beyond the current {{<term "watermark), or retractions and corrections in the input, they may also need to issue corrections or retractions for previously produced results that were influenced by these events.
 
 We consider the correction / retraction model that works across all stages of data pipelines essential to making processing **maximally autonomous**. In turn, only by making data processing autonomous can collaborative data pipelines be **sustainable at global scale**.
 
@@ -116,6 +116,6 @@ ODF uses the [two-event changelog stream](#changelog-stream-two-events) as its b
 
 Just like in our example above a special `op` column carries the {{<term "operation type">}} of each record.
 
-Retractions and corrections are supported on {{<term "root dataset">}} level via [merge strategies]({{<relref "merge-strategies">}}).
+Retractions and corrections are supported on {{<term "root dataset">}} level via [merge strategies](/merge-strategies).
 
 We are currently working to integrate their support into all processing engines for seamless propagation across {{<term "derivative datasets" "derivative-dataset">}}.

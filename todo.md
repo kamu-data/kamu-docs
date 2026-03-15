@@ -1,5 +1,6 @@
 # TODO
 
+- align badges
 - use Tooltip for glossary and schema items?
 - Spec ToC ident issues
 - Diagram background when zoomed in

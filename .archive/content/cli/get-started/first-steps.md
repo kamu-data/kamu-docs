@@ -11,12 +11,12 @@ For a quick overview of key functionality you can also view this tutorial:
 
 This tutorial will give you a high-level tour of `kamu` and show you how it works through examples.
 
-We assume that you have already followed the [installation steps]({{<ref "install">}}) and have `kamu` tool ready.
+We assume that you have already followed the [installation steps](/install) and have `kamu` tool ready.
 
 {{<info>}}
 **Not ready to install just yet?**
 
-Try `kamu` in this [self-serve demo]({{<ref "demo">}}) without needing to install anything.
+Try `kamu` in this [self-serve demo](/demo) without needing to install anything.
 {{</info>}}
 
 Don't forget to set up **shell completions** - they make using `kamu` a lot more fun!
@@ -37,7 +37,7 @@ Note that some command also have sub-commands, e.g. `kamu repo {add,list,...}`, 
 kamu repo add -h
 ```
 
-Command help is also available online on [CLI Reference]({{<relref "cli-reference">}}) page.
+Command help is also available online on [CLI Reference](/cli-reference) page.
 
 ## Ingesting data
 
@@ -176,13 +176,13 @@ DatasetKind: Root
 DatasetID: did:odf:fed01057c94fb0378e3222704bb70a261d3ebeaa0d1b38c056a0bdd476360b8548db1
 ```
 
-This is a [globally unique identity]({{<relref "spec#dataset-identity">}}) which is based on a cryptographic key-pair that only you control.
+This is a [globally unique identity](/spec#dataset-identity) which is based on a cryptographic key-pair that only you control.
 
 Thus by creating an ODF dataset you get both:
 - a way to **uniquely identify** it on the web
 - and a way to **prove ownership** over it.
 
-This will be extremely useful when we get to [sharing data with others]({{<relref "cli/collab">}}).
+This will be extremely useful when we get to [sharing data with others](/cli/collab).
 
 
 ### Fetching data
@@ -208,7 +208,7 @@ Polling sources perform following steps:
 - `preprocess` (optional) - shaping the structured data with queries (e.g. to convert types into best suited form)
 - `merge` - merging the new data from the source with the **history of previously seen data**
 
-You can find more information about data sources and ingestion stages in [this section]({{<ref "ingest">}}).
+You can find more information about data sources and ingestion stages in [this section](/ingest).
 
 Note that the data file we are ingesting is in [ESRI Shapefile](https://en.wikipedia.org/wiki/Shapefile) format, which is a widespread format for geo-spatial data, so we are using a special {{<schema "EsriShapefile" "ReadStep::EsriShapefile">}} reader.
 
@@ -302,7 +302,7 @@ limit 5;
 
 Use `Ctrl+D` to exit the SQL shell.
 
-SQL is a widely supported language, so `kamu` can be used in conjunction with many other tools that support it, such as Tableau and Power BI. See [integrations]({{<ref "integrations">}}) for details.
+SQL is a widely supported language, so `kamu` can be used in conjunction with many other tools that support it, such as Tableau and Power BI. See [integrations](/integrations) for details.
 
 The `kamu sql` is a very powerful command that you can use both interactively or for scripting. We encourage you to explore more of its options through `kamu sql --help`.
 
@@ -394,4 +394,4 @@ We hope this quick overview inspires you to give `kamu` a try!
 Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **{{<term "reproducible an verifiable" "verifiability">}}** way. 
 
 
-Please continue to the [self-serve demo]({{<ref "demo">}}) for some hands-on walkthroughs and tutorials, and check out our other [learning materials]({{<ref "learning-materials">}}).
+Please continue to the [self-serve demo](/demo) for some hands-on walkthroughs and tutorials, and check out our other [learning materials](/learning-materials).

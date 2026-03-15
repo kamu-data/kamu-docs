@@ -52,13 +52,13 @@ curl -s "https://get.kamu.dev" | sh
 ```
 
 * Watch [introductory videos](https://www.youtube.com/watch?v=oUTiWW6W78A&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk) to see `kamu` in action
-* Follow the ["Getting Started"]({{<ref "get-started">}}) guide through an online demo and installation instructions.
+* Follow the ["Getting Started"](/get-started) guide through an online demo and installation instructions.
 
 
 ## How it Works
 
 ### Ingest from any source
-`kamu` works well with popular data extractors like Debezium and provides [many built-in sources]({{<ref "/cli/ingest">}}) ranging from polling data on the web to MQTT broker and blockchain logs.
+`kamu` works well with popular data extractors like Debezium and provides [many built-in sources](/cli/ingest) ranging from polling data on the web to MQTT broker and blockchain logs.
 
 <div align="center">
 {{<image filename="/images/cli/index/pull-multi.gif" alt="Ingesting data" width="65%">}}
@@ -66,7 +66,7 @@ curl -s "https://get.kamu.dev" | sh
 
 
 ### Track tamper-proof history
-Data is stored in [Open Data Fabric]({{<ref "/odf">}}) (ODF) format - an open **Web3-native format** inspired by Apache Iceberg and Delta.
+Data is stored in [Open Data Fabric](/odf) (ODF) format - an open **Web3-native format** inspired by Apache Iceberg and Delta.
 
 In addition to "table" abstraction on top of Parquet files, ODF provides:
 - Cryptographic integrity and commitments
@@ -75,11 +75,11 @@ In addition to "table" abstraction on top of Parquet files, ODF provides:
 - Rich extensible metadata (e.g. licenses, attachments, semantics)
 - Compatibility with decentralized storages like [IPFS](https://ipfs.tech)
 
-Unlike Iceberg and Delta that encourage continuous loss of history through Change-Data-Capture, ODF format is **history-preserving**. It encourages working with data in the [event form](https://www.kamu.dev/blog/a-brief-history-of-time-in-data-modelling-olap-systems/), and dealing with inaccuracies through [explicit retractions and corrections]({{<ref "retractions-corrections">}}).
+Unlike Iceberg and Delta that encourage continuous loss of history through Change-Data-Capture, ODF format is **history-preserving**. It encourages working with data in the [event form](https://www.kamu.dev/blog/a-brief-history-of-time-in-data-modelling-olap-systems/), and dealing with inaccuracies through [explicit retractions and corrections](/retractions-corrections).
 
 
 ### Explore, query, document
-`kamu` offers a wide range of [integrations]({{<ref "integrations">}}), including:
+`kamu` offers a wide range of [integrations](/integrations), including:
 - Embedded SQL shell for quick EDA
 - Integrated Jupyter notebooks for ML/AI
 - Embedded Web UI with SQL editor and metadata explorer
@@ -93,7 +93,7 @@ Unlike Iceberg and Delta that encourage continuous loss of history through Chang
 
 
 ### Build enterprise-grade ETL pipelines
-Data in `kamu` can only be [transformed through code]({{<ref "transform">}}). An SQL query that cleans one dataset or combines two via JOIN can be used to create a **derivative dataset**.
+Data in `kamu` can only be [transformed through code](/transform). An SQL query that cleans one dataset or combines two via JOIN can be used to create a **derivative dataset**.
 
 `kamu` doesn't implement data processing itself - it integrates [many popular data engines](https://docs.kamu.dev/cli/supported-engines/) *(Flink, Spark, DataFusion...)* as plugins, so you can build an ETL flow that uses the strengths of different engines at different steps of the pipeline:
 
@@ -110,7 +110,7 @@ All derivative datasets use **stream processing** that results in some [revoluti
 
 
 ### Share datasets with others
-ODF datasets can be shared via any [conventional](https://docs.kamu.dev/cli/collab/repositories/) (S3, GCS, Azure) and [decentralized]({{<ref "ipfs">}}) (IPFS) storage and easily replicated. Sharing a large dataset is simple as:
+ODF datasets can be shared via any [conventional](https://docs.kamu.dev/cli/collab/repositories/) (S3, GCS, Azure) and [decentralized](/ipfs) (IPFS) storage and easily replicated. Sharing a large dataset is simple as:
 
 ```sh
 kamu push covid19.case-details "s3://datasets.example.com/covid19.case-details/"
@@ -132,7 +132,7 @@ kamu pull "s3://datasets.example.com/covid19.case-details/"
 kamu verify --recursive covid19.case-details
 ```
 
-Verifiability allows you to [establish trust]({{<ref "validity">}}) in data processed by someone you don't even know and detect if they act maliciously.
+Verifiability allows you to [establish trust](/validity) in data processed by someone you don't even know and detect if they act maliciously.
 
 Verifiable trust allows people to **reuse and collaborate** on data on a global scale, similarly to open-source software.
 
@@ -147,12 +147,12 @@ Every query result is accompanied by a **cryptographic commitment** that you can
 `kamu` offers unparalleled flexibility of deployment options:
 - You can build, test, and debug your data projects and pipelines on a laptop
 - Incorporate online storage for larger volumes, but keep processing it locally
-- When you need real-time processing and 24/7 querying you can run the same pipelines with [`kamu-node`]({{<ref "/node">}}) as a small server
+- When you need real-time processing and 24/7 querying you can run the same pipelines with [`kamu-node`](/node) as a small server
 - A node can be deployed in Kubernetes and scale to a large cluster.
 
 
 ### Get data to and from blockchains
-Using `kamu` you can easily [read on-chain data]({{<ref "blockchain-source">}}) to run analytics on smart contracts, and provide data to blockchains via novel [Open Data Fabric oracle]({{<ref "oracle">}}).
+Using `kamu` you can easily [read on-chain data](/blockchain-source) to run analytics on smart contracts, and provide data to blockchains via novel [Open Data Fabric oracle](/oracle).
 
 
 
@@ -281,7 +281,7 @@ We also scrape a lot of websites to make smarter purchasing decisions. `kamu` le
 
 If you like what we're doing - support us by [starring the repo](https://github.com/kamu-data/kamu-cli), this helps us a lot!
 
-For the list of our community resource and guides on how to contribute [start here]({{<ref "community">}}).
+For the list of our community resource and guides on how to contribute [start here](/community).
 
 
 [Repository]: https://github.com/kamu-data/kamu-cli

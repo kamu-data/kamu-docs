@@ -16,7 +16,7 @@ In simple terms, given two root datasets `A` and `B` the derivative dataset `C` 
 C = f(A, B)
 ```
 
-Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams]({{<relref "spec#nature-of-data">}}), and function `f()` is a [streaming (temporal) processing]({{<relref "spec#stream-processing-model">}}) operation that produces another stream as an output.
+Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams](/spec#nature-of-data), and function `f()` is a [streaming (temporal) processing](/spec#stream-processing-model) operation that produces another stream as an output.
 
 Stream processing composition works just like normal functional composition:
 
@@ -34,7 +34,7 @@ Functions being "pure" means that {{<term "derivative datasets" "derivative-data
 While this may seem restrictive - this unlocks highly desirable properties like {{<term "reproducibility and verifiability" "verifiability">}} of all computations and ability to automatically derive {{<term "provenance">}}.
 
 {{<info>}}
-Imagine being able to erase all derivative data in the world and [reconstruct it in identical form]({{<relref "spec#derivative-data-transience">}}) just from source data. Derivative data in ODF sometimes feels like a superpower.
+Imagine being able to erase all derivative data in the world and [reconstruct it in identical form](/spec#derivative-data-transience) just from source data. Derivative data in ODF sometimes feels like a superpower.
 {{</info>}}
 
 
@@ -74,10 +74,10 @@ This event is as simple as defining two things:
 - `inputs` - data from which datasets will be used as input to this pipeline step
 - `transform` - the transformation being performed.
 
-Technically ODF supports [any data processing framework]({{<relref "spec#engine">}}). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
+Technically ODF supports [any data processing framework](/spec#engine). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
 
 ## Execution Model
-When you use [`kamu pull`]({{<relref "cli-reference#kamu-pull">}}) on a derivative dataset the tool will:
+When you use [`kamu pull`](/cli-reference#kamu-pull) on a derivative dataset the tool will:
 1. Start the appropriate {{<term "query engine" "engine">}}
 2. Restore the state of computation from previous {{<term "checkpoint">}} (if any)
 3. Feed the **previously unseen** data from all inputs
@@ -96,7 +96,7 @@ Some typical operations you can perform on datasets (in the order of increasing 
 - **Stream-to-Stream Join** - combining several streams of data based on some predicate and a time window
 - **Temporal Table Join** - joining a stream to a projection of another stream that represents "current state" of some evolving data based on the timestamp of individual records.
 
-Please see [Examples]({{<relref "examples">}}) for detailed explanation of each of these classes of operations.
+Please see [Examples](/examples) for detailed explanation of each of these classes of operations.
 
 ## Consistency
 Modern stream processing frameworks should be more appropriately called *"temporal processing frameworks"* as they account for time of records and all kinds of time-related problems during the computations.
@@ -118,7 +118,7 @@ See [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era
 ## Self-correcting Nature
 While we mostly talk about data streams from perspective of observing new events and adding new records - there are many situations when events that were already published may be deemed incorrect and need to be **retracted or corrected**.
 
-We [previously discussed]({{<relref "merge-strategies#snapshot">}}) retractions and corrections in the context of {{<term "merge strategies" "merge-strategy">}}, but the most amazing thing about stream processing is that it **can automatically react to retractions and corrections in inputs** to issue appropriate retractions or corrections in the output.
+We [previously discussed](/merge-strategies#snapshot) retractions and corrections in the context of {{<term "merge strategies" "merge-strategy">}}, but the most amazing thing about stream processing is that it **can automatically react to retractions and corrections in inputs** to issue appropriate retractions or corrections in the output.
 
 This means that whenever a major issue is detected and fixed in some {{<term "root dataset">}} - these events can **automatically and rapidly propagate** through hundreds of data pipeline stages with no human involvement.
 
@@ -126,4 +126,4 @@ This means that whenever a major issue is detected and fixed in some {{<term "ro
 Imagine you publish a research paper based on some medical dataset. Few months passes and the hospital that published the dataset notices and corrects a major inconsistency in data. By linking your paper to a certain range within the source dataset you will be able to get an instant **notification** that your results may be no longer valid. And if your analysis is also stored as an ODF dataset - it can be **instantly updated** accounting for all corrections.
 {{</tip>}}
 
-See [Retractions & Corrections]({{<relref "retractions-corrections">}}) section for a deeper look.
+See [Retractions & Corrections](/retractions-corrections) section for a deeper look.

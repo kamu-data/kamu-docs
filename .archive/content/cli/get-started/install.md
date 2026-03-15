@@ -10,7 +10,7 @@ aliases:
 ---
 
 {{<info>}}
-Before using this product, please read the [project status disclaimer]({{<ref "project-status">}}).
+Before using this product, please read the [project status disclaimer](/project-status).
 {{</info>}}
 
 ## General Information
@@ -27,7 +27,7 @@ Please report any issues during the installation process [here](https://github.c
 
 ### Linux
 Linux is our primary target environment. We don't have packages for various Linux flavors yet, but since the tool is just a simple binary it's very easy to get started:
-1. Install `docker` using your distro's package manager (alternatively we highly recommend trying [podman]({{<relref "#using-podman-instead-of-docker">}}))
+1. Install `docker` using your distro's package manager (alternatively we highly recommend trying [podman](/#using-podman-instead-of-docker))
 2. Make sure you can launch containers without `sudo` by following [official documentation](https://docs.docker.com/engine/install/linux-postinstall/)
 3. Install `kamu` via installer script by running:
     ```bash
@@ -40,9 +40,9 @@ Linux is our primary target environment. We don't have packages for various Linu
 
 See also:
 <!-- no toc -->
-- [Installing shell completions]({{<relref "#installing-shell-completions">}})
-- [A Note on Docker Security]({{<relref "#a-note-on-docker-security">}})
-- [Using Podman instead of Docker]({{<relref "#using-podman-instead-of-docker">}})
+- [Installing shell completions](/#installing-shell-completions)
+- [A Note on Docker Security](/#a-note-on-docker-security)
+- [Using Podman instead of Docker](/#using-podman-instead-of-docker)
 
 ### MacOS X
 We fully support Intel and M-series Macs, to install `kamu` please follow these steps:
@@ -60,8 +60,8 @@ We fully support Intel and M-series Macs, to install `kamu` please follow these 
 
 See also:
 <!-- no toc -->
-- [Installing shell completions]({{<relref "#installing-shell-completions">}})
-- [Using Podman instead of Docker]({{<relref "#using-podman-instead-of-docker">}})
+- [Installing shell completions](/#installing-shell-completions)
+- [Using Podman instead of Docker](/#using-podman-instead-of-docker)
 
 ### Windows (using WSL2)
 1. Install WSL2 following [these steps](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
@@ -97,8 +97,8 @@ See also:
 
 See also:
 <!-- no toc -->
-- [Installing shell completions]({{<relref "#installing-shell-completions">}})
-- [Using Podman instead of Docker]({{<relref "#using-podman-instead-of-docker">}})
+- [Installing shell completions](/#installing-shell-completions)
+- [Using Podman instead of Docker](/#using-podman-instead-of-docker)
 
 ### Windows (using Docker Desktop)
 {{<warning>}}
@@ -145,10 +145,10 @@ We take your security very seriously. Unfortunately the execution model of `dock
 
 On our side we are taking following measures to gain your trust:
 - `kamu` and all of its components are open-source and [available for review](https://github.com/kamu-data/kamu-cli/)
-- All of our `docker` images are based on reputable source images and are [available for review]({{<relref "supported-engines">}})
+- All of our `docker` images are based on reputable source images and are [available for review](/supported-engines)
 - When `kamu` starts `docker` containers it limits the scope of volumes it's mounting to a minimum. You can review the volume mounts by running `kamu` with `-v` flag or using `docker ps`.
 
-To avoid all these issues please consider using [`podman`]({{<relref "#using-podman-instead-of-docker">}}) - this container runtime operates in **daemon-less** and **root-less** mode, so it's fully compliant with the standard Unix permission model.
+To avoid all these issues please consider using [`podman`](/#using-podman-instead-of-docker) - this container runtime operates in **daemon-less** and **root-less** mode, so it's fully compliant with the standard Unix permission model.
 
 
 ## Using Podman instead of Docker 

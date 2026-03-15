@@ -4,7 +4,7 @@ description: Frequently asked questions
 icon: question
 ---
 
-import {Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 ## Kamu vs. Apache Iceberg, Delta Lake
 Apache Iceberg and Delta formats in modern data lakes serve the purpose of creating a logical representation of **data table** that abstracts the physical layout of data on disk.

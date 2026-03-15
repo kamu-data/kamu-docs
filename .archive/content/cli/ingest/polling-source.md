@@ -75,21 +75,21 @@ The structure of the {{<schema "SetPollingSource">}} event directly reflects all
 - `prepare` (optional) - specifies how to prepare raw binary data for reading (e.g. extracting an archive or converting between formats)
 - `read` - specifies how to read the data into structured form (e.g. as CSV or Parquet)
 - `preprocess` (optional) - allows to shape the structured data with queries (e.g. to parse and convert types into best suited form wit SQL)
-- `merge` - specifies how to **combine the read data with the history of previously seen data** (this step is extremely important as it performs "ledgerization" / "historization" of the evolving state of data - see [Merge Strategies]({{<relref "merge-strategies">}}) section for explanation).
+- `merge` - specifies how to **combine the read data with the history of previously seen data** (this step is extremely important as it performs "ledgerization" / "historization" of the evolving state of data - see [Merge Strategies](/merge-strategies) section for explanation).
 
 A polling source can later be deactivated using {{<schema "DisablePollingSource">}} event.
 
-For multiple example of handling tricky data sources see [input formats]({{<relref "input-formats">}}) section.
+For multiple example of handling tricky data sources see [input formats](/input-formats) section.
 
 ## Polling Data via CLI
-To poll data into dataset via `kamu` use the general-purpose [`kamu pull`]({{<relref "cli-reference#kamu-ingest">}}) command.
+To poll data into dataset via `kamu` use the general-purpose [`kamu pull`](/cli-reference#kamu-ingest) command.
 
 ```sh
 kamu pull com.example.city-populations
 ```
 
 ## Polling Data via API
-See [Kamu Node protocols documentation]({{<relref "protocols">}}) for various options of polling data programmatically via APIs.
+See [Kamu Node protocols documentation](/protocols) for various options of polling data programmatically via APIs.
 
 ## Event Time
 The perfect scenario for `kamu` is when data records contain {{<term "event time">}} within them as a column, but many data sources on the web are not like that.

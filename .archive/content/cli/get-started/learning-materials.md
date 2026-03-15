@@ -38,7 +38,7 @@ aliases:
 | [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era/)                                                                    | Beginner | Why we are using stream processing instead of batch                             |
 | [Course: Introduction to Web3 Data Engineering](https://www.kamu.dev/blog/2024-08-28-intro-to-web3-data-engineering/)                             | Beginner | How Web3 innovations can be applied to conventional data lakehouse architecture |
 | [Next Decade of Data: From algebra to calculus, from silos to real-time supply chains](https://www.kamu.dev/blog/2024-06-27-next-decade-of-data/) | Beginner | Analysis of the state of the data market and future predictions                 |
-| [Open Data Fabric protocol specification]({{<relref "odf/spec">}})                                                                                | Advanced | Specification itself, for tech-savvy readers                                    |
+| [Open Data Fabric protocol specification](/odf/spec)                                                                                | Advanced | Specification itself, for tech-savvy readers                                    |
 
 ## External Resources
 
@@ -49,6 +49,6 @@ aliases:
 
 
 See also:
-- [FAQ]({{<ref "faq">}})
-- [First Steps]({{<ref "first-steps">}})
-- [Examples]({{<ref "examples">}})
+- [FAQ](/faq)
+- [First Steps](/first-steps)
+- [Examples](/examples)

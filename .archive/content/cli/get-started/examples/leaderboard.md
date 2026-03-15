@@ -76,7 +76,7 @@ Create the dataset now:
 kamu add player-scores.yaml
 ```
 
-To get data in we will ingest it from a file, but note that it could similarly be any other ["push" protocol]({{<ref "push-source">}}) like REST, MQTT, Kafka...
+To get data in we will ingest it from a file, but note that it could similarly be any other ["push" protocol](/push-source) like REST, MQTT, Kafka...
 
 Let's add the first match scores in:
 ```sh
@@ -266,4 +266,4 @@ In the world of ODF streaming - late data, backfills, and input retractions are 
 
 ---
 
-If you haven't already - make sure to check out the [Stock Market Trading example]({{<ref "stock-trading">}}) that introduces the **{{<term "watermark">}}** - another really important mechanism related to streams.
+If you haven't already - make sure to check out the [Stock Market Trading example](/stock-trading) that introduces the **{{<term "watermark">}}** - another really important mechanism related to streams.

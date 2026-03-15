@@ -14,7 +14,7 @@ Besides code you can contribute in many different ways:
 
 - Improving the [documentation](https://github.com/kamu-data/kamu-docs)
 - Graphic design
-- Adding more interesting [data science examples]({{<relref "examples">}})
+- Adding more interesting [data science examples](/examples)
 - Improving CI pipelines
 - Working with the [community](https://discord.gg/aSpVjWwu)
 - Mentoring others
@@ -24,4 +24,4 @@ Before you start working on anything:
 1. Consider joining our [Discord Server](https://discord.gg/aSpVjWwu) to discuss your ideas
 2. Make sure your work has an associated **GitHub issue**, it's assigned to you, and the scope of work was agreed upon with project maintainers (we value your time and really don't like rejecting PRs!)
 3. Technical contributors should read the [DEVELOPER.md](https://github.com/kamu-data/kamu-cli/blob/master/DEVELOPER.md) for instructions on correctly setting up their environment (similar files exist in all top-level repositories)
-4. Understand the [Licensing Terms]({{<ref "license">}})
+4. Understand the [Licensing Terms](/license)

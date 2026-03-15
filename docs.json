@@ -57,6 +57,56 @@
             ]
           },
           {
+            "group": "Kamu Node",
+            "pages": [
+              "node/about",
+              "node/quick-start",
+              "node/architecture",
+              {
+                "group": "Protocols",
+                "pages": [
+                  "node/api/overview",
+                  "node/api/flight-sql",
+                  "node/api/graphql",
+                  "node/api/jdbc",
+                  "node/api/kafka",
+                  "node/api/mqtt",
+                  "node/api/odata",
+                  "node/api/odf",
+                  "node/api/oracle",
+                  "node/api/postgres",
+                  "node/api/rest",
+                  "node/api/webhooks",
+                  "node/api/websocket"
+                ]
+              },
+              {
+                "group": "Deployment",
+                "pages": [
+                  "node/deploy/manual",
+                  "node/deploy/k8s",
+                  "node/deploy/artifacts",
+                  "node/deploy/auth",
+                  "node/deploy/storage",
+                  "node/deploy/capacity",
+                  "node/deploy/security",
+                  "node/deploy/customization"
+                ]
+              },
+              {
+                "group": "Operations",
+                "icon": "wrench",
+                "pages": [
+                  "node/operator/monitoring",
+                  "node/operator/upgrades",
+                  "node/operator/performance"
+                ]
+              },
+              "node/commitments",
+              "node/troubleshoot"
+            ]
+          },
+          {
             "group": "Kamu Web Platform",
             "pages": [
               "platform/about",

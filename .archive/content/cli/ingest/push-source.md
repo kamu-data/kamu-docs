@@ -47,11 +47,11 @@ This allows you to declare **multiple push sources per dataset**, which may be u
 
 An existing push source can be deactivated using {{<schema "DisablePushSource">}} event.
 
-Also note that, just like polling sources, push sources pass data through a [Merge Strategy]({{<relref "merge-strategies">}}), so they too can benefit, for example, from **event deduplication** of the {{<schema "Ledger" "MergeStrategy::Ledger">}} merge strategy.
+Also note that, just like polling sources, push sources pass data through a [Merge Strategy](/merge-strategies), so they too can benefit, for example, from **event deduplication** of the {{<schema "Ledger" "MergeStrategy::Ledger">}} merge strategy.
 
 
 ## Pushing Data via CLI
-To push data into dataset via `kamu` use [`kamu ingest`]({{<relref "cli-reference#kamu-ingest">}}) command.
+To push data into dataset via `kamu` use [`kamu ingest`](/cli-reference#kamu-ingest) command.
 
 You can push data from files:
 
@@ -80,7 +80,7 @@ kamu tail gps
 ```
 
 ## Pushing Data via API
-See [Kamu Node protocols documentation]({{<relref "protocols">}}) for various options of pushing data programmatically via APIs.
+See [Kamu Node protocols documentation](/protocols) for various options of pushing data programmatically via APIs.
 
 ## Format Translation
 While push sources define a specific {{<schema "read format" "ReadStep">}} for their data - there is some tolerance. For example you can push {{<schema "Csv" "ReadStep::Csv">}} data to the source that declares {{<schema "NdJson" "ReadStep::NdJson">}} format and `kamu` will attempt to read it using the same schema.

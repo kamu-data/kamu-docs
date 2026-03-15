@@ -207,4 +207,4 @@ kamu pull com.acme.orders --set-watermark 2020-01-13T00:00:00Z
 kamu pull --all
 ```
 
-More detailed explanation of watermarks is given in the [Stock Market Trading example]({{<relref "stock-trading">}}).
+More detailed explanation of watermarks is given in the [Stock Market Trading example](/stock-trading).

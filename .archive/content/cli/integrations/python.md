@@ -56,7 +56,7 @@ select 1 as value
 
 This extension is pre-installed in the integrated notebook environment you can run via `kamu notebook` command line command.
 
-See [Exploring Data]({{<ref "explore#jupyter-notebooks">}}) section for a tutorial on using notebooks.
+See [Exploring Data](/explore#jupyter-notebooks) section for a tutorial on using notebooks.
 
 For more information on extensions see the [library documentation](https://github.com/kamu-data/kamu-client-python).
 

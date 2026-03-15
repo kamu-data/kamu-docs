@@ -9,14 +9,14 @@ categories: []
 While `kamu` focuses primarily on the problem of data management, you often may want to do some basic data exploration before exporting data for further use in your data science projects, so we decided to provide a few simple exploration tools for you to assess the state of data without leaving the comfort of one tool.
 
 ## Tail Command
-Use [`kamu tail`]({{<relref "cli-reference#kamu-tail">}}) command to quickly view a sample of last events in a dataset:
+Use [`kamu tail`](/cli-reference#kamu-tail) command to quickly view a sample of last events in a dataset:
 
 ```bash
 kamu tail ca.bccdc.covid19.case-details
 ```
 
 ## Inspect Command Group
-A set of [`kamu inspect *`]({{<relref "cli-reference#kamu-inspect">}}) commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
+A set of [`kamu inspect *`](/cli-reference#kamu-inspect) commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
 
 ```bash
 kamu inspect lineage ca.covid19.daily-cases -b
@@ -25,7 +25,7 @@ kamu inspect lineage ca.covid19.daily-cases -b
 {{<image filename="/images/cli/first-steps/lineage.png" alt="kamu sql">}}
 
 ## SQL Console
-[`kamu sql`]({{<relref "cli-reference#kamu-sql">}}) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
+[`kamu sql`](/cli-reference#kamu-sql) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
 
 {{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
 
@@ -68,7 +68,7 @@ limit 5;
 
 Use `Ctrl+D` to exit the SQL shell.
 
-SQL is a widely supported language, so `kamu` can be used in conjunction with many other tools that support it, such as Tableau and Power BI. See [integrations]({{<ref "integrations">}}) for details.
+SQL is a widely supported language, so `kamu` can be used in conjunction with many other tools that support it, such as Tableau and Power BI. See [integrations](/integrations) for details.
 
 The `kamu sql` is a very powerful command that you can use both interactively or for scripting. We encourage you to explore more of its options through `kamu sql --help`.
 

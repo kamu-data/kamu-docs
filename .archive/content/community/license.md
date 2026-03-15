@@ -61,7 +61,7 @@ Same reasons have also lead to creation of the [SSPL license](https://www.mongod
 Yes, the way we look at it is:
 
 - Your company uses `kamu` internally to publish datasets
-- Datasets are available online in [ODF format]({{<ref "odf">}}), which is an open protocol
+- Datasets are available online in [ODF format](/odf), which is an open protocol
 - Your clients independently can use `kamu` (or any other tool compatible with ODF) to download data
 
 Since you're not operating `kamu` as a _service_ for your customers - you're not violating the "Additional Use Grant".

@@ -6,7 +6,7 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 <div align="center">
 
-<img filename="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%"/>
+<img src="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%"/>
 
 [![Repository](https://img.shields.io/github/v/tag/kamu-data/kamu-web-ui?include_prereleases&logo=github&logoColor=white&label=Repository&style=for-the-badge)](https://github.com/kamu-data/kamu-web-ui/)
 [![Release](https://img.shields.io/github/v/release/kamu-data/kamu-web-ui?include_prereleases&logo=angular&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-web-ui/releases/latest)

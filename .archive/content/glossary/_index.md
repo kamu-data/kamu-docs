@@ -11,7 +11,7 @@ aliases:
 
 # Open Data Fabric
 ## Event
-As described in the [Nature of Data]({{<relref "spec#nature-of-data">}}) section, the system operates only on data expressed as past events, observations, or propositions believed to be true at a certain time. For simplicity, we will use the term "event" throughout to refer to such data tuples.
+As described in the [Nature of Data](/spec#nature-of-data) section, the system operates only on data expressed as past events, observations, or propositions believed to be true at a certain time. For simplicity, we will use the term "event" throughout to refer to such data tuples.
 
 ## Data
 Data is a set of {{<term "Events" "event">}} stored in the system. Since events are immutable data can only grow over time. Conceptually it's best to think of data as a full log of a potentially infinite event stream.
@@ -21,8 +21,8 @@ Data never appears in the system alone as we would not be able to tell where it 
 {{<image filename="/images/pages/glossary/dataset.svg" alt="Diagram: Dataset/Data">}}
 
 See also:
-- [Data Format]({{<relref "spec#data-format">}})
-- [Common Data Schema]({{<relref "spec#common-data-schema">}})
+- [Data Format](/spec#data-format)
+- [Common Data Schema](/spec#common-data-schema)
 
 ## Schema
 Schema describes the shape of the {{<term "data" "data">}} by associating names and data types to columns that data is composed of. Schema can change over time and its changes are tracked in the {{<term "Metadata Chain" "metadata-chain">}}.
@@ -38,8 +38,8 @@ date_of_birth DATE,
 ```
 
 See also:
-- [Schema Format]({{<relref "spec#schema-format">}})
-- [Schema Evolution]({{<relref "spec#schema-evolution">}})
+- [Schema Format](/spec#schema-format)
+- [Schema Evolution](/spec#schema-evolution)
 
 ## Offset
 Offset is a monotonically increasing sequential numeric identifier that is assigned to every record and represents its position relative to the beginning of the dataset. Offsets are used to uniquely identify any record in the dataset. Offset of the first record in a dataset is `0`.
@@ -48,8 +48,8 @@ Offset is a monotonically increasing sequential numeric identifier that is assig
 Since past {{<term "Events" "event">}} are immutable, if some event is deemed incorrect later on it can only be rectified by issuing an explicit {{<term "retraction or correction" "retractions-and-corrections">}}. Retraction and corrections are also represented as {{<term "Events" "event">}} in the same stream of {{<term "Data" "data">}} and differentiated by a special "operation type" field.
 
 See also:
-- [Common data schema]({{<relref "spec#common-data-schema">}})
-- [Representation of retractions and corrections]({{<relref "spec#representation-of-retractions-and-corrections">}})
+- [Common data schema](/spec#common-data-schema)
+- [Representation of retractions and corrections](/spec#representation-of-retractions-and-corrections)
 
 ## Data Slice
 {{<term "Data" "data">}} arrives into the system as the arbitrary large sets of events. We refer to them as "slices".
@@ -66,8 +66,8 @@ Refers to information about a {{<term "Dataset" "dataset">}} stored in its {{<te
 
 ## Metadata Chain
 Metadata Chain captures all essential information about the {{<term "Dataset" "dataset">}}, including:
-- Where the data comes from (see [Data Ingestion]({{<relref "spec#data-ingestion">}}))
-- How data was processed (see {{<term "Query" "query">}})
+- Where the data comes from (see [Data Ingestion](/spec#data-ingestion))
+- How data was processed (see {{<term "Query" "query)
 - Its {{<term "Schema" "schema">}}
 - Log of all modifications made to the data, including information used to verify the integrity of data
 - Current {{<term "Watermark" "watermark">}}
@@ -92,12 +92,12 @@ In addition to core events like adding data, running a query, and change of sche
 These extensions are out of scope of this document.
 
 See also:
-- [Metadata Format]({{<relref "spec#metadata-format">}})
+- [Metadata Format](/spec#metadata-format)
 - {{<schema "Metadata Events Reference" "metadata-events">}}
 
 ## Dataset
 Dataset is the main unit of data exchange in the system. It's simply a combination of:
-- [Identity]({{<relref "spec#dataset-identity">}})
+- [Identity](/spec#dataset-identity)
 - {{<term "Data" "data">}}
 - {{<term "Metadata Chain" "metadata-chain">}}
 - {{<term "Checkpoints" "checkpoint">}}
@@ -120,7 +120,7 @@ Root dataset definition includes:
 All this information is stored in the {{<term "Metadata Chain" "metadata-chain">}} and can change over time as the dataset evolves.
 
 See also:
-- [Merge Strategy]({{<relref "spec#merge-strategies">}})
+- [Merge Strategy](/spec#merge-strategies)
 
 ### Derivative Dataset
 Derivative datasets are created by transforming/combining one or multiple existing datasets.
@@ -133,14 +133,14 @@ They are defined by the combination of:
 This information is stored in the {{<term "Metadata Chain" "metadata-chain">}} and can change over time as the dataset evolves.
 
 See also:
-- [Derivative Data Transience]({{<relref "spec#derivative-data-transience">}})
+- [Derivative Data Transience](/spec#derivative-data-transience)
 
 ## Query
 Queries define how input data is combined, modified, and re-shaped to produce new data.
 
 Queries are used in two contexts:
 - When defining new {{<term "Derivative Datasets" "derivative-dataset">}}
-- When analyzing and extracting data from an existing {{<term "Dataset" "dataset">}} (locally or from a {{<term "repository" "repository">}})
+- When analyzing and extracting data from an existing {{<term "Dataset" "dataset">}} (locally or from a {{<term "repository" "repository)
 
 The system is agnostic to the exact language used to define the query and the set of supported dialects can be extended by implementing a new {{<term "Engine" "engine">}}.
 
@@ -165,9 +165,9 @@ GROUP BY TUMBLE(event_time, INTERVAL '1' MONTH), sku_id
 ```
 
 See also:
-- [Stream Processing Model]({{<relref "spec#stream-processing-model">}})
-- [Derivative Data Transience]({{<relref "spec#derivative-data-transience">}})
-- [Engine Contract]({{<relref "spec#engine-contract">}})
+- [Stream Processing Model](/spec#stream-processing-model)
+- [Derivative Data Transience](/spec#derivative-data-transience)
+- [Engine Contract](/spec#engine-contract)
 
 ## Engine
 Engine is an interface shared by all specific implementations of a {{<term "Query" "query">}} dialect. Engine implementations are responsible for applying defined queries to input data and returning the result. For example, some engines allows you to query data using a series of streaming SQL statements.
@@ -179,7 +179,7 @@ Engines run in a sandboxed environments and are not permitted to use any externa
 As Engines are in the full control of all data transformations, they are also responsible for answering the {{<term "Provenance" "provenance">}} queries.
 
 See also:
-- [Engine Contract]({{<relref "spec#engine-contract">}})
+- [Engine Contract](/spec#engine-contract)
 
 ## Checkpoint
 Checkpoints are used by the {{<term "Engines" "engine">}} to store the computation state between the different invocations of a {{<term "Query" "query">}}. They are fully engine-specific and opaque to the system. They are however an essential durable part of a {{<term "Dataset" "dataset">}} as they are necessary to be able to pause and resume the streaming queries, and are essential in implementing "exactly-once" processing semantics.
@@ -195,23 +195,23 @@ Core responsibilities:
 - Commits the resulting data slices and new metadata blocks
 
 See also:
-- [Coordinator Contract]({{<relref "spec#coordinator-contract">}})
+- [Coordinator Contract](/spec#coordinator-contract)
 
 ## Ingestion
 Ingestion is the process by which external data gets into the system. Typical ingestion steps that describe how data is obtained and read (e.g. fetching data from some URL on the web, decompressing it, and reading it as CSV) are a part of the {{<term "Root Dataset" "root-dataset">}} definition.
 
 See also:
-- [Data Ingestion]({{<relref "spec#data-ingestion">}})
+- [Data Ingestion](/spec#data-ingestion)
 
 ## Merge Strategy
-By [design]({{<relref "spec#nature-of-data">}}), the system only stores data in the append-only event log format to preserve the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may expose their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
+By [design](/spec#nature-of-data), the system only stores data in the append-only event log format to preserve the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may expose their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
 
-When {{<term "ingesting data" "ingestion">}} from external sources, the {{<term "Root Datasets" "root-dataset">}} can choose between different [Merge Strategies]({{<relref "spec#merge-strategies">}}) that define how to combine the newly-ingested data with the existing one.
+When {{<term "ingesting data" "ingestion">}} from external sources, the {{<term "Root Datasets" "root-dataset">}} can choose between different [Merge Strategies](/spec#merge-strategies) that define how to combine the newly-ingested data with the existing one.
 
 For example, when dealing with the daily database dumps, a user can choose the merge strategy that performs [change data capture](https://en.wikipedia.org/wiki/Change_data_capture), transforming dumps into a set of events that signify record creation, update, or deletion.
 
 See also:
-- [Merge Strategies]({{<relref "spec#merge-strategies">}})
+- [Merge Strategies](/spec#merge-strategies)
 
 ## Hash
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) are used by the system in these three scenarios:
@@ -225,12 +225,12 @@ The new {{<term "MetadataBlock" "metadata-chain">}} will also be cryptographical
 
 Usage examples:
 - If the {{<term "Metadata Chain" "metadata-chain">}} of a certain dataset is reliably known (e.g. available from many independent peers) a peer can then download the {{<term "Data" "data">}} from any untrusted source and use the hash function to validate the authenticity of every data slice that composes it.
-- The trustworthiness of any {{<term "Dataset" "dataset">}} can be established by reviewing the transformations it claims to be performing on data (contained in the {{<term "Metadata Chain" "metadata-chain">}}), re-applying those transformations in a trusted environment, and then comparing the hash sums of the result slices.
+- The trustworthiness of any {{<term "Dataset" "dataset">}} can be established by reviewing the transformations it claims to be performing on data (contained in the {{<term "Metadata Chain" "metadata-chain), re-applying those transformations in a trusted environment, and then comparing the hash sums of the result slices.
 
 See also:
-- [Data Hashing]({{<relref "spec#data-hashing">}})
-- [Checkpoint Hashing]({{<relref "spec#checkpoint-hashing">}})
-- [Metadata Block Hashing]({{<relref "spec#metadata-block-hashing">}})
+- [Data Hashing](/spec#data-hashing)
+- [Checkpoint Hashing](/spec#checkpoint-hashing)
+- [Metadata Block Hashing](/spec#metadata-block-hashing)
 
 ## Provenance
 Data provenance describes the origins and the history of data and adds value to data by explaining how it was obtained.
@@ -254,7 +254,7 @@ Depending on the language used by an {{<term "Engine" "engine">}} one approach m
 
 See also:
 - [Provenance in Databases: Why, How, and Where](http://homepages.inf.ed.ac.uk/jcheney/publications/provdbsurvey.pdf)
-- [Engine Contract: Derive Provenance]({{<relref "spec#derive-provenance">}})
+- [Engine Contract: Derive Provenance](/spec#derive-provenance)
 
 ## Verifiability
 In the scope of this specification, verifiability of data means the ability to establish:
@@ -314,7 +314,7 @@ There are no restrictions on the event time in the system - there can be many ev
 - Post-dated events and predictions - with event time set into the future
 - Back-dated events and corrections - with event time set into the past
 
-Depending on the type of transformations these restrictions may be more strict, e.g. joining datasets based on event time may require it to be quasi-monotonic increasing to know when the join operation can be considered complete (see {{<term "Watermarks" "watermark">}}).
+Depending on the type of transformations these restrictions may be more strict, e.g. joining datasets based on event time may require it to be quasi-monotonic increasing to know when the join operation can be considered complete (see {{<term "Watermarks" "watermark).
 
 See also:
 * {{<term "Projections" "projection">}}
@@ -342,13 +342,13 @@ Errors in source data are inevitable and require a mechanism for correcting them
 
 Retractions and corrections are explicit events that can appear in {{<term "Root" "root-dataset">}} datasets to signify that some previous event was published in error, or to correct some of its fields. They are differentiated from regular events by the special {{<term "Operation Type" "operation-type">}} field.
 
-Retractions and corrections can also naturally occur in {{<term "Derivative" "derivative-dataset">}} datasets in cases when a stream processing operation encounters late data (data arriving past the current {{<term "Watermark" "watermark">}}). In such cases streaming transformation may publish corrections or retractions for previously produced result records that were influenced by the late events.
+Retractions and corrections can also naturally occur in {{<term "Derivative" "derivative-dataset">}} datasets in cases when a stream processing operation encounters late data (data arriving past the current {{<term "Watermark" "watermark). In such cases streaming transformation may publish corrections or retractions for previously produced result records that were influenced by the late events.
 
 Retractions and corrections model is fundamental to making data processing **maximally autonomous**.
 
 See also:
-- [Common data schema]({{<relref "spec#common-data-schema">}})
-- [Representation of retractions and corrections]({{<relref "spec#representation-of-retractions-and-corrections">}})
+- [Common data schema](/spec#common-data-schema)
+- [Representation of retractions and corrections](/spec#representation-of-retractions-and-corrections)
 
 ## Repository
 Repositories let participants of the system exchange {{<term "Datasets" "dataset">}} with one another.
@@ -359,7 +359,7 @@ Repository definition includes:
 - Credentials needed to access it
 - Any necessary protocol-specific configuration
 
-In the most basic form, a {{<term "Repository" "repository">}} can simply be a location where the dataset files are hosted over one of the [supported]({{<relref "spec#supported-protocols">}}) file or object-based data transfer protocols. The owner of a dataset will have push privileges to this location, while other participants can pull data from it.
+In the most basic form, a {{<term "Repository" "repository">}} can simply be a location where the dataset files are hosted over one of the [supported](/spec#supported-protocols) file or object-based data transfer protocols. The owner of a dataset will have push privileges to this location, while other participants can pull data from it.
 
 An advanced repository can support more functionality like:
 - Push data API for publishers
@@ -367,7 +367,7 @@ An advanced repository can support more functionality like:
 - Query API for making use of repository's compute resources and reducing the amount of transferred data
 
 See also:
-- [Repository Contract]({{<relref "spec#repository-contract">}})
+- [Repository Contract](/spec#repository-contract)
 
 ## Projection
 In relational algebra, a [projection](https://en.wikipedia.org/wiki/Projection_(relational_algebra)) is an operation that removes one or many dimensions from a data tuple. In the context of our system the most common projections are *temporal projections* involving the {{<term "System Time" "system-time">}} and {{<term "Event Time" "event-time">}} dimensions.
@@ -390,15 +390,15 @@ When {{<term "Metadata" "metadata">}} objects are saved on disk or transmitted o
 A {{<term "manifest">}} with {{<schema "DatasetSnapshot">}} schema.
 
 ## Workspace
-A workspace in the context of [Kamu CLI]({{<relref "cli">}}) is a directory that contains a hidden `.kamu` sub-directory where `kamu` stores local copies of datasets and configuration, including connection parameters to remote ODF repositories.
+A workspace in the context of [Kamu CLI](/cli) is a directory that contains a hidden `.kamu` sub-directory where `kamu` stores local copies of datasets and configuration, including connection parameters to remote ODF repositories.
 
 ## Node
-[Kamu Node]({{<relref "node">}}) is a set of [Kubernetes](https://kubernetes.io/) applications that can be installed in a distributed environment to operate data pipelines, verify computations done by other parties, and execute queries on co-located data. It is a horizontally-scalable **back-end implementation** of ODF protocol. Operating a node is the primary way to contribute compute resources to the ODF network.
+[Kamu Node](/node) is a set of [Kubernetes](https://kubernetes.io/) applications that can be installed in a distributed environment to operate data pipelines, verify computations done by other parties, and execute queries on co-located data. It is a horizontally-scalable **back-end implementation** of ODF protocol. Operating a node is the primary way to contribute compute resources to the ODF network.
 
 ## Oracle
 [Blockchain Oracles](https://en.wikipedia.org/wiki/Blockchain_oracle) provide information from the outside-world sources to the on-chain [smart contracts](https://en.wikipedia.org/wiki/Smart_contract). The need for oracles arises because in typical blockchain implementations nodes cannot call any external APIs, therefore are limited to operate only on the information that is stored on chain.
 
-Working in combination with ODF smart contracts, [Kamu Node]({{<relref "node">}}) implements an ODF oracle provider component that allows requesting data from the ODF network and supplying it to the smart contracts through a blockchain transaction.
+Working in combination with ODF smart contracts, [Kamu Node](/node) implements an ODF oracle provider component that allows requesting data from the ODF network and supplying it to the smart contracts through a blockchain transaction.
 
 Using ODF network oracle, smart contracts gain the ability to:
 - access outside-world data through ODF nodes
