@@ -1,8 +1,6 @@
 ---
-Title: Python Scripts & Notebooks
+title: Python Scripts & Notebooks
 description: Connecting Python applications to Kamu.
-categories: []
-aliases: []
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

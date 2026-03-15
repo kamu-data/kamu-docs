@@ -1,8 +1,5 @@
 ---
-Title: Blockchain Sources
-weight: 60
-categories: []
-aliases:
+title: Blockchain Sources
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -27,11 +24,11 @@ content:
           nodeUrl: wss://localhost:8545
 ```
 
-You can also specify `nodeUrl` directly in the {{<schema "FetchStep::EthereumLogs">}} (see below).
+You can also specify `nodeUrl` directly in the <Schema t="FetchStep::EthereumLogs"/> (see below).
 
 
 ## Accessing Specific Log
-Logs can be accessed using {{<schema "FetchStep::EthereumLogs">}} ([full example](https://github.com/kamu-data/kamu-cli/blob/master/examples/reth-vs-snp500/net.rocketpool.reth.tokens-minted.yaml)):
+Logs can be accessed using <Schema t="FetchStep::EthereumLogs"/> ([full example](https://github.com/kamu-data/kamu-cli/blob/master/examples/reth-vs-snp500/net.rocketpool.reth.tokens-minted.yaml)):
 
 ```yaml
 kind: DatasetSnapshot

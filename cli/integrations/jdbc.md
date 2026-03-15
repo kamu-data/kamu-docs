@@ -1,8 +1,6 @@
 ---
-Title: Generic JDBC Client
+title: Generic JDBC Client
 description: Connecting client applications via JDBC protocol.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

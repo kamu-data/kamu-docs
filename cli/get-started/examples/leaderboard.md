@@ -25,7 +25,7 @@ Suppose we have a game where players compete in matches against one another and 
 ### Getting Started
 To follow this example checkout `kamu-cli` repository and navigate into [examples/leaderboard](https://github.com/kamu-data/kamu-cli/tree/master/examples/leaderboard) sub-directory.
 
-Create a temporary kamu {{<term "workspace">}} in that folder using:
+Create a temporary kamu <Term t="workspace"/> in that folder using:
 
 ```sh
 kamu init
@@ -44,9 +44,9 @@ We start with the `player_scores` dataset that will ingest the scores of all pla
 - `player_id STRING`
 - `score BIGINT`
 
-Our game will be sending scores data directly to the {{<term "node">}} hosting this dataset, so we will use {{<schema "AddPushSource">}} metadata event to describe the format that data will come in.
+Our game will be sending scores data directly to the <Term t="node"/> hosting this dataset, so we will use <Schema t="AddPushSource"/> metadata event to describe the format that data will come in.
 
-We'll use {{<schema "NdJson" "ReadStep::NdJson">}}:
+We'll use <Schema t="NdJson" id="ReadStep::NdJson"/>:
 
 ```yaml
 kind: DatasetSnapshot
@@ -248,7 +248,7 @@ As Alice was displaced by Charlie from the 1st place we see (starting from row `
 └────────┴────┴─────┴───────┴──────────┴───────────┴───────┘
 ```
 
-You are witnessing the {{<term "retractions and corrections mechanism" "retractions-and-corrections">}} of ODF datasets!
+You are witnessing the <Term t="retractions and corrections mechanism" id="retractions-and-corrections"/> of ODF datasets!
 
 ## So, why not Batch?
 So what do we gain from having a changelog stream with retractions? Why not run a batch query every once in a while to get the current leaderboard?
@@ -268,4 +268,4 @@ In the world of ODF streaming - late data, backfills, and input retractions are 
 
 ---
 
-If you haven't already - make sure to check out the [Stock Market Trading example](/stock-trading) that introduces the **{{<term "watermark">}}** - another really important mechanism related to streams.
+If you haven't already - make sure to check out the [Stock Market Trading example](/stock-trading) that introduces the **<Term t="watermark"/>** - another really important mechanism related to streams.

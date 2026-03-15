@@ -1,8 +1,6 @@
 ---
-Title: DBeaver
+title: DBeaver
 description: Connecting DBeaver via JDBC protocol.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

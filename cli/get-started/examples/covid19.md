@@ -1,10 +1,5 @@
 ---
-Title: COVID-19 Daily Cases
-description:
-weight: 0
-categories: []
-aliases:
-  - /cli/learn/examples/covid19
+title: COVID-19 Daily Cases
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -19,8 +14,8 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 This example currently exists as part of the [self-serve demo](/demo).
 
-While we're working on the text version try the demo and watch this video:
+While we're working on the text version try the demo and watch Kamu 101 playlist:
 
-{{% youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk %}}
+<YouTubeList id="PLV91cS45lwVG20Hicztbv7hsjN6x69MJk"/>
 
 The dataset files can be found in the [examples/covid](https://github.com/kamu-data/kamu-cli/tree/master/examples/covid) directory.

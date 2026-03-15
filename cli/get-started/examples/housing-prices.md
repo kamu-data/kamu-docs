@@ -61,9 +61,9 @@ kamu pull --all
 ./init-s3.sh
 ```
 
-{{<warning>}}
+<Warning>
 The source data for `tax-reports` dataset is quite large (~400MB in CSV format) so if you don't want to wait too long - use the `init-s3.sh` script.
-{{</warning>}}
+</Warning>
 
 This may take 10+ minutes as the tax report dataset is quite large. You can leave the ingest running and move on to the next step meanwhile.
 
@@ -112,7 +112,7 @@ The `-n 100000` parameter here overrides the default limit on the dataframe size
 
 We can then use the resulting GeoJson data and render the heatmap using the [mapboxgl-jupyter](https://github.com/mapbox/mapboxgl-jupyter) library which comes pre-installed with `kamu`'s notebook server image.
 
-{{<image filename="/images/cli/examples/housing-prices/heatmap.png" alt="heatmap">}}
+<Diagram src="/images/cli/examples/housing-prices/heatmap.png" alt="House prices heatmap"/>
 
 
 ### Spatial Joins

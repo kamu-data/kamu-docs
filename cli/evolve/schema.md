@@ -1,11 +1,6 @@
 ---
-Title: Schema Evolution
-
-description:
-weight: 10
-underConstruction: true
-categories: []
-aliases:
+title: Schema Evolution
+icon: wrench
 ---
 
 ## Adding / deprecating columns

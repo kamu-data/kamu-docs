@@ -1,8 +1,6 @@
 ---
-Title: Tableau
+title: Tableau
 description: Connecting Tableau via JDBC protocol.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

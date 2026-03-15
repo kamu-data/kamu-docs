@@ -1,11 +1,6 @@
 ---
-Title: Derivative Dataset Evolution
-
-description:
-weight: 30
-underConstruction: true
-categories: []
-aliases:
+title: Derivative Dataset Evolution
+icon: wrench
 ---
 
 ## Derivative Dataset Evolution

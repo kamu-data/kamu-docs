@@ -1,10 +1,5 @@
 ---
-Title: Overdue Order Shipments
-description:
-weight: 0
-categories: []
-aliases:
-  - /cli/learn/examples/overdue-shipments
+title: Overdue Order Shipments
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

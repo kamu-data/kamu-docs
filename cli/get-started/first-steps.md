@@ -15,11 +15,11 @@ This tutorial will give you a high-level tour of `kamu` and show you how it work
 
 We assume that you have already followed the [installation steps](/install) and have `kamu` tool ready.
 
-{{<info>}}
+<Info>
 **Not ready to install just yet?**
 
 Try `kamu` in this [self-serve demo](/demo) without needing to install anything.
-{{</info>}}
+</Info>
 
 Don't forget to set up **shell completions** - they make using `kamu` a lot more fun!
 
@@ -46,9 +46,9 @@ Command help is also available online on [CLI Reference](/cli-reference) page.
 Throughout this tutorial we will be using the [Modified Zip Code Areas](https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk) dataset from New York Open Data Portal.
 
 ### Initializing the workspace
-To work with `kamu` you first need a **workspace**. {{<term "Workspace">}} is where kamu will store important information about {{<term "datasets" "dataset">}} and cached data. Let's create one:
+To work with `kamu` you first need a **workspace**. <Term t="Workspace"/> is where kamu will store important information about <Term t="datasets" "dataset"/> and cached data. Let's create one:
 
-{{<image filename="/images/cli/first-steps/init.gif" alt="kamu init">}}
+<Diagram src="/images/cli/first-steps/init.gif" alt="kamu init"/>
 
 ```bash
 mkdir my_workspace
@@ -56,9 +56,9 @@ cd my_workspace
 kamu init
 ```
 
-A {{<term "workspace">}} is just a directory with `.kamu` folder where all sorts of {{<term "data">}} and {{<term "metadata">}} are stored. It behaves very similarly to `.git` directory version-controlled repositories.
+A <Term t="workspace"/> is just a directory with `.kamu` folder where all sorts of <Term t="data"/> and <Term t="metadata"/> are stored. It behaves very similarly to `.git` directory version-controlled repositories.
 
-As you'd expect the {{<term "workspace">}} is currently empty:
+As you'd expect the <Term t="workspace"/> is currently empty:
 ```bash
 kamu list
 ```
@@ -68,11 +68,11 @@ One of the design principles of `kamu` is to know exactly where any piece of dat
 
 We'll get into the details of that later, but for now let's create such link.
 
-{{<image filename="/images/cli/first-steps/pull.gif" alt="kamu pull">}}
+<Diagram src="/images/cli/first-steps/pull.gif" alt="kamu pull"/>
 
-{{<term "Datasets" "dataset">}} are created from {{<term "dataset snapshots" "dataset-snapshot">}} - special files that describe the **desired state** of the metadata upon creation.
+<Term t="Datasets" "dataset"/> are created from <Term t="dataset snapshots" id="dataset-snapshot"/> - special files that describe the **desired state** of the metadata upon creation.
 
-We will use a {{<schema "DatasetSnapshot">}} file from [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) that looks like this:
+We will use a <Schema t="DatasetSnapshot"/> file from [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) that looks like this:
 
 ```yaml
 kind: DatasetSnapshot
@@ -108,7 +108,7 @@ Or add it directly from URL like so:
 kamu add https://raw.githubusercontent.com/kamu-data/kamu-contrib/master/us.cityofnewyork.data/zipcode-boundaries.yaml
 ```
 
-Such YAML files are called {{<term "manifests" "manifest">}}. First two lines specify that the file contains {{<schema "DatasetSnapshot">}} object and then specify the version of the schema, for upgradeability:
+Such YAML files are called <Term t="manifests" id="manifest"/>. First two lines specify that the file contains <Schema t="DatasetSnapshot"/> object and then specify the version of the schema, for upgradeability:
 
 ```yaml
 kind: DatasetSnapshot
@@ -123,7 +123,7 @@ name: us.cityofnewyork.data.zipcode-boundaries
 kind: Root
 ```
 
-{{<term "Datasets" "dataset">}} that ingest external data in `kamu` are called {{<term "Root" "root-dataset">}} datasets.
+<Term t="Datasets" "dataset"/> that ingest external data in `kamu` are called <Term t="Root" "root-dataset"/> datasets.
 
 Next we have:
 
@@ -135,7 +135,7 @@ metadata:
     ...
 ```
 
-This section contains one or many {{<term "metadata events" "metadata-chain">}} that can describe different aspects of a dataset, like:
+This section contains one or many <Term t="metadata events" id="metadata-chain"/> that can describe different aspects of a dataset, like:
 - where data comes from
 - its schema
 - license
@@ -144,9 +144,9 @@ This section contains one or many {{<term "metadata events" "metadata-chain">}} 
 - data quality checks
 - and much more.
 
-{{<tip>}}
+<Tip>
 To create your own snapshot file use `kamu new` command - it outputs a well-annotated template that you can customize for your needs.
-{{</tip>}}
+</Tip>
 
 
 ### Dataset Identity
@@ -201,7 +201,7 @@ kamu list
 └──────────────────────────────────────────┴──────┴────────┴─────────┴──────┘
 ```
 
-But the {{<schema "SetPollingSource">}} event that we specified in the snapshot describes where from and how `kamu` can ingest external data.
+But the <Schema t="SetPollingSource"/> event that we specified in the snapshot describes where from and how `kamu` can ingest external data.
 
 Polling sources perform following steps:
 - `fetch` - downloading the data from some external source (e.g. HTTP/FTP)
@@ -212,7 +212,7 @@ Polling sources perform following steps:
 
 You can find more information about data sources and ingestion stages in [this section](/ingest).
 
-Note that the data file we are ingesting is in [ESRI Shapefile](https://en.wikipedia.org/wiki/Shapefile) format, which is a widespread format for geo-spatial data, so we are using a special {{<schema "EsriShapefile" "ReadStep::EsriShapefile">}} reader.
+Note that the data file we are ingesting is in [ESRI Shapefile](https://en.wikipedia.org/wiki/Shapefile) format, which is a widespread format for geo-spatial data, so we are using a special <Schema t="EsriShapefile" id="ReadStep::EsriShapefile"/> reader.
 
 To fetch data from the source run:
 
@@ -253,7 +253,7 @@ For this `kamu` provides many tools (from basic to advanced):
 
 
 ### Tail command
-To quickly preview few last {{<term "events" "event">}} of any dataset use `tail` command:
+To quickly preview few last <Term t="events" id="event"/> of any dataset use `tail` command:
 
 ```bash
 $ kamu tail us.cityofnewyork.data.zipcode-boundaries
@@ -263,20 +263,20 @@ $ kamu tail us.cityofnewyork.data.zipcode-boundaries
 ### SQL shell
 SQL is the _lingua franca_ of the data science and `kamu` uses it extensively. So naturally it provides you a simple way to run ad-hoc queries on data.
 
-{{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
+<Diagram src="/images/cli/first-steps/sql.gif" alt="kamu sql"/>
 
 Following command will drop you into the SQL shell:
 ```bash
 kamu sql
 ```
 
-By default this command uses the [Apache Datafusion](https://arrow.apache.org/datafusion/) {{<term "engine">}}, so its [powerful SQL](https://arrow.apache.org/datafusion/user-guide/sql/index.html) is now available to you.
+By default this command uses the [Apache Datafusion](https://arrow.apache.org/datafusion/) <Term t="engine"/>, so its [powerful SQL](https://arrow.apache.org/datafusion/user-guide/sql/index.html) is now available to you.
 
-{{<tip>}}
+<Tip>
 You can also select other engines, e.g. [Apache Spark](https://spark.apache.org/)!
-{{</tip>}}
+</Tip>
 
-All datasets in your {{<term "workspace">}} should be available to you as tables:
+All datasets in your <Term t="workspace"/> should be available to you as tables:
 
 ```sql
 show tables;
@@ -288,9 +288,9 @@ You can use `describe` to inspect the dataset schema:
 describe "us.cityofnewyork.data.zipcode-boundaries";
 ```
 
-{{<note>}}
+<Note>
 The extra quotes are needed to treat the dataset name containing dots as a table name.
-{{</note>}}
+</Note>
 
 And of course you can run queries against any dataset:
 
@@ -318,9 +318,9 @@ Get started by running:
 kamu notebook -e MAPBOX_ACCESS_TOKEN=<your mapbox token>
 ```
 
-{{<note>}}
+<Note>
 Above we also tell `kamu` to pass the [MapBox](https://www.mapbox.com/) access token as `MAPBOX_ACCESS_TOKEN` environment variable into Jupyter, which we will use for plotting. You can get the token for free or skip this step and simply run `kamu notebook`.
-{{</note>}}
+</Note>
 
 Executing this should open your default browser with a Jupyter running in it.
 
@@ -356,11 +356,11 @@ select * from 'us.cityofnewyork.data.zipcode-boundaries' limit 3
 
 The queries return regular [Pandas](https://pandas.pydata.org/) dataframe.
 
-{{<image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002">}}
+<Diagram src="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002"/>
 
 Thanks to the [autovizwidget](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
 
-{{<image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003">}}
+<Diagram src="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003"/>
 
 To assign the result of `%%sql` cell to a variable use:
 ```sql
@@ -368,13 +368,13 @@ To assign the result of `%%sql` cell to a variable use:
 select ...
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004">}}
+<Diagram src="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004"/>
 
 You can use any of your favorite libraries to further process and visualize it:
 
 Example of visualizing population density data as a *choropleth* chart using [mapboxgl](https://github.com/mapbox/mapboxgl-jupyter) library:
 
-{{<image filename="/images/cli/first-steps/notebook-005.png" alt="kamu notebook 005">}}
+<Diagram src="/images/cli/first-steps/notebook-005.png" alt="kamu notebook 005"/>
 
 You can find this as well as many other notebooks in [kamu-contrib](https://github.com/kamu-data/kamu-contrib) repo.
 
@@ -388,12 +388,12 @@ kamu ui
 
 Web UI is especially useful once you start developing complex stream processing pipelines, to explore them more visually:
 
-{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}
+<Diagram src="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI"/>
 
 ## Conclusion
 We hope this quick overview inspires you to give `kamu` a try! 
 
-Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **{{<term "reproducible an verifiable" "verifiability">}}** way. 
+Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **<Term t="reproducible an verifiable" "verifiability"/>** way. 
 
 
 Please continue to the [self-serve demo](/demo) for some hands-on walkthroughs and tutorials, and check out our other [learning materials](/learning-materials).

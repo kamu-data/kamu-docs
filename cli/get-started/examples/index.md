@@ -1,10 +1,6 @@
 ---
 Title: Examples
 description: Sample data projects executed with kamu
-weight: 50
-categories: []
-aliases:
-  - /cli/learn/examples
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -49,6 +45,6 @@ The wild variety of formats and ways to model data used by the data publishers t
 
 To give you more examples on how to deal with **different ingest scenarios** we've created an [experimental repository](https://github.com/kamu-data/kamu-contrib) where we publish dataset manifests for a variety of Open Data sources.
 
-{{<tip>}}
+<Tip>
 Stuck on parsing a yet another variety of timestamps? Confused on how to change projection of the GIS data when reading ESRI file? Then check out [`kamu-contrib`](https://github.com/kamu-data/kamu-contrib) repo.
-{{</tip>}}
+</Tip>

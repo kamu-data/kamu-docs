@@ -1,16 +1,13 @@
 ---
-Title: Retractions & Corrections
-description:
-weight: 50
-underConstruction: false
-categories: []
-aliases:
+title: Retractions & Corrections
 ---
+
+import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 ## Motivation
 Errors in source data are inevitable and require a mechanism for correcting them post factum. Unlike databases, where one could issue `DELETE` or `UPDATE` queries, our core data model is an [immutable append-only stream](/spec#nature-of-data), and thus requires a different mechanism to issue **retractions and corrections** for past events.
 
-In cases when stream processing operations encounter late data (beyond the current {{<term "watermark), or retractions and corrections in the input, they may also need to issue corrections or retractions for previously produced results that were influenced by these events.
+In cases when stream processing operations encounter late data (beyond the current <Term t="watermark"/>), or retractions and corrections in the input, they may also need to issue corrections or retractions for previously produced results that were influenced by these events.
 
 We consider the correction / retraction model that works across all stages of data pipelines essential to making processing **maximally autonomous**. In turn, only by making data processing autonomous can collaborative data pipelines be **sustainable at global scale**.
 
@@ -114,8 +111,8 @@ Due to the restriction that correct from/to events appear side by side, this for
 ## ODF Model
 ODF uses the [two-event changelog stream](#changelog-stream-two-events) as its base model.
 
-Just like in our example above a special `op` column carries the {{<term "operation type">}} of each record.
+Just like in our example above a special `op` column carries the <Term t="operation type"/> of each record.
 
-Retractions and corrections are supported on {{<term "root dataset">}} level via [merge strategies](/merge-strategies).
+Retractions and corrections are supported on <Term t="root dataset"/> level via [merge strategies](/merge-strategies).
 
-We are currently working to integrate their support into all processing engines for seamless propagation across {{<term "derivative datasets" "derivative-dataset">}}.
+We are currently working to integrate their support into all processing engines for seamless propagation across <Term t="derivative datasets" id="derivative-dataset"/>.

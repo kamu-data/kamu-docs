@@ -1,8 +1,6 @@
 ---
-Title: Generic ADBC Client
+title: Generic ADBC Client
 description: Connecting client applications via ADBC protocol.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

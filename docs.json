@@ -149,7 +149,7 @@
                 "group": "Handling Bad Data",
                 "icon": "wrench",
                 "pages": [
-                  "/cli/bad-data/issuing-retractions-corrections",
+                  "/cli/bad-data/retractions-corrections",
                   "/cli/bad-data/ingest-errors",
                   "/cli/bad-data/upstream",
                   "/cli/bad-data/pii"
@@ -326,6 +326,10 @@
   },
   "redirects": [
     {
+      "source": "/demo",
+      "destination": "/cli/get-started/demo"
+    },
+    {
       "source": "/tos",
       "destination": "/terms"
     },
@@ -340,6 +344,30 @@
     {
       "source": "/license",
       "destination": "/licensing"
+    },
+    {
+      "source": "/cli/demo",
+      "destination": "/cli/get-started/demo"
+    },
+    {
+      "source": "/cli/self-serve-demo",
+      "destination": "/cli/get-started/demo"
+    },
+    {
+      "source": "/cli/get-started/self-serve-demo",
+      "destination": "/cli/get-started/demo"
+    },
+    {
+      "source": "/cli/install",
+      "destination": "/cli/get-started/install"
+    },
+    {
+      "source": "/cli/installation",
+      "destination": "/cli/get-started/install"
+    },
+    {
+      "source": "/cli/get-started/installation",
+      "destination": "/cli/get-started/install"
     }
   ]
 }

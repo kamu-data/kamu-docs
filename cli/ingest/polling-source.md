@@ -16,7 +16,7 @@ Polling sources are suitable for ingesting data from:
 - External systems using custom connector libraries.
 
 ## Source Metadata
-Polling sources are defined via {{<schema "SetPollingSource">}} metadata event:
+Polling sources are defined via <Schema t="SetPollingSource"/> metadata event:
 
 ```yaml
 ---
@@ -72,14 +72,14 @@ content:
       eventTimeColumn: date
 ```
 
-The structure of the {{<schema "SetPollingSource">}} event directly reflects all the ingestion phases:
+The structure of the <Schema t="SetPollingSource"/> event directly reflects all the ingestion phases:
 - `fetch` - specifies how to download the data from some external source (e.g. HTTP/FTP) and how to cache it efficiently
 - `prepare` (optional) - specifies how to prepare raw binary data for reading (e.g. extracting an archive or converting between formats)
 - `read` - specifies how to read the data into structured form (e.g. as CSV or Parquet)
 - `preprocess` (optional) - allows to shape the structured data with queries (e.g. to parse and convert types into best suited form wit SQL)
 - `merge` - specifies how to **combine the read data with the history of previously seen data** (this step is extremely important as it performs "ledgerization" / "historization" of the evolving state of data - see [Merge Strategies](/merge-strategies) section for explanation).
 
-A polling source can later be deactivated using {{<schema "DisablePollingSource">}} event.
+A polling source can later be deactivated using <Schema t="DisablePollingSource"/> event.
 
 For multiple example of handling tricky data sources see [input formats](/input-formats) section.
 
@@ -94,15 +94,15 @@ kamu pull com.example.city-populations
 See [Kamu Node protocols documentation](/protocols) for various options of polling data programmatically via APIs.
 
 ## Event Time
-The perfect scenario for `kamu` is when data records contain {{<term "event time">}} within them as a column, but many data sources on the web are not like that.
+The perfect scenario for `kamu` is when data records contain <Term t="event time"/> within them as a column, but many data sources on the web are not like that.
 
 If event time is not present in data - `kamu` will try to infer it. This can be:
 - Modification time for files on local or remote file systems
 - `Last-Modified` time for HTTP resources.
 
-If no time can be extracted from the source - it will fall back to using {{<term "system time">}}.
+If no time can be extracted from the source - it will fall back to using <Term t="system time"/>.
 
-Usually its best to be explicit about where your {{<term "event time">}} is coming by defining {{<schema "EventTimeSource">}} in the `fetch` section of {{<schema "SetPollingSource">}}. It's pretty flexible, allowing you to even extract time from timestamps that are part of file names:
+Usually its best to be explicit about where your <Term t="event time"/> is coming by defining <Schema t="EventTimeSource"/> in the `fetch` section of <Schema t="SetPollingSource"/>. It's pretty flexible, allowing you to even extract time from timestamps that are part of file names:
 
 ```yaml
 fetch:
@@ -120,8 +120,8 @@ fetch:
 ## Source Caching
 `kamu` does its best to avoid redundant work and not ingest data if source was not updated since the lass poll.
 
-Exact mechanism of cache control depends on the {{<schema "source type" "FetchStep">}} and the protocol used. In case of HTTP, for example, it will rely on standard HTTP caching headers like `ETag` and `Last-Modified`.
+Exact mechanism of cache control depends on the <Schema t="source type" id="FetchStep"/> and the protocol used. In case of HTTP, for example, it will rely on standard HTTP caching headers like `ETag` and `Last-Modified`.
 
-The latest caching information is stored in dataset metadata in {{<schema "AddData">}} event in a special {{<schema "SourceState">}} object. This means that it is possible for ingest to return no data and no new {{<term "watermark">}}, but still write a {{<term "metadata block" "metadata-chain">}} containing only the new source state.
+The latest caching information is stored in dataset metadata in <Schema t="AddData"/> event in a special <Schema t="SourceState"/> object. This means that it is possible for ingest to return no data and no new <Term t="watermark"/>, but still write a <Term t="metadata block" id="metadata-chain"/> containing only the new source state.
 
-You can control caching behavior via {{<schema "SourceCaching">}} object in the `fetch` section of {{<schema "SetPollingSource">}}.
+You can control caching behavior via <Schema t="SourceCaching"/> object in the `fetch` section of <Schema t="SetPollingSource"/>.

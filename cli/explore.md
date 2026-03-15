@@ -21,12 +21,12 @@ A set of [`kamu inspect *`](/cli-reference#kamu-inspect) commands allows you to 
 kamu inspect lineage ca.covid19.daily-cases -b
 ```
 
-{{<image filename="/images/cli/first-steps/lineage.png" alt="kamu sql">}}
+<Diagram src="/images/cli/first-steps/lineage.png" alt="kamu sql"/>
 
 ## SQL Console
 [`kamu sql`](/cli-reference#kamu-sql) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
 
-{{<image filename="/images/cli/first-steps/sql.gif" alt="kamu sql">}}
+<Diagram src="/images/cli/first-steps/sql.gif" alt="kamu sql"/>
 
 Following command will drop you into the SQL shell:
 ```bash
@@ -35,9 +35,9 @@ kamu sql
 
 By default this command uses the [Apache Datafusion](https://arrow.apache.org/datafusion/) engine, so its [powerful SQL](https://arrow.apache.org/datafusion/user-guide/sql/index.html) is now available to you.
 
-{{<tip>}}
+<Tip>
 You can also select other engines, e.g. [Apache Spark](https://spark.apache.org/)!
-{{</tip>}}
+</Tip>
 
 All datasets in your workspace should be available to you as tables:
 
@@ -51,9 +51,9 @@ You can use `describe` to inspect the dataset's schema:
 describe "us.cityofnewyork.data.zipcode-boundaries";
 ```
 
-{{<note>}}
+<Note>
 The extra quotes needed to treat the dataset name containing dots as a table name.
-{{</note>}}
+</Note>
 
 And of course you can run queries against any dataset:
 
@@ -79,9 +79,9 @@ Kamu also connects the power of [Apache Spark](https://spark.apache.org/) with t
 kamu notebook
 ```
 
-{{<tip>}}
+<Tip>
 You can use `-e ENV_VAR` option to pass additional environment variable into the notebook server. This can be very useful for different access and security tokens needed by different visualization APIs.
-{{</tip>}}
+</Tip>
 
 Executing this should open your default browser with a Jupyter running in it.
 
@@ -113,21 +113,21 @@ Or, more conveniently, using the `%%sql` cell magic:
 select * from 'my-dataset' limit 3
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002">}}
+<Diagram src="/images/cli/first-steps/notebook-002.png" alt="kamu notebook 002"/>
 
-{{<note>}}
+<Note>
 By default the `notebook` command will use DataFusion engine. To start with Spark use:
 
 ```sh
 kamu notebook --engine spark
 ```
-{{</note>}}
+</Note>
 
 The queries return regular Pandas dataframe.
 
 Thanks to the [autovizwidget](https://github.com/jupyter-incubator/sparkmagic) library you also get some simple instant visualizations for results of your queries.
 
-{{<image filename="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003">}}
+<Diagram src="/images/cli/first-steps/notebook-003.png" alt="kamu notebook 003"/>
 
 To assign the result of `%%sql` cell to a variable use:
 ```sql
@@ -135,7 +135,7 @@ To assign the result of `%%sql` cell to a variable use:
 select * from x
 ```
 
-{{<image filename="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004">}}
+<Diagram src="/images/cli/first-steps/notebook-004.png" alt="kamu notebook 004"/>
 
 You can use any of your favorite libraries to further process and visualize it.
 
@@ -143,7 +143,7 @@ You can use any of your favorite libraries to further process and visualize it.
 ## Web UI
 And finally, `kamu` comes with embedded Web UI that you can use to explore your pipelines and run SQL queries on data from the comfort of your browser:
 
-{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI">}}
+<Diagram src="/images/cli/first-steps/kamu-ui.png" alt="Kamu Web UI"/>
 
 You can launch it by running:
 

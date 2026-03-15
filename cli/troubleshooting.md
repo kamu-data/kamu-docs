@@ -1,9 +1,6 @@
 ---
-Title: Troubleshooting
+title: Troubleshooting
 description: Diagnosing the errors and reporting issues.
-weight: 1000
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -16,14 +13,15 @@ This command can be used to verify your environment setup:
 ```sh
 kamu system diagnose
 ```
-<pre><i>
-docker installed .. <span style="color:green">ok</span>
-docker can pull images .. <span style="color:green">ok</span>
-docker can run without sudo .. <span style="color:green">ok</span>
-docker can mount volumes .. <span style="color:green">ok</span>
-workspace consistency check .. <span style="color:green">ok</span>
+
+```sh Example response
+docker installed .. ok
+docker can pull images .. ok
+docker can run without sudo .. ok
+docker can mount volumes .. ok
+workspace consistency check .. ok
 ...
-</i></pre>
+```
 
 ## Standard Logging
 When `kamu` runs, it logs into `.kamu/run` directory. This directory is **cleaned up on every run**, so if you encounter an error make sure to copy important logs before running next `kamu` command.
@@ -36,7 +34,7 @@ Using `kamu --trace` flag allows you to record the execution of the program and 
 
 > Note: If you are using Brave or a similar high-security browser and get an error from Perfetto when loading the trace - try disabling the security features to allow the UI app fetch data from `http://localhost:9001`.
 
-{{<image filename="/images/cli/index/trace-perfetto.png" alt="Perfetto UI displaying a trace">}}
+<Diagram src="/images/cli/index/trace-perfetto.png" alt="Perfetto UI displaying a trace"/>
 
 ## Engine Errors
 In this early stages of development `kamu` does a minimal amount of error reporting from engines, so you might definitely encounter some issues that will require an ability to read exception information logged by the engines.

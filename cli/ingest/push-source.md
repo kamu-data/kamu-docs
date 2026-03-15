@@ -1,8 +1,5 @@
 ---
-Title: Push Sources
-weight: 30
-categories: []
-aliases:
+title: Push Sources
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -16,7 +13,7 @@ Push sources are suitable for:
 
 
 ## Source Metadata
-Push sources are added via {{<schema "AddPushSource">}} metadata event:
+Push sources are added via <Schema t="AddPushSource"/> metadata event:
 
 ```yaml
 kind: DatasetSnapshot
@@ -47,9 +44,9 @@ sourceName: default
 
 This allows you to declare **multiple push sources per dataset**, which may be useful for situations where several devices from different manufacturers produce slightly different data, but you want them to be able to write directly to one dataset.
 
-An existing push source can be deactivated using {{<schema "DisablePushSource">}} event.
+An existing push source can be deactivated using <Schema t="DisablePushSource"/> event.
 
-Also note that, just like polling sources, push sources pass data through a [Merge Strategy](/merge-strategies), so they too can benefit, for example, from **event deduplication** of the {{<schema "Ledger" "MergeStrategy::Ledger">}} merge strategy.
+Also note that, just like polling sources, push sources pass data through a [Merge Strategy](/merge-strategies), so they too can benefit, for example, from **event deduplication** of the <Schema t="Ledger" id="MergeStrategy::Ledger"/> merge strategy.
 
 
 ## Pushing Data via CLI
@@ -85,6 +82,6 @@ kamu tail gps
 See [Kamu Node protocols documentation](/protocols) for various options of pushing data programmatically via APIs.
 
 ## Format Translation
-While push sources define a specific {{<schema "read format" "ReadStep">}} for their data - there is some tolerance. For example you can push {{<schema "Csv" "ReadStep::Csv">}} data to the source that declares {{<schema "NdJson" "ReadStep::NdJson">}} format and `kamu` will attempt to read it using the same schema.
+While push sources define a specific <Schema t="read format" id="ReadStep"/> for their data - there is some tolerance. For example you can push <Schema t="Csv" id="ReadStep::Csv"/> data to the source that declares <Schema t="NdJson" id="ReadStep::NdJson"/> format and `kamu` will attempt to read it using the same schema.
 
 This behavior works both in CLI commands and in push APIs.

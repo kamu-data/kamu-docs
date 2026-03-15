@@ -1,10 +1,7 @@
 ---
-Title: Learning Materials
+title: Learning Materials
 description: Explainer videos, talks, publications and other learning materials
-weight: 30
-categories: []
-aliases:
-  - /cli/learn/learning-materials
+mode: wide
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

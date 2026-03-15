@@ -1,21 +1,17 @@
 ---
-Title: Validity of Data
+title: Validity of Data
 description: Describes audit and verification procedures that can be used to ensure the data presented to you is trustworthy
-weight: 50
-alwaysopen: false
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 This topic is also covered in detail in this video:
 
-{{% youtube hN_vpHYmwi0 %}}
+<YouTube id="hN_vpHYmwi0"/>
 
 With `kamu` sharing data becomes very easy, but with that problem out of the way you will soon start wondering "How can I trust the data I downloaded from someone else?". Let's first define what validity or trustworthiness of data means.
 
-For a more technical description see {{<term "verifiability">}}.
+For a more technical description see <Term t="verifiability"/>.
 
 ### Validity of Root Data
 Let's say you're about to use a root dataset containing historical weather information in your city. How can you be sure it's trustworthy?
@@ -52,6 +48,6 @@ For every derivative dataset the `kamu verify` command does two things:
 - Compares hashes of data you downloaded to the ones stored in metadata (ensures data is not tampered or corrupted)
 - Executes the declared derivative transformations locally to compare the hash of the result to one stored in metadata (ensures that metadata was not spoofed to match the fake result)
 
-{{<info>}}
-Remember that you are not alone in the fight for data validity. Other people will also be verifying these datasets, so the Open Data Fabric network can quickly detect and exclude the participants who distribute malicious data.
-{{</info>}}
+<Info>
+Remember that in the fight for data validity you are not alone. Other people will also be verifying these datasets, so the Open Data Fabric network can quickly detect and exclude the participants who distribute malicious data.
+</Info>

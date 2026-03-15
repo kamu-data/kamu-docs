@@ -1,15 +1,11 @@
 ---
-Title: Input Formats
+title: Input Formats
 description: Examples of handling tricky formats during ingestion
-weight: 20
-categories: []
-aliases:
-  - /cli/ingest/ingest-examples
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
-`kamu` supports multiple {{<schema "data sources" "FetchStep">}} and {{<schema "data formats" "ReadStep">}} that in combination with custom {{<schema "preparation steps" "PrepStep">}} can be used ingest all kinds of data.
+`kamu` supports multiple <Schema t="data sources" id="FetchStep"/> and <Schema t="data formats" id="ReadStep"/> that in combination with custom <Schema t="preparation steps" id="PrepStep"/> can be used ingest all kinds of data.
 
 Note that `kamu` is not made to be or replace data workflow tools like [Apache Airflow](https://airflow.apache.org/) or [Apache Ni-Fi](https://nifi.apache.org/), or data extraction tool like [Debezium](https://debezium.io/). Utilities described below are here only to simplify the initial data ingestion step - the very first step in the data's journey through a web of structured stream processing pipelines.
 
@@ -26,7 +22,7 @@ read:
   quote: '"'
 ```
 
-See: {{<schema "ReadStep::Csv">}}
+See: <Schema t="ReadStep::Csv"/>
 
 
 # JSON Document
@@ -55,7 +51,7 @@ read:
 
 Where `subPath` points at the array of records withing the document.
 
-See: {{<schema "ReadStep::Json">}}
+See: <Schema t="ReadStep::Json"/>
 
 
 # NDJSON
@@ -76,7 +72,7 @@ read:
   - key STRING
 ```
 
-See: {{<schema "ReadStep::NdJson">}}
+See: <Schema t="ReadStep::NdJson"/>
 
 
 # GeoJSON Document
@@ -89,7 +85,7 @@ read:
 
 The reader expects one `FeatureCollection` object in the root and will create a record per each `Feature` inside it, extracting the properties into individual columns and leaving the feature `geometry` in its own column.
 
-See: {{<schema "ReadStep::GeoJson">}}
+See: <Schema t="ReadStep::GeoJson"/>
 
 
 # NDGeoJSON Document
@@ -102,7 +98,7 @@ read:
 
 It is similar to [GeoJSON](#geojson-document) format but instead of `FeatureCollection` object in the root it expects every individual `Feature` to appear on its own line.
 
-See: {{<schema "ReadStep::NdGeoJson">}}
+See: <Schema t="ReadStep::NdGeoJson"/>
 
 
 # Esri Shapefile
@@ -123,7 +119,7 @@ preprocess:
     FROM input
 ```
 
-See: {{<schema "ReadStep::EsriShapefile">}}
+See: <Schema t="ReadStep::EsriShapefile"/>
 
 
 # Compressed Data & Archives
@@ -144,7 +140,7 @@ prepare:
   subPath: specific-file-*.csv  # Note: can contain glob patterns
 ```
 
-See: {{<schema "PrepStep::Decompress">}}
+See: <Schema t="PrepStep::Decompress"/>
 
 
 # Other Formats
@@ -168,11 +164,11 @@ read:
   - key STRING
 ```
 
-See: {{<schema "PrepStep::Pipe">}}
+See: <Schema t="PrepStep::Pipe"/>
 
 
 # Directory of Timestamped Files
-The {{<schema "FetchStep::FilesGlob">}} is used in cases where directory contains a growing set of files. Files can be periodic snapshots of your database or represent batches of new data in a ledger. In either case file content should never change - once `kamu` processes a file it will not consider it again. It's OK for files to disappear - `kamu` will remember the name of the file it ingested last and will only consider files that are higher in order than that one (lexicographically based on file name, or based on event time as shown below).
+The <Schema t="FetchStep::FilesGlob"/> is used in cases where directory contains a growing set of files. Files can be periodic snapshots of your database or represent batches of new data in a ledger. In either case file content should never change - once `kamu` processes a file it will not consider it again. It's OK for files to disappear - `kamu` will remember the name of the file it ingested last and will only consider files that are higher in order than that one (lexicographically based on file name, or based on event time as shown below).
 
 In the example below data inside the files is in snapshot format, and to complicate things it does not itself contain an event time - the event time is written into the file's name.
 
@@ -198,7 +194,7 @@ fetch:
     kind: Forever
 ```
 
-See: {{<schema "FetchStep::FilesGlob">}}
+See: <Schema t="FetchStep::FilesGlob"/>
 
 
 # Dealing with API Keys

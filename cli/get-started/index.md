@@ -11,11 +11,27 @@ Hi, and welcome to `kamu` - the world's first **planet-scale data pipeline** tha
 
 You can always get help or share feedback along the way in our [community channels](/community).
 
-To get started:
-1. Acknowledge the [current project status](/project-status)
-2. Go through [Kamu 101](/learning-materials) series of videos to get a taste of what `kamu` is about
-3. Take a self-guided tour in our [online demo environment](/demo)
-4. [Install](/install) `kamu` on your laptop
-5. Get to know it through [first steps](/first-steps) guide and try out the [advanced examples](/examples)
-6. Learn about architecture and design choices behind our data formats and protocols from our [conference talks](/learning-materials)
-7. Do a deep dive into [Open Data Fabric](/odf) protocol specification
+## To get started
+<Steps>
+  <Step>
+    Acknowledge the [current project status](/project-status)
+  </Step>
+  <Step>
+    Go through [Kamu 101](/learning-materials) series of videos to get a taste of what `kamu` is about
+  </Step>
+  <Step>
+    Take a self-guided tour in our [online demo environment](/demo)
+  </Step>
+  <Step>
+    [Install](/install) `kamu` on your laptop
+  </Step>
+  <Step>
+    Get to know it through [first steps](/first-steps) guide and try out the [advanced examples](/examples)
+  </Step>
+  <Step>
+    Learn about architecture and design choices behind our data formats and protocols from our [conference talks](/learning-materials)
+  </Step>
+  <Step>
+    Do a deep dive into [Open Data Fabric](/odf) protocol specification
+  </Step>
+</Steps>

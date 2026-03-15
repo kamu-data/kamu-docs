@@ -1,8 +1,6 @@
 ---
-Title: Apache Superset
+title: Apache Superset
 description: Connecting Apache Superset to Kamu via Flight SQL.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

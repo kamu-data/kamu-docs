@@ -1,5 +1,7 @@
 # TODO
 
+- section links e.g. /cli
+- table width (engines)
 - google analytics?
 - top links
 - align badges

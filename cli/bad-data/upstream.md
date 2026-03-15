@@ -1,8 +1,4 @@
 ---
-Title: Bad Data in Upstream Datasets
-description:
-weight: 30
-underConstruction: true
-categories: []
-aliases:
+title: Bad Data in Upstream Datasets
+icon: wrench
 ---

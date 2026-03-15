@@ -1,13 +1,10 @@
 ---
-Title: Ingesting Data
-description: Getting raw / source / root data into the system. Understanding the process of publishing data and the properties of root datasets.
-weight: 30
-categories: []
+title: Ingesting Data
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
-Ingestion is the process by which external data is added into Open Data Fabric's {{<term "root datasets" "root-dataset">}}. Kamu supports a wide variety of sources including resources on the web and [blockchains](/blockchain-source). Below we will describe why this process is necessary and how it works.
+Ingestion is the process by which external data is added into Open Data Fabric's <Term t="root datasets" id="root-dataset"/>. Kamu supports a wide variety of sources including resources on the web and [blockchains](/blockchain-source). Below we will describe why this process is necessary and how it works.
 
 ## Motivation
 When interacting with data on the web we usually cannot make any assumptions about guarantees that its publisher provides:
@@ -19,7 +16,7 @@ Data on the web is in a state of a *constant churn* where data is often updated 
 
 [Open Data Fabric](/spec) was created to **avoid excessive copying and harmful versioning** of data, and instead embed these guarantees into the data format itself, making them **impossible to violate**.
 
-Ingestion step is about getting the external data from this *"churning world"* into strict ledgers of {{<term "root datasets" "root-dataset">}}, where properties like clear ownership, reproducibility, accountability, and complete historical account can be guaranteed and made explicit.
+Ingestion step is about getting the external data from this *"churning world"* into strict ledgers of <Term t="root datasets" id="root-dataset"/>, where properties like clear ownership, reproducibility, accountability, and complete historical account can be guaranteed and made explicit.
 
 ## Sources
 There are two types of ingestion sources:
@@ -29,21 +26,21 @@ There are two types of ingestion sources:
 ## Phases
 Ingestion process has several well-defined phases:
 <div align="center">
-{{<image filename="/images/cli/ingest/ingest.png" alt="Ingest flow">}}
+<Diagram src="/images/cli/ingest/ingest.png" alt="Ingest flow"/>
 </div>
 
-These phases are directly reflected in the {{<schema "SetPollingSource">}} event:
+These phases are directly reflected in the <Schema t="SetPollingSource"/> event:
 - `fetch` - specifies how to download the data from some external source (e.g. HTTP/FTP) and how to cache it efficiently
 - `prepare` (optional) - specifies how to prepare raw binary data for reading (e.g. extracting an archive or converting between formats)
 - `read` - specifies how to read the data into structured form (e.g. as CSV or Parquet)
 - `preprocess` (optional) - allows to shape the structured data with queries (e.g. to parse and convert types into best suited form wit SQL)
 - `merge` - specifies how to **combine the read data with the history of previously seen data** (this step is extremely important as it performs "ledgerization" / "historization" of the evolving state of data - see [Merge Strategies](/merge-strategies) section for explanation).
 
-{{<tip>}}
+<Tip>
 If you are confused about what `SetPollingSource` event is - please refer to [First Steps](/first-steps) section that explains dataset creation.
-{{</tip>}}
+</Tip>
 
-The phases of push ingest are defined by the {{<schema "AddPushSource">}} event and are very similar, except for omitting `fetch` and `prepare` steps.
+The phases of push ingest are defined by the <Schema t="AddPushSource"/> event and are very similar, except for omitting `fetch` and `prepare` steps.
 
 For more information refer to [Polling Sources](/polling-source) and [Push Sources](/push-source) sections.
 
@@ -51,4 +48,4 @@ For more information refer to [Polling Sources](/polling-source) and [Push Sourc
 - For more information about defining data sources refer to [Polling Sources](/polling-source) and [Push Sources](/push-source) sections.
 - For examples of dealing with various types of data refer to [Input Formats](/input-formats) section.
 - For detailed explanation of "ledgerization" process see [Merge Strategies](/merge-strategies) section.
-- For more inspiration on creating {{<term "root datasets" "root-dataset">}} see [Examples](/examples) and [`kamu-contrib`](https://github.com/kamu-data/kamu-contrib/) repo.
+- For more inspiration on creating <Term t="root datasets" id="root-dataset"/> see [Examples](/examples) and [`kamu-contrib`](https://github.com/kamu-data/kamu-contrib/) repo.

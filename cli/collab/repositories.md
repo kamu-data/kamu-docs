@@ -1,16 +1,12 @@
 ---
-Title: Repositories
+title: Repositories
 description: Describes different approaches to sharing datasets
-weight: 10
-alwaysopen: false
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 ## Supported Repository Types
-Data in `kamu` is shared via {{<term "repositories" "repository">}}. There are multiple types of repositories that differ by the kinds of services they provide. The most basic repository allows you to upload ("push") and download ("pull") data, while more advanced can allow searching datasets, query data in-place, or subscribing for updates.
+Data in `kamu` is shared via <Term t="repositories" id="repository"/>. There are multiple types of repositories that differ by the kinds of services they provide. The most basic repository allows you to upload ("push") and download ("pull") data, while more advanced can allow searching datasets, query data in-place, or subscribing for updates.
 
 |   Type   | Description                                                                                             |                Capabilities                | URL Examples                                                                                                              |
 | :------: | ------------------------------------------------------------------------------------------------------- | :----------------------------------------: | ------------------------------------------------------------------------------------------------------------------------- |
@@ -54,17 +50,17 @@ kamu pull example-dataset  # Will pull from https://example.org/dataset
 kamu push example-dataset  # Will push to s3://my-bucket.example.org/example-dataset
 ```
 
-Both `pull` and `push` commands will analyze the state of the dataset in the {{<term "workspace">}} and at the repository and will only upload data and metadata that wasn't previously seen (a minimal update).
+Both `pull` and `push` commands will analyze the state of the dataset in the <Term t="workspace"/> and at the repository and will only upload data and metadata that wasn't previously seen (a minimal update).
 
 These commands are also "safe". They will detect all types of concurrent changes and history divergence and prevent you from overwriting someone else's changes.
 
-{{<note>}}
+<Note>
 When you pull a `Root` dataset from a remote source running `kamu pull` on it will attempt to sync it from the repository, and NOT execute a polling or other ingest action. In `kamu list` datasets with pull aliases will be showing up as `Remote(...)`. 
-{{</note>}}
+</Note>
 
 
 ## Repositories
-If you store multiple datasets side by side in some locations you can add it as a repository. Repositories are configured per {{<term "workspace">}} using the `kamu repo` command group.
+If you store multiple datasets side by side in some locations you can add it as a repository. Repositories are configured per <Term t="workspace"/> using the `kamu repo` command group.
 
 To add new repo use:
 ```bash

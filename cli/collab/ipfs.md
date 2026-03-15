@@ -1,10 +1,6 @@
 ---
-Title: Sharing datasets with IPFS
+title: Sharing datasets with IPFS
 description: Describes integration with content-addressable decentralized storage
-weight: 20
-alwaysopen: false
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
@@ -35,7 +31,7 @@ Unlike any other data processing system, `kamu` was build from ground up with re
 
 These event streams are represented by a linked list of metadata blocks (think git history or blockchain) that reference portions of raw data and checkpoint files:
 
-{{<image filename="/images/ipfs/odf-chain.svg" alt="ODF dataset structure" width="350px" align="center">}}
+<Diagram src="/images/cli/ipfs/odf-chain.svg" alt="ODF dataset structure" width="350px" align="center"/>
 
 So, very similarly to IPFS, the composing parts of a dataset in `kamu` are:
 - **Immutable** - dataset only changes by appending new blocks
@@ -43,13 +39,13 @@ So, very similarly to IPFS, the composing parts of a dataset in `kamu` are:
 
 Why it matters? Imagine you store a directory containing many large files in IPFS and it is assigned `CID1`. When you add a new file to it and do `ipfs add . -r` again IPFS will notice that it already has CIDs for all but one file and will reuse those objects:
 
-{{<image filename="/images/ipfs/ipfs-cids.svg" alt="CIDs in IPFS" width="250px" align="center">}}
+<Diagram src="/images/cli/ipfs/ipfs-cids.svg" alt="CIDs in IPFS" width="250px" align="center"/>
 
 If `CID1` remains "pinned" it basically represents the state of the same directory as `CID2` but at the previous point in time.
 
 This also works for `kamu` datasets:
 
-{{<image filename="/images/ipfs/odf-chain-in-ipfs.svg" alt="ODF dataset in IPFS" width="350px" align="center">}}
+<Diagram src="/images/cli/ipfs/odf-chain-in-ipfs.svg" alt="ODF dataset in IPFS" width="350px" align="center"/>
 
 - Each time you push to IPFS you are only adding the blocks and objects that were not seen previously. There is no duplication.
 - Previous CIDs remain valid - they simply point to an older subset of an event stream.
@@ -57,12 +53,12 @@ This also works for `kamu` datasets:
 
 Unlike many other data processing systems that mutate data, the cheapness of an "append" operation in `kamu` allows it achieve near real-time latencies of data propagation even when handling massive datasets and using immutable storage like IPFS.
 
-{{<note>}}
+<Note>
 The above diagrams are good to build up some intuition, but this is not exactly how data looks like in IPFS on the [IPLD DAG](https://ipld.io/) level. An accurate diagram would need to consider:
 - Slicing of large files into multiple objects
 - Raw vs. wrapped nodes
 - Balanced vs. custom DAG structure
-{{</note>}}
+</Note>
 
 ## Pulling from IPFS
 `kamu` supports pulling data from IPFS just like from any [other repository](/repositories). 
@@ -74,9 +70,9 @@ kamu pull ipfs://bafybeietcz4lxovy3ejdhb67nt3lj43vaeuyhectkqfnmmlnatfug5vqhe --a
 kamu pull ipns://k51qzi5uqu5dic6zu9i2f4afctxmsm298ypiuy3ijmob1w6m96c092qp4ev7mn --as my-dataset
 ```
 
-{{<tip>}}
+<Tip>
 Since the content behind an `ipfs://` URL never changes we use `--no-alias` flag to skip creation of the pull alias.
-{{</tip>}}
+</Tip>
 
 
 ### Configuring IPFS Gateway
@@ -124,9 +120,9 @@ We can now use this key to form a destination URL as `ipns://{key}` and push the
 kamu push my-dataset --to ipns://k51qzi5uqu5dgl4gf3uayepenee5tzix3r8oiwyimxsfuikr7alq928xxtwmew
 ```
 
-{{<warning>}}
+<Warning>
 Currently IPNS keys have a default lifetime of 24h (see `ipfs name publish --help`). This means you'll need to run push command periodically (e.g. on a cron job) to prevent it from expiring. Otherwise your URL will become non-resolvable.
-{{</warning>}}
+</Warning>
 
 Since IPNS pointers are mutable the next time we update the dataset we can push it again using the push alias `kamu` created for us:
 

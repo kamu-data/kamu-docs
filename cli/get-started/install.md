@@ -11,9 +11,9 @@ aliases:
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
-{{<info>}}
+<Info>
 Before using this product, please read the [project status disclaimer](/project-status).
-{{</info>}}
+</Info>
 
 ## General Information
 `kamu` is a **single-binary** utility that comes bundled with most of its dependencies.
@@ -41,7 +41,6 @@ Linux is our primary target environment. We don't have packages for various Linu
     ```
 
 See also:
-<!-- no toc -->
 - [Installing shell completions](/#installing-shell-completions)
 - [A Note on Docker Security](/#a-note-on-docker-security)
 - [Using Podman instead of Docker](/#using-podman-instead-of-docker)
@@ -61,7 +60,6 @@ We fully support Intel and M-series Macs, to install `kamu` please follow these 
     ```
 
 See also:
-<!-- no toc -->
 - [Installing shell completions](/#installing-shell-completions)
 - [Using Podman instead of Docker](/#using-podman-instead-of-docker)
 
@@ -98,14 +96,13 @@ See also:
     ```
 
 See also:
-<!-- no toc -->
 - [Installing shell completions](/#installing-shell-completions)
 - [Using Podman instead of Docker](/#using-podman-instead-of-docker)
 
 ### Windows (using Docker Desktop)
-{{<warning>}}
+<Warning>
 The native Windows binary is still highly experimental, so in most cases it's better to use the WSL
-{{</warning>}}
+</Warning>
 
 1. Install and run [Docker Desktop](https://docs.docker.com/docker-for-windows/install/).
    1. It's a good idea to give the Docker's VM more CPU and RAM - you can do so in `VirtualBox`.
@@ -116,9 +113,9 @@ The native Windows binary is still highly experimental, so in most cases it's be
 
 Docker Toolbox runs Docker in a Virtual Machine. This means to mount a file from your host file system into a Docker container the file first needs to be mounted into VM, so make sure all paths that `kamu` will need are mapped in VirtualBox VM settings.
 
-{{<tip>}}
+<Tip>
 **Example:** Lets assume your workspace directory is `C:\Users\me\kamu`. When `kamu` runs it will detect that Docker runs in a VM it will convert it to `/c/Users/me/kamu`. So in your VM settings you may need to add a mapping from `C:\Users\me` to `/c/Users/me`.
-{{</tip>}}
+</Tip>
 
 ## Upgrading
 On most platforms a new version of `kamu` can be installed by simply re-running the installer script:
@@ -156,9 +153,9 @@ To avoid all these issues please consider using [`podman`](/#using-podman-instea
 ## Using Podman instead of Docker 
 [`podman`](https://podman.io/) is an alternative container runtime that fixes the [security shortcomings of `docker`](#a-note-on-docker-security). We highly recommend you to give it a try, as we are planning to make it a default runtime in the near future.
 
-{{<warning>}}
+<Warning>
 Make sure to follow [Podman's Rootless Setup Guide](https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md) to allow `kamu` to run containers without `sudo`.
-{{</warning>}}
+</Warning>
 
 In order to instruct `kamu` to use `podman` run:
 
@@ -166,7 +163,7 @@ In order to instruct `kamu` to use `podman` run:
 kamu config set --user engine.runtime podman
 ```
 
-{{<info>}}
+<Info>
 On some systems you need to separately install `podman-dnsname` package to allow containers to communicate with one another via hostnames. To check whether you have it run:
 
 ```bash
@@ -177,7 +174,7 @@ podman network ls
 #                                                               ^^^ plugin installed
 podman network prune
 ```
-{{</info>}} 
+</Info> 
 
 
 ## Development Images
@@ -193,6 +190,6 @@ For example, try running:
 docker run -it --rm ghcr.io/kamu-data/kamu-base:latest-with-data kamu list
 ```
 
-{{<info>}}
+<Info>
 These images have `podman` installed inside the container, so when `kamu` runs an engine `podman` will be trying to pull an image and start a container from within another container. For such container-in-container setup to work you may need to pass `--privileged` flag when running this image.
-{{</info>}}
+</Info>

@@ -1,8 +1,6 @@
 ---
-Title: PowerBI
+title: PowerBI
 description: Connecting PowerBI via ODBC protocol.
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

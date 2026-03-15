@@ -263,7 +263,7 @@ To view the results you can use the provided `trading.ipynb` notebook and see th
 kamu notebook
 ```
 
-{{<image filename="/images/cli/examples/stock-trading/market_value.png" alt="Market value graph as viewed in the notebook" width="50%">}}
+<Diagram src="/images/cli/examples/stock-trading/market_value.png" alt="Market value graph as viewed in the notebook" width="50%"/>
 
 ### The role of watermarks
 If you look closely at the previous graph you will notice that the last event there is dated `2019-12-02`. This might be surprising because even though our account has stopped actively trading on that date, the ticker data still keeps coming, so we should be seeing the market value change over the course of 2020 and onwards...
@@ -325,6 +325,6 @@ kamu pull my.trading.holdings.market-value --recursive
 
 You can now reload the notebook and see that the graph extends to our watermark date.
 
-{{<note>}}
+<Note>
 Watermarks and many other stream processing concepts make temporal data processing much simpler. Take a minute to imagine how the queries we wrote above would look like in the batch processing form, how many edge cases associated with varying cadences, late and out-of-order arrivals the equivalent batch processing code would have to handle, and how **error-prone** it would be to write.
-{{</note>}}
+</Note>
