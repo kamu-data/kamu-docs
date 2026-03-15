@@ -19,7 +19,7 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 Kamu Web Platform is a **front-end application** that acts as a window into the decentralized [Open Data Fabric](/odf) (ODF) network.
 
-<img src="/images/pages/platform/kamu-web-ui-screenshot-cloud.png" alt="Kamu Platform screenshots"/>
+<img src="/images/platform/kamu-web-ui-screenshot-cloud.png" alt="Kamu Platform screenshots"/>
 
 Think of it as GitHub for data pipelines or Etherscan for ODF. It can be used in multiple setups:
 - On a laptop to explore and build pipelines together with [Kamu CLI](/cli)

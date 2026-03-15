@@ -19,7 +19,7 @@ if not os.path.exists(ODF_PATH):
         f"out side by side, but couldn't find path: {ODF_PATH}")
 
 IMAGES_DIR = "images/pages/spec"
-IMAGES_URL = "/images/pages/spec/"
+IMAGES_URL = "/images/spec/"
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!

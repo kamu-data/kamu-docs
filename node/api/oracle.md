@@ -188,11 +188,11 @@ To better understand what oracle providers return find the incoming oracle trans
 
 Find the `ProvideResults` log:
 
-<Diagram src="/images/pages/node/protocols/oracle-provider-result-data.jpg" alt="ProvideResults event data"/>
+<Diagram src="/images/node/protocols/oracle-provider-result-data.jpg" alt="ProvideResults event data"/>
 
 Copy the data field and paste it in https://cbor.me/ to get something like this:
 
-<Diagram src="/images/pages/node/protocols/oracle-provider-cbor.jpg" alt="Decoded CBOR data"/>
+<Diagram src="/images/node/protocols/oracle-provider-cbor.jpg" alt="Decoded CBOR data"/>
 
 The first three fields are: `version`, `success`, `data`. Refer to [`OdfResponse`](https://github.com/kamu-data/kamu-contracts/blob/e25e896ede177fdac7d34e9a4a3330094d23cc6f/src/OdfResponse.sol#L9) to understand the layout of the other fields.
 

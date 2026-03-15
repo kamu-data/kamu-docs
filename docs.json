@@ -22,7 +22,8 @@
             "group": "Getting Started",
             "icon": "book-open-cover",
             "pages": [
-              "/welcome"
+              "/welcome",
+              "/faq"
             ]
           },
           {
@@ -57,102 +58,111 @@
             ]
           },
           {
-            "group": "Kamu Node",
+            "group": "Kamu CLI",
+            "icon": "book-open-cover",
             "pages": [
-              "node/about",
-              "node/quick-start",
-              "node/architecture",
+              "/cli/about"
+            ]
+          },
+          {
+            "group": "Kamu Node",
+            "icon": "book-open-cover",
+            "pages": [
+              "/node/about",
+              "/node/quick-start",
+              "/node/architecture",
               {
                 "group": "Protocols",
                 "pages": [
-                  "node/api/overview",
-                  "node/api/flight-sql",
-                  "node/api/graphql",
-                  "node/api/jdbc",
-                  "node/api/kafka",
-                  "node/api/mqtt",
-                  "node/api/odata",
-                  "node/api/odf",
-                  "node/api/oracle",
-                  "node/api/postgres",
-                  "node/api/rest",
-                  "node/api/webhooks",
-                  "node/api/websocket"
+                  "/node/api/overview",
+                  "/node/api/flight-sql",
+                  "/node/api/graphql",
+                  "/node/api/jdbc",
+                  "/node/api/kafka",
+                  "/node/api/mqtt",
+                  "/node/api/odata",
+                  "/node/api/odf",
+                  "/node/api/oracle",
+                  "/node/api/postgres",
+                  "/node/api/rest",
+                  "/node/api/webhooks",
+                  "/node/api/websocket"
                 ]
               },
               {
                 "group": "Deployment",
                 "pages": [
-                  "node/deploy/manual",
-                  "node/deploy/k8s",
-                  "node/deploy/artifacts",
-                  "node/deploy/auth",
-                  "node/deploy/storage",
-                  "node/deploy/capacity",
-                  "node/deploy/security",
-                  "node/deploy/customization"
+                  "/node/deploy/manual",
+                  "/node/deploy/k8s",
+                  "/node/deploy/artifacts",
+                  "/node/deploy/auth",
+                  "/node/deploy/storage",
+                  "/node/deploy/capacity",
+                  "/node/deploy/security",
+                  "/node/deploy/customization"
                 ]
               },
               {
                 "group": "Operations",
                 "icon": "wrench",
                 "pages": [
-                  "node/operator/monitoring",
-                  "node/operator/upgrades",
-                  "node/operator/performance"
+                  "/node/operator/monitoring",
+                  "/node/operator/upgrades",
+                  "/node/operator/performance"
                 ]
               },
-              "node/commitments",
-              "node/troubleshoot"
+              "/node/commitments",
+              "/node/troubleshoot"
             ]
           },
           {
             "group": "Kamu Web Platform",
             "pages": [
-              "platform/about",
-              "platform/accounts",
+              "/platform/about",
+              "/platform/accounts",
               {
                 "group": "Datasets",
                 "icon": "wrench",
                 "pages": [
-                  "platform/datasets/attachments",
-                  "platform/datasets/licenses"
+                  "/platform/datasets/attachments",
+                  "/platform/datasets/licenses"
                 ]
               },
               {
                 "group": "Data Exploration",
                 "icon": "wrench",
                 "pages": [
-                  "platform/data/querying",
-                  "platform/data/notebooks"
+                  "/platform/data/querying",
+                  "/platform/data/notebooks"
                 ]
               },
-              "platform/privacy",
+              "/platform/privacy",
               {
                 "group": "Flow System",
                 "icon": "wrench",
                 "pages": [
-                  "platform/flows/overview"
+                  "/platform/flows/overview"
                 ]
               },
               {
                 "group": "Administration",
                 "icon": "wrench",
                 "pages": [
-                  "platform/admin/monitoring",
-                  "platform/admin/tasks-executors"
+                  "/platform/admin/monitoring",
+                  "/platform/admin/tasks-executors"
                 ]
               }
             ]
           },
           {
             "group": "Other",
-            "icon": "book-open-cover",
             "pages": [
-              "terms",
-              "faq",
-              "glossary",
-              "typography"
+              "/community",
+              "/contrib",
+              "/licensing",
+              "/terms",
+              "/glossary",
+              "/typography"
             ]
           }
         ]
@@ -229,6 +239,14 @@
     {
       "source": "/terms-of-service",
       "destination": "/terms"
+    },
+    {
+      "source": "/contribution-guidelines",
+      "destination": "/contrib"
+    },
+    {
+      "source": "/license",
+      "destination": "/licensing"
     }
   ]
 }

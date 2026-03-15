@@ -1,12 +1,6 @@
 ---
-Title: Licensing Terms
-description:
-weight: 30
-alwaysopen: false
-categories: []
-aliases:
-  - /license
-  - /contrib/license
+title: Licensing Terms
+icon: scroll
 ---
 
 ## Brief explanation of Kamu's license
@@ -49,9 +43,9 @@ Unfortunately, there are many precedents where the work of Open Source companies
 - [Couchbase](https://blog.couchbase.com/couchbase-adopts-bsl-license/)
 - [Sentry](https://blog.sentry.io/2019/11/06/relicensing-sentry)
 
-{{<info>}}
+<Info>
 Same reasons have also lead to creation of the [SSPL license](https://www.mongodb.com/licensing/server-side-public-license/faq) by MongoDB, which is also adopted by many companies, but we chose BSL for being **simpler and less ambiguous**.
-{{</info>}}
+</Info>
 
 
 ## FAQ

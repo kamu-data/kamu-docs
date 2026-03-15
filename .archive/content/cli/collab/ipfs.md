@@ -33,7 +33,7 @@ Unlike any other data processing system, `kamu` was build from ground up with re
 
 These event streams are represented by a linked list of metadata blocks (think git history or blockchain) that reference portions of raw data and checkpoint files:
 
-{{<image filename="/images/pages/ipfs/odf-chain.svg" alt="ODF dataset structure" width="350px" align="center">}}
+{{<image filename="/images/ipfs/odf-chain.svg" alt="ODF dataset structure" width="350px" align="center">}}
 
 So, very similarly to IPFS, the composing parts of a dataset in `kamu` are:
 - **Immutable** - dataset only changes by appending new blocks
@@ -41,13 +41,13 @@ So, very similarly to IPFS, the composing parts of a dataset in `kamu` are:
 
 Why it matters? Imagine you store a directory containing many large files in IPFS and it is assigned `CID1`. When you add a new file to it and do `ipfs add . -r` again IPFS will notice that it already has CIDs for all but one file and will reuse those objects:
 
-{{<image filename="/images/pages/ipfs/ipfs-cids.svg" alt="CIDs in IPFS" width="250px" align="center">}}
+{{<image filename="/images/ipfs/ipfs-cids.svg" alt="CIDs in IPFS" width="250px" align="center">}}
 
 If `CID1` remains "pinned" it basically represents the state of the same directory as `CID2` but at the previous point in time.
 
 This also works for `kamu` datasets:
 
-{{<image filename="/images/pages/ipfs/odf-chain-in-ipfs.svg" alt="ODF dataset in IPFS" width="350px" align="center">}}
+{{<image filename="/images/ipfs/odf-chain-in-ipfs.svg" alt="ODF dataset in IPFS" width="350px" align="center">}}
 
 - Each time you push to IPFS you are only adding the blocks and objects that were not seen previously. There is no duplication.
 - Previous CIDs remain valid - they simply point to an older subset of an event stream.

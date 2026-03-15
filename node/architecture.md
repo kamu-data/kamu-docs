@@ -9,7 +9,7 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 This diagram shows a complete deployment of [Kamu Node](/node) and [Kamu Web Platform](/platform):
 
 <Diagram
-    src="/images/pages/node/node-platform-deployment-components.svg" 
+    src="/images/node/node-platform-deployment-components.svg" 
     alt="Kamu Node and Platform deployment components"/>
 
 ## Dataset Storage

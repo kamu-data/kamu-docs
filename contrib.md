@@ -1,9 +1,6 @@
 ---
-Title: Contribution Guidelines
-description: All you need to know before taking upon any work
-weight: 10
-alwaysopen: false
-categories: []
+title: Contributing
+icon: heart
 ---
 
 Thanks for considering to contribute! This project is a massive undertaking and developed just by a few people, so every little bit helps.

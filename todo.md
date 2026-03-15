@@ -1,5 +1,7 @@
 # TODO
 
+- google analytics?
+- top links
 - align badges
 - use Tooltip for glossary and schema items?
 - Spec ToC ident issues

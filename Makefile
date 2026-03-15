@@ -22,3 +22,8 @@ docgen:
 .PHONY: nix
 nix:
 	nix develop ./dev/nix
+
+
+.PHONY: clean
+clean:
+	rm -rf node_modules

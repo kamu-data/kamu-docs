@@ -18,7 +18,7 @@ Data is a set of <Term t="Events" id="event"/> stored in the system. Since event
 
 Data never appears in the system alone as we would not be able to tell where it came from and whether it can be trusted. Data always appears as part of a <Term t="Dataset" id="dataset"/>.
 
-<Diagram src="/images/pages/glossary/dataset.svg" alt="Diagram: Dataset/Data"/>
+<Diagram src="/images/glossary/dataset.svg" alt="Diagram: Dataset/Data"/>
 
 See also:
 - [Data Format](/spec#data-format)
@@ -59,7 +59,7 @@ More formally, a slice is a:
 - That has the same <Term t="Schema" id="schema"/>
 - Defined by its `[start; end]` <Term t="Offset" id="offset"/> interval
 
-<Diagram src="/images/pages/glossary/metadata.svg" alt="Diagram: Data Slices and Metadata"/>
+<Diagram src="/images/glossary/metadata.svg" alt="Diagram: Data Slices and Metadata"/>
 
 ## Metadata
 Refers to information about a <Term t="Dataset" id="dataset"/> stored in its <Term t="Metadata Chain" id="metadata-chain"/>.
@@ -74,11 +74,11 @@ Metadata Chain captures all essential information about the <Term t="Dataset" id
 
 Just like <Term t="Data" id="data"/>, the metadata chain also has a temporal nature. It consists of individual **Metadata Blocks** that refer to the previous block in the chain, forming a singly-linked list. Every block carries one of <Schema t="Metadata Events" id="metadata-events"/> that describes how data evolved over time.
 
-<Diagram src="/images/pages/glossary/metadata-chain.svg" alt="Diagram: Metadata Chain"/>
+<Diagram src="/images/glossary/metadata-chain.svg" alt="Diagram: Metadata Chain"/>
 
 All Metadata Blocks are immutable and changes by appending new blocks. With blocks, data, and checkpoints named after and referenced by the <Term t="hash" id="hash"/> of their content - a dataset forms a type of [content-addressable](https://en.wikipedia.org/wiki/Content-addressable_storage) system, where having a reference to the last Metadata Block one can traverse the entire chain to discover all the components of the dataset.
 
-<Diagram src="/images/pages/glossary/metadata-chain-2.svg" alt="Diagram: Dataset as a Content-Addressable Graph"/>
+<Diagram src="/images/glossary/metadata-chain-2.svg" alt="Diagram: Dataset as a Content-Addressable Graph"/>
 
 Metadata Chain also supports **Block References** that assign a certain symbolic name to a block hash, effectively acting as a named pointer. At the minimum all datasets have a `head` reference that indicates the current last block in the Metadata Chain. Using multiple references the metadata chain can be organized into a directed acyclic graph that can form branches, allowing for example to stage some subset of events for review or an automated QA process before they are accepted into the main chain.
 
@@ -106,7 +106,7 @@ Depending on where the data comes from datasets can be of these kinds:
 - <Term t="Root" id="root-dataset"/>
 - <Term t="Derivative" id="derivative-dataset"/>
 
-<Diagram src="/images/pages/glossary/dataset_graph.svg" alt="Diagram: Dataset Graph"/>
+<Diagram src="/images/glossary/dataset_graph.svg" alt="Diagram: Dataset Graph"/>
 
 ### Root Dataset
 Root datasets are the points of entry of external data into the system. They are usually owned by the organization that has full authority and responsibility over that data, i.e. a trusted source.
@@ -174,7 +174,7 @@ Engine is an interface shared by all specific implementations of a <Term t="Quer
 
 Engines run in a sandboxed environments and are not permitted to use any external resources to guarantee the reproducibility of all operations.
 
-<Diagram src="/images/pages/glossary/engine-execution-env.svg" alt="Diagram: Derivative Transformation"/>
+<Diagram src="/images/glossary/engine-execution-env.svg" alt="Diagram: Derivative Transformation"/>
 
 As Engines are in the full control of all data transformations, they are also responsible for answering the <Term t="Provenance" id="provenance"/> queries.
 
@@ -325,7 +325,7 @@ See also:
 ## Watermark
 A watermark defines the point in <Term t="Event Time" id="event-time"/> for which with a high probability we've already observed all preceding events.
 
-<Diagram src="/images/pages/glossary/watermarks_in_stream.svg" alt="Diagram: Watermarks in the Stream"/>
+<Diagram src="/images/glossary/watermarks_in_stream.svg" alt="Diagram: Watermarks in the Stream"/>
 
 When performing time-based windowed operation, aggregations, or joins it is important to know when a certain time window can be considered closed. Watermark tells the system "You most likely will not get event with time less than `T` anymore".
 
@@ -333,7 +333,7 @@ In the <Term t="Root Dataset" id="root-dataset"/> events can still arrive even a
 
 Watermarks in the system are defined per every <Term t="Metadata Block" id="metadata-chain"/>. By default, the <Term t="Root Dataset" id="root-dataset"/> will assign the watermark to the maximum observed <Term t="Event Time" id="event-time"/> in the <Term t="Data Slice" id="data-slice"/>. You can and should override this behavior if you expect events to arrive out-of-order to some degree, e.g. offsetting the watermark by `1 day` prior to last seen event.
 
-<Diagram src="/images/pages/glossary/watermarks_vs_time.svg" alt="Diagram: Watermarks in Time Domains"/>
+<Diagram src="/images/glossary/watermarks_vs_time.svg" alt="Diagram: Watermarks in Time Domains"/>
 
 Watermarks can also be set based on the <Term t="System Time" id="system-time"/> manually or semi-automatically. This is valuable for the slow moving <Term t="Datasets" id="dataset"/> where it's normal not to see any events in days or even months. Setting the watermark explicitly allows all computations based on such stream to proceed, knowing that there were no events for that time period, where otherwise the output would be stalled assuming the <Term t="Dataset" id="dataset"/> was not updated for a while and old data can still arrive.
 

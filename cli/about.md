@@ -1,17 +1,12 @@
 ---
-Title: Kamu CLI
-description:
-weight: 20
-topLevelElement: true
-topLevelProject: true
-alwaysopen: false
-categories: ["CLI"]
-aliases:
+title: About
 ---
+
+import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 <div align="center">
 
-{{<image filename="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%">}}
+<img src="/images/kamu-logo-slogan.png" alt="Kamu logo" width="50%"/>
 
 [Repository] | [Demo] | [Tutorials] | [Examples] | [FAQ] | [Chat]
 
@@ -20,17 +15,15 @@ aliases:
 [![CI](https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-cli/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master)](https://github.com/kamu-data/kamu-cli/actions)
 [![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
 
-</p>
 </div>
+
 
 `kamu` *(pronounced [kæmˈuː](https://en.wikipedia.org/wiki/Albert_Camus))* is a command-line tool for management and verifiable processing of dynamic structured data. It's a green-field project that aims to enable **global collaboration on data** on the same scale as seen today in software.
 
 ## Intro
 `kamu` is based on [Open Data Fabric](https://opendatafabric.org) protocol.
 <div align="center">
-<a href="https://www.youtube.com/watch?v=ZyiZVfuVM9E" target="_blank">
-<img alt="Open Data Fabric: Building Block of Collaborative Data" src="https://img.youtube.com/vi/ZyiZVfuVM9E/maxresdefault.jpg" width="60%"/>
-</a>
+<YouTube id="ZyiZVfuVM9E" width="60%"/>
 <p><i>Introductory video</i></p>
 </div>
 
@@ -61,7 +54,7 @@ curl -s "https://get.kamu.dev" | sh
 `kamu` works well with popular data extractors like Debezium and provides [many built-in sources](/cli/ingest) ranging from polling data on the web to MQTT broker and blockchain logs.
 
 <div align="center">
-{{<image filename="/images/cli/index/pull-multi.gif" alt="Ingesting data" width="65%">}}
+<img src="/images/cli/index/pull-multi.gif" alt="Ingesting data" width="65%"/>
 </div>
 
 
@@ -86,9 +79,9 @@ Unlike Iceberg and Delta that encourage continuous loss of history through Chang
 - Apache Superset and many other BI solutions
 
 <div align="center">
-{{<image filename="/images/cli/first-steps/sql.gif" alt="SQL Shell" width="65%">}}
+<img src="/images/cli/first-steps/sql.gif" alt="SQL Shell" width="65%"/>
 
-{{<image filename="/images/cli/first-steps/notebook-005.png" alt="Integrated Jupyter notebook" width="65%">}}
+<img src="/images/cli/first-steps/notebook-005.png" alt="Integrated Jupyter notebook" width="65%"/>
 </div>
 
 
@@ -98,7 +91,7 @@ Data in `kamu` can only be [transformed through code](/transform). An SQL query 
 `kamu` doesn't implement data processing itself - it integrates [many popular data engines](https://docs.kamu.dev/cli/supported-engines/) *(Flink, Spark, DataFusion...)* as plugins, so you can build an ETL flow that uses the strengths of different engines at different steps of the pipeline:
 
 <div align="center">
-{{<image filename="/images/cli/first-steps/kamu-ui.png" alt="Complex ETL pipeline in Kamu Web UI" width="65%">}}
+<img src="/images/cli/first-steps/kamu-ui.png" alt="Complex ETL pipeline in Kamu Web UI" width="65%"/>
 </div>
 
 
@@ -160,9 +153,10 @@ Using `kamu` you can easily [read on-chain data](/blockchain-source) to run anal
 
 In general, `kamu` is a great fit for cases where data is exchanged between several independent parties, and for (low to moderate frequency & volume) mission-critical data where high degree of trustworthiness and protection from malicious actors is required.
 
-{{< tabs tabTotal="5" tabID="1" tabName1="Open Data" tabName2="Science & Research" tabName3="Data-driven Journalism" tabName4="Business core data" tabName5="Personal analytics">}} 
+<Card>
+<Tabs>
 
-{{< tab tabNum="1" >}}
+<Tab title="Open Data">
 To share data **outside of your organization** today you have limited options:
 
 - You can publish it on some open data portal, but lose ownership and control of your data
@@ -178,9 +172,9 @@ This is why the goal of `kamu` is to make data publishing **cheap and effortless
 - Maintain full control and ownership of your data
 
 As opposed to just the download counter you get on most data portals, `kamu` brings publishers closer to the communities allowing them to see who and how uses their data. You no longer send data into "the ether", but create a **closed feedback loop** with your consumers.
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="2" >}}
+<Tab title="Science & Research">
 One of the driving forces behind `kamu`'s design was the [ongoing reproducibility crisis](https://www.nature.com/articles/533452a) in science, which we believe to a large extent is caused by our poor data management practices.
 
 After incidents like [The Surgisphere scandal](https://www.the-scientist.com/features/the-surgisphere-scandal-what-went-wrong--67955) the sentiment in research is changing from assuming that all research is done in good faith, to considering any research unreliable until proven otherwise.
@@ -199,9 +193,9 @@ When using `kamu`:
 - All the data prep work (that often accounts for [80% of time of a data scientist](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/?sh=348d5f876f63)) can be shared and **reused** by others
 - Your data projects will **continue to function** long after you've moved on, so the work done years ago can continue to produce valuable insights with minimal maintenance on your part
 - Continuously flowing datasets are much **easier to systematize** than the exponentially growing number of snapshots
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="3" >}}
+<Tab title="Data-driven Journalism">
 Data-driven journalism is on the rise and has proven to be extremely effective. In the world of misinformation and extremely polarized opinions data provides us an anchoring point to discuss complex problems and analyze cause and effect. Data itself is non-partisan and has no secret agenda, and arguments around different interpretations of data are infinitely more productive than ones based on gut feelings.
 
 Unfortunately, too often data has issues that undermine its trustworthiness. And even if the data is correct, it's very easy to pose a question about its sources that will take too long to answer - the data will be dismissed, and the gut feelings will step in.
@@ -211,17 +205,17 @@ This is why `kamu`'s goal is to make data **verifiably trustworthy** and make an
 And once we agree that source data can be trusted, we can build analyses and **real-time dashboards** that keep track of complex issues like corruption, inequality, climate, epidemics, refugee crises, etc.
 
 `kamu` prevents good research from going stale the moment it's published!
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="4" >}}
+<Tab title="Business core data">
 `kamu` aims to be the most reliable data management solution that provides recent data while maintaining the **highest degree of accountability** and **tamper-proof provenance**, without you having to put all data in some central database. 
 
 We're developing it with financial and pharmaceutical use cases in mind, where **audit and compliance could be fully automated** through our system.
 
 Note that we currently focus on mission-critical data and `kamu` is not well suited for IoT or other high-frequency and high-volume cases, but can be a good fit for insights produced from such data that influence your company's decisions and strategy.
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="5" >}}
+<Tab title="Personal analytics">
 Being data geeks, we use `kamu` for data-driven decision-making even in our personal lives. 
 
 Actually, our largest data pipelines so far were created for personal finance:
@@ -230,24 +224,26 @@ Actually, our largest data pipelines so far were created for personal finance:
 - analyze stocks trading data. 
 
 We also scrape a lot of websites to make smarter purchasing decisions. `kamu` lets us keep all this data up-to-date with an **absolute minimal effort**.
-{{< /tab >}}
+</Tab>
 
-{{< /tabs >}}
+</Tabs>
+</Card>
+
 
 ## Features
-
 `kamu` connects **publishers** and **consumers** of data through a decentralized network and lets people **collaborate** on extracting insight from data. It offers many perks for everyone who participates in this first-of-a-kind data supply chain:
 
-{{< tabs tabTotal="4" tabID="2" tabName1="For Data Publishers" tabName2="For Data Scientists" tabName3="For Data Consumers" tabName4="For Data Exploration">}} 
+<Card>
+<Tabs>
 
-{{< tab tabNum="1" >}}
+<Tab title="For Data Publishers">
 - Easily **share your data** with the world **without moving it** anywhere
 - Retain full **ownership and control** of your data
 - Close the feedback loop and **see who and how uses your data**
 - Provide **real-time**, **verifiable and reproducible** data that follows the best data management practices
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="2" >}}
+<Tab title="For Data Scientists">
 - **Ingest any existing dataset** from the web
 - Always **stay up-to-date** by pulling latest updates from the data sources with just one command
 - Use **stable data references** to make your data projects fully reproducible
@@ -256,37 +252,37 @@ We also scrape a lot of websites to make smarter purchasing decisions. `kamu` le
 - **Write query once and run it forever** - our pipelines require nearly zero maintenance
 - Built-in support for **GIS data**
 - **Share** your results with others in a fully reproducible and reusable form
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="3" >}}
+<Tab title="For Data Consumers">
 - **Download** a dataset from a shared repository
 - **Verify** that all data comes from trusted sources using 100% accurate **lineage**
 - **Audit** the chain of transformations this data went through
 - **Validate** that downloaded was not tampered with a single command
 - **Trust** your data by knowing where every single bit of information came from with our **fine grain provenance**
-{{< /tab >}}
+</Tab>
 
-{{< tab tabNum="4" >}}
+<Tab title="For Data Exploration">
 - Explore data and run **ad-hoc SQL queries**
 - Launch a **Jupyter notebook** with one command
 - Join, filter, and shape your data using SQL
 - Visualize the result using your favorite library
 - Explore complex pipelines in Web UI
-{{< /tab >}}
+</Tab>
 
-{{< /tabs >}}
+</Tabs>
+</Card>
 
 
 ## Community
-
 If you like what we're doing - support us by [starring the repo](https://github.com/kamu-data/kamu-cli), this helps us a lot!
 
 For the list of our community resource and guides on how to contribute [start here](/community).
 
 
 [Repository]: https://github.com/kamu-data/kamu-cli
-[Demo]: {{<ref "demo">}}
-[Tutorials]: {{<ref "get-started/learning-materials">}}
-[Examples]: {{<ref "examples">}}
-[FAQ]: {{<ref "faq">}}
+[Demo]: /cli/demo
+[Tutorials]: /get-started/learning-materials
+[Examples]: /examples
+[FAQ]: /faq
 [Chat]: https://discord.gg/nU6TXRQNXC

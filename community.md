@@ -1,11 +1,6 @@
 ---
-Title: Community
-description:
-weight: 60
-topLevelElement: true
-categories: []
-aliases:
-  - /contrib
+title: Community
+icon: user-group
 ---
 
 We welcome participation from everyone - join, ask questions, and get involved!
@@ -33,4 +28,4 @@ The top-level repositories are:
 We are preparing to make the existing multi-year Kamu roadmap public, but most of it can already be seen as "Epics" in top-level repositories ([example in kamu-cli](https://github.com/kamu-data/kamu-cli/issues?q=is%3Aissue+is%3Aopen+label%3Aepic)).
 
 ## Contributing
-See [Contribution Guidelines](/contribution-guidelines) to get started.
+See [Contribution Guidelines](/contributing) to get started.

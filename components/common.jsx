@@ -22,7 +22,7 @@ export const Diagram = ({ src, alt }) => {
 };
 
 
-export const YouTube = ({ id }) => {
+export const YouTube = ({ id, width }) => {
   const src = `https://www.youtube.com/embed/${id}`;
 
   return <iframe
@@ -30,6 +30,7 @@ export const YouTube = ({ id }) => {
     src={src}
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
+    width={width}
   ></iframe>;
 };
 
