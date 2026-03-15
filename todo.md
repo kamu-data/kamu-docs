@@ -1,9 +1,13 @@
 # TODO
 
 - section links e.g. /cli
-- table width (engines)
+- commands reference indented blocks are not treated as code
+- tables column width
+  - config reference
+  - known engines
+  - learning materials
 - google analytics?
-- top links
+- top-level links
 - align badges
 - use Tooltip for glossary and schema items?
 - Spec ToC ident issues

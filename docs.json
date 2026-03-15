@@ -262,7 +262,23 @@
       },
       {
         "tab": "Reference",
-        "groups": []
+        "groups": [
+          {
+            "group": "Kamu CLI",
+            "icon": "book-open-cover",
+            "pages": [
+              "/cli/commands",
+              "/cli/config"
+            ]
+          },
+          {
+            "group": "Kamu Node",
+            "icon": "book-open-cover",
+            "pages": [
+              "/node/config"
+            ]
+          }
+        ]
       }
     ],
     "global": {

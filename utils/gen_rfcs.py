@@ -26,11 +26,7 @@ title: "{title}"
 
 INDEX_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: RFCs
-linkTitle: RFCs
-weight: 30
-categories: []
-aliases:
+title: RFCs
 ---
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'

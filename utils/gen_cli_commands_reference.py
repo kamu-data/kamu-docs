@@ -15,17 +15,30 @@ if not os.path.exists(KAMU_CLI_PATH):
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Commands Reference
-description:
-weight: 100
-categories: []
+title: Commands Reference
 ---
 """
+
+
+# Hacky way to convert to MDX style
+def md_to_mdx(text):
+    lines = []
+    for line in text.split("\n"):
+        line = line.replace("{", "\\{").replace("<!--", "{/*").replace("-->", "*/}")
+        if "`" not in line:
+            line = line.replace("<", "\\<")
+        lines.append(line)
+    
+    return "\n".join(lines)
+
 
 if __name__ == "__main__":
     # Read the source
     with open(os.path.join(KAMU_CLI_PATH, "resources/cli-reference.md")) as f:
         text = f.read()
+
+    # Convert comments
+    text = md_to_mdx(text)
 
     print(PAGE_HEADER)
     print(text)

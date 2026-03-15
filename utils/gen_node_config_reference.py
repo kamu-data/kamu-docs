@@ -15,17 +15,28 @@ if not os.path.exists(KAMU_NODE_PATH):
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-Title: Config Reference
-description:
-weight: 110
-categories: []
+title: Config Reference
 ---
 """
+
+
+# Hacky way to convert to MDX style
+def md_to_mdx(text):
+    lines = []
+    for line in text.split("\n"):
+        line = line.replace("{", "\\{").replace("<!--", "{/*").replace("-->", "*/}")
+        lines.append(line)
+    
+    return "\n".join(lines)
+
 
 if __name__ == "__main__":
     # Read the source
     with open(os.path.join(KAMU_NODE_PATH, "resources/api-server/config.md")) as f:
         text = f.read()
+
+    # Convert comments
+    text = md_to_mdx(text)
 
     print(PAGE_HEADER)
     print(text)

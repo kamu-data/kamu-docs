@@ -14,9 +14,9 @@ docgen:
 	python utils/gen_glossary.py > glossary.md
 	python utils/gen_spec.py > odf/spec.md
 	python utils/gen_rfcs.py odf/rfcs/
-	# python utils/gen_cli_commands_reference.py > content/cli/cli-reference.md
-	# python utils/gen_cli_config_reference.py > content/cli/config-reference.md
-	# python utils/gen_node_config_reference.py > content/node/config-reference.md
+	python utils/gen_cli_commands_reference.py > cli/commands.md
+	python utils/gen_cli_config_reference.py > cli/config.md
+	python utils/gen_node_config_reference.py > node/config.md
 
 
 .PHONY: nix
