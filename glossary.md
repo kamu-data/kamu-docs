@@ -2,7 +2,6 @@
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
 title: Glossary
 description: Definitions of commonly used terms in Open Data Fabric and Kamu projects
-icon: arrow-down-a-z
 ---
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'

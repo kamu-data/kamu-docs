@@ -29,6 +29,7 @@
             "group": "Open Data Fabric",
             "icon": "book-open-cover",
             "pages": [
+              "/odf/about",
               "/odf/spec",
               "/odf/reference",
               {

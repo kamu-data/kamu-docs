@@ -18,7 +18,7 @@ if not os.path.exists(ODF_PATH):
 
 GLOSSARY_EXTRA_PATH = "utils/glossary-extra.md"
 
-IMAGES_DIR = "images/pages/glossary"
+IMAGES_DIR = "images/glossary"
 IMAGES_URL = "/images/glossary/"
 
 PAGE_HEADER = """---

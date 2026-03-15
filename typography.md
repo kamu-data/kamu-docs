@@ -4,7 +4,7 @@ description: Common UI elements used in documentation
 icon: pen
 ---
 
-import {Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 This section provides examples of all style elements available to documentation authors and the guidelines on using them.
 

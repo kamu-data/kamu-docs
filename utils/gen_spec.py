@@ -18,8 +18,8 @@ if not os.path.exists(ODF_PATH):
         f"Expecting to have `open-data-fabric` repository checked "
         f"out side by side, but couldn't find path: {ODF_PATH}")
 
-IMAGES_DIR = "images/pages/spec"
-IMAGES_URL = "/images/spec/"
+IMAGES_DIR = "images/odf"
+IMAGES_URL = "/images/odf/"
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
