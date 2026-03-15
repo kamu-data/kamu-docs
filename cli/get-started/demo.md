@@ -53,7 +53,7 @@ jupyter_1  |   http://127.0.0.1:8765/?token=...
 
 Use this URL in your browser to open Jupyter. Once in Jupyter, navigate to the `demo` directory, open first notebook, and follow the instructions.
 
-Enjoy, and please send us [your feedback](https://github.com/issues)!
+Enjoy, and please send us [your feedback](https://github.com/kamu-data/kamu-cli/issues/)!
 
 ### Shutting down
 To shutdown the environment do:
