@@ -61,7 +61,100 @@
             "group": "Kamu CLI",
             "icon": "book-open-cover",
             "pages": [
-              "/cli/about"
+              "/cli/about",
+              "/cli/supported-engines",
+              "/cli/troubleshooting",
+              {
+                "group": "Getting Started",
+                "root": "/cli/get-started/index",
+                "pages": [
+                  "/cli/get-started/project-status",
+                  "/cli/get-started/demo",
+                  "/cli/get-started/install",
+                  "/cli/get-started/learning-materials",
+                  {
+                    "group": "Examples",
+                    "root": "/cli/get-started/examples/index",
+                    "pages": [
+                      "/cli/get-started/examples/covid19",
+                      "/cli/get-started/examples/currency-conversion",
+                      "/cli/get-started/examples/housing-prices",
+                      "/cli/get-started/examples/leaderboard",
+                      "/cli/get-started/examples/overdue-shipments",
+                      "/cli/get-started/examples/stock-trading",
+                      "/cli/get-started/examples/web3-data"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Ingesting Data",
+                "root": "/cli/ingest/index",
+                "pages": [
+                  "/cli/ingest/input-formats",
+                  "/cli/ingest/push-source",
+                  "/cli/ingest/merge-strategies",
+                  "/cli/ingest/blockchain-source"
+                ]
+              },
+              {
+                "group": "Transforming Data",
+                "root": "/cli/transform/index",
+                "pages": [
+                  "/cli/transform/projections",
+                  "/cli/transform/retractions-corrections",
+                  "/cli/transform/aggregations",
+                  "/cli/transform/joins-s2s",
+                  "/cli/transform/joins-tt",
+                  "/cli/transform/watermarks",
+                  "/cli/transform/gis-data"
+                ]
+              },
+              "/cli/explore",
+              {
+                "group": "Sharing & Collaboration",
+                "root": "/cli/collab/index",
+                "pages": [
+                  "/cli/collab/repositories",
+                  "/cli/collab/privacy-and-permissions",
+                  "/cli/collab/ipfs",
+                  "/cli/collab/validity",
+                  "/cli/collab/provenance"
+                ]
+              },
+              {
+                "group": "Integrations",
+                "root": "/cli/integrations/index",
+                "pages": [
+                  "/cli/integrations/adbc",
+                  "/cli/integrations/apache-superset",
+                  "/cli/integrations/dbeaver",
+                  "/cli/integrations/jdbc",
+                  "/cli/integrations/odbc",
+                  "/cli/integrations/powerbi",
+                  "/cli/integrations/python",
+                  "/cli/integrations/tableau"
+                ]
+              },
+              {
+                "group": "Dataset Evolution",
+                "icon": "wrench",
+                "pages": [
+                  "/cli/evolve/schema",
+                  "/cli/evolve/root",
+                  "/cli/evolve/deriv"
+                ]
+              },
+              {
+                "group": "Handling Bad Data",
+                "icon": "wrench",
+                "pages": [
+                  "/cli/bad-data/issuing-retractions-corrections",
+                  "/cli/bad-data/ingest-errors",
+                  "/cli/bad-data/upstream",
+                  "/cli/bad-data/pii"
+                ]
+              }
             ]
           },
           {
