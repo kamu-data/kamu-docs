@@ -96,7 +96,7 @@ In our design we achieve trust with following solution criteria:
 - All transformations that were applied to it must be known and can be audited
 - The results of those transformations can always be reproduced by following the same transformation steps
 
-<Diagram src="/images/odf/transform.svg" alt="Diagram: Transformation"/>
+<Diagram src="/images/odf/spec/transform.svg" alt="Diagram: Transformation"/>
 
 Components:
 - Transformations are expressed using [Queries](#query) written in any of the supported languages.
@@ -178,7 +178,7 @@ Data is a set of [Events](#event) stored in the system. Since events are immutab
 
 Data never appears in the system alone as we would not be able to tell where it came from and whether it can be trusted. Data always appears as part of a [Dataset](#dataset).
 
-<Diagram src="/images/odf/dataset.svg" alt="Diagram: Dataset/Data"/>
+<Diagram src="/images/odf/spec/dataset.svg" alt="Diagram: Dataset/Data"/>
 
 See also:
 - [Data Format](#data-format)
@@ -219,7 +219,7 @@ More formally, a slice is a:
 - That has the same [Schema](#schema)
 - Defined by its `[start; end]` [Offset](#offset) interval
 
-<Diagram src="/images/odf/metadata.svg" alt="Diagram: Data Slices and Metadata"/>
+<Diagram src="/images/odf/spec/metadata.svg" alt="Diagram: Data Slices and Metadata"/>
 
 ## Metadata
 Refers to information about a [Dataset](#dataset) stored in its [Metadata Chain](#metadata-chain).
@@ -234,11 +234,11 @@ Metadata Chain captures all essential information about the [Dataset](#dataset),
 
 Just like [Data](#data), the metadata chain also has a temporal nature. It consists of individual **Metadata Blocks** that refer to the previous block in the chain, forming a singly-linked list. Every block carries one of <Schema t="Metadata Events" id="metadata-events"/> that describes how data evolved over time.
 
-<Diagram src="/images/odf/metadata-chain.svg" alt="Diagram: Metadata Chain"/>
+<Diagram src="/images/odf/spec/metadata-chain.svg" alt="Diagram: Metadata Chain"/>
 
 All Metadata Blocks are immutable and changes by appending new blocks. With blocks, data, and checkpoints named after and referenced by the [hash](#hash) of their content - a dataset forms a type of [content-addressable](https://en.wikipedia.org/wiki/Content-addressable_storage) system, where having a reference to the last Metadata Block one can traverse the entire chain to discover all the components of the dataset.
 
-<Diagram src="/images/odf/metadata-chain-2.svg" alt="Diagram: Dataset as a Content-Addressable Graph"/>
+<Diagram src="/images/odf/spec/metadata-chain-2.svg" alt="Diagram: Dataset as a Content-Addressable Graph"/>
 
 Metadata Chain also supports **Block References** that assign a certain symbolic name to a block hash, effectively acting as a named pointer. At the minimum all datasets have a `head` reference that indicates the current last block in the Metadata Chain. Using multiple references the metadata chain can be organized into a directed acyclic graph that can form branches, allowing for example to stage some subset of events for review or an automated QA process before they are accepted into the main chain.
 
@@ -266,7 +266,7 @@ Depending on where the data comes from datasets can be of these kinds:
 - [Root](#root-dataset)
 - [Derivative](#derivative-dataset)
 
-<Diagram src="/images/odf/dataset_graph.svg" alt="Diagram: Dataset Graph"/>
+<Diagram src="/images/odf/spec/dataset_graph.svg" alt="Diagram: Dataset Graph"/>
 
 ### Root Dataset
 Root datasets are the points of entry of external data into the system. They are usually owned by the organization that has full authority and responsibility over that data, i.e. a trusted source.
@@ -334,7 +334,7 @@ Engine is an interface shared by all specific implementations of a [Query](#quer
 
 Engines run in a sandboxed environments and are not permitted to use any external resources to guarantee the reproducibility of all operations.
 
-<Diagram src="/images/odf/engine-execution-env.svg" alt="Diagram: Derivative Transformation"/>
+<Diagram src="/images/odf/spec/engine-execution-env.svg" alt="Diagram: Derivative Transformation"/>
 
 As Engines are in the full control of all data transformations, they are also responsible for answering the [Provenance](#provenance) queries.
 
@@ -485,7 +485,7 @@ See also:
 ## Watermark
 A watermark defines the point in [Event Time](#event-time) for which with a high probability we've already observed all preceding events.
 
-<Diagram src="/images/odf/watermarks_in_stream.svg" alt="Diagram: Watermarks in the Stream"/>
+<Diagram src="/images/odf/spec/watermarks_in_stream.svg" alt="Diagram: Watermarks in the Stream"/>
 
 When performing time-based windowed operation, aggregations, or joins it is important to know when a certain time window can be considered closed. Watermark tells the system "You most likely will not get event with time less than `T` anymore".
 
@@ -493,7 +493,7 @@ In the [Root Dataset](#root-dataset) events can still arrive even after their ti
 
 Watermarks in the system are defined per every [Metadata Block](#metadata-chain). By default, the [Root Dataset](#root-dataset) will assign the watermark to the maximum observed [Event Time](#event-time) in the [Data Slice](#data-slice). You can and should override this behavior if you expect events to arrive out-of-order to some degree, e.g. offsetting the watermark by `1 day` prior to last seen event.
 
-<Diagram src="/images/odf/watermarks_vs_time.svg" alt="Diagram: Watermarks in Time Domains"/>
+<Diagram src="/images/odf/spec/watermarks_vs_time.svg" alt="Diagram: Watermarks in Time Domains"/>
 
 Watermarks can also be set based on the [System Time](#system-time) manually or semi-automatically. This is valuable for the slow moving [Datasets](#dataset) where it's normal not to see any events in days or even months. Setting the watermark explicitly allows all computations based on such stream to proceed, knowing that there were no events for that time period, where otherwise the output would be stalled assuming the [Dataset](#dataset) was not updated for a while and old data can still arrive.
 
@@ -790,7 +790,7 @@ See Also:
 ## Dataset Layout
 The recommended layout of the dataset on disk is:
 
-<Diagram src="/images/odf/dataset_layout.svg" alt="Diagram: Dataset Layout"/>
+<Diagram src="/images/odf/spec/dataset_layout.svg" alt="Diagram: Dataset Layout"/>
 
 This layout must be used when sharing datasets via file or object-based [Repositories](#repository) (e.g. local FS, S3, IPFS, DAT...).
 
@@ -860,7 +860,7 @@ This operation is used by the [Coordinator](#coordinator) to perform the next it
 
 The [Coordinator](#coordinator) is designed to isolate the [Engines](#engine) from the complexity of managing the [Metadata Chain](#metadata-chain) and make processing look as close as possible to a regular stream processing.
 
-<Diagram src="/images/odf/engine_transform.svg" alt="Sequence Diagram: Execute Query"/>
+<Diagram src="/images/odf/spec/engine_transform.svg" alt="Sequence Diagram: Execute Query"/>
 
 Inputs:
 - Transaction ID
@@ -1024,7 +1024,7 @@ The `Snapshot` strategy also requires special treatment in regard to the [Event 
 ### Derivative Transformations
 [Previously](#execute-query) we looked at how an [Engine](#engine) executes the transformation query. Here we will look at what happens on the [Coordinator](#coordinator) side.
 
-<Diagram src="/images/odf/engine_transform.svg" alt="Sequence Diagram: Execute Query"/>
+<Diagram src="/images/odf/spec/engine_transform.svg" alt="Sequence Diagram: Execute Query"/>
 
 Here are the steps that the [Coordinator](#coordinator) performs during the transformation:
 - **Batch step** - Analyze the [Metadata Chains](#metadata-chain) of the [Dataset](#dataset) being transformed and all the inputs. The goal here is to decide how far the processing can progress before hitting one of the special conditions, such as a change of schema in one of the inputs or a change of the transformation query.

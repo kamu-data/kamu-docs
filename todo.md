@@ -1,7 +1,14 @@
 # TODO
 
-- section links e.g. /cli
-- commands reference indented blocks are not treated as code
+- `/cli/get-started` -> `/get-started/`
+- `/node/api` -> new tab?
+- `/cli/integrations` -> new tab?
+- `/odf` -> reference tab?
+- project icons
+- check section links e.g. `/cli`
+- fix `welcome` page links
+- links linting and fixes
+- commands / config reference indented blocks are not treated as code
 - tables column width
   - config reference
   - known engines
@@ -13,8 +20,7 @@
 - Spec ToC ident issues
 - Diagram background when zoomed in
 - open graph / social preview
-- fix search
-- improve `allchildren` preview
+- `welcome` page align links to bottom
 - extend FAQ
     with reddit questions
     streaming only for real-time
