@@ -1,7 +1,7 @@
 ---
 title: FAQ
 description: Frequently asked questions
-icon: question
+icon: circle-question
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

@@ -1,6 +1,7 @@
 ---
 title: "Welcome to Kamu!"
 sidebarTitle: Welcome
+icon: hand-spock
 mode: wide
 ---
 
