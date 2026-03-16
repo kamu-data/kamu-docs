@@ -75,3 +75,21 @@ a.project-quicklink:is(.dark *, .light *) {
   height: 100px;
   width: auto;
 }
+
+
+/* CI badges */
+div.badges {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px;
+}
+div.badges img {
+    display: inline;
+    margin: 0;
+}
+div.badges a {
+    border-bottom: 0;
+}

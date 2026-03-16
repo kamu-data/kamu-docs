@@ -20,7 +20,7 @@ Our documentation is organized around four closely related projects:
 <Columns cols={2}>
   <Card>
     <h4 class="project-title"><a href="/odf">Open Data Fabric</a></h4>
-    <a href="/odf"><img src="/images/projects/odf.svg"/></a>
+    <a href="/odf"><img src="/images/projects/odf.svg" noZoom/></a>
     ODF is an open protocol spec for exchange and verifiable multi-party processing of data. It's an independent open-source project. It is included on this website for convenience of cross-referencing with the rest of documentation.
 
     <Columns cols={2}>
@@ -33,7 +33,7 @@ Our documentation is organized around four closely related projects:
 
   <Card>
     <h4 class="project-title"><a href="/cli">Kamu CLI</a></h4>
-    <a href="/cli"><img src="/images/projects/kamu-cli.svg"/></a>
+    <a href="/cli"><img src="/images/projects/kamu-cli.svg" noZoom/></a>
     A powerful command line tool that implements ODF protocol. You can run it on any device to build data pipelines, ingest and explore data, and interact with other nodes on ODF network.
 
     <Columns cols={2}>
@@ -46,7 +46,7 @@ Our documentation is organized around four closely related projects:
 
   <Card>
     <h4 class="project-title"><a href="/node">Kamu Node</a></h4>
-    <a href="/node"><img src="/images/projects/kamu-node.svg"/></a>
+    <a href="/node"><img src="/images/projects/kamu-node.svg" noZoom/></a>
     A scalable server implementation of ODF. It's a set of Kubernetes applications that can be installed in a distributed environment to:
     - Operate data pipelines
     - Verify computations done by other parties
@@ -63,7 +63,7 @@ Our documentation is organized around four closely related projects:
 
   <Card>
     <h4 class="project-title"><a href="/platform">Kamu Web Platform</a></h4>
-    <a href="/platform"><img src="/images/projects/kamu-platform.svg"/></a>
+    <a href="/platform"><img src="/images/projects/kamu-platform.svg" noZoom/></a>
     A front-end application that acts as a window into the ODF network. Think of it as GitHub for data pipelines or Etherscan of ODF. It can be used in multiple setups: from exploring your local Kamu CLI workspace, to managing your distributed Kamu Node deployment, and to interacting with remote nodes in the global ODF network.
 
     <Columns cols={2}>

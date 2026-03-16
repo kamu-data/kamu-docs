@@ -10,10 +10,21 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 [Repository] | [Demo] | [Tutorials] | [Examples] | [FAQ] | [Chat]
 
-
-[![Release](https://img.shields.io/github/v/release/kamu-data/kamu-cli?include_prereleases&logo=rust&logoColor=orange&style=for-the-badge)](https://github.com/kamu-data/kamu-cli/releases/latest)
-[![CI](https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-cli/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master)](https://github.com/kamu-data/kamu-cli/actions)
-[![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
+<div class="badges">
+  <a href="https://github.com/kamu-data/kamu-cli/releases/latest">
+    <img
+      src="https://img.shields.io/github/v/release/kamu-data/kamu-cli?include_prereleases&logo=rust&logoColor=orange&style=for-the-badge"
+      noZoom/>
+  </a>
+  <a href="https://github.com/kamu-data/kamu-cli/actions">
+    <img 
+      src="https://img.shields.io/github/actions/workflow/status/kamu-data/kamu-cli/build.yaml?logo=githubactions&label=CI&logoColor=white&style=for-the-badge&branch=master"
+      noZoom/>
+  </a>
+  <a href="https://discord.gg/nU6TXRQNXC">
+    <img src="https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord" noZoom/>
+  </a>
+</div>
 
 </div>
 

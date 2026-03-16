@@ -23,15 +23,23 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 [Original Whitepaper](https://arxiv.org/abs/2111.06364) |
 [Chat](https://discord.gg/nU6TXRQNXC)
 
-[![Spec](https://img.shields.io/github/v/tag/open-data-fabric/open-data-fabric?include_prereleases&logo=gitbook&logoColor=white&label=Spec&style=for-the-badge)](https://github.com/open-data-fabric/open-data-fabric/blob/master/open-data-fabric.md)
-[![Metadata Reference](https://img.shields.io/static/v1?label={}&message=Schemas&color=blue&style=for-the-badge)](./open-data-fabric.md#reference-information)
-[![Chat](https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord)](https://discord.gg/nU6TXRQNXC)
-
+<div class="badges">
+  <a href="/odf/spec">
+    <img
+      src="https://img.shields.io/github/v/tag/open-data-fabric/open-data-fabric?include_prereleases&logo=gitbook&logoColor=white&label=Spec&style=for-the-badge"
+      noZoom/>
+  </a>
+  <a href="/odf/schemas">
+    <img 
+      src="https://img.shields.io/static/v1?label={}&message=Schemas&color=blue&style=for-the-badge"
+      noZoom/>
+  </a>
+  <a href="https://discord.gg/nU6TXRQNXC">
+    <img src="https://shields.io/discord/898726370199359498?style=for-the-badge&logo=discord&label=Discord" noZoom/>
+  </a>
 </div>
 
-<Info>
-While we are in the process of automating our documentation pipeline please refer to the [GitHub Repository](https://github.com/kamu-data/open-data-fabric) for the latest version of the protocol specification.
-</Info>
+</div>
 
 
 ## Introduction
