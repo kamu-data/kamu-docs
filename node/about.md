@@ -53,5 +53,5 @@ You should consider Kamu Node when you want to:
 - Build a horizontally-scalable lakehouse for your data
 - Need a decentralized infrastructure for sharing data with your partners or globally without intermediaries
 - Want to continuously operate ODF data pipelines or verify data
-- Need a rich set of [data APIs](/node/protocols/)
-- Want to provide data to [ODF blockchain oracle](/node/protocols/oracle)
+- Need a rich set of [data APIs](/api)
+- Want to provide data to [ODF blockchain oracle](/api/oracle)

@@ -12,8 +12,8 @@ This section provides examples of all style elements available to documentation 
 ## Links
 
 We have special types of links to refer readers to:
-- definitions of terms in the [Glossary](/glossary)
-- schemas in the [Reference](/reference)
+- definitions of terms in the [Glossary](/general/glossary)
+- schemas in the [ODF Schemas Reference](/odf/schemas)
 
 **Input:**
 
@@ -161,7 +161,7 @@ Result:
 
 ```markdown
 <img 
-  src="/static/kamu-logo-dark.svg" 
+  src="/images/kamu-logo-dark.svg" 
   alt="Kamu logo"
   style={{width: "30%"}}
   className="rounded-lg"
@@ -171,7 +171,7 @@ Result:
 Result:
 
 <img 
-  src="/static/kamu-logo-dark.svg" 
+  src="/images/kamu-logo-dark.svg" 
   alt="Kamu logo"
   style={{width: "30%"}}
   className="rounded-lg"

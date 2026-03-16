@@ -16,7 +16,7 @@ In simple terms, given two root datasets `A` and `B` the derivative dataset `C` 
 C = f(A, B)
 ```
 
-Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams](/spec#nature-of-data), and function `f()` is a [streaming (temporal) processing](/spec#stream-processing-model) operation that produces another stream as an output.
+Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams](/odf/spec#nature-of-data), and function `f()` is a [streaming (temporal) processing](/odf/spec#stream-processing-model) operation that produces another stream as an output.
 
 Stream processing composition works just like normal functional composition:
 
@@ -34,7 +34,7 @@ Functions being "pure" means that <Term t="derivative datasets" id="derivative-d
 While this may seem restrictive - this unlocks highly desirable properties like <Term t="reproducibility and verifiability" id="verifiability"/> of all computations and ability to automatically derive <Term t="provenance"/>.
 
 <Info>
-Imagine being able to erase all derivative data in the world and [reconstruct it in identical form](/spec#derivative-data-transience) just from source data. Derivative data in ODF sometimes feels like a superpower.
+Imagine being able to erase all derivative data in the world and [reconstruct it in identical form](/odf/spec#derivative-data-transience) just from source data. Derivative data in ODF sometimes feels like a superpower.
 </Info>
 
 
@@ -74,10 +74,10 @@ This event is as simple as defining two things:
 - `inputs` - data from which datasets will be used as input to this pipeline step
 - `transform` - the transformation being performed.
 
-Technically ODF supports [any data processing framework](/spec#engine). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
+Technically ODF supports [any data processing framework](/odf/spec#engine). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
 
 ## Execution Model
-When you use [`kamu pull`](/cli-reference#kamu-pull) on a derivative dataset the tool will:
+When you use [`kamu pull`](/cli/commands#kamu-pull) on a derivative dataset the tool will:
 1. Start the appropriate <Term t="query engine" id="engine"/>
 2. Restore the state of computation from previous <Term t="checkpoint"/> (if any)
 3. Feed the **previously unseen** data from all inputs
@@ -118,7 +118,7 @@ See [Kamu Blog: The End of Batch Era](https://www.kamu.dev/blog/end-of-batch-era
 ## Self-correcting Nature
 While we mostly talk about data streams from perspective of observing new events and adding new records - there are many situations when events that were already published may be deemed incorrect and need to be **retracted or corrected**.
 
-We [previously discussed](/merge-strategies#snapshot) retractions and corrections in the context of <Term t="merge strategies" id="merge-strategy"/>, but the most amazing thing about stream processing is that it **can automatically react to retractions and corrections in inputs** to issue appropriate retractions or corrections in the output.
+We [previously discussed](/cli/ingest/merge-strategies#snapshot) retractions and corrections in the context of <Term t="merge strategies" id="merge-strategy"/>, but the most amazing thing about stream processing is that it **can automatically react to retractions and corrections in inputs** to issue appropriate retractions or corrections in the output.
 
 This means that whenever a major issue is detected and fixed in some <Term t="root dataset"/> - these events can **automatically and rapidly propagate** through hundreds of data pipeline stages with no human involvement.
 
@@ -126,4 +126,4 @@ This means that whenever a major issue is detected and fixed in some <Term t="ro
 Imagine you publish a research paper based on some medical dataset. Few months passes and the hospital that published the dataset notices and corrects a major inconsistency in data. By linking your paper to a certain range within the source dataset you will be able to get an instant **notification** that your results may be no longer valid. And if your analysis is also stored as an ODF dataset - it can be **instantly updated** accounting for all corrections.
 </Tip>
 
-See [Retractions & Corrections](/retractions-corrections) section for a deeper look.
+See [Retractions & Corrections](/cli/transform/retractions-corrections) section for a deeper look.

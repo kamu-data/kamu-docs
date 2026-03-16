@@ -3,7 +3,7 @@ title: Quick Start
 ---
 
 <Tip>
-If you are looking to try out some [APIs](/protocols) and [integrations](/integrations) without deploying an full node - you can start API server directly from the CLI tool as:
+If you are looking to try out some [APIs](/api) and [integrations](/integrations) without deploying an full node - you can start API server directly from the CLI tool as:
 ```sh
 kamu system api-server
 ```
@@ -12,7 +12,7 @@ kamu system api-server
 **Ready to give Kamu Node a try?** This guide will help you deploy all components of Kamu Node and [Kamu Web Platform](/platform) on your local machine in a few simple steps.
 
 
-Use it to familiarize yourself with the process of deploying all components in a minimalistic configuration. Once you are ready to deploy a production-ready node instance please refer to the [Deployment Manual](/deploy).
+Use it to familiarize yourself with the process of deploying all components in a minimalistic configuration. Once you are ready to deploy a production-ready node instance please refer to the [Deployment Manual](/node/deploy).
 
 
 ## Prerequisites

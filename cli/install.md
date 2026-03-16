@@ -6,7 +6,7 @@ description: Covers installation steps to get kamu-cli running on your computer
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 <Info>
-Before using this product, please read the [project status disclaimer](/project-status).
+Before using this product, please read the [project status disclaimer](/general/project-status).
 </Info>
 
 ## General Information
@@ -138,7 +138,7 @@ We take your security very seriously. Unfortunately the execution model of `dock
 
 On our side we are taking following measures to gain your trust:
 - `kamu` and all of its components are open-source and [available for review](https://github.com/kamu-data/kamu-cli/)
-- All of our `docker` images are based on reputable source images and are [available for review](/supported-engines)
+- All of our `docker` images are based on reputable source images and are [available for review](/general/supported-engines)
 - When `kamu` starts `docker` containers it limits the scope of volumes it's mounting to a minimum. You can review the volume mounts by running `kamu` with `-v` flag or using `docker ps`.
 
 To avoid all these issues please consider using [`podman`](/#using-podman-instead-of-docker) - this container runtime operates in **daemon-less** and **root-less** mode, so it's fully compliant with the standard Unix permission model.

@@ -12,7 +12,7 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 ## Summary
 
-This example currently exists as part of the [self-serve demo](/demo).
+This example currently exists as part of the [online tutorial](/start/tutorial).
 
 While we're working on the text version try the demo and watch Kamu 101 playlist:
 

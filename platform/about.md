@@ -40,7 +40,7 @@ Think of it as GitHub for data pipelines or Etherscan for ODF. It can be used in
 - As a window into the global ODF network to interact with millions of decentralized data sources and supply chains.
 
 ## Get Started
-By far the simplest way to try it out is using [Kamu CLI](/cli) - simply [install](/install) it and run this command in your <Term t="workspace"/>:
+By far the simplest way to try it out is using [Kamu CLI](/cli) - simply [install](/cli/install) it and run this command in your <Term t="workspace"/>:
 
 ```sh
 kamu ui
@@ -49,4 +49,4 @@ kamu ui
 ## Helm Chart
 You can deploy Kamu Web platform into a [Kubernetes](https://kubernetes.io/) cluster using [Helm](https://helm.sh/) and our latest chart from [ArtifactHub](https://artifacthub.io/packages/search?org=kamu).
 
-See [deployment manual](/deploy) on how to deploy the Web Platform alongside [Kamu Node](/node).
+See [deployment manual](/node/deploy) on how to deploy the Web Platform alongside [Kamu Node](/node).

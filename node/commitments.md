@@ -20,7 +20,7 @@ This mechanism is foundational to **automatic dispute resolution** mechanism of 
 - **Multi-protocol** - Ideally the commitment structure can be reused without significant alterations across multiple protocols like REST, Blockchain Oracle, FlightSQL, Kafka egress, WebSockets etc.
 
 ## Structured Recursive Commitments
-Let's explore how the commitment scheme works using a [REST batch query API](/rest):
+Let's explore how the commitment scheme works using a [REST batch query API](/api/rest):
 
 ```python
 POST /query
@@ -163,7 +163,7 @@ Properties:
 
 
 ## Commitments in ODF Oracle
-For the explanation of oracle commitments see [ODF Oracle protocol documentation](/oracle).
+For the explanation of oracle commitments see [ODF Oracle protocol documentation](/api/oracle).
 
 
 ## Zero-Knowledge Proofs

@@ -5,7 +5,7 @@ title: Retractions & Corrections
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 ## Motivation
-Errors in source data are inevitable and require a mechanism for correcting them post factum. Unlike databases, where one could issue `DELETE` or `UPDATE` queries, our core data model is an [immutable append-only stream](/spec#nature-of-data), and thus requires a different mechanism to issue **retractions and corrections** for past events.
+Errors in source data are inevitable and require a mechanism for correcting them post factum. Unlike databases, where one could issue `DELETE` or `UPDATE` queries, our core data model is an [immutable append-only stream](/odf/spec#nature-of-data), and thus requires a different mechanism to issue **retractions and corrections** for past events.
 
 In cases when stream processing operations encounter late data (beyond the current <Term t="watermark"/>), or retractions and corrections in the input, they may also need to issue corrections or retractions for previously produced results that were influenced by these events.
 
@@ -113,6 +113,6 @@ ODF uses the [two-event changelog stream](#changelog-stream-two-events) as its b
 
 Just like in our example above a special `op` column carries the <Term t="operation type"/> of each record.
 
-Retractions and corrections are supported on <Term t="root dataset"/> level via [merge strategies](/merge-strategies).
+Retractions and corrections are supported on <Term t="root dataset"/> level via [merge strategies](/cli/ingest/merge-strategies).
 
 We are currently working to integrate their support into all processing engines for seamless propagation across <Term t="derivative datasets" id="derivative-dataset"/>.

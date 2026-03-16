@@ -7,7 +7,7 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 # Purpose
 
-Open Data Fabric [by design](/spec#nature-of-data) stores all data in the append-only event log format, always preserving the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may share their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
+Open Data Fabric [by design](/odf/spec#nature-of-data) stores all data in the append-only event log format, always preserving the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may share their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
 
 When ingesting data from external sources, <Term t="Root datasets" id="root-dataset"/> can choose between different <Schema t="merge strategies" id="MergeStrategy"/> that define how to combine the newly-ingested data with the existing one.
 
@@ -171,7 +171,7 @@ Pulling the dataset will now result in the following history:
 
 The two added rows represent the `'-C' correct-from` event that carries the old value that was changed, and `'+C' correct-to` event that carries the new value that was observed. Similarly the `'-R' retract` event can be issued for a record that disappeared in the source data.
 
-This model is extremely powerful, as it not only provides us the full history of how data was evolving over time, but allows all downstream computations to [automatically react to corrections and retractions](/retractions-corrections).
+This model is extremely powerful, as it not only provides us the full history of how data was evolving over time, but allows all downstream computations to [automatically react to corrections and retractions](/cli/transform/retractions-corrections).
 
 
 ## Append

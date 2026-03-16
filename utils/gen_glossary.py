@@ -98,7 +98,7 @@ if __name__ == "__main__":
             schema = url.removeprefix("reference-")
             return f'<Schema t="{t}" id="{schema}"/>'
         else:
-            return f'[{t}](/spec#{url})'
+            return f'[{t}](/odf/spec#{url})'
 
 
     section = re.sub(r"\[([^]]+)]\(#([^)]+)\)", sub_refs, section)

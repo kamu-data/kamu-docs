@@ -190,4 +190,4 @@ kamu tail my.trading.transactions.cad
 
 The best thing about this is that *you may never have to touch this SQL query again*. Each time you run `kamu pull` in the future the latest transaction data will be ingested along with latest exchange rates, producing new transactions with converted prices. This is the "write once - run forever" philosophy of `kamu` that combines best propagation times with the accuracy of solving temporal problems without taking any shortcuts.
 
-Once you master this example - make sure to check out the [Stock Market Trading example](/stock-trading) that introduces another really important mechanism related to temporal joins - the **<Term t="watermark"/>**.
+Once you master this example - make sure to check out the [Stock Market Trading example](/examples/stock-trading) that introduces another really important mechanism related to temporal joins - the **<Term t="watermark"/>**.

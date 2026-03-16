@@ -25,7 +25,7 @@ This type is typically used for defining new datasets and changing the existing 
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `name` | `string` | ✔️ | [`dataset-alias`](/spec#dataset-identity) | Alias of the dataset. |
+| `name` | `string` | ✔️ | [`dataset-alias`](/odf/spec#dataset-identity) | Alias of the dataset. |
 | `kind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 | `metadata` | `array(`[`MetadataEvent`](#metadataevent)`)` | ✔️ |  | An array of metadata events that will be used to populate the chain. Here you can define polling and push sources, set licenses, add attachments etc. |
 
@@ -134,7 +134,7 @@ Establishes the identity of the dataset. Always the first metadata event in the 
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | [`dataset-id`](/spec#dataset-identity) | Unique identity of the dataset. |
+| `datasetId` | `string` | ✔️ | [`dataset-id`](/odf/spec#dataset-identity) | Unique identity of the dataset. |
 | `datasetKind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/metadata-events/Seed.json)
@@ -548,8 +548,8 @@ Sent by the coordinator to an engine to perform the next step of data transforma
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | [`dataset-id`](/spec#dataset-identity) | Unique identifier of the output dataset. |
-| `datasetAlias` | `string` | ✔️ | [`dataset-alias`](/spec#dataset-identity) | Alias of the output dataset, for logging purposes only. |
+| `datasetId` | `string` | ✔️ | [`dataset-id`](/odf/spec#dataset-identity) | Unique identifier of the output dataset. |
+| `datasetAlias` | `string` | ✔️ | [`dataset-alias`](/odf/spec#dataset-identity) | Alias of the output dataset, for logging purposes only. |
 | `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | System time to use for new records. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the output dataset. |
 | `transform` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
@@ -567,8 +567,8 @@ Sent as part of the engine transform request operation to describe the input
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | [`dataset-id`](/spec#dataset-identity) | Unique identifier of the dataset. |
-| `datasetAlias` | `string` | ✔️ | [`dataset-alias`](/spec#dataset-identity) | Alias of the output dataset, for logging purposes only. |
+| `datasetId` | `string` | ✔️ | [`dataset-id`](/odf/spec#dataset-identity) | Unique identifier of the dataset. |
+| `datasetAlias` | `string` | ✔️ | [`dataset-alias`](/odf/spec#dataset-identity) | Alias of the output dataset, for logging purposes only. |
 | `queryAlias` | `string` | ✔️ |  | An alias of this input to be used in queries. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the input dataset. |
 | `offsetInterval` | [`OffsetInterval`](#offsetinterval) |  |  | Subset of data that goes into this transaction. |
@@ -775,7 +775,7 @@ Describes a slice of the input dataset used during a transformation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | [`dataset-id`](/spec#dataset-identity) | Input dataset identifier. |
+| `datasetId` | `string` | ✔️ | [`dataset-id`](/odf/spec#dataset-identity) | Input dataset identifier. |
 | `prevBlockHash` | `string` |  | [`multihash`](https://github.com/multiformats/multihash) | Last block of the input dataset that was previously incorporated into the derivative transformation, if any. Must be equal to the last non-empty `newBlockHash`. Together with `newBlockHash` defines a half-open `(prevBlockHash, newBlockHash]` interval of blocks that will be considered in this transaction. |
 | `newBlockHash` | `string` |  | [`multihash`](https://github.com/multiformats/multihash) | Hash of the last block that will be incorporated into the derivative transformation. When present, defines a half-open `(prevBlockHash, newBlockHash]` interval of blocks that will be considered in this transaction. |
 | `prevOffset` | `integer` |  | `uint64` | Last data record offset in the input dataset that was previously incorporated into the derivative transformation, if any. Must be equal to the last non-empty `newOffset`. Together with `newOffset` defines a half-open `(prevOffset, newOffset]` interval of data records that will be considered in this transaction. |
@@ -1245,7 +1245,7 @@ Describes a derivative transformation input
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetRef` | `string` | ✔️ | [`dataset-ref`](/spec#dataset-identity) | A local or remote dataset reference. When block is accepted this MUST be in the form of a DatasetId to guarantee reproducibility, as aliases can change over time. |
+| `datasetRef` | `string` | ✔️ | [`dataset-ref`](/odf/spec#dataset-identity) | A local or remote dataset reference. When block is accepted this MUST be in the form of a DatasetId to guarantee reproducibility, as aliases can change over time. |
 | `alias` | `string` |  |  | An alias under which this input will be available in queries. Will be populated from `datasetRef` if not provided before resolving it to DatasetId. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/fragments/TransformInput.json)

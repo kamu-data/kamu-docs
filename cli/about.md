@@ -56,7 +56,7 @@ curl -s "https://get.kamu.dev" | sh
 ```
 
 * Watch [introductory videos](https://www.youtube.com/watch?v=oUTiWW6W78A&list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk) to see `kamu` in action
-* Follow the ["Getting Started"](/get-started) guide through an online demo and installation instructions.
+* Follow the ["First Steps"](/start/first-steps) guide through an online demo and installation instructions.
 
 
 ## How it Works
@@ -79,7 +79,7 @@ In addition to "table" abstraction on top of Parquet files, ODF provides:
 - Rich extensible metadata (e.g. licenses, attachments, semantics)
 - Compatibility with decentralized storages like [IPFS](https://ipfs.tech)
 
-Unlike Iceberg and Delta that encourage continuous loss of history through Change-Data-Capture, ODF format is **history-preserving**. It encourages working with data in the [event form](https://www.kamu.dev/blog/a-brief-history-of-time-in-data-modelling-olap-systems/), and dealing with inaccuracies through [explicit retractions and corrections](/retractions-corrections).
+Unlike Iceberg and Delta that encourage continuous loss of history through Change-Data-Capture, ODF format is **history-preserving**. It encourages working with data in the [event form](https://www.kamu.dev/blog/a-brief-history-of-time-in-data-modelling-olap-systems/), and dealing with inaccuracies through [explicit retractions and corrections](/cli/transform/retractions-corrections).
 
 
 ### Explore, query, document
@@ -97,7 +97,7 @@ Unlike Iceberg and Delta that encourage continuous loss of history through Chang
 
 
 ### Build enterprise-grade ETL pipelines
-Data in `kamu` can only be [transformed through code](/transform). An SQL query that cleans one dataset or combines two via JOIN can be used to create a **derivative dataset**.
+Data in `kamu` can only be [transformed through code](/cli/transform). An SQL query that cleans one dataset or combines two via JOIN can be used to create a **derivative dataset**.
 
 `kamu` doesn't implement data processing itself - it integrates [many popular data engines](https://docs.kamu.dev/cli/supported-engines/) *(Flink, Spark, DataFusion...)* as plugins, so you can build an ETL flow that uses the strengths of different engines at different steps of the pipeline:
 
@@ -114,7 +114,7 @@ All derivative datasets use **stream processing** that results in some [revoluti
 
 
 ### Share datasets with others
-ODF datasets can be shared via any [conventional](https://docs.kamu.dev/cli/collab/repositories/) (S3, GCS, Azure) and [decentralized](/ipfs) (IPFS) storage and easily replicated. Sharing a large dataset is simple as:
+ODF datasets can be shared via any [conventional](https://docs.kamu.dev/cli/collab/repositories/) (S3, GCS, Azure) and [decentralized](/cli/collab/ipfs) (IPFS) storage and easily replicated. Sharing a large dataset is simple as:
 
 ```sh
 kamu push covid19.case-details "s3://datasets.example.com/covid19.case-details/"
@@ -136,7 +136,7 @@ kamu pull "s3://datasets.example.com/covid19.case-details/"
 kamu verify --recursive covid19.case-details
 ```
 
-Verifiability allows you to [establish trust](/validity) in data processed by someone you don't even know and detect if they act maliciously.
+Verifiability allows you to [establish trust](/cli/collab/validity) in data processed by someone you don't even know and detect if they act maliciously.
 
 Verifiable trust allows people to **reuse and collaborate** on data on a global scale, similarly to open-source software.
 
@@ -156,7 +156,7 @@ Every query result is accompanied by a **cryptographic commitment** that you can
 
 
 ### Get data to and from blockchains
-Using `kamu` you can easily [read on-chain data](/blockchain-source) to run analytics on smart contracts, and provide data to blockchains via novel [Open Data Fabric oracle](/oracle).
+Using `kamu` you can easily [read on-chain data](/cli/ingest/blockchain-source) to run analytics on smart contracts, and provide data to blockchains via novel [Open Data Fabric oracle](/api/oracle).
 
 
 

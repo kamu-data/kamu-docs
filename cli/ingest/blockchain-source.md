@@ -191,6 +191,6 @@ The above code is using `eth_try_decode_event` function provided by [`datafusion
 ## Future Work
 Blockchain data satisfies all properties of an ODF dataset (history-preserving, reproducible, verifiable), with differences primarily in encoding. We therefore see Kamu NOT as an indexer (solutions that copy data from blockchains into queryable databases, leading to recentralization concerns). Instead we see **blockchains as a natural extension of the Open Data Fabric network**.
 
-Integrating blockchains as data sources and consumers of data via [Kamu Oracle](/oracle) makes Kamu the first system where you can go through the whole cycle (reading on-chain data, merging it with off-chain data, providing data back on-chain to a smart contract) within one solution, with just SQL, with full verifiability.
+Integrating blockchains as data sources and consumers of data via [Kamu Oracle](/api/oracle) makes Kamu the first system where you can go through the whole cycle (reading on-chain data, merging it with off-chain data, providing data back on-chain to a smart contract) within one solution, with just SQL, with full verifiability.
 
 Our future work will focus on further **erasing the boundary between on- and off-chain data**.

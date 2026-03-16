@@ -23,6 +23,6 @@ https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy
 https://node.demo.kamu.dev/odata/kamu/co.alphavantage.tickers.daily.spy?$select=offset,close&$orderby=offset+asc&$top=10
 ```
 
-You can find more endpoint information in [OpenAPI documentation](/node/api/rest/).
+You can find more endpoint information in [OpenAPI documentation](/api/rest/).
 
 See documentation of our [datafusion-odata](https://github.com/kamu-data/datafusion-odata/) library for the list of limitations.

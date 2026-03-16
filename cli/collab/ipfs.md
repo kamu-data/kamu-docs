@@ -27,7 +27,7 @@ The IPFS is well-documented, so we will quickly review the basics, and if you fi
   - IPNS uses a hashsum of a public key to create a unique name entry in a decentralized way ([more](https://docs.ipfs.io/concepts/ipns/)).
 
 ## Kamu and IPFS
-Unlike any other data processing system, `kamu` was build from ground up with reproducibility in mind - it defaults to never losing history. As the [ODF spec](/spec) explains in detail - the best way to do this is to represent data as **append-only** event streams. 
+Unlike any other data processing system, `kamu` was build from ground up with reproducibility in mind - it defaults to never losing history. As the [ODF spec](/odf/spec) explains in detail - the best way to do this is to represent data as **append-only** event streams. 
 
 These event streams are represented by a linked list of metadata blocks (think git history or blockchain) that reference portions of raw data and checkpoint files:
 
@@ -61,7 +61,7 @@ The above diagrams are good to build up some intuition, but this is not exactly 
 </Note>
 
 ## Pulling from IPFS
-`kamu` supports pulling data from IPFS just like from any [other repository](/repositories). 
+`kamu` supports pulling data from IPFS just like from any [other repository](/cli/collab/repositories). 
 
 You can use both `ipfs://` and `ipns://` URLs:
 

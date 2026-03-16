@@ -128,7 +128,7 @@ At a bird's eye view, ODF specifies the following aspects of data management, wi
 - [PyData Global 2021 Talk: Time: The most misunderstood dimension in data modelling](https://www.youtube.com/watch?v=XxKnTusccUM)
 - [Data+AI Summit 2020 Talk: Building a Distributed Collaborative Data Pipeline](https://databricks.com/session_eu20/building-a-distributed-collaborative-data-pipeline-with-apache-spark)
 
-More tutorials and articles can be found in [kamu-cli documentation](/learning-materials).
+More tutorials and articles can be found in [kamu-cli documentation](/start/learning-materials).
 
 
 ## Current State

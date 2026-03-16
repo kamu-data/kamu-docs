@@ -11,7 +11,7 @@ title: "RFC-016: ODF Schema Format"
 **Published Date**: 2025-08-25
 
 **Authors**:
-- [Sergii Mikhtoniuk](mailto:smikhtoniuk@kamu.dev), [Kamu](kamu.dev)
+- [Sergii Mikhtoniuk](mailto:smikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 
 
 **Compatibility**:
@@ -161,7 +161,7 @@ This format is compatible with old event format because flatbuffers only care ab
 
 `[3]` We introduce `opendatafabric.org/description` attribute to contain field (column) description.
 
-`[4]` The `opendatafabric.org/type` here is used only as an example of possible advanced attribute used to extend logical type beyond core schema - see [RFC-017](017-large-files-linking.md) for more details.
+`[4]` The `opendatafabric.org/type` here is used only as an example of possible advanced attribute used to extend logical type beyond core schema - see [RFC-017](/odf/rfcs/017-large-files-linking.md) for more details.
 
 `[5]` Types recursively work for struct fields.
 
@@ -269,7 +269,7 @@ Field optionality (nullability) deserves a special note. Arrow currently has ver
 Why should we *not* do this?
 */}
 
-- It requires changing `SetDataSchema` event to store ODF schemas instead of nested [Arrow Flatbuffers](https://github.com/apache/arrow/blob/main/format/Schema.fbs) (see [RFC-010](010-data-schema-in-metadata.md))
+- It requires changing `SetDataSchema` event to store ODF schemas instead of nested [Arrow Flatbuffers](https://github.com/apache/arrow/blob/main/format/Schema.fbs) (see [RFC-010](/odf/rfcs/010-data-schema-in-metadata.md))
 
 - At present users would have to define the schema for **system fields** (`offset, op, system_time, event_time`) which is verbose and error-prone. We believe that this extra burden can be resolved by providing better automatic schema inference in the tooling.
   

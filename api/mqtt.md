@@ -29,5 +29,5 @@ For example:
 - `retained: false, qos: 1 (at least once)` - will *likely* make broker to buffer all messages from the device and deliver them to `kamu` upon reconnect. This mode is good for devices like door sensors, where the whole series of events matters. The exact behavior is very broker-specific, so make sure to read you broker's documentation.
 
 <Note>
-You can use [merge strategies](/merge-strategies) to avoid duplication of retained data in your dataset.
+You can use [merge strategies](/cli/ingest/merge-strategies) to avoid duplication of retained data in your dataset.
 </Note>

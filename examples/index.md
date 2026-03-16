@@ -9,14 +9,14 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 | Name                                                        |    Level     |                              Topics                               |
 | ----------------------------------------------------------- | :----------: | :---------------------------------------------------------------: |
-| [Self-serve Demo](/demo)                      |   Beginner   |                          basic commands                           |
-| [Currency Conversion](/currency-conversion)   |   Beginner   |                       temporal-table joins                        |
-| [COVID-19 Daily Cases](/covid19)              |   Beginner   |  harmonization, unions, tumbling window aggregations, notebooks   |
-| [Leaderboard](/leaderboard)                   |   Beginner   |                  top-n aggregations, push ingest                  |
-| [Housing Prices](/housing-prices)             |   Beginner   |           GIS data, GIS functions, GIS joins, notebooks           |
-| [Stock Market Trading](/stock-trading)        | Intermediate |     aggregations, temporal-table joins, watermarks, notebooks     |
-| [Overdue Order Shipments](/overdue-shipments) | Intermediate |                stream-to-stream joins, watermarks                 |
-| [Web3 Data](/web3-data)                       | Intermediate | repositories, temporal-table joins, stream processing, watermarks |
+| [Self-serve Tutorial](/start/tutorial)                      |   Beginner   |                          basic commands                           |
+| [Currency Conversion](/examples/currency-conversion)        |   Beginner   |                       temporal-table joins                        |
+| [COVID-19 Daily Cases](/examples/covid19)                   |   Beginner   |  harmonization, unions, tumbling window aggregations, notebooks   |
+| [Leaderboard](/examples/leaderboard)                        |   Beginner   |                  top-n aggregations, push ingest                  |
+| [Housing Prices](/examples/housing-prices)                  |   Beginner   |           GIS data, GIS functions, GIS joins, notebooks           |
+| [Stock Market Trading](/examples/stock-trading)             | Intermediate |     aggregations, temporal-table joins, watermarks, notebooks     |
+| [Overdue Order Shipments](/examples/overdue-shipments)      | Intermediate |                stream-to-stream joins, watermarks                 |
+| [Web3 Data](/examples/web3-data)                            | Intermediate | repositories, temporal-table joins, stream processing, watermarks |
 
 To work with examples we recommend you to clone the [kamu-cli repo](https://github.com/kamu-data/kamu-cli) and use directories in `examples/` as your workspaces.
 

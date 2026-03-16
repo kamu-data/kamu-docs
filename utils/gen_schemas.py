@@ -90,7 +90,7 @@ def render_format(sch):
         url = external_formats[fmt]
         return f"[`{fmt}`]({url})"
     elif fmt in ("dataset-id", "dataset-name", "dataset-alias", "dataset-ref", "dataset-ref-any"):
-        return f"[`{fmt}`](/spec#dataset-identity)"
+        return f"[`{fmt}`](/odf/spec#dataset-identity)"
     elif fmt in ("int32", "uint32", "int64", "uint64", "path", "regex", "url", "flatbuffers"):
         return f"`{fmt}`"
     else:

@@ -8,14 +8,14 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 While `kamu` focuses primarily on the problem of data management, you often may want to do some basic data exploration before exporting data for further use in your data science projects, so we decided to provide a few simple exploration tools for you to assess the state of data without leaving the comfort of one tool.
 
 ## Tail Command
-Use [`kamu tail`](/cli-reference#kamu-tail) command to quickly view a sample of last events in a dataset:
+Use [`kamu tail`](/cli/commands#kamu-tail) command to quickly view a sample of last events in a dataset:
 
 ```bash
 kamu tail ca.bccdc.covid19.case-details
 ```
 
 ## Inspect Command Group
-A set of [`kamu inspect *`](/cli-reference#kamu-inspect) commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
+A set of [`kamu inspect *`](/cli/commands#kamu-inspect) commands allows you to explore metadata and lineage of datasets. For example to display the lineage of a certain dataset in a browser use:
 
 ```bash
 kamu inspect lineage ca.covid19.daily-cases -b
@@ -24,7 +24,7 @@ kamu inspect lineage ca.covid19.daily-cases -b
 <Diagram src="/images/cli/first-steps/lineage.png" alt="kamu sql"/>
 
 ## SQL Console
-[`kamu sql`](/cli-reference#kamu-sql) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
+[`kamu sql`](/cli/commands#kamu-sql) command group provides a simple way to run ad-hoc queries and explore data using SQL language.
 
 <Diagram src="/images/cli/first-steps/sql.gif" alt="kamu sql"/>
 

@@ -17,19 +17,19 @@ You can always get help or share feedback along the way in our [community channe
     Go through [Kamu 101](https://www.youtube.com/playlist?list=PLV91cS45lwVG20Hicztbv7hsjN6x69MJk) series of videos to get a taste of what `kamu` is about
   </Step>
   <Step>
-    Take a self-guided tour in our [online demo environment](/demo)
+    Take a self-guided tour in our [online tutorial](/start/tutorial)
   </Step>
   <Step>
-    [Install](/install) `kamu` on your laptop
+    [Install](/cli/install) `kamu` on your laptop
   </Step>
   <Step>
-    Get to know it through [first steps](/first-steps) guide and try out the [advanced examples](/examples)
+    Get to know it through [quick start](/cli/quick-start) guide and try out the [advanced examples](/examples)
   </Step>
   <Step>
     Join our data science community on [Discord](https://discord.gg/nU6TXRQNXC)
   </Step>
   <Step>
-    Learn about architecture and design choices behind our data formats and protocols from our [conference talks](/learning-materials)
+    Learn about architecture and design choices behind our data formats and protocols from our [conference talks](/start/learning-materials)
   </Step>
   <Step>
     Do a deep dive into [Open Data Fabric](/odf) protocol specification

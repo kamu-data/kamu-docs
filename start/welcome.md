@@ -8,10 +8,10 @@ mode: wide
 <Card
   title="First time here?"
   icon="rocket"
-  href="/cli/get-started"
+  href="/start/first-steps"
   horizontal
 >
-  Start with this Kamu CLI tutorial to learn the basics in the comfort of your laptop.
+  Follow these steps to get started
 </Card>
 
 ## Projects
@@ -39,8 +39,8 @@ Our documentation is organized around four closely related projects:
     <Columns cols={2}>
       <div><a href="/cli/install" class="project-quicklink">&gt; Install</a></div>
       <div><a href="/cli/quick-start" class="project-quicklink">&gt; Quick Start</a></div>
-      <div><a href="/tutorial" class="project-quicklink">&gt; Tutorial</a></div>
-      <div><a href="/start/examples" class="project-quicklink">&gt; Examples</a></div>
+      <div><a href="/start/tutorial" class="project-quicklink">&gt; Tutorial</a></div>
+      <div><a href="/examples" class="project-quicklink">&gt; Examples</a></div>
     </Columns>
   </Card>
 

@@ -11,7 +11,7 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 # Open Data Fabric
 ## Event
-As described in the [Nature of Data](/spec#nature-of-data) section, the system operates only on data expressed as past events, observations, or propositions believed to be true at a certain time. For simplicity, we will use the term "event" throughout to refer to such data tuples.
+As described in the [Nature of Data](/odf/spec#nature-of-data) section, the system operates only on data expressed as past events, observations, or propositions believed to be true at a certain time. For simplicity, we will use the term "event" throughout to refer to such data tuples.
 
 ## Data
 Data is a set of <Term t="Events" id="event"/> stored in the system. Since events are immutable data can only grow over time. Conceptually it's best to think of data as a full log of a potentially infinite event stream.
@@ -21,8 +21,8 @@ Data never appears in the system alone as we would not be able to tell where it 
 <Diagram src="/images/glossary/dataset.svg" alt="Diagram: Dataset/Data"/>
 
 See also:
-- [Data Format](/spec#data-format)
-- [Common Data Schema](/spec#common-data-schema)
+- [Data Format](/odf/spec#data-format)
+- [Common Data Schema](/odf/spec#common-data-schema)
 
 ## Schema
 Schema describes the shape of the <Term t="data" id="data"/> by associating names and data types to columns that data is composed of. Schema can change over time and its changes are tracked in the <Term t="Metadata Chain" id="metadata-chain"/>.
@@ -38,8 +38,8 @@ date_of_birth DATE,
 ```
 
 See also:
-- [Schema Format](/spec#schema-format)
-- [Schema Evolution](/spec#schema-evolution)
+- [Schema Format](/odf/spec#schema-format)
+- [Schema Evolution](/odf/spec#schema-evolution)
 
 ## Offset
 Offset is a monotonically increasing sequential numeric identifier that is assigned to every record and represents its position relative to the beginning of the dataset. Offsets are used to uniquely identify any record in the dataset. Offset of the first record in a dataset is `0`.
@@ -48,8 +48,8 @@ Offset is a monotonically increasing sequential numeric identifier that is assig
 Since past <Term t="Events" id="event"/> are immutable, if some event is deemed incorrect later on it can only be rectified by issuing an explicit <Term t="retraction or correction" id="retractions-and-corrections"/>. Retraction and corrections are also represented as <Term t="Events" id="event"/> in the same stream of <Term t="Data" id="data"/> and differentiated by a special "operation type" field.
 
 See also:
-- [Common data schema](/spec#common-data-schema)
-- [Representation of retractions and corrections](/spec#representation-of-retractions-and-corrections)
+- [Common data schema](/odf/spec#common-data-schema)
+- [Representation of retractions and corrections](/odf/spec#representation-of-retractions-and-corrections)
 
 ## Data Slice
 <Term t="Data" id="data"/> arrives into the system as the arbitrary large sets of events. We refer to them as "slices".
@@ -66,7 +66,7 @@ Refers to information about a <Term t="Dataset" id="dataset"/> stored in its <Te
 
 ## Metadata Chain
 Metadata Chain captures all essential information about the <Term t="Dataset" id="dataset"/>, including:
-- Where the data comes from (see [Data Ingestion](/spec#data-ingestion))
+- Where the data comes from (see [Data Ingestion](/odf/spec#data-ingestion))
 - How data was processed (see <Term t="Query" id="query"/>)
 - Its <Term t="Schema" id="schema"/>
 - Log of all modifications made to the data, including information used to verify the integrity of data
@@ -92,12 +92,12 @@ In addition to core events like adding data, running a query, and change of sche
 These extensions are out of scope of this document.
 
 See also:
-- [Metadata Format](/spec#metadata-format)
+- [Metadata Format](/odf/spec#metadata-format)
 - <Schema t="Metadata Events Reference" id="metadata-events"/>
 
 ## Dataset
 Dataset is the main unit of data exchange in the system. It's simply a combination of:
-- [Identity](/spec#dataset-identity)
+- [Identity](/odf/spec#dataset-identity)
 - <Term t="Data" id="data"/>
 - <Term t="Metadata Chain" id="metadata-chain"/>
 - <Term t="Checkpoints" id="checkpoint"/>
@@ -120,7 +120,7 @@ Root dataset definition includes:
 All this information is stored in the <Term t="Metadata Chain" id="metadata-chain"/> and can change over time as the dataset evolves.
 
 See also:
-- [Merge Strategy](/spec#merge-strategies)
+- [Merge Strategy](/odf/spec#merge-strategies)
 
 ### Derivative Dataset
 Derivative datasets are created by transforming/combining one or multiple existing datasets.
@@ -133,7 +133,7 @@ They are defined by the combination of:
 This information is stored in the <Term t="Metadata Chain" id="metadata-chain"/> and can change over time as the dataset evolves.
 
 See also:
-- [Derivative Data Transience](/spec#derivative-data-transience)
+- [Derivative Data Transience](/odf/spec#derivative-data-transience)
 
 ## Query
 Queries define how input data is combined, modified, and re-shaped to produce new data.
@@ -165,9 +165,9 @@ GROUP BY TUMBLE(event_time, INTERVAL '1' MONTH), sku_id
 ```
 
 See also:
-- [Stream Processing Model](/spec#stream-processing-model)
-- [Derivative Data Transience](/spec#derivative-data-transience)
-- [Engine Contract](/spec#engine-contract)
+- [Stream Processing Model](/odf/spec#stream-processing-model)
+- [Derivative Data Transience](/odf/spec#derivative-data-transience)
+- [Engine Contract](/odf/spec#engine-contract)
 
 ## Engine
 Engine is an interface shared by all specific implementations of a <Term t="Query" id="query"/> dialect. Engine implementations are responsible for applying defined queries to input data and returning the result. For example, some engines allows you to query data using a series of streaming SQL statements.
@@ -179,7 +179,7 @@ Engines run in a sandboxed environments and are not permitted to use any externa
 As Engines are in the full control of all data transformations, they are also responsible for answering the <Term t="Provenance" id="provenance"/> queries.
 
 See also:
-- [Engine Contract](/spec#engine-contract)
+- [Engine Contract](/odf/spec#engine-contract)
 
 ## Checkpoint
 Checkpoints are used by the <Term t="Engines" id="engine"/> to store the computation state between the different invocations of a <Term t="Query" id="query"/>. They are fully engine-specific and opaque to the system. They are however an essential durable part of a <Term t="Dataset" id="dataset"/> as they are necessary to be able to pause and resume the streaming queries, and are essential in implementing "exactly-once" processing semantics.
@@ -195,23 +195,23 @@ Core responsibilities:
 - Commits the resulting data slices and new metadata blocks
 
 See also:
-- [Coordinator Contract](/spec#coordinator-contract)
+- [Coordinator Contract](/odf/spec#coordinator-contract)
 
 ## Ingestion
 Ingestion is the process by which external data gets into the system. Typical ingestion steps that describe how data is obtained and read (e.g. fetching data from some URL on the web, decompressing it, and reading it as CSV) are a part of the <Term t="Root Dataset" id="root-dataset"/> definition.
 
 See also:
-- [Data Ingestion](/spec#data-ingestion)
+- [Data Ingestion](/odf/spec#data-ingestion)
 
 ## Merge Strategy
-By [design](/spec#nature-of-data), the system only stores data in the append-only event log format to preserve the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may expose their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
+By [design](/odf/spec#nature-of-data), the system only stores data in the append-only event log format to preserve the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may expose their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
 
-When <Term t="ingesting data" id="ingestion"/> from external sources, the <Term t="Root Datasets" id="root-dataset"/> can choose between different [Merge Strategies](/spec#merge-strategies) that define how to combine the newly-ingested data with the existing one.
+When <Term t="ingesting data" id="ingestion"/> from external sources, the <Term t="Root Datasets" id="root-dataset"/> can choose between different [Merge Strategies](/odf/spec#merge-strategies) that define how to combine the newly-ingested data with the existing one.
 
 For example, when dealing with the daily database dumps, a user can choose the merge strategy that performs [change data capture](https://en.wikipedia.org/wiki/Change_data_capture), transforming dumps into a set of events that signify record creation, update, or deletion.
 
 See also:
-- [Merge Strategies](/spec#merge-strategies)
+- [Merge Strategies](/odf/spec#merge-strategies)
 
 ## Hash
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) are used by the system in these three scenarios:
@@ -228,9 +228,9 @@ Usage examples:
 - The trustworthiness of any <Term t="Dataset" id="dataset"/> can be established by reviewing the transformations it claims to be performing on data (contained in the <Term t="Metadata Chain" id="metadata-chain"/>), re-applying those transformations in a trusted environment, and then comparing the hash sums of the result slices.
 
 See also:
-- [Data Hashing](/spec#data-hashing)
-- [Checkpoint Hashing](/spec#checkpoint-hashing)
-- [Metadata Block Hashing](/spec#metadata-block-hashing)
+- [Data Hashing](/odf/spec#data-hashing)
+- [Checkpoint Hashing](/odf/spec#checkpoint-hashing)
+- [Metadata Block Hashing](/odf/spec#metadata-block-hashing)
 
 ## Provenance
 Data provenance describes the origins and the history of data and adds value to data by explaining how it was obtained.
@@ -254,7 +254,7 @@ Depending on the language used by an <Term t="Engine" id="engine"/> one approach
 
 See also:
 - [Provenance in Databases: Why, How, and Where](http://homepages.inf.ed.ac.uk/jcheney/publications/provdbsurvey.pdf)
-- [Engine Contract: Derive Provenance](/spec#derive-provenance)
+- [Engine Contract: Derive Provenance](/odf/spec#derive-provenance)
 
 ## Verifiability
 In the scope of this specification, verifiability of data means the ability to establish:
@@ -347,8 +347,8 @@ Retractions and corrections can also naturally occur in <Term t="Derivative" id=
 Retractions and corrections model is fundamental to making data processing **maximally autonomous**.
 
 See also:
-- [Common data schema](/spec#common-data-schema)
-- [Representation of retractions and corrections](/spec#representation-of-retractions-and-corrections)
+- [Common data schema](/odf/spec#common-data-schema)
+- [Representation of retractions and corrections](/odf/spec#representation-of-retractions-and-corrections)
 
 ## Repository
 Repositories let participants of the system exchange <Term t="Datasets" id="dataset"/> with one another.
@@ -359,7 +359,7 @@ Repository definition includes:
 - Credentials needed to access it
 - Any necessary protocol-specific configuration
 
-In the most basic form, a <Term t="Repository" id="repository"/> can simply be a location where the dataset files are hosted over one of the [supported](/spec#supported-protocols) file or object-based data transfer protocols. The owner of a dataset will have push privileges to this location, while other participants can pull data from it.
+In the most basic form, a <Term t="Repository" id="repository"/> can simply be a location where the dataset files are hosted over one of the [supported](/odf/spec#supported-protocols) file or object-based data transfer protocols. The owner of a dataset will have push privileges to this location, while other participants can pull data from it.
 
 An advanced repository can support more functionality like:
 - Push data API for publishers
@@ -367,7 +367,7 @@ An advanced repository can support more functionality like:
 - Query API for making use of repository's compute resources and reducing the amount of transferred data
 
 See also:
-- [Repository Contract](/spec#repository-contract)
+- [Repository Contract](/odf/spec#repository-contract)
 
 ## Projection
 In relational algebra, a [projection](https://en.wikipedia.org/wiki/Projection_(relational_algebra)) is an operation that removes one or many dimensions from a data tuple. In the context of our system the most common projections are *temporal projections* involving the <Term t="System Time" id="system-time"/> and <Term t="Event Time" id="event-time"/> dimensions.

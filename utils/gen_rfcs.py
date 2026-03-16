@@ -34,6 +34,8 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 Protocol design evolution proposals:
 """
 
+RFC_LINK_PREFIX = "/odf/rfcs/"
+
 
 def get_summary(text: str) -> str:
     section_name = "## Summary"
@@ -92,7 +94,7 @@ if __name__ == "__main__":
                 # print(f"+++", file=sys.stderr)
 
                 rfc = rfc_match[0]
-                return f'[{t}]({rfc})'
+                return f'[{t}]({RFC_LINK_PREFIX}{rfc})'
             else:
                 return f'[{t}]({url})'
 
@@ -114,7 +116,7 @@ if __name__ == "__main__":
         f.write(INDEX_HEADER)
 
         for fname, title, summary in summaries:
-            f.write(f'- [{title}]({fname[:-3]})\n')
+            f.write(f'- [{title}]({RFC_LINK_PREFIX}{fname[:-3]})\n')
     
     # Update docs.json
     with open("docs.json") as f:

@@ -48,6 +48,6 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 
 See also:
-- [FAQ](/faq)
-- [First Steps](/first-steps)
+- [FAQ](/start/faq)
+- [First Steps](/start/first-steps)
 - [Examples](/examples)
