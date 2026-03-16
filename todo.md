@@ -1,7 +1,5 @@
 # TODO
 
-- `/cli/integrations` -> new tab?
-- `/node/api` -> new tab?
 - `/odf` -> reference tab?
 - project icons
 - check section links e.g. `/cli`

@@ -146,24 +146,6 @@
               "/node/quick-start",
               "/node/architecture",
               {
-                "group": "Protocols",
-                "pages": [
-                  "/node/api/overview",
-                  "/node/api/flight-sql",
-                  "/node/api/graphql",
-                  "/node/api/jdbc",
-                  "/node/api/kafka",
-                  "/node/api/mqtt",
-                  "/node/api/odata",
-                  "/node/api/odf",
-                  "/node/api/oracle",
-                  "/node/api/postgres",
-                  "/node/api/rest",
-                  "/node/api/webhooks",
-                  "/node/api/websocket"
-                ]
-              },
-              {
                 "group": "Deployment",
                 "pages": [
                   "/node/deploy/manual",
@@ -261,6 +243,25 @@
               "/node/config"
             ]
           }
+        ]
+      },
+      {
+        "tab": "APIs",
+        "pages": [
+          "/api/overview",
+          "/api/flight-sql",
+          "/api/graphql",
+          "/api/jdbc",
+          "/api/kafka",
+          "/api/mqtt",
+          "/api/odata",
+          "/api/odf",
+          "/api/postgres",
+          "/api/rest",
+          "/api/openapi",
+          "/api/webhooks",
+          "/api/websocket",
+          "/api/oracle"
         ]
       },
       {
@@ -394,5 +395,11 @@
       "source": "/cli/get-started/installation",
       "destination": "/cli/install"
     }
-  ]
+  ],
+  "metadata": {
+    "timestamp": true
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  }
 }
