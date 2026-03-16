@@ -51,15 +51,20 @@ h4.project-title:is(.dark *, .light *) {
     text-align: center;
 }
 
+h4.project-title a {
+    border-bottom: 0;
+}
+
 a.project-quicklink:is(.dark *, .light *) {
     font-size: 15px;
     font-weight: 300;
     color: #ec6e2a;
+    border-bottom: 0;
 }
 
 
 /* Welcome page project icons have special treatment */
-.prose a img:is(
+.prose div img:is(
     [src*="projects/odf.svg"],
     [src*="projects/kamu-cli.svg"],
     [src*="projects/kamu-node.svg"],

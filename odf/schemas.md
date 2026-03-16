@@ -1,6 +1,6 @@
 ---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: Reference
+title: Schemas
 description: Schemas of common metadata objects
 ---
 

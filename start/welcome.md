@@ -18,35 +18,35 @@ mode: wide
 Our documentation is organized around four closely related projects:
 
 <Columns cols={2}>
-  <Card href="/odf">
-    <h4 class="project-title">Open Data Fabric</h4>
-    <img src="images/projects/odf.svg"/>
+  <Card>
+    <h4 class="project-title"><a href="/odf">Open Data Fabric</a></h4>
+    <a href="/odf"><img src="/images/projects/odf.svg"/></a>
     ODF is an open protocol spec for exchange and verifiable multi-party processing of data. It's an independent open-source project. It is included on this website for convenience of cross-referencing with the rest of documentation.
 
     <Columns cols={2}>
-      <div><a href="/x" class="project-quicklink">&gt; Introduction</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Specification</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Reference</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; RFCs</a></div>
+      <div><a href="/odf" class="project-quicklink">&gt; About</a></div>
+      <div><a href="/odf/spec" class="project-quicklink">&gt; Specification</a></div>
+      <div><a href="/odf/schemas" class="project-quicklink">&gt; Schemas</a></div>
+      <div><a href="/odf/rfcs" class="project-quicklink">&gt; RFCs</a></div>
     </Columns>
   </Card>
 
-  <Card href="/cli">
-    <h4 class="project-title">Kamu CLI</h4>
-    <img src="images/projects/kamu-cli.svg"/>
+  <Card>
+    <h4 class="project-title"><a href="/cli">Kamu CLI</a></h4>
+    <a href="/cli"><img src="/images/projects/kamu-cli.svg"/></a>
     A powerful command line tool that implements ODF protocol. You can run it on any device to build data pipelines, ingest and explore data, and interact with other nodes on ODF network.
 
     <Columns cols={2}>
-      <div><a href="/x" class="project-quicklink">&gt; Overview</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Demo</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Install</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; First steps</a></div>
+      <div><a href="/cli/install" class="project-quicklink">&gt; Install</a></div>
+      <div><a href="/cli/quick-start" class="project-quicklink">&gt; Quick Start</a></div>
+      <div><a href="/tutorial" class="project-quicklink">&gt; Tutorial</a></div>
+      <div><a href="/start/examples" class="project-quicklink">&gt; Examples</a></div>
     </Columns>
   </Card>
 
-  <Card href="/node">
-    <h4 class="project-title">Kamu Node</h4>
-    <img src="images/projects/kamu-node.svg"/>
+  <Card>
+    <h4 class="project-title"><a href="/node">Kamu Node</a></h4>
+    <a href="/node"><img src="/images/projects/kamu-node.svg"/></a>
     A scalable server implementation of ODF. It's a set of Kubernetes applications that can be installed in a distributed environment to:
     - Operate data pipelines
     - Verify computations done by other parties
@@ -54,22 +54,22 @@ Our documentation is organized around four closely related projects:
     - Provide data via rich set of APIs to applications and smart contracts.
   
     <Columns cols={2}>
-      <div><a href="/x" class="project-quicklink">&gt; Quick Start</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Protocols</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Deploying</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Operating</a></div>
+      <div><a href="/node/quick-start" class="project-quicklink">&gt; Quick Start</a></div>
+      <div><a href="/api" class="project-quicklink">&gt; APIs</a></div>
+      <div><a href="/node/deploy" class="project-quicklink">&gt; Deploying</a></div>
+      <div><a href="/node/commitments" class="project-quicklink">&gt; Operating</a></div>
     </Columns>
   </Card>
 
-  <Card href="/platform">
-    <h4 class="project-title">Kamu Web Platform</h4>
-    <img src="images/projects/kamu-platform.svg"/>
+  <Card>
+    <h4 class="project-title"><a href="/platform">Kamu Web Platform</a></h4>
+    <a href="/platform"><img src="/images/projects/kamu-platform.svg"/></a>
     A front-end application that acts as a window into the ODF network. Think of it as GitHub for data pipelines or Etherscan of ODF. It can be used in multiple setups: from exploring your local Kamu CLI workspace, to managing your distributed Kamu Node deployment, and to interacting with remote nodes in the global ODF network.
 
     <Columns cols={2}>
-      <div><a href="/x" class="project-quicklink">&gt; Overview</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Get Started</a></div>
-      <div><a href="/x" class="project-quicklink">&gt; Administration</a></div>
+      <div><a href="/platform" class="project-quicklink">&gt; Overview</a></div>
+      <div><a href="/platform" class="project-quicklink">&gt; Get Started</a></div>
+      <div><a href="/platform/admin" class="project-quicklink">&gt; Administration</a></div>
     </Columns>
   </Card>
 </Columns>

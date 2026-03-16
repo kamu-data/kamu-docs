@@ -120,7 +120,7 @@ if __name__ == "__main__":
     with open("docs.json") as f:
         cfg = json.load(f)
 
-    odf = cfg["navigation"]["tabs"][0]["groups"][1]
+    odf = cfg["navigation"]["tabs"][1]["groups"][0]
     assert odf["group"] == "Open Data Fabric"
     rfcs = odf["pages"][3]
     assert rfcs["group"] == "RFCs"

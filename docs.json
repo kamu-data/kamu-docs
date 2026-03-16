@@ -17,6 +17,7 @@
     "tabs": [
       {
         "tab": "Guides",
+        "icon": "person-chalkboard",
         "groups": [
           {
             "group": "Get Started",
@@ -43,40 +44,7 @@
             ]
           },
           {
-            "group": "Open Data Fabric",
-            "icon": "book-open-cover",
-            "pages": [
-              "/odf/about",
-              "/odf/spec",
-              "/odf/reference",
-              {
-                "group": "RFCs",
-                "root": "/odf/rfcs/index",
-                "pages": [
-                  "/odf/rfcs/001-record-offsets",
-                  "/odf/rfcs/002-logical-data-hashes",
-                  "/odf/rfcs/003-content-addressability",
-                  "/odf/rfcs/004-metadata-extensibility",
-                  "/odf/rfcs/005-dataset-annotations",
-                  "/odf/rfcs/006-checkpoints-as-files",
-                  "/odf/rfcs/007-simple-transfer-protocol",
-                  "/odf/rfcs/008-smart-transfer-protocol",
-                  "/odf/rfcs/009-ingest-source-state",
-                  "/odf/rfcs/010-data-schema-in-metadata",
-                  "/odf/rfcs/011-push-ingest-sources",
-                  "/odf/rfcs/012-recommend-base16-encoding",
-                  "/odf/rfcs/013-yaml-enum-representation",
-                  "/odf/rfcs/014-minimize-offset-scanning",
-                  "/odf/rfcs/015-unified-changelog-stream-schema",
-                  "/odf/rfcs/016-odf-schema",
-                  "/odf/rfcs/017-large-files-linking"
-                ]
-              }
-            ]
-          },
-          {
             "group": "Kamu CLI",
-            "icon": "book-open-cover",
             "pages": [
               "/cli/about",
               "/cli/install",
@@ -140,7 +108,6 @@
           },
           {
             "group": "Kamu Node",
-            "icon": "book-open-cover",
             "pages": [
               "/node/about",
               "/node/quick-start",
@@ -227,10 +194,41 @@
       },
       {
         "tab": "Reference",
+        "icon": "book-open-cover",
         "groups": [
           {
+            "group": "Open Data Fabric",
+            "pages": [
+              "/odf/about",
+              "/odf/spec",
+              "/odf/schemas",
+              {
+                "group": "RFCs",
+                "root": "/odf/rfcs/index",
+                "pages": [
+                  "/odf/rfcs/001-record-offsets",
+                  "/odf/rfcs/002-logical-data-hashes",
+                  "/odf/rfcs/003-content-addressability",
+                  "/odf/rfcs/004-metadata-extensibility",
+                  "/odf/rfcs/005-dataset-annotations",
+                  "/odf/rfcs/006-checkpoints-as-files",
+                  "/odf/rfcs/007-simple-transfer-protocol",
+                  "/odf/rfcs/008-smart-transfer-protocol",
+                  "/odf/rfcs/009-ingest-source-state",
+                  "/odf/rfcs/010-data-schema-in-metadata",
+                  "/odf/rfcs/011-push-ingest-sources",
+                  "/odf/rfcs/012-recommend-base16-encoding",
+                  "/odf/rfcs/013-yaml-enum-representation",
+                  "/odf/rfcs/014-minimize-offset-scanning",
+                  "/odf/rfcs/015-unified-changelog-stream-schema",
+                  "/odf/rfcs/016-odf-schema",
+                  "/odf/rfcs/017-large-files-linking"
+                ]
+              }
+            ]
+          },
+          {
             "group": "Kamu CLI",
-            "icon": "book-open-cover",
             "pages": [
               "/cli/commands",
               "/cli/config"
@@ -238,7 +236,6 @@
           },
           {
             "group": "Kamu Node",
-            "icon": "book-open-cover",
             "pages": [
               "/node/config"
             ]
@@ -247,6 +244,7 @@
       },
       {
         "tab": "APIs",
+        "icon": "code",
         "pages": [
           "/api/overview",
           "/api/flight-sql",
@@ -258,7 +256,6 @@
           "/api/odf",
           "/api/postgres",
           "/api/rest",
-          "/api/openapi",
           "/api/webhooks",
           "/api/websocket",
           "/api/oracle"
@@ -266,6 +263,7 @@
       },
       {
         "tab": "Integrations",
+        "icon": "network-wired",
         "pages": [
           "/integrations/overview",
           "/integrations/apache-superset",
@@ -369,6 +367,10 @@
     },
     {
       "source": "/demo",
+      "destination": "/start/tutorial"
+    },
+    {
+      "source": "/tutorial",
       "destination": "/start/tutorial"
     },
     {
