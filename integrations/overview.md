@@ -1,6 +1,5 @@
 ---
-title: Integrations With Other Systems
-description: Preparing data to be used by external systems and further processing.
+title: Overview
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

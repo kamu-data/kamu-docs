@@ -117,20 +117,6 @@
                 ]
               },
               {
-                "group": "Integrations",
-                "root": "/cli/integrations/index",
-                "pages": [
-                  "/cli/integrations/adbc",
-                  "/cli/integrations/apache-superset",
-                  "/cli/integrations/dbeaver",
-                  "/cli/integrations/jdbc",
-                  "/cli/integrations/odbc",
-                  "/cli/integrations/powerbi",
-                  "/cli/integrations/python",
-                  "/cli/integrations/tableau"
-                ]
-              },
-              {
                 "group": "Dataset Evolution",
                 "icon": "wrench",
                 "pages": [
@@ -275,6 +261,20 @@
               "/node/config"
             ]
           }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "pages": [
+          "/integrations/overview",
+          "/integrations/apache-superset",
+          "/integrations/dbeaver",
+          "/integrations/adbc",
+          "/integrations/jdbc",
+          "/integrations/odbc",
+          "/integrations/powerbi",
+          "/integrations/python",
+          "/integrations/tableau"
         ]
       }
     ],
