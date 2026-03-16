@@ -29,19 +29,17 @@ button:has(svg[style*="wrench.svg"]) > svg[style*="wrench.svg"] {
 /* Shortcodes / Snippets */
 
 /* <Term/> */
-.prose a.glossary-term:is(.dark *) {
-    color: #ff0000;
-}
-.prose a.glossary-term:is(.light *) {
-    color: #aa0000;
+.prose a.glossary-term:is(.dark *, .light *) {
+    color: inherit;
+    font-weight: inherit;
+    border-bottom: 2px dotted #325495;
 }
 
 /* <Schema/> */
-.prose a.schema-object:is(.dark *) {
-    color: #00ff00;
-}
-.prose a.schema-object:is(.light *) {
-    color: #00aa00;
+.prose a.schema-object:is(.dark *, .light *) {
+    color: inherit;
+    font-weight: inherit;
+    border-bottom: 2px dotted #2c802c;
 }
 
 

@@ -288,8 +288,8 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hello@kamu.dev"
+        "label": "Get Help",
+        "href": "https://discord.gg/nU6TXRQNXC"
       }
     ],
     "primary": {

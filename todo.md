@@ -1,8 +1,5 @@
 # TODO
 
-- top-level links
-- use Tooltip for glossary and schema items?
-- PUBLISH
 - Spec ToC ident issues
 - tables column width
   - config reference

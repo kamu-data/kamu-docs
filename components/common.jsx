@@ -1,6 +1,6 @@
 export const Term = ({ t, id }) => {
   const anchor = id ? id : t.toLowerCase().replace(/\s+/g, "-");
-  const link = `/glossary#${anchor}`;
+  const link = `/general/glossary#${anchor}`;
 
   return <a class="glossary-term" href={link}>{t}</a>;
 };
@@ -8,7 +8,7 @@ export const Term = ({ t, id }) => {
 
 export const Schema = ({ t, id }) => {
   const anchor = id ? id : t.toLowerCase().replace(/\s+/g, "-");
-  const link = `/reference#${anchor}`;
+  const link = `/odf/schemas#${anchor}`;
 
   return <a class="schema-object" href={link}>{t}</a>;
 };

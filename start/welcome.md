@@ -5,6 +5,9 @@ icon: hand-spock
 mode: wide
 ---
 
+<Tooltip headline="API" tip="Application Programming Interface: a set of protocols for software applications to communicate." cta="Read our API guide" href="/api-reference">API</Tooltip> documentation helps developers understand how to integrate with your service.
+
+
 <Card
   title="First time here?"
   icon="rocket"
