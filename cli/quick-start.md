@@ -1,15 +1,13 @@
 ---
-Title: First Steps
+title: Quick Start
 description: A quick rundown of the key features to get a feel for the tool
-weight: 25
-categories: []
-aliases:
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
 For a quick overview of key functionality you can also view this tutorial:
-{{<youtube-list PLV91cS45lwVG20Hicztbv7hsjN6x69MJk>}}
+
+<YouTube id="oUTiWW6W78A"/>
 
 This tutorial will give you a high-level tour of `kamu` and show you how it works through examples.
 
@@ -46,7 +44,7 @@ Command help is also available online on [CLI Reference](/cli-reference) page.
 Throughout this tutorial we will be using the [Modified Zip Code Areas](https://data.cityofnewyork.us/Health/Modified-Zip-Code-Tabulation-Areas-MODZCTA-/pri4-ifjk) dataset from New York Open Data Portal.
 
 ### Initializing the workspace
-To work with `kamu` you first need a **workspace**. <Term t="Workspace"/> is where kamu will store important information about <Term t="datasets" "dataset"/> and cached data. Let's create one:
+To work with `kamu` you first need a **workspace**. <Term t="Workspace"/> is where kamu will store important information about <Term t="datasets" id="dataset"/> and cached data. Let's create one:
 
 <Diagram src="/images/cli/first-steps/init.gif" alt="kamu init"/>
 
@@ -70,7 +68,7 @@ We'll get into the details of that later, but for now let's create such link.
 
 <Diagram src="/images/cli/first-steps/pull.gif" alt="kamu pull"/>
 
-<Term t="Datasets" "dataset"/> are created from <Term t="dataset snapshots" id="dataset-snapshot"/> - special files that describe the **desired state** of the metadata upon creation.
+<Term t="Datasets" id="dataset"/> are created from <Term t="dataset snapshots" id="dataset-snapshot"/> - special files that describe the **desired state** of the metadata upon creation.
 
 We will use a <Schema t="DatasetSnapshot"/> file from [kamu-contrib repo](https://github.com/kamu-data/kamu-contrib/blob/master/us.cityofnewyork.data/zipcode-boundaries.yaml) that looks like this:
 
@@ -123,7 +121,7 @@ name: us.cityofnewyork.data.zipcode-boundaries
 kind: Root
 ```
 
-<Term t="Datasets" "dataset"/> that ingest external data in `kamu` are called <Term t="Root" "root-dataset"/> datasets.
+<Term t="Datasets" id="dataset"/> that ingest external data in `kamu` are called <Term t="Root" id="root-dataset"/> datasets.
 
 Next we have:
 
@@ -393,7 +391,7 @@ Web UI is especially useful once you start developing complex stream processing 
 ## Conclusion
 We hope this quick overview inspires you to give `kamu` a try! 
 
-Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **<Term t="reproducible an verifiable" "verifiability"/>** way. 
+Don't get distracted by the pretty notebooks and UIs though - we covered only the tip of the iceberg. The true power of `kamu` lies in how it manages data, letting you to reliably track it, transform it, and share results with your peers in an easily **<Term t="reproducible an verifiable" id="verifiability"/>** way. 
 
 
 Please continue to the [self-serve demo](/demo) for some hands-on walkthroughs and tutorials, and check out our other [learning materials](/learning-materials).

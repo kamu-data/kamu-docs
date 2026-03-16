@@ -1,5 +1,5 @@
 ---
-Title: Examples
+title: Examples
 description: Sample data projects executed with kamu
 ---
 

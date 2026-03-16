@@ -1,6 +1,7 @@
 ---
 title: Supported Data Engines
 description: Describes strengths and development state of different engines supported by kamu
+icon: database
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

@@ -1,12 +1,6 @@
 ---
-Title: Installation
+title: Install
 description: Covers installation steps to get kamu-cli running on your computer
-weight: 15
-categories: []
-aliases:
-  - /cli/install
-  - /cli/installation
-  - /cli/get-started/installation
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'

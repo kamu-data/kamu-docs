@@ -1,10 +1,8 @@
 # TODO
 
-- `/cli/get-started` -> `/get-started/`
 - `/cli/integrations` -> new tab?
 - `/node/api` -> new tab?
 - `/odf` -> reference tab?
-- `/glossary` -> reference tab? (General section?)
 - project icons
 - check section links e.g. `/cli`
 - fix `welcome` page links

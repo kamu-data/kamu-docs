@@ -60,10 +60,10 @@ a.project-quicklink:is(.dark *, .light *) {
 
 /* Welcome page project icons have special treatment */
 .prose a img:is(
-    [src*="odf.svg"],
-    [src*="kamu-cli.svg"],
-    [src*="kamu-node.svg"],
-    [src*="kamu-platform.svg"]
+    [src*="projects/odf.svg"],
+    [src*="projects/kamu-cli.svg"],
+    [src*="projects/kamu-node.svg"],
+    [src*="projects/kamu-platform.svg"]
  ) {
   display: block;
   margin: 30px auto 0 auto;

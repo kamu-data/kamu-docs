@@ -1,12 +1,29 @@
 ---
-title: FAQ
-description: Frequently asked questions
+title: Frequently asked questions
+sidebarTitle: FAQ
 icon: circle-question
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
-## Kamu vs. Apache Iceberg, Delta Lake
+
+### Is Kamu a database?
+No. Databases focus on state and transactional processing while Kamu focuses on historical data, analytics, and data science (complex user-defined queries, summaries, statistics). Databases update data in-place, while Kamu is more like a super low-latency accounting ledger - it preserves all history of changes by default allowing you to understand who and how changed data over time. Databases only work within company boundaries, while Kamu is designed for multi-party exchange and similarly to Git allows you to hold everyone who supplied or processed data forever accountable for results. Databases store data in custom data formats, while Kamu uses interoperable formats where data can be copied around as files and efficiently queried by multiple data engines similarly to Open Lakehouse architecture.
+
+
+### Why separate Kamu CLI, Kamu Node, and ODF?
+We believe that participating in global data economy should not require credit cards, accounts, and cloud subscriptions. So we packed ALL features of a modern data lakehouse in a CLI tool that you can install on your laptop and use for free. Kamu Node is a server counterpart - same features but designed for large scale. ODF is the underlying set of formats and protocols for data exchange and verifiable processing - both CLI and Node are implementing it.
+
+
+### Can I use Kamu with my existing infrastructure?
+Yes, Kamu is designed to integrate with existing infra and tools. You can ingest data from databases and run it alonside existing data lakehouses. Kamu supports many standard protocols and query languages like SQL, so your existing data science notebooks, BI tools, and analytics platforms can query Kamu datasets directly. The key benefit of using Kamu throughout your data stack is that once data is in, it gains verifiability, provenance tracking, and collaboration capabilities. See [integrations](/integrations) section for more info.
+
+
+### What are the performance characteristics of Kamu?
+Kamu is designed with massive volumes of near-realtime data in mind (e.g. industrial IoT, finance). It builds on decades of advancements in analytical data management and modern lakehouse architectures. It uses temporal processing model to allow highly efficient incremental processing of streaming data. Its scaling and performance characteristics should closely match those of the underlying engines, with minimal overhead introduced by metadata ledger upkeep and data hashing. Likewise the underlying ODF format is very efficient for data transfer and replication, including direct-to-storage access to fully utilize your network bandwidth.
+
+
+### Kamu vs. Apache Iceberg, Delta Lake?
 Apache Iceberg and Delta formats in modern data lakes serve the purpose of creating a logical representation of **data table** that abstracts the physical layout of data on disk.
 
 Their features include:
@@ -41,7 +58,7 @@ ODF datasets also include several **cryptographic features**:
 So while Iceberg and Delta fill the purpose of table abstractions in enterprise data lakehouses, ODF dataset is a **Web3-native** ledgerized data format that we see as a building block for **multi-party exchange and collaborative processing of data**.
 
 
-## Kamu vs. Spark, Flink, Kafka Streaming
+### Kamu vs. Spark, Flink, Kafka Streaming?
 `kamu` does not replace or compete with enterprise data processing engines - it uses them as building blocks.
 
 Think of `kamu` as *"Kubernetes for Data"*, where [multiple different engines](/supported-engines) are just plug-in components, integrated together into a single **verifiable data processing framework**.
@@ -57,7 +74,7 @@ While individual engines let you do almost anything with data, `kamu` is a lot m
 - And much more...
 
 
-## ComKamu vs. Snowflake
+### Kamu vs. Snowflake?
 | Snowflake                                                                                                                                                                                       | Kamu                                                                                                                                                                                                                            |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Is a robust data platform and enterprise data warehouse                                                                                                                                         | Is a Web3-native data sharing and collaborative processing solution                                                                                                                                                             |
@@ -71,7 +88,7 @@ While individual engines let you do almost anything with data, `kamu` is a lot m
 | Only off-chain data, limited to **company-size silos**                                                                                                                                          | Seamlessly integrates **on and off-chain data**, and can provide data to blockchain as an **optimistic oracle**                                                                                                                 |
 
 
-## Kamu vs. Databricks
+### Kamu vs. Databricks?
 Databricks provide an amazing set of technologies for enterprise data, however, many of the limitations described in the [Snowflake](#snowflake) section in regards to centralization still apply.
 
 Unlike Databricks platform, `kamu` is:
@@ -82,7 +99,7 @@ Unlike Databricks platform, `kamu` is:
 - **Collaborative** - built-in verifiability and auditability allows allows data exchange and processing to function across company boundaries, and provides a reliable foundation for multi-party data exchange and processing.
 
 
-## Kamu vs. Apache Airflow, Apache NiFi
+### Kamu vs. Apache Airflow, Apache NiFi?
 These tools are "swiss army knives" of data processing. Their ultimate flexibility unfortunately also makes them easily misused, often resulting in [Rube Goldberg machines](https://en.wikipedia.org/wiki/Rube_Goldberg_machine) that are extremely convoluted and fragile.
 
 Our goal with `kamu` is to provide a more opinionated data management framework that:
@@ -96,7 +113,7 @@ Our goal with `kamu` is to provide a more opinionated data management framework 
 You can use these tools to prepare data for ingestion into `kamu`, but after that you should seriously consider the superior [stream processing computational model](https://www.kamu.dev/blog/end-of-batch-era/) for further proccessing.
 
 
-## Kamu vs. JSON REST APIs
+### Kamu vs. JSON REST APIs
 | JSON REST                                                                                                                                                                                  | Kamu                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | No standard - diffrent auth mechanisms, data models, limits, pagination, error handling                                                                                                    | Simple and [open protocol](/odf)                                          |
@@ -109,7 +126,7 @@ You can use these tools to prepare data for ingestion into `kamu`, but after tha
 | Not composable - after data is altered you'd need to build a new API infrastructure to share it                                                                                            | Infinitely composable - improved/enriched data can be shared with the network easily |
 
 
-## Kamu vs. Blockchains
+### Kamu vs. Blockchains?
 Although [ODF data format](/odf) is inspired by cryptographic ledgers used in blockchains, `kamu` is NOT a mesh connectivity network, it does NOT maintain a single ledger or run any kind of consensus between nodes.
 
 Nodes in `kamu` talk to each other only to execute a query that touches data spread across them, or to run a streaming data processing task.
@@ -122,7 +139,7 @@ We designed `kamu` to work well with blockchains:
 - `kamu` can in turn [use data from blockchains](/blockchain-source) for processing and analytics.
 
 
-## Kamu vs. Ceramic Network
+### Kamu vs. Ceramic Network?
 | Ceramic                                                                                                                                                                                                                                                                | Kamu                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Purpose: transactional data store for decentralized apps                                                                                                                                                                                                               | Purpose: historical data lakehouse, analytical querying, composable stream processing                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -133,7 +150,7 @@ We designed `kamu` to work well with blockchains:
 | No built-in data transformation capabilities. Derivative data can only be created by extracting data from the system, transforming it, and writing it into a new stream. Transformed data therefore will be disjoint from its origin. The model is **non-composable**. | Data transformation is a core part of the system. Processing pipelines can be built using streaming SQL allowing to create higher-level datasets that clean, aggregate, enrich, and integrate data. Provenance of derivative data is preserved. Pipelines are **infinitely composable**. Using **verifiable processing** the validity of all data can be verified, allowing to build data pipelines that span arcoss multiple organizations in a global **trustless** environment. |
 
 
-## Kamu vs. Space And Time
+### Kamu vs. Space And Time?
 | Space And Time                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Kamu                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Centralized data warehouse using Zero-Knowledge proofs                                                                                                                                                                                                                                                                                                                                                                                                                                | Decentralized data lakehouse, a Kubernetes-like framework for data management, and a multi-party collaborative data processing network                                                                                                                                                                                                                                                                                                            |
@@ -145,7 +162,7 @@ We designed `kamu` to work well with blockchains:
 | No built-in data transformation capabilities. Derivative data can only be created by extracting data from the system, transforming it, and writing it into a new table. Transformed data therefore will be disjoint from its origin. The model is **non-composable**.                                                                                                                                                                                                                 | Data transformation is a core part of the system. Processing pipelines can be built using streaming SQL allowing to create higher-level datasets that clean, aggregate, enrich, and integrate data. Provenance of derivative data is preserved. Pipelines are **infinitely composable**.                                                                                                                                                          |
 
 
-## Can I use Pandas or other library to create derivative datasets?
+### Can I use Pandas or other library to create derivative datasets?
 `kamu`'s goal is to be as inclusive of different ways to process data as possible, but also **uphold certain key properties** of data pipelines like autonomy, low latency, and reproducibility. 
 
 Pandas and most other libraries do **batch processing**, so they are not suited for processing data that flows continuously. Using them would be inefficient, non-reproducible, and error prone, as batch paradigm does not handle late and out-of-order data, and other types of temporal problems we see in data constantly (see our [learning materials](/learning-materials) on the topic of streaming vs. batch). 

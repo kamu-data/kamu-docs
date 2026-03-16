@@ -19,10 +19,27 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Get Started",
             "pages": [
-              "/welcome",
-              "/faq"
+              "/start/welcome",
+              "/start/faq",
+              "/start/first-steps",
+              "/start/learning-materials",
+              "/start/tutorial",
+              {
+                "group": "Examples",
+                "icon": "book-open",
+                "root": "/examples/index",
+                "pages": [
+                  "/examples/covid19",
+                  "/examples/currency-conversion",
+                  "/examples/housing-prices",
+                  "/examples/leaderboard",
+                  "/examples/overdue-shipments",
+                  "/examples/stock-trading",
+                  "/examples/web3-data"
+                ]
+              }
             ]
           },
           {
@@ -62,31 +79,8 @@
             "icon": "book-open-cover",
             "pages": [
               "/cli/about",
-              "/cli/supported-engines",
-              "/cli/troubleshooting",
-              {
-                "group": "Getting Started",
-                "root": "/cli/get-started/index",
-                "pages": [
-                  "/cli/get-started/project-status",
-                  "/cli/get-started/demo",
-                  "/cli/get-started/install",
-                  "/cli/get-started/learning-materials",
-                  {
-                    "group": "Examples",
-                    "root": "/cli/get-started/examples/index",
-                    "pages": [
-                      "/cli/get-started/examples/covid19",
-                      "/cli/get-started/examples/currency-conversion",
-                      "/cli/get-started/examples/housing-prices",
-                      "/cli/get-started/examples/leaderboard",
-                      "/cli/get-started/examples/overdue-shipments",
-                      "/cli/get-started/examples/stock-trading",
-                      "/cli/get-started/examples/web3-data"
-                    ]
-                  }
-                ]
-              },
+              "/cli/install",
+              "/cli/quick-start",
               {
                 "group": "Ingesting Data",
                 "root": "/cli/ingest/index",
@@ -154,7 +148,8 @@
                   "/cli/bad-data/upstream",
                   "/cli/bad-data/pii"
                 ]
-              }
+              },
+              "/cli/troubleshooting"
             ]
           },
           {
@@ -248,14 +243,16 @@
             ]
           },
           {
-            "group": "Other",
+            "group": "General",
             "pages": [
-              "/community",
-              "/contrib",
-              "/licensing",
-              "/terms",
-              "/glossary",
-              "/typography"
+              "/general/project-status",
+              "/general/supported-engines",
+              "/general/community",
+              "/general/contrib",
+              "/general/licensing",
+              "/general/terms",
+              "/general/glossary",
+              "/general/typography"
             ]
           }
         ]
@@ -299,7 +296,7 @@
     "primary": {
       "type": "button",
       "label": "Install",
-      "href": "/cli/get-started/install/"
+      "href": "/cli/install/"
     }
   },
   "contextual": {
@@ -342,48 +339,60 @@
   },
   "redirects": [
     {
-      "source": "/demo",
-      "destination": "/cli/get-started/demo"
+      "source": "/faq",
+      "destination": "/first-steps/faq"
+    },
+    {
+      "source": "/welcome",
+      "destination": "/first-steps/welcome"
     },
     {
       "source": "/tos",
-      "destination": "/terms"
+      "destination": "/general/terms"
     },
     {
       "source": "/terms-of-service",
-      "destination": "/terms"
+      "destination": "/general/terms"
+    },
+    {
+      "source": "/contributing",
+      "destination": "/general/contrib"
     },
     {
       "source": "/contribution-guidelines",
-      "destination": "/contrib"
+      "destination": "/general/contrib"
     },
     {
       "source": "/license",
-      "destination": "/licensing"
+      "destination": "/general/licensing"
+    },
+    {
+      "source": "/demo",
+      "destination": "/start/tutorial"
     },
     {
       "source": "/cli/demo",
-      "destination": "/cli/get-started/demo"
+      "destination": "/start/tutorial"
     },
     {
       "source": "/cli/self-serve-demo",
-      "destination": "/cli/get-started/demo"
+      "destination": "/start/tutorial"
     },
     {
       "source": "/cli/get-started/self-serve-demo",
-      "destination": "/cli/get-started/demo"
+      "destination": "/start/tutorial"
     },
     {
-      "source": "/cli/install",
-      "destination": "/cli/get-started/install"
+      "source": "/install",
+      "destination": "/cli/install"
     },
     {
       "source": "/cli/installation",
-      "destination": "/cli/get-started/install"
+      "destination": "/cli/install"
     },
     {
       "source": "/cli/get-started/installation",
-      "destination": "/cli/get-started/install"
+      "destination": "/cli/install"
     }
   ]
 }

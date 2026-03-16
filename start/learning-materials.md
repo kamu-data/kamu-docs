@@ -1,6 +1,7 @@
 ---
 title: Learning Materials
 description: Explainer videos, talks, publications and other learning materials
+icon: person-chalkboard
 mode: wide
 ---
 
