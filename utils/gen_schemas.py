@@ -102,6 +102,10 @@ def render_union(ctx, sch, name):
     ctx.out.write(sch.get("description", ""))
     ctx.out.write("\n\n")
 
+    if sch.get("format") == "union-or-string":
+        assert sch["oneOf"][0]["type"] == "string"
+        del sch["oneOf"][0]
+
     rows = []
     for option in sch["oneOf"]:
         option_id = option["$ref"].split("/")[-1]
@@ -192,7 +196,11 @@ def render_object(ctx, sch, name):
                 render_type(ctx, psch),
                 "✔️" if pname in sch["required"] else "",
                 render_format(psch),
-                psch.get("description", "")
+                psch.get("description", "") + (
+                    "\n\nDefault: `{}`".format(psch.get("default"))
+                    if psch.get("default")
+                    else ""
+                )
             ]
                 for pname, psch in sch["properties"].items()
             ]

@@ -68,8 +68,11 @@ Can be read using:
 read:
   kind: NdJson
   schema:
-  - id BIGINT
-  - key STRING
+    fields:
+      - name: id
+        type: Int64
+      - name: key
+        type: String
 ```
 
 See: <Schema t="ReadStep::NdJson"/>
@@ -160,8 +163,11 @@ prepare:
 read:
   kind: Csv
   schema:
-  - id BIGINT
-  - key STRING
+    fields:
+      - name: id
+        type: Int64
+      - name: key
+        type: String
 ```
 
 See: <Schema t="PrepStep::Pipe"/>
