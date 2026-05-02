@@ -43,9 +43,13 @@ content:
         kind: Csv
         header: true
         schema:
-          - "date DATE"
-          - "city STRING"
-          - "population STRING"
+          fields:
+            - name: date
+              type: Date
+            - name: city
+              type: String
+            - name: population
+              type: String
       # OPTIONAL: Pre-processing query that shapes the data.
       # Useful for converting text data into strict types
       preprocess:
