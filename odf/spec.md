@@ -6,7 +6,7 @@ title: Specification
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
 
-Version: 0.37.0
+Version: 0.38.0
 
 # Abstract
 **Open Data Fabric** is an open protocol specification for decentralized exchange and transformation of semi-structured data that aims to holistically address many shortcomings of the modern data management systems and workflows.

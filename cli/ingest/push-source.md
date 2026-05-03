@@ -27,9 +27,13 @@ content:
       read:
         kind: NdJson
         schema:
-          - t TIMESTAMP
-          - long DOUBLE
-          - lat DOUBLE
+          fields:
+            - name: t
+              type: Timestamp
+            - name: long
+              type: float64
+            - name: lat
+              type: float64
       merge:
         kind: Append
     - kind: SetVocab

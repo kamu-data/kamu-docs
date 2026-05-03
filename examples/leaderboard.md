@@ -39,10 +39,10 @@ You can either follow the example steps below or fast-track through it by runnin
 
 ### Scores Dataset
 We start with the `player_scores` dataset that will ingest the scores of all players who played a match. It will have a very simple schema:
-- `match_time TIMESTAMP`
-- `match_id BIGINT`
-- `player_id STRING`
-- `score BIGINT`
+- `match_time: Timestamp`
+- `match_id: Int64`
+- `player_id: String`
+- `score: Int64`
 
 Our game will be sending scores data directly to the <Term t="node"/> hosting this dataset, so we will use <Schema t="AddPushSource"/> metadata event to describe the format that data will come in.
 
@@ -60,10 +60,15 @@ content:
       read:
         kind: NdJson
         schema:
-          - "match_time TIMESTAMP"
-          - "match_id BIGINT"
-          - "player_id STRING"
-          - "score BIGINT"
+          fields:
+            - name: match_time
+              type: Timestamp
+            - name: match_id
+              type: Int64
+            - name: player_id
+              type: String
+            - name: score
+              type: Int64
       merge:
         kind: Ledger
         primaryKey:
