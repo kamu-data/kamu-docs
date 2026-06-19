@@ -1,8 +1,5 @@
 ---
-Title: Polling Sources
-weight: 40
-categories: []
-aliases:
+title: Polling Sources
 ---
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
