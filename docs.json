@@ -54,6 +54,7 @@
                 "root": "/cli/ingest/index",
                 "pages": [
                   "/cli/ingest/input-formats",
+                  "/cli/ingest/polling-source",
                   "/cli/ingest/push-source",
                   "/cli/ingest/merge-strategies",
                   "/cli/ingest/blockchain-source"
