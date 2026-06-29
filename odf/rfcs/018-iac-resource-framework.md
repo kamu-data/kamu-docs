@@ -458,7 +458,7 @@ Current API of the Node evolved as several groups of functionality:
   - GraphQL
   - FlightSQL
 
-<Diagram src="/images/odf/rfcs/apis-before.png" alt=""/>
+<Diagram src="/images/odf/rfcs/018/apis-before.png" alt=""/>
 
 Our REST API is currently missing the functionality for listing datasets, inspecting metadata, and manipulating other objects like accounts, flows, variables etc - this role is only filled by GraphQL.
 
@@ -472,7 +472,7 @@ As we evolve our APIs we would like:
 ### REST API strategy
 We will introduce another core REST API protocol group: **Resource protocol**.
 
-<Diagram src="/images/odf/rfcs/apis-after.png" alt=""/>
+<Diagram src="/images/odf/rfcs/018/apis-after.png" alt=""/>
 
 Resource protocol will define:
 * How to list, create, update, delete, and get the state of various resources in an ODF system  
@@ -555,7 +555,7 @@ Proposed changes can be introduced in implementations in parallel with existing 
 
 Kubernetes provides a unified API that is very extensible and provides a uniform way to work with all object resources.
 
-<Diagram src="/images/odf/rfcs/k8s-apis.png" alt=""/>
+<Diagram src="/images/odf/rfcs/018/k8s-apis.png" alt=""/>
 
 Basic Kubernetes API scheme is:
 

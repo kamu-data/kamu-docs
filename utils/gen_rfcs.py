@@ -100,11 +100,7 @@ if __name__ == "__main__":
 
             rfc_match = re.search(r"(\d{3}-.*)\.md", url)
 
-            # print(f"rfc_match {rfc_match}", file=sys.stderr)
-
             if rfc_match:
-                # print(f"+++", file=sys.stderr)
-
                 rfc = rfc_match[0]
                 return f'[{t}]({RFC_LINK_PREFIX}{rfc})'
             else:
@@ -116,8 +112,8 @@ if __name__ == "__main__":
         # Fix up images
         def sub_images(m: re.Match[str]) -> str:
             alt = m.group(1)
-            path = os.path.basename(m.group(2))
-            return f'<Diagram src="/images/odf/rfcs/{path}" alt="{alt}"/>'
+            path = m.group(2)
+            return f'<Diagram src="/{rfcs_dst_images_dir}/{path}" alt="{alt}"/>'
 
         text = re.sub(r"\!\[([^]]*)\]\(/rfcs/img/(.+)\)", sub_images, text)
 
