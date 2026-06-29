@@ -3,6 +3,8 @@
 title: "RFC-005: New Annotation Metadata Events"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 **Start Date**: 2022-04-08
 
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/20?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/20)

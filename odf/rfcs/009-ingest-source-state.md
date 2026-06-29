@@ -3,6 +3,8 @@
 title: "RFC-009: Ingestion Source State"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 **Start Date**: 2023-04-28
 
 [![RFC](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/50?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/50)

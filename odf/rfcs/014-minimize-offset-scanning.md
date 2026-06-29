@@ -3,6 +3,8 @@
 title: "RFC-014: Minimizing scanning for last offset and block"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 [![Issue](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/62?label=Issue)](https://github.com/kamu-data/open-data-fabric/issues/69)
 [![Spec PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/63?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/63)
 

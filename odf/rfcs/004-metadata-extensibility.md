@@ -3,6 +3,8 @@
 title: "RFC-004: Metadata Extensibility"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 **Start Date**: 2020-12-29
 
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/8?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/8)

@@ -3,6 +3,8 @@
 title: "RFC-002: Logical Data Digests"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 **Start Date**: 2021-11-15
 
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/1?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/1)

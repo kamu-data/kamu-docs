@@ -3,6 +3,8 @@
 title: "RFC-015: Unified changelog stream schema"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 [![Issue](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/47?label=Issue)](https://github.com/kamu-data/open-data-fabric/issues/47)
 [![Spec PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/72?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/72)
 

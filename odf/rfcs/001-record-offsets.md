@@ -3,6 +3,8 @@
 title: "RFC-001: Record Offsets"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 **Start Date**: 2021-06-01
 
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/10?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/10)

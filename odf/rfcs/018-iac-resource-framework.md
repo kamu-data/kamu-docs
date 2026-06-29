@@ -3,6 +3,8 @@
 title: "RFC-018: Infrastructure-as-Code Resource Framework"
 ---
 
+import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
+
 [![PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/126?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/126)
 
 **Start Date**: 2025-06-14

@@ -23,6 +23,8 @@ PAGE_HEADER = """---
 title: "{title}"
 ---
 
+import {{Diagram, Term, Schema, YouTube, YouTubeList}} from '/components/common.jsx'
+
 """
 
 INDEX_HEADER = """---
