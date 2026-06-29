@@ -74,7 +74,7 @@ title: Config Reference
   &quot;images&quot;: \{
     &quot;datafusion&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-datafusion:0.9.0&quot;,
     &quot;flink&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-flink:0.18.2-flink_1.16.0-scala_2.12-java8&quot;,
-    &quot;risingwave&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.2.0-risingwave_1.7.0-alpha&quot;,
+    &quot;risingwave&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.3.0&quot;,
     &quot;spark&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-spark:0.23.1-spark_3.5.0&quot;
   },
   &quot;networkNs&quot;: &quot;Private&quot;,
@@ -115,7 +115,7 @@ title: Config Reference
 <tr>
 <td><code>identity</code></td>
 <td><a href="#identityconfig"><code>IdentityConfig</code></a></td>
-<td><code class="language-json">null</code></td>
+<td><code class="language-json">\{}</code></td>
 <td>UNSTABLE: Identity configuration</td>
 </tr>
 <tr>
@@ -577,7 +577,6 @@ Base type: `string`
 <tbody>
 <tr><td><a href="#databasecredentialsourceconfigrawpassword"><code>RawPassword</code></a></td></tr>
 <tr><td><a href="#databasecredentialsourceconfigawssecret"><code>AwsSecret</code></a></td></tr>
-<tr><td><a href="#databasecredentialsourceconfigawsiamtoken"><code>AwsIamToken</code></a></td></tr>
 </tbody>
 </table>
 
@@ -622,27 +621,6 @@ Base type: `string`
 </tr>
 <tr>
 <td><code>secretName</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-## `DatabaseCredentialSourceConfig::AwsIamToken`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>kind</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>userName</code></td>
 <td><code>string</code></td>
 <td></td>
 <td></td>
@@ -725,7 +703,7 @@ The encryption key must be a 32-character alphanumeric string, which
 includes both uppercase and lowercase Latin letters (A-Z, a-z) and
 digits (0-9).
 
-To generate use:
+To generate, use:
 ```sh
 tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32; echo
 ```
@@ -947,7 +925,7 @@ Base type: `string`
 <td><pre><code class="language-json">\{
   &quot;datafusion&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-datafusion:0.9.0&quot;,
   &quot;flink&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-flink:0.18.2-flink_1.16.0-scala_2.12-java8&quot;,
-  &quot;risingwave&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.2.0-risingwave_1.7.0-alpha&quot;,
+  &quot;risingwave&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.3.0&quot;,
   &quot;spark&quot;: &quot;ghcr.io&#x2F;kamu-data&#x2F;engine-spark:0.23.1-spark_3.5.0&quot;
 }</code></pre></td>
 <td>UNSTABLE: Default engine images</td>
@@ -1070,7 +1048,7 @@ See: [kamu-node#277](https://github.com/kamu-data/kamu-node/issues/277)
 <tr>
 <td><code>risingwave</code></td>
 <td><code>string</code></td>
-<td><code class="language-json">&quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.2.0-risingwave_1.7.0-alpha&quot;</code></td>
+<td><code class="language-json">&quot;ghcr.io&#x2F;kamu-data&#x2F;engine-risingwave:0.3.0&quot;</code></td>
 <td>UNSTABLE: RisingWave engine image</td>
 </tr>
 <tr>
@@ -1331,31 +1309,52 @@ resources (for authenticated clients)
 
 ## `IdentityConfig`
 
+Private keys are used to sign API responses.
+Supported algorithms: `ed25519`, `secp256k1`.
+
 <table>
 <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
 <tbody>
 <tr>
-<td><code>privateKey</code></td>
+<td><code>ed25519PrivateKey</code></td>
 <td><a href="#privatekey"><code>PrivateKey</code></a></td>
 <td><code class="language-json">null</code></td>
 <td>
 
-Private key used to sign API responses.
-Currently only `ed25519` keys are supported.
+Root private key that corresponds to the `authority` and is used to sign
+responses.
 
-To generate use:
+To generate, use:
+```sh
+od -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' && echo
+```
+or
+```sh
+openssl rand -hex 32
+```
 
-    dd if=/dev/urandom bs=1 count=32 status=none |
-        base64 -w0 |
-        tr '+/' '-_' |
-        tr -d '=' |
-        (echo -n u && cat)
+</td>
+</tr>
+<tr>
+<td><code>secp256k1PrivateKey</code></td>
+<td><a href="#secp256k1signer"><code>Secp256k1Signer</code></a></td>
+<td><code class="language-json">null</code></td>
+<td>
 
-The command above:
-- reads 32 random bytes
-- base64-encodes them
-- converts default base64 encoding to base64url and removes padding
-- prepends a multibase prefix
+Secp256k1 private key used to sign EIP-712 typed data.
+
+To generate, use:
+```sh
+od -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' && echo
+```
+or
+```sh
+openssl rand -hex 32
+```
+or
+```sh
+cast wallet new
+```
 
 </td>
 </tr>
@@ -1798,6 +1797,10 @@ Base type: `string`
 </tr>
 </tbody>
 </table>
+
+## `Secp256k1Signer`
+
+Base type: `string`
 
 ## `SourceConfig`
 

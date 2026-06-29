@@ -223,7 +223,8 @@
                   "/odf/rfcs/014-minimize-offset-scanning",
                   "/odf/rfcs/015-unified-changelog-stream-schema",
                   "/odf/rfcs/016-odf-schema",
-                  "/odf/rfcs/017-large-files-linking"
+                  "/odf/rfcs/017-large-files-linking",
+                  "/odf/rfcs/018-iac-resource-framework"
                 ]
               }
             ]

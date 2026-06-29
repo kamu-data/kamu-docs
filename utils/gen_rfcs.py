@@ -3,6 +3,7 @@ import os
 import re
 import sys
 import json
+import shutil
 
 # Locate `open-data-fabric` repo
 ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
@@ -53,19 +54,29 @@ def get_summary(text: str) -> str:
 
 
 if __name__ == "__main__":
-    rfcs_dir = os.path.join(ODF_PATH, "rfcs")
+    rfcs_src_dir = os.path.join(ODF_PATH, "rfcs")
+    rfcs_dst_dir = "odf/rfcs"
+    rfcs_src_images_dir = os.path.join(ODF_PATH, "rfcs/img")
+    rfcs_dst_images_dir = "images/odf/rfcs"
 
-    file_names = list(os.listdir(rfcs_dir))
+    # Copy images
+    if os.path.exists(rfcs_dst_images_dir):
+        shutil.rmtree(rfcs_dst_images_dir)
+    shutil.copytree(rfcs_src_images_dir, rfcs_dst_images_dir)
+
+
+    # Copy and fix up RFC md files
+    file_names = list(os.listdir(rfcs_src_dir))
     file_names.sort()
 
     summaries = []
 
     for fname in file_names:
-        if fname == "000-template.md":
-            continue
+        src_path = os.path.join(rfcs_src_dir, fname)
+        dst_path = os.path.join(rfcs_dst_dir, fname)
 
-        src_path = os.path.join(rfcs_dir, fname)
-        dst_path = os.path.join(sys.argv[1], fname)
+        if fname == "000-template.md" or os.path.isdir(src_path):
+            continue
 
         # Read the source
         with open(src_path) as f:
@@ -77,6 +88,7 @@ if __name__ == "__main__":
 
         # Remove title
         text = text[len(m.group(0)):].strip()
+        title = title.replace("<!-- omit in toc -->", "").strip()
 
         # Convert comments
         text = text.replace("<!--", "{/*").replace("-->", "*/}")
@@ -101,6 +113,14 @@ if __name__ == "__main__":
 
         text = re.sub(r"\[([^]]+)]\(([^)]+)\)", map_link, text)
 
+        # Fix up images
+        def sub_images(m: re.Match[str]) -> str:
+            alt = m.group(1)
+            path = os.path.basename(m.group(2))
+            return f'<Diagram src="/images/odf/rfcs/{path}" alt="{alt}"/>'
+
+        text = re.sub(r"\!\[([^]]*)\]\(/rfcs/img/(.+)\)", sub_images, text)
+
         with open(dst_path, "w") as f:
             f.write(PAGE_HEADER.format(title=title))
             f.write(text)
@@ -112,7 +132,7 @@ if __name__ == "__main__":
         ))
 
     # Write index
-    with open(os.path.join(sys.argv[1], "index.md"), "w") as f:
+    with open(os.path.join(rfcs_dst_dir, "index.md"), "w") as f:
         f.write(INDEX_HEADER)
 
         for fname, title, summary in summaries:

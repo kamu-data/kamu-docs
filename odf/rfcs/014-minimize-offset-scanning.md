@@ -1,6 +1,6 @@
 ---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: "RFC-014: Minimizing scanning for last offset and block "
+title: "RFC-014: Minimizing scanning for last offset and block"
 ---
 
 [![Issue](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/62?label=Issue)](https://github.com/kamu-data/open-data-fabric/issues/69)
