@@ -26,14 +26,6 @@ title: Config Reference
 <td>Database connection configuration</td>
 </tr>
 <tr>
-<td><code>datasetEnvVars</code></td>
-<td><a href="#datasetenvvarsconfig"><code>DatasetEnvVarsConfig</code></a></td>
-<td><pre><code class="language-json">\{
-  &quot;enabled&quot;: false
-}</code></pre></td>
-<td>Dataset environment variables configuration</td>
-</tr>
-<tr>
 <td><code>didEncryption</code></td>
 <td><a href="#didsecretencryptionconfig"><code>DidSecretEncryptionConfig</code></a></td>
 <td><pre><code class="language-json">\{
@@ -178,6 +170,14 @@ title: Config Reference
 <td>Search configuration</td>
 </tr>
 <tr>
+<td><code>secretsEncryption</code></td>
+<td><a href="#secretsencryptionconfig"><code>SecretsEncryptionConfig</code></a></td>
+<td><pre><code class="language-json">\{
+  &quot;enabled&quot;: false
+}</code></pre></td>
+<td>Secrets encryption configuration</td>
+</tr>
+<tr>
 <td><code>source</code></td>
 <td><a href="#sourceconfig"><code>SourceConfig</code></a></td>
 <td><pre><code class="language-json">\{
@@ -190,7 +190,7 @@ title: Config Reference
   &quot;http&quot;: \{
     &quot;connectTimeout&quot;: &quot;30s&quot;,
     &quot;maxRedirects&quot;: 10,
-    &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.264.0&quot;
+    &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.267.0&quot;
   },
   &quot;mqtt&quot;: \{
     &quot;brokerIdleTimeout&quot;: &quot;1s&quot;
@@ -221,6 +221,12 @@ title: Config Reference
 </table>
 
 ## `AccountConfig`
+
+The declarative account configuration used to register an account if one
+does not already exist.
+
+To update an existing account, either `id` or `private_key` must be
+specified.
 
 <table>
 <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -265,7 +271,7 @@ Auto-derived from `account_name` if omitted
 <td><code class="language-json">null</code></td>
 <td>
 
-Auto-derived from `account_name` if omitted
+May be omitted in favor of `private_key`.
 
 </td>
 </tr>
@@ -274,6 +280,17 @@ Auto-derived from `account_name` if omitted
 <td><a href="#password"><code>Password</code></a></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td><code>privateKey</code></td>
+<td><a href="#privatekey"><code>PrivateKey</code></a></td>
+<td><code class="language-json">null</code></td>
+<td>
+
+Optional ed25519 private key. When set, `id` is derived from it
+(and must match `id` if both are present).
+
+</td>
 </tr>
 <tr>
 <td><code>properties</code></td>
@@ -286,6 +303,16 @@ Auto-derived from `account_name` if omitted
 <td><code>string</code></td>
 <td><code class="language-json">&quot;password&quot;</code></td>
 <td></td>
+</tr>
+<tr>
+<td><code>providerIdentityKey</code></td>
+<td><code>string</code></td>
+<td><code class="language-json">null</code></td>
+<td>
+
+Auto-derived from `account_name` if omitted
+
+</td>
 </tr>
 <tr>
 <td><code>registeredAt</code></td>
@@ -640,40 +667,6 @@ Base type: `string`
 <td><a href="#databasecredentialsourceconfig"><code>DatabaseCredentialSourceConfig</code></a></td>
 <td></td>
 <td></td>
-</tr>
-</tbody>
-</table>
-
-## `DatasetEnvVarsConfig`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>enabled</code></td>
-<td><code>boolean</code></td>
-<td><code class="language-json">false</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>encryptionKey</code></td>
-<td><code>string</code></td>
-<td><code class="language-json">null</code></td>
-<td>
-
-Represents the encryption key for the dataset env vars. This field is
-required if `enabled` is `true` or `None`.
-
-The encryption key must be a 32-character alphanumeric string, which
-includes both uppercase and lowercase Latin letters (A-Z, a-z) and
-digits (0-9).
-
-To generate use:
-```sh
-tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32; echo
-```
-
-</td>
 </tr>
 </tbody>
 </table>
@@ -1284,7 +1277,7 @@ the resources (for authenticated clients)
 <tr>
 <td><code>userAgent</code></td>
 <td><code>string</code></td>
-<td><code class="language-json">&quot;kamu-cli&#x2F;0.264.0&quot;</code></td>
+<td><code class="language-json">&quot;kamu-cli&#x2F;0.267.0&quot;</code></td>
 <td>Value to use for User-Agent header</td>
 </tr>
 </tbody>
@@ -1747,6 +1740,40 @@ Base type: `string`
 
 Base type: `string`
 
+## `SecretsEncryptionConfig`
+
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td><code>boolean</code></td>
+<td><code class="language-json">false</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>encryptionKey</code></td>
+<td><code>string</code></td>
+<td><code class="language-json">null</code></td>
+<td>
+
+Represents the encryption key for secrets. This field is required if
+`enabled` is `true` or `None`.
+
+The encryption key must be a 32-character alphanumeric string, which
+includes both uppercase and lowercase Latin letters (A-Z, a-z) and
+digits (0-9).
+
+To generate use:
+```sh
+tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32; echo
+```
+
+</td>
+</tr>
+</tbody>
+</table>
+
 ## `SourceConfig`
 
 <table>
@@ -1769,7 +1796,7 @@ Base type: `string`
 <td><pre><code class="language-json">\{
   &quot;connectTimeout&quot;: &quot;30s&quot;,
   &quot;maxRedirects&quot;: 10,
-  &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.264.0&quot;
+  &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.267.0&quot;
 }</code></pre></td>
 <td>HTTP-specific configuration</td>
 </tr>

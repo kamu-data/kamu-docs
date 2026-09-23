@@ -44,6 +44,9 @@ This RFC proposes a new Open Data Fabric manifest format and a set of resource t
     - [Ownership](#ownership)
     - [Generations](#generations)
     - [Status](#status)
+  - [Authorization](#authorization)
+    - [Attributes](#attributes)
+    - [Relations](#relations)
   - [Resource Application](#resource-application)
   - [APIs](#apis)
     - [Current state of ODF APIs](#current-state-of-odf-apis)
@@ -169,12 +172,18 @@ Resources can explicitly define which `account` they belong to:
 ```yaml
 $schema: https://opendatafabric.org/schemas/config/v1alpha1/SecretSet
 headers:
-  account: alice  # Short form can parse DID or name
-  account:  # Full form
-    id: did:odf:123..321
+  account:
     name: alice
 spec: {}
 ```
+
+Or using a short form:
+
+```yaml
+account: alice  # Short form can parse UID, DID, or name
+```
+
+See [resource references](#references) for details about referring to accounts.
 
 Unlike Kubernetes that uses RBAC and `namespace`-based isolation - ODF is based on **ReBAC account-centric model** that allows complex ownership and access control hierarchies, e.g. teams, organizations, flexible permissions for accounts outside of organizations.
 
@@ -243,13 +252,12 @@ Labels and annotations are fully **mutable**.
 Label and annotation keys can be either short type names or full URIs:
 
 ```yaml
-```yaml
 $schema: https://opendatafabric.org/schemas/config/v1alpha1/Dataset
 headers:
   name: my-dataset
   labels:
     # Resolves to https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetKind
-    # Anything but Root or Derivative will fail valiation
+    # Anything but Root or Derivative will fail validation
     datasetKind: Root
     did: did:odf:aa..bb
   annotations:
@@ -269,10 +277,12 @@ Controllers may contribute their own labels to simplify common filtering scenari
 Resource manifests can link to other resources using **references**, forming a DAG.
 
 Resources can be referenced by:
-- ID
-- Type and name (optionally including the owner account name)
+- ID (unique within a node)
+- DID (unique globally)
+- Type, name, and the (optional) owning account
+  - When account is not specified the name is resolved within the current account (auth subject)
 
-Example:
+Example of referencing a `PersistentVolume` by name and owning account:
 
 ```yaml
 $schema: https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset
@@ -280,16 +290,32 @@ headers:
   name: my-dataset
 spec:
   metadata: []
-  volume: PersistentVolume:my-org/my-s3-bucket
+  volume:
+    type: PersistentVolume
+    name: my-s3-bucket
+    account:
+      name: my-org
 ```
 
-Short form `volume` reference above is equivalent to:
+Or in short form:
+```yaml
+volume: PersistentVolume:my-org/my-s3-bucket
+```
+
+Example of referencing by ID:
+
 ```yaml
 volume:
   type: PersistentVolume
-  name: my-s3-bucket
-  account:
-    name: my-org
+  id: 6767a4ee-d74d-436e-84f9-709407869a26
+```
+
+Example of referencing by DID:
+
+```yaml
+account:
+  type: Account
+  did: did:odf:0xfa..bc
 ```
 
 Cyclical references are not allowed - this can be enforced by implementations via linters.
@@ -301,7 +327,7 @@ Unlike Kubernetes that doesn't specify a common reference format - in ODF all re
 Many contexts may choose to provide extended versions of resource references that:
 - Restrict target resources to a specific type (e.g. `DatasetRef`, `VolumeRef`)
 - Provide additional features (e.g. ability to reference a sub-path of a secret via `Secret:postgres#password`)
-- Allow referencing by DIDs (e.g. `account:did:pkh:eip155:1:0xaa..`)
+
 
 ### Reference resolution
 When setting up complex resource graphs like ingestion pipelines it's very convenient to reference all components by names, especially when target resources are not created yet and were not assigned an `id`.
@@ -328,7 +354,9 @@ volume:
 Multiple resources can be referenced at once with **selectors**.
 
 Resources can be referenced in bulk by shared properties like:
-- Name patterns
+- Owning account
+- Resource type
+- Name pattern
 - Label filters
 
 ```yaml
@@ -338,7 +366,7 @@ headers:
 spec:
   target:
     type: Dataset
-    name: org.opendatafabric.%
+    name: org.opendatafabric.%  # A SQL LIKE-style wildcard that matches names starting with 'org.opendatafabric.'
     labels:
       datasetKind: Root
       env: prod
@@ -351,7 +379,11 @@ spec:
       maxSliceRecords: 10_000
 ```
 
-Note that, unlike references, selectors are not resolved to IDs, so if some resource stops matching the pattern after a rename or a change of label - it will not be tracked by the selector.
+Being a superset of reference type, selectors can match singular resources by:
+- ID and DID
+- Type and a name (without wildcards)
+
+Note however that, unlike references, selectors are not resolved to specific IDs during the apply process. Whether a resource matches a selector is determined repeatedly during controller operations, so resources can start and stop matching selector criteria after the initial application of a resource containing the selector.
 
 
 ### Ownership
@@ -393,9 +425,9 @@ Note that `generation` does not increment on status changes as it is intended to
 ### Status
 The `status` section of the resource manifest never appears in user-defined manifests. It is maintained by the ODF nodes and writeable only by resource controllers. It is used to provide detailed information about the reconciliation status of the resource.
 
-The main controller of a resource populates the `phase` and associated top-level fields during reconciliation attempts, while the `conditions` field provides a generic mechanism to attach additional information like error codes and messages. The `conditions` can be contributed by multiple controllers.
+Controllers may act asynchronously, so a combination of `observedGeneration` and `reconciledGeneration` fields tells which generation of the resource spec main controller have last seen, and which it was able to successfully reconcile.
 
-Example of `Source` resource status where reconciliation attempt for `generation: 2` failed because it links to non-existing secret:
+Example of `Source` resource status where reconciliation attempt for `generation: 2` failed because it links to non-existing secret, leaving the previous generation running:
 ```yaml
 $schema: https://opendatafabric.org/schemas/source/v1/Source
 headers:
@@ -403,33 +435,134 @@ headers:
   generation: 2
 spec: {}
 status:
-  phase: Failed 
+  phase: Degraded
   observedGeneration: 2
-  updatedAt: 2026-01-02T00:00:00Z
+  observedAt: 2026-01-02T00:00:00Z
+  reconciledGeneration: 1
+  reconciledAt: 2026-01-01T00:00:00Z
   conditions:
-    https://opendatafabric.org/schemas/source/v1/SourceReconciliationError:
+    https://opendatafabric.org/schemas/resource/v1/ReconciliationError:
       code: unresolved-reference
       message: "Secret `new-api-key` not found"
-      updatedAt: 2026-01-02T00:00:00Z
-      observedGeneration: 2
 ```
 
-The `phase` field state machine:
+The `phase` field is populated as follows:
 
-```mermaid
-stateDiagram-v2
-    [*] */} Pending: Newly created
-    Pending */} Reconciling: Main controller detects<br/>(observedGen < gen)
-    Reconciling */} Ready: Reconciled successfully
-    Reconciling */} Failed: Reconciliation error
-    Ready */} Pending: Spec or headers changed<br/>(gen bump)
-    Failed */} Pending: Spec or headers changed<br/>(gen bump)
-    Ready */} [*]: Delete
-    Failed */} [*]: Delete
-    Pending */} [*]: Delete
+| `generation` | `observedGeneration` | `reconciledGeneration` | `phase` | Meaning |
+|:---:|:---:|:---:|:---:|---|
+| 1 | — | — | `Pending` | Controller has not seen the resource yet |
+| 3 | 2 | 2 | `Pending` | Controller has not seen gen 3 yet |
+| 3 | 3 | 2 | `Reconciling` | Controller is actively applying gen 3 |
+| 3 | 3 | 3 | `Ready` | Fully reconciled, running current spec |
+| 3 | 3 | 2 | `Degraded` | Reconcile of gen 3 failed, but gen 2 is still running |
+| 3 | 3 | — | `Failed` | Controller saw gen 3, but never successfully reconciled anything |
+
+The `conditions` field provides extended information about the state of a specific resource type. Conditions can be contributed by multiple controllers. They are keyed by schema IDs to disambiguate, avoid name collisions, and provide schema checking.
+
+Conditions contributed by controllers other than the main resource controller should carry their own `observedGeneration` and `reconciledGeneration` fields to reflect that they may lag behind or be ahead of the main controller's `status.observedGeneration`.
+
+
+## Authorization
+ODF uses a **Relationship-Based Access Control (ReBAC)** model. Access decisions are based on two kinds of facts materialized into the ReBAC engine by resource controllers:
+
+- **Attributes** — typed facts attached to individual resources (e.g. "this dataset allows public read")
+- **Relations** — directed links between resources carrying a typed role (e.g. "alice has role `Maintainer` on `acme/foo`")
+
+Both are declared in resource manifests and version-controlled alongside the resources they protect.
+
+
+### Attributes
+ReBAC attributes reuse the existing [labels](#labels--annotations) mechanism. A label schema that declares `labelProperties.isAuthAttribute: true` signals that any resource carrying that label should have its value materialized into a ReBAC attribute.
+
+Example ReBAC attribute label:
+```json
+{
+  "$id": "https://opendatafabric.org/schemas/dataset/v1alpha1/AllowPublicRead",
+  "$schema": "https://opendatafabric.org/schemas/metaschemas/v1alpha1/ResourceLabel",
+  "description": "Controls whether the dataset is readable by any authenticated user.",
+  "type": "boolean",
+  "labelProperties": {
+    "isAuthAttribute": true,
+    "resourceTypes": [
+      "https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset"
+    ]
+  }
+}
 ```
 
-The `conditions` are keyed by schema IDs to disambiguate, avoid name collisions, and provide schema checking.
+It now can be defined like any other resource label:
+```yaml
+$schema: https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset
+headers:
+  name: my-dataset
+  labels:
+    # Short form - resolved to https://opendatafabric.org/schemas/dataset/v1alpha1/AllowPublicRead
+    AllowPublicRead: true
+    # Full URI form
+    https://opendatafabric.org/schemas/dataset/v1alpha1/AllowAnonymousRead: false
+spec:
+  kind: Root
+  metadata: []
+```
+
+Key properties:
+- **Single authoring surface** — attributes live on the resource they describe, eliminating cross-ownership ambiguity
+- **Typed and validated** — the label schema's `type` field is enforced at apply time
+- **Indexed** — because auth attributes are labels, they are also queryable in the resource listing API
+- **Schema-discoverable** — implementations enumerate label schemas with `isAuthAttribute: true` at startup to know which labels to materialize, without hardcoding a list
+- **Auth attributes must be labels, not annotations** — validators reject a resource that places an `isAuthAttribute` label under `annotations`
+- **Admission control** — changing a label with `isAuthAttribute: true` may require elevated permissions beyond those needed to update the rest of the resource spec; the flag is the hook that admission controllers use to enforce this
+
+
+### Relations
+ReBAC relations between resources are declared using the `Relations` manifest. Each relation is a triple `(subject, relation, object)` where `relation` resolves to a schema that defines valid `value` types, subject types, and object types:
+
+```json
+{
+  "$id": "https://opendatafabric.org/schemas/dataset/v1alpha1/Role",
+  "$schema": "https://opendatafabric.org/schemas/metaschemas/v1alpha1/Relation",
+  "description": "Access role granted to a subject on a dataset.",
+  "type": "string",
+  "enum": ["Reader", "Editor", "Maintainer"],
+  "relationProperties": {
+    "subjectResourceTypes": ["https://opendatafabric.org/schemas/auth/v1alpha1/Account"],
+    "objectResourceTypes": ["https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset"]
+  }
+}
+```
+
+Example relation that grants Alice the `Maintainer` role on Bob's dataset:
+```yaml
+$schema: https://opendatafabric.org/schemas/auth/v1alpha1/Relations
+headers:
+  account: bob  # account that owns the objects being protected
+  name: alice--role--bobs-dataset
+spec:
+  relations:
+    - subject: Account:alice
+      relation: DatasetRole  # Resolves to https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetRole
+      value: Maintainer
+      object: Dataset:bob/bobs-dataset
+```
+
+An example of value-less relation is `Member` used to define group membership:
+
+```yaml
+# relations-admin.yaml
+$schema: https://opendatafabric.org/schemas/auth/v1alpha1/Relations
+headers:
+  name: admins
+  account: system
+spec:
+  relations:
+    - subject: Account:alice
+      relation: Member  # resolves to https://opendatafabric.org/schemas/auth/v1alpha1/Member
+      object: Group:system/admin
+```
+
+**Authorization:** the caller applying a `Relations` manifest must hold sufficient permission on `headers.account` to create a resource in that scope and have necessary permissions on `subject` and `object` resources to establish the relation. The `subject` and `object` permissions are specific to every relation type and checked by the controllers.
+
+**Cascading cleanup:** - implementation should use the same [resource referential integrity](#references) mechanism to detect when subject or object is deleted. Implementations may either cascade-delete the stale triples automatically or surface them as a reconciliation warning for the operator to resolve.
 
 
 ## Resource Application
@@ -446,6 +579,7 @@ When applying manifests the following steps take place:
 7. Resource `generation` is incremented
 8. Resource specs are saved into the event store
 9. Reconciliation process is initiated asynchronously
+
 
 ## APIs
 
@@ -509,7 +643,7 @@ For example a manifest like this one:
 ```yaml
 $schema: https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset
 headers:
-  id: did:odf:123..321
+  did: did:odf:123..321
   name: foo
   account: sergiimk
 spec:
@@ -543,13 +677,15 @@ Proposed changes can be introduced in implementations in parallel with existing 
 # Prior art
 
 ## Kubernetes Design Notes
+* [Kubernetes Architectural Principles](https://github.com/kubernetes/design-proposals-archive/blob/main/architecture/principles.md)
+* [Kubernetes API Conventions](https://github.com/kubernetes/community/blob/main/contributors/devel/sig-architecture/api-conventions.md)
 * [Generated Object API Reference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#api-overview)  
 * OpenAPI Spec
   * [Schema link](https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/api/openapi-spec/swagger.json)  
   * [OpenAPI Editor](https://editor-next.swagger.io/)  
 * [apimachinery](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go)  
 * [Kubernetes API concepts](https://kubernetes.io/docs/reference/using-api/api-concepts/)  
-* [kube.rs](http://kube.rs)  
+* [kube.rs](http://kube.rs)
 * [https://github.com/Arnavion/k8s-openapi](https://github.com/Arnavion/k8s-openapi)  
 * [Kubernetes API Groups](https://github.com/kubernetes/design-proposals-archive/blob/main/api-machinery/api-group.md) (api-based versioning instead of resource-based)
 

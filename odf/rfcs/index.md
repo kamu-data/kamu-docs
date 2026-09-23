@@ -24,3 +24,4 @@ Protocol design evolution proposals:
 - [RFC-016: ODF Schema Format](/odf/rfcs/016-odf-schema)
 - [RFC-017: Large Files Linking](/odf/rfcs/017-large-files-linking)
 - [RFC-018: Infrastructure-as-Code Resource Framework](/odf/rfcs/018-iac-resource-framework)
+- [RFC-019: IaC Task and Flow System](/odf/rfcs/019-iac-task-flow-system)
