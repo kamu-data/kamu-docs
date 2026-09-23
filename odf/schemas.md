@@ -6,8 +6,8 @@ description: Schemas of common metadata objects
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-# Auth
-## `Account`
+## Auth
+### `Account`
 Registers an account in an predefined account provider.
 
 | Property | Type | Required | Format | Description |
@@ -16,9 +16,9 @@ Registers an account in an predefined account provider.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`AccountSpecInput`](#accountspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/Account.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/Account.json)
 
-## `AccountHandle`
+### `AccountHandle`
 Link to an account.
 
 | Property | Type | Required | Format | Description |
@@ -27,9 +27,9 @@ Link to an account.
 | `did` | `string` | ✔️ | `account-id` | DID of the account. |
 | `name` | `string` | ✔️ | `account-name` | Name of the account. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/AccountHandle.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/AccountHandle.json)
 
-## `AccountRef`
+### `AccountRef`
 
 
 | Property | Type | Required | Format | Description |
@@ -38,9 +38,9 @@ Link to an account.
 | `did` | `string` |  | `account-id` | DID of the account. |
 | `name` | `string` |  | `account-name` | Name of the account. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/AccountRef.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/AccountRef.json)
 
-## `AccountSpec`
+### `AccountSpec`
 Predefined account specification.
 
 | Property | Type | Required | Format | Description |
@@ -52,9 +52,9 @@ Predefined account specification.
 | `avatarUrl` | `string` |  | `uri` | URL of the account's avatar image. |
 | `password` | [`Secret`](#secret) |  |  | Password for local authentication. Absent for SSO or DID-based accounts. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/AccountSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/AccountSpec.json)
 
-## `AccountSpecInput`
+### `AccountSpecInput`
 Predefined account specification.
 
 | Property | Type | Required | Format | Description |
@@ -66,9 +66,9 @@ Predefined account specification.
 | `avatarUrl` | `string` |  | `uri` | URL of the account's avatar image. |
 | `password` | [`Secret`](#secret) |  |  | Password for local authentication. Absent for SSO or DID-based accounts. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/AccountSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/AccountSpecInput.json)
 
-## `AccountType`
+### `AccountType`
 Represents the type of an account.
 
 | Enum Value |
@@ -76,9 +76,9 @@ Represents the type of an account.
 | `User` |
 | `Organization` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/AccountType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/AccountType.json)
 
-## `Group`
+### `Group`
 A named group of accounts. Members are assigned via the `Member` relation. Groups can be granted roles on resources, allowing permissions to be managed at the group level rather than per-account.
 
 | Property | Type | Required | Format | Description |
@@ -87,26 +87,26 @@ A named group of accounts. Members are assigned via the `Member` relation. Group
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`GroupSpecInput`](#groupspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/Group.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/Group.json)
 
-## `GroupSpec`
+### `GroupSpec`
 Group specification. Groups have no intrinsic properties — membership and permissions are expressed entirely through relations.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/GroupSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/GroupSpec.json)
 
-## `GroupSpecInput`
+### `GroupSpecInput`
 Group specification. Groups have no intrinsic properties — membership and permissions are expressed entirely through relations.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/GroupSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/GroupSpecInput.json)
 
-## `Member`
+### `Member`
 Declares an account as a member of a group. Membership is binary — no value is carried by this relation.
 
 _Type: `null`_
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/Member.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/Member.json)
 
-## `Relation`
+### `Relation`
 A directed relationship between two resources, optionally carrying a typed value.
 
 | Property | Type | Required | Format | Description |
@@ -116,9 +116,9 @@ A directed relationship between two resources, optionally carrying a typed value
 | `value` | `object` |  |  | Optional value associated with the relation e.g. `maintainer` for a `role` relation. |
 | `object` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | The resource that is the target of the relation. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/Relation.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/Relation.json)
 
-## `RelationInput`
+### `RelationInput`
 A directed relationship between two resources, optionally carrying a typed value.
 
 | Property | Type | Required | Format | Description |
@@ -128,9 +128,9 @@ A directed relationship between two resources, optionally carrying a typed value
 | `value` | `object` |  |  | Optional value associated with the relation e.g. `maintainer` for a `role` relation. |
 | `object` | [`ResourceRef`](#resourceref) | ✔️ |  | The resource that is the target of the relation. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/RelationInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/RelationInput.json)
 
-## `Relations`
+### `Relations`
 Specified relations between resources on which auth policies act upon.
 
 | Property | Type | Required | Format | Description |
@@ -139,28 +139,28 @@ Specified relations between resources on which auth policies act upon.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`RelationsSpecInput`](#relationsspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/Relations.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/Relations.json)
 
-## `RelationsSpec`
+### `RelationsSpec`
 Specifies relations between resources on which auth policies act upon.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `relations` | `array(`[`Relation`](#relation)`)` | ✔️ |  | Relations between resources. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/RelationsSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/RelationsSpec.json)
 
-## `RelationsSpecInput`
+### `RelationsSpecInput`
 Specifies relations between resources on which auth policies act upon.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `relations` | `array(`[`RelationInput`](#relationinput)`)` |  |  | Relations between resources. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/auth/v1alpha1/RelationsSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/RelationsSpecInput.json)
 
-# Config
-## `Secret`
+## Config
+### `Secret`
 
 
 | Property | Type | Required | Format | Description |
@@ -168,9 +168,9 @@ Specifies relations between resources on which auth policies act upon.
 | `value` | `string` | ✔️ |  | A secret value in raw or encoded form. |
 | `contentEncoding` | `string` |  |  | Represents the encoding of the value. Typically will be `jwe` after a raw secret gets encrypted. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/Secret.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/Secret.json)
 
-## `SecretSet`
+### `SecretSet`
 Defines a set of secrets stored and managed by the ODF node.
 
 | Property | Type | Required | Format | Description |
@@ -179,34 +179,34 @@ Defines a set of secrets stored and managed by the ODF node.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`SecretSetSpecInput`](#secretsetspecinput) | ✔️ |  | Specifies the desired state of the secret set. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/SecretSet.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/SecretSet.json)
 
-## `SecretSetSpec`
+### `SecretSetSpec`
 Defines a set of secrets stored and managed by the ODF node and accessible via embedded sercets provider.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `secrets` | [`Secrets`](#secrets) | ✔️ |  | Key value pairs of secrets. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/SecretSetSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/SecretSetSpec.json)
 
-## `SecretSetSpecInput`
+### `SecretSetSpecInput`
 Defines a set of secrets stored and managed by the ODF node and accessible via embedded sercets provider.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `secrets` | [`Secrets`](#secrets) | ✔️ |  | Key value pairs of secrets. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/SecretSetSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/SecretSetSpecInput.json)
 
-## `Secrets`
+### `Secrets`
 Container for key-value secrets. Every key must be a string. Values may be strings with raw unencrypted data or objects that signify the encoding.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/Secrets.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/Secrets.json)
 
-## `ValueHandle`
+### `ValueHandle`
 Reference to a value within a `VariableSet` or a `SecretSet`.
 
 | Property | Type | Required | Format | Description |
@@ -217,9 +217,9 @@ Reference to a value within a `VariableSet` or a `SecretSet`.
 | `name` | `string` | ✔️ | `resource-name` | Name of a resource. |
 | `path` | `string` |  |  | JSON path to a value within a `VariableSet` or a `SecretSet`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/ValueHandle.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/ValueHandle.json)
 
-## `ValueRef`
+### `ValueRef`
 
 
 | Property | Type | Required | Format | Description |
@@ -230,25 +230,25 @@ Reference to a value within a `VariableSet` or a `SecretSet`.
 | `name` | `string` |  | `resource-name` | Name of a resource. |
 | `path` | `string` |  |  | JSON path to a value within a `VariableSet` or a `SecretSet`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/ValueRef.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/ValueRef.json)
 
-## `ValueRefs`
+### `ValueRefs`
 Container for key-value variables. Every key must be a string. Values shoud reference fields in `SecretSet`s and `VariableSet`s.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/ValueRefs.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/ValueRefs.json)
 
-## `Variable`
+### `Variable`
 
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `value` | `string` | ✔️ |  | A value in raw or encoded form. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/Variable.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/Variable.json)
 
-## `VariableSet`
+### `VariableSet`
 Defines a set of variables stored and managed by the ODF node.
 
 | Property | Type | Required | Format | Description |
@@ -257,35 +257,35 @@ Defines a set of variables stored and managed by the ODF node.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`VariableSetSpecInput`](#variablesetspecinput) | ✔️ |  | Specifies the desired state of the variable set. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/VariableSet.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/VariableSet.json)
 
-## `VariableSetSpec`
+### `VariableSetSpec`
 Defines a set of variables stored and managed by the ODF node and accessible via embedded variables provider.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `variables` | [`Variables`](#variables) | ✔️ |  | Key value pairs of variables. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/VariableSetSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/VariableSetSpec.json)
 
-## `VariableSetSpecInput`
+### `VariableSetSpecInput`
 Defines a set of variables stored and managed by the ODF node and accessible via embedded variables provider.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `variables` | [`Variables`](#variables) | ✔️ |  | Key value pairs of variables. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/VariableSetSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/VariableSetSpecInput.json)
 
-## `Variables`
+### `Variables`
 Container for key-value variables. Every key must be a string. Values may be raw strings or objects that incorporate the encoding.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/config/v1alpha1/Variables.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/config/v1alpha1/Variables.json)
 
-# Data
-## `DataField`
+## Data
+### `DataField`
 Represents a named field (column) in a root or nested struct schema
 
 | Property | Type | Required | Format | Description |
@@ -294,9 +294,9 @@ Represents a named field (column) in a root or nested struct schema
 | `type` | [`DataType`](#datatype) | ✔️ |  | Logical type of the field that defines its semantic behavior and value ranges |
 | `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataField.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataField.json)
 
-## `DataSchema`
+### `DataSchema`
 This schema aims to be a human-friendly variant of Arrow. Arrow currently specifies only the [flatbuffer format](https://github.com/apache/arrow/blob/f9301c0ba8a7ed1b0b63275cfdd4c44c26b04675/format/Schema.fbs) which has many legacy to it and is not suited to be defined by humans, so we had to define our own schema format. While inspired by Arrow - this format makes a clear separation between logical data types and encoding (physical layout) of data in the chunks.
 
 | Property | Type | Required | Format | Description |
@@ -304,9 +304,9 @@ This schema aims to be a human-friendly variant of Arrow. Arrow currently specif
 | `fields` | `array(`[`DataField`](#datafield)`)` | ✔️ |  | Top-level fields (columns) of the schema. |
 | `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataSchema.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataSchema.json)
 
-## `DataType`
+### `DataType`
 Defines a logical type of the field. Logical type determines the semantics and boudaries of a type and how it can be operated on, without a concern about encoding and physical layout of the data in chunks.
 
 | Union Type | Description |
@@ -336,28 +336,28 @@ Defines a logical type of the field. Logical type determines the semantics and b
 | [`DataType::Timestamp`](#datatypetimestamp) | A point in time, represented as an offset from the Unix epoch in a specific timezone. |
 | [`DataType::String`](#datatypestring) | A Unicode string. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Binary`
+### `DataType::Binary`
 A sequence of bytes. Used for arbitrary binary data.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `fixedLength` | `integer` |  | `uint64` | Number of bytes per value for fixed-size binary. If omitted, the binary is variable-length. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Bool`
+### `DataType::Bool`
 A boolean value representing true or false.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Date`
+### `DataType::Date`
 A calendar date.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Decimal`
+### `DataType::Decimal`
 A fixed-point decimal number with a specified precision and scale.
 
 | Property | Type | Required | Format | Description |
@@ -365,73 +365,73 @@ A fixed-point decimal number with a specified precision and scale.
 | `precision` | `integer` | ✔️ | `uint32` | Total number of decimal digits that can be stored. |
 | `scale` | `integer` | ✔️ | `int32` | Number of digits after the decimal point. In certain situations, scale could be negative number. For negative scale, it is the number of padding 0 to the right of the digits.<br/><br/>For example the number 12300 could be treated as a decimal has precision 3 and scale -2. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Duration`
+### `DataType::Duration`
 An elapsed time interval with a specified time unit.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `unit` | [`TimeUnit`](#timeunit) |  |  | The unit of the duration measurement.<br/><br/>Default: `Millisecond` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Float16`
+### `DataType::Float16`
 A floating-point number.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Float32`
+### `DataType::Float32`
 A floating-point number.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Float64`
+### `DataType::Float64`
 A floating-point number.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Int8`
+### `DataType::Int8`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Int16`
+### `DataType::Int16`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Int32`
+### `DataType::Int32`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Int64`
+### `DataType::Int64`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::UInt8`
+### `DataType::UInt8`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::UInt16`
+### `DataType::UInt16`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::UInt32`
+### `DataType::UInt32`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::UInt64`
+### `DataType::UInt64`
 An integer value.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::List`
+### `DataType::List`
 A list of values, all having the same data type.
 
 | Property | Type | Required | Format | Description |
@@ -439,9 +439,9 @@ A list of values, all having the same data type.
 | `itemType` | [`DataType`](#datatype) | ✔️ |  | Data type of list items. |
 | `fixedLength` | `integer` |  | `uint64` | Number of list items per value for fixed-size lists. If omitted, the list is variable-length. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Map`
+### `DataType::Map`
 A map of key-value pairs, represented as a list of entries (structs with key and value fields).
 
 | Property | Type | Required | Format | Description |
@@ -450,41 +450,41 @@ A map of key-value pairs, represented as a list of entries (structs with key and
 | `valueType` | [`DataType`](#datatype) | ✔️ |  | Data type of the map's values. |
 | `keysSorted` | `boolean` |  |  | Set to true if the keys within each value are sorted. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Null`
+### `DataType::Null`
 A type representing the absence of a value (null).
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Option`
+### `DataType::Option`
 A type representing an optional (nullable) value of another data type.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `inner` | [`DataType`](#datatype) | ✔️ |  | Inner data type for the optional value. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Struct`
+### `DataType::Struct`
 A collection of named fields, each with its own data type.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `fields` | `array(`[`DataField`](#datafield)`)` | ✔️ |  | Fields that make up the struct. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Time`
+### `DataType::Time`
 A time of day value, without a date, with a specified unit of granularity.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `unit` | [`TimeUnit`](#timeunit) |  |  | The unit of the time value.<br/><br/>Default: `Millisecond` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::Timestamp`
+### `DataType::Timestamp`
 A point in time, represented as an offset from the Unix epoch in a specific timezone.
 
 | Property | Type | Required | Format | Description |
@@ -492,22 +492,22 @@ A point in time, represented as an offset from the Unix epoch in a specific time
 | `unit` | [`TimeUnit`](#timeunit) |  |  | The unit of the timestamp value that determines its precision.<br/><br/>Default: `Millisecond` |
 | `timezone` | `string` |  |  | The timezone is an optional string indicating the name of a timezone<br/>one of<br/><br/>* As used in the Olson timezone database (the "tz database" or<br/>  "tzdata"), such as "America/New_York".<br/>* An absolute timezone offset of the form "+XX:XX" or "-XX:XX",<br/>  such as "+07:30".<br/><br/>Default: `UTC` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
-## `DataType::String`
+### `DataType::String`
 A Unicode string.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/DataType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/DataType.json)
 
 
-## `ExtraAttributes`
+### `ExtraAttributes`
 Container for custom key-value extension attributes. Every key must be in the form of `<domain>/<path>` (e.g. `kamu.dev/archetype`) in order to fully disambiguate the value in the face of multiple extensions. Values may be any valid JSON including nested objects.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/ExtraAttributes.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/ExtraAttributes.json)
 
-## `OperationType`
+### `OperationType`
 Defines an operation in a changelog stream.
 
 | Enum Value |
@@ -517,9 +517,9 @@ Defines an operation in a changelog stream.
 | `CorrectFrom` |
 | `CorrectTo` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/OperationType.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/OperationType.json)
 
-## `TimeUnit`
+### `TimeUnit`
 Defines the unit of measurement of time
 
 | Enum Value |
@@ -529,10 +529,10 @@ Defines the unit of measurement of time
 | `Microsecond` |
 | `Nanosecond` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/data/v1alpha1/TimeUnit.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/data/v1alpha1/TimeUnit.json)
 
-# Dataset
-## `AddData`
+## Dataset
+### `AddData`
 Indicates that data has been ingested into a root dataset.
 
 | Property | Type | Required | Format | Description |
@@ -545,23 +545,23 @@ Indicates that data has been ingested into a root dataset.
 | `newSourceState` | [`SourceState`](#sourcestate) |  |  | The state of the source the data was added from to allow fast resuming. If the state did not change but is still relevant for subsequent runs it should be carried, i.e. only the last state per source is considered when resuming. |
 | `extra` | [`ExtraAttributes`](#extraattributes) |  |  | ODF extensions. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/AddData.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/AddData.json)
 
-## `AllowAnonymousRead`
+### `AllowAnonymousRead`
 Controls whether the dataset is readable by users who did not authenticate. Materialized into the ReBAC attribute store by the controller.
 
 _Type: `boolean`_
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/AllowAnonymousRead.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/AllowAnonymousRead.json)
 
-## `AllowPublicRead`
+### `AllowPublicRead`
 Controls whether the dataset is readable by any authenticated user. Materialized into the ReBAC attribute store by the Dataset controller.
 
 _Type: `boolean`_
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/AllowPublicRead.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/AllowPublicRead.json)
 
-## `AttachmentEmbedded`
+### `AttachmentEmbedded`
 Embedded attachment item.
 
 | Property | Type | Required | Format | Description |
@@ -569,28 +569,28 @@ Embedded attachment item.
 | `path` | `string` | ✔️ |  | Path to an attachment if it was materialized into a file. |
 | `content` | `string` | ✔️ |  | Content of the attachment. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/AttachmentEmbedded.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/AttachmentEmbedded.json)
 
-## `Attachments`
+### `Attachments`
 Defines the source of attachment files.
 
 | Union Type | Description |
 | --- | --- |
 | [`Attachments::Embedded`](#attachmentsembedded) | For attachments that are specified inline and are embedded in the metadata. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Attachments.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Attachments.json)
 
-## `Attachments::Embedded`
+### `Attachments::Embedded`
 For attachments that are specified inline and are embedded in the metadata.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `items` | `array(`[`AttachmentEmbedded`](#attachmentembedded)`)` | ✔️ |  | List of embedded items. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Attachments.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Attachments.json)
 
 
-## `Checkpoint`
+### `Checkpoint`
 Describes a checkpoint produced by an engine
 
 | Property | Type | Required | Format | Description |
@@ -598,9 +598,9 @@ Describes a checkpoint produced by an engine
 | `physicalHash` | `string` | ✔️ | [`multihash`](https://github.com/multiformats/multihash) | Hash sum of the checkpoint file. |
 | `size` | `integer` | ✔️ | `uint64` | Size of checkpoint file in bytes. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Checkpoint.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Checkpoint.json)
 
-## `CompactionParams`
+### `CompactionParams`
 Optional parameters to control ingestion behavior.
 
 | Property | Type | Required | Format | Description |
@@ -608,9 +608,9 @@ Optional parameters to control ingestion behavior.
 | `maxSliceSize` | `string` |  | `byte-size` | Target maximum size of each compacted data slice e.g. `100MiB`. |
 | `maxSliceRecords` | `integer` |  | `uint64` | Target maximum number of records per compacted data slice. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/CompactionParams.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/CompactionParams.json)
 
-## `DataSlice`
+### `DataSlice`
 Describes a slice of data added to a dataset or produced via transformation
 
 | Property | Type | Required | Format | Description |
@@ -620,9 +620,9 @@ Describes a slice of data added to a dataset or produced via transformation
 | `offsetInterval` | [`OffsetInterval`](#offsetinterval) | ✔️ |  | Data slice produced by the transaction. |
 | `size` | `integer` | ✔️ | `uint64` | Size of data file in bytes. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DataSlice.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DataSlice.json)
 
-## `Dataset`
+### `Dataset`
 Represents a desired state of a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -631,9 +631,9 @@ Represents a desired state of a dataset.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`DatasetSpecInput`](#datasetspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Dataset.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Dataset.json)
 
-## `DatasetHandle`
+### `DatasetHandle`
 Link to a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -643,9 +643,9 @@ Link to a dataset.
 | `did` | `string` | ✔️ | `dataset-id` | DID of the dataset. |
 | `name` | `string` | ✔️ | `resource-name` | Name of the dataset. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetHandle.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetHandle.json)
 
-## `DatasetKind`
+### `DatasetKind`
 Represents type of the dataset.
 
 | Enum Value |
@@ -653,9 +653,9 @@ Represents type of the dataset.
 | `Root` |
 | `Derivative` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetKind.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetKind.json)
 
-## `DatasetRef`
+### `DatasetRef`
 
 
 | Property | Type | Required | Format | Description |
@@ -665,9 +665,9 @@ Represents type of the dataset.
 | `did` | `string` |  | `dataset-id` | DID of the dataset. |
 | `name` | `string` |  | `resource-name` | Name of the dataset. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetRef.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetRef.json)
 
-## `DatasetRole`
+### `DatasetRole`
 Access role granted to a subject on a dataset. Note: in future this fixed enum schema will likely be replaced by a reference to a `DatasetRole` resources that defines granular permissions on different actions available on a dataset.
 
 | Enum Value |
@@ -676,9 +676,9 @@ Access role granted to a subject on a dataset. Note: in future this fixed enum s
 | `Editor` |
 | `Maintainer` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetRole.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetRole.json)
 
-## `DatasetSelector`
+### `DatasetSelector`
 
 
 | Property | Type | Required | Format | Description |
@@ -689,9 +689,9 @@ Access role granted to a subject on a dataset. Note: in future this fixed enum s
 | `labels` | [`LabelFilter`](#labelfilter) |  |  | Filter by resource labels. |
 | `kind` | [`DatasetKind`](#datasetkind) |  |  | Restricts the selector to datasets of a specific kind. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetSelector.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetSelector.json)
 
-## `DatasetSpec`
+### `DatasetSpec`
 Represents a desired state of the dataset metadata.
 
 | Property | Type | Required | Format | Description |
@@ -701,9 +701,9 @@ Represents a desired state of the dataset metadata.
 | `metadata` | `array(`[`MetadataEvent`](#metadataevent)`)` | ✔️ |  | An array of metadata events that will be used to populate the chain. Here you can define polling and push sources, set licenses, add attachments etc. |
 | `volume` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | Reference to a storage volume where dataset data will be stored. If omitted, the node's default storage is used. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetSpec.json)
 
-## `DatasetSpecInput`
+### `DatasetSpecInput`
 Represents a desired state of the dataset metadata.
 
 | Property | Type | Required | Format | Description |
@@ -713,9 +713,9 @@ Represents a desired state of the dataset metadata.
 | `metadata` | `array(`[`MetadataEvent`](#metadataevent)`)` | ✔️ |  | An array of metadata events that will be used to populate the chain. Here you can define polling and push sources, set licenses, add attachments etc. |
 | `volume` | [`PersistentVolumeRef`](#persistentvolumeref) |  |  | Reference to a storage volume where dataset data will be stored. If omitted, the node's default storage is used. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetSpecInput.json)
 
-## `DatasetVocabulary`
+### `DatasetVocabulary`
 Specifies the mapping of system columns onto dataset schema.
 
 | Property | Type | Required | Format | Description |
@@ -725,9 +725,9 @@ Specifies the mapping of system columns onto dataset schema.
 | `systemTimeColumn` | `string` |  |  | Name of the system time column.<br/><br/>Default: `system_time` |
 | `eventTimeColumn` | `string` |  |  | Name of the event time column.<br/><br/>Default: `event_time` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/DatasetVocabulary.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/DatasetVocabulary.json)
 
-## `ExecuteTransform`
+### `ExecuteTransform`
 Indicates that derivative transformation has been performed.
 
 | Property | Type | Required | Format | Description |
@@ -739,9 +739,9 @@ Indicates that derivative transformation has been performed.
 | `newCheckpoint` | [`Checkpoint`](#checkpoint) |  |  | Describes checkpoint written during this transaction, if any. If an engine operation resulted in no updates to the checkpoint, but checkpoint is still relevant for subsequent runs - a hash of the previous checkpoint should be specified. |
 | `newWatermark` | `string` |  | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Last watermark of the output data stream, if any. Initial blocks may not have watermarks, but once watermark is set - all subsequent blocks should either carry the same watermark or specify a new (greater) one. Thus, watermarks are monotonically non-decreasing. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/ExecuteTransform.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/ExecuteTransform.json)
 
-## `ExecuteTransformInput`
+### `ExecuteTransformInput`
 Describes a slice of the input dataset used during a transformation
 
 | Property | Type | Required | Format | Description |
@@ -752,9 +752,9 @@ Describes a slice of the input dataset used during a transformation
 | `prevOffset` | `integer` |  | `uint64` | Last data record offset in the input dataset that was previously incorporated into the derivative transformation, if any. Must be equal to the last non-empty `newOffset`. Together with `newOffset` defines a half-open `(prevOffset, newOffset]` interval of data records that will be considered in this transaction. |
 | `newOffset` | `integer` |  | `uint64` | Offset of the last data record that will be incorporated into the derivative transformation, if any. When present, defines a half-open `(prevOffset, newOffset]` interval of data records that will be considered in this transaction. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/ExecuteTransformInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/ExecuteTransformInput.json)
 
-## `MetadataBlock`
+### `MetadataBlock`
 An individual block in the metadata chain that captures the history of modifications of a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -764,9 +764,9 @@ An individual block in the metadata chain that captures the history of modificat
 | `sequenceNumber` | `integer` | ✔️ | `uint64` | Block sequence number, starting from zero at the seed block. |
 | `event` | [`MetadataEvent`](#metadataevent) | ✔️ |  | Event data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/MetadataBlock.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/MetadataBlock.json)
 
-## `MetadataEvent`
+### `MetadataEvent`
 Represents a transaction that occurred on a dataset.
 
 | Union Type | Description |
@@ -785,10 +785,10 @@ Represents a transaction that occurred on a dataset.
 | [`DisablePushSource`](#disablepushsource) |  |
 | [`DisablePollingSource`](#disablepollingsource) |  |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/MetadataEvent.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/MetadataEvent.json)
 
 
-## `OffsetInterval`
+### `OffsetInterval`
 Describes a range of data as a closed arithmetic interval of offsets
 
 | Property | Type | Required | Format | Description |
@@ -796,9 +796,9 @@ Describes a range of data as a closed arithmetic interval of offsets
 | `start` | `integer` | ✔️ | `uint64` | Start of the closed interval [start; end]. |
 | `end` | `integer` | ✔️ | `uint64` | End of the closed interval [start; end]. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/OffsetInterval.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/OffsetInterval.json)
 
-## `Projection`
+### `Projection`
 Represents a projection of a dataaset history into a state for fast lookups.
 
 | Property | Type | Required | Format | Description |
@@ -807,9 +807,9 @@ Represents a projection of a dataaset history into a state for fast lookups.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`ProjectionSpecInput`](#projectionspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Projection.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Projection.json)
 
-## `ProjectionSpec`
+### `ProjectionSpec`
 Represents a projection of a dataaset history into a state for fast lookups.
 
 | Property | Type | Required | Format | Description |
@@ -817,9 +817,9 @@ Represents a projection of a dataaset history into a state for fast lookups.
 | `inputs` | `array(`[`TransformInput`](#transforminput)`)` | ✔️ |  | Datasets that will be used as sources. |
 | `project` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/ProjectionSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/ProjectionSpec.json)
 
-## `ProjectionSpecInput`
+### `ProjectionSpecInput`
 Represents a projection of a dataaset history into a state for fast lookups.
 
 | Property | Type | Required | Format | Description |
@@ -827,9 +827,9 @@ Represents a projection of a dataaset history into a state for fast lookups.
 | `inputs` | `array(`[`TransformInput`](#transforminput)`)` | ✔️ |  | Datasets that will be used as sources. |
 | `project` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/ProjectionSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/ProjectionSpecInput.json)
 
-## `Seed`
+### `Seed`
 Establishes the identity of the dataset. Always the first metadata event in the chain.
 
 | Property | Type | Required | Format | Description |
@@ -837,18 +837,18 @@ Establishes the identity of the dataset. Always the first metadata event in the 
 | `datasetId` | `string` | ✔️ | `dataset-id` | Unique identity of the dataset. |
 | `datasetKind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Seed.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Seed.json)
 
-## `SetAttachments`
+### `SetAttachments`
 Associates a set of files with this dataset.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `attachments` | [`Attachments`](#attachments) | ✔️ |  | One of the supported attachment sources. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetAttachments.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetAttachments.json)
 
-## `SetDataSchema`
+### `SetDataSchema`
 Specifies the complete schema of Data Slices added to the Dataset following this event.
 
 | Property | Type | Required | Format | Description |
@@ -856,9 +856,9 @@ Specifies the complete schema of Data Slices added to the Dataset following this
 | `rawArrowSchema` | `string` |  | [`flatbuffers`](https://flatbuffers.dev/) | DEPRECATED: Apache Arrow schema encoded in its native flatbuffers representation. |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Defines the logical schema of the data files that follow this event. Will become a required field after migration. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetDataSchema.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetDataSchema.json)
 
-## `SetInfo`
+### `SetInfo`
 Provides basic human-readable information about a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -866,9 +866,9 @@ Provides basic human-readable information about a dataset.
 | `description` | `string` |  |  | Brief single-sentence summary of a dataset. |
 | `keywords` | `array(string)` |  |  | Keywords, search terms, or tags used to describe the dataset. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetInfo.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetInfo.json)
 
-## `SetLicense`
+### `SetLicense`
 Defines a license that applies to this dataset.
 
 | Property | Type | Required | Format | Description |
@@ -878,9 +878,9 @@ Defines a license that applies to this dataset.
 | `spdxId` | `string` |  |  | License identifier from the SPDX License List. |
 | `websiteUrl` | `string` | ✔️ | `uri` | URL where licensing terms can be found. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetLicense.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetLicense.json)
 
-## `SetTransform`
+### `SetTransform`
 Defines a transformation that produces data in a derivative dataset.
 
 | Property | Type | Required | Format | Description |
@@ -888,9 +888,9 @@ Defines a transformation that produces data in a derivative dataset.
 | `inputs` | `array(`[`TransformInput`](#transforminput)`)` | ✔️ |  | Datasets that will be used as sources. |
 | `transform` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetTransform.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetTransform.json)
 
-## `SetVocab`
+### `SetVocab`
 Lets you manipulate names of the system columns to avoid conflicts.
 
 | Property | Type | Required | Format | Description |
@@ -900,9 +900,9 @@ Lets you manipulate names of the system columns to avoid conflicts.
 | `systemTimeColumn` | `string` |  |  | Name of the system time column. |
 | `eventTimeColumn` | `string` |  |  | Name of the event time column. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SetVocab.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SetVocab.json)
 
-## `SqlQueryStep`
+### `SqlQueryStep`
 Defines a query in a multi-step SQL transformation.
 
 | Property | Type | Required | Format | Description |
@@ -910,9 +910,9 @@ Defines a query in a multi-step SQL transformation.
 | `alias` | `string` |  |  | Name of the temporary view that will be created from result of the query. Step without this alias will be treated as an output of the transformation. |
 | `query` | `string` | ✔️ |  | SQL query the result of which will be exposed under the alias. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/SqlQueryStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/SqlQueryStep.json)
 
-## `TemporalTable`
+### `TemporalTable`
 Temporary Flink-specific extension for creating temporal tables from streams.
 
 | Property | Type | Required | Format | Description |
@@ -920,18 +920,18 @@ Temporary Flink-specific extension for creating temporal tables from streams.
 | `name` | `string` | ✔️ |  | Name of the dataset to be converted into a temporal table. |
 | `primaryKey` | `array(string)` | ✔️ |  | Column names used as the primary key for creating a table. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/TemporalTable.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/TemporalTable.json)
 
-## `Transform`
+### `Transform`
 Engine-specific processing queries that shape the resulting data.
 
 | Union Type | Description |
 | --- | --- |
 | [`Transform::Sql`](#transformsql) | Transform using one of the SQL dialects. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Transform.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Transform.json)
 
-## `Transform::Sql`
+### `Transform::Sql`
 Transform using one of the SQL dialects.
 
 | Property | Type | Required | Format | Description |
@@ -942,10 +942,10 @@ Transform using one of the SQL dialects.
 | `queries` | `array(`[`SqlQueryStep`](#sqlquerystep)`)` |  |  | Specifies multi-step SQL transformations. Each step acts as a shorthand for `CREATE TEMPORARY VIEW <alias> AS (<query>)`. Last query in the array should have no alias and will be treated as an output. |
 | `temporalTables` | `array(`[`TemporalTable`](#temporaltable)`)` |  |  | Temporary Flink-specific extension for creating temporal tables from streams. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Transform.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Transform.json)
 
 
-## `TransformInput`
+### `TransformInput`
 Describes a derivative transformation input
 
 | Property | Type | Required | Format | Description |
@@ -953,9 +953,9 @@ Describes a derivative transformation input
 | `datasetRef` | `string` | ✔️ | `dataset-ref` | A local or remote dataset reference. When block is accepted this MUST be in the form of a DatasetId to guarantee reproducibility, as aliases can change over time. |
 | `alias` | `string` |  |  | An alias under which this input will be available in queries. Will be populated from `datasetRef` if not provided before resolving it to DatasetId. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/TransformInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/TransformInput.json)
 
-## `Watermark`
+### `Watermark`
 Represents a watermark in the event stream.
 
 | Property | Type | Required | Format | Description |
@@ -963,10 +963,10 @@ Represents a watermark in the event stream.
 | `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Moment in processing time when watermark was emitted. |
 | `eventTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Moment in event time which watermark has reached. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/dataset/v1alpha1/Watermark.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/dataset/v1alpha1/Watermark.json)
 
-# Engine
-## `RawQueryRequest`
+## Engine
+### `RawQueryRequest`
 Sent by the coordinator to an engine to perform query on raw input data, usually as part of ingest preprocessing step
 
 | Property | Type | Required | Format | Description |
@@ -975,9 +975,9 @@ Sent by the coordinator to an engine to perform query on raw input data, usually
 | `transform` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 | `outputDataPath` | `string` | ✔️ | `path` | Path where query result will be written. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryRequest.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryRequest.json)
 
-## `RawQueryResponse`
+### `RawQueryResponse`
 Sent by an engine to coordinator when performing the raw query operation
 
 | Union Type | Description |
@@ -987,32 +987,32 @@ Sent by an engine to coordinator when performing the raw query operation
 | [`RawQueryResponse::InvalidQuery`](#rawqueryresponseinvalidquery) | Query did not pass validation |
 | [`RawQueryResponse::InternalError`](#rawqueryresponseinternalerror) | Internal error during query execution |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryResponse.json)
 
-## `RawQueryResponse::Progress`
+### `RawQueryResponse::Progress`
 Reports query progress
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryResponse.json)
 
-## `RawQueryResponse::Success`
+### `RawQueryResponse::Success`
 Query executed successfully
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `numRecords` | `integer` | ✔️ | `uint64` | Number of records produced by the query |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryResponse.json)
 
-## `RawQueryResponse::InvalidQuery`
+### `RawQueryResponse::InvalidQuery`
 Query did not pass validation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `message` | `string` | ✔️ |  | Explanation of an error |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryResponse.json)
 
-## `RawQueryResponse::InternalError`
+### `RawQueryResponse::InternalError`
 Internal error during query execution
 
 | Property | Type | Required | Format | Description |
@@ -1020,10 +1020,10 @@ Internal error during query execution
 | `message` | `string` | ✔️ |  | Brief description of an error |
 | `backtrace` | `string` |  |  | Details of an error (e.g. a backtrace) |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/RawQueryResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/RawQueryResponse.json)
 
 
-## `TransformRequest`
+### `TransformRequest`
 Sent by the coordinator to an engine to perform the next step of data transformation
 
 | Property | Type | Required | Format | Description |
@@ -1039,9 +1039,9 @@ Sent by the coordinator to an engine to perform the next step of data transforma
 | `newCheckpointPath` | `string` | ✔️ | `path` | TODO: This will be removed when coordinator will be speaking to engines purely through Arrow. |
 | `newDataPath` | `string` | ✔️ | `path` | TODO: This will be removed when coordinator will be speaking to engines purely through Arrow. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformRequest.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformRequest.json)
 
-## `TransformRequestInput`
+### `TransformRequestInput`
 Sent as part of the engine transform request operation to describe the input
 
 | Property | Type | Required | Format | Description |
@@ -1055,9 +1055,9 @@ Sent as part of the engine transform request operation to describe the input
 | `schemaFile` | `string` | ✔️ | `path` | TODO: replace with actual DDL or Parquet schema. |
 | `explicitWatermarks` | `array(`[`Watermark`](#watermark)`)` | ✔️ |  | Watermarks that should be injected into the stream to separate micro batches for reproducibility. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformRequestInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformRequestInput.json)
 
-## `TransformResponse`
+### `TransformResponse`
 Sent by an engine to coordinator when performing the data transformation
 
 | Union Type | Description |
@@ -1067,14 +1067,14 @@ Sent by an engine to coordinator when performing the data transformation
 | [`TransformResponse::InvalidQuery`](#transformresponseinvalidquery) | Query did not pass validation |
 | [`TransformResponse::InternalError`](#transformresponseinternalerror) | Internal error during query execution |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformResponse.json)
 
-## `TransformResponse::Progress`
+### `TransformResponse::Progress`
 Reports query progress
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformResponse.json)
 
-## `TransformResponse::Success`
+### `TransformResponse::Success`
 Query executed successfully
 
 | Property | Type | Required | Format | Description |
@@ -1082,18 +1082,18 @@ Query executed successfully
 | `newOffsetInterval` | [`OffsetInterval`](#offsetinterval) |  |  | Data slice produced by the transaction, if any. |
 | `newWatermark` | `string` |  | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Watermark advanced by the transaction, if any. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformResponse.json)
 
-## `TransformResponse::InvalidQuery`
+### `TransformResponse::InvalidQuery`
 Query did not pass validation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `message` | `string` | ✔️ |  | Explanation of an error |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformResponse.json)
 
-## `TransformResponse::InternalError`
+### `TransformResponse::InternalError`
 Internal error during query execution
 
 | Property | Type | Required | Format | Description |
@@ -1101,19 +1101,19 @@ Internal error during query execution
 | `message` | `string` | ✔️ |  | Brief description of an error |
 | `backtrace` | `string` |  |  | Details of an error (e.g. a backtrace) |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/engine/v1alpha1/TransformResponse.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/engine/v1alpha1/TransformResponse.json)
 
 
-# Event
-## `EventFilter`
+## Event
+### `EventFilter`
 Filters that work on domain event types and fields.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/event/v1alpha1/EventFilter.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/event/v1alpha1/EventFilter.json)
 
-# Flow
-## `Flow`
+## Flow
+### `Flow`
 Defines a sequence of tasks to be executed upon certain trigger conditions.
 
 | Property | Type | Required | Format | Description |
@@ -1122,9 +1122,9 @@ Defines a sequence of tasks to be executed upon certain trigger conditions.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`FlowSpecInput`](#flowspecinput) | ✔️ |  | Specifies the desired state of the flow. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/Flow.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/Flow.json)
 
-## `FlowRun`
+### `FlowRun`
 Defines a set of tasks to be executed in a sequence.
 
 | Property | Type | Required | Format | Description |
@@ -1133,9 +1133,9 @@ Defines a set of tasks to be executed in a sequence.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`FlowRunSpecInput`](#flowrunspecinput) | ✔️ |  | Specifies the desired state of the flow run. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRun.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRun.json)
 
-## `FlowRunActivationCause`
+### `FlowRunActivationCause`
 Cause of the flow run activation
 
 | Property | Type | Required | Format | Description |
@@ -1144,9 +1144,9 @@ Cause of the flow run activation
 | `initiator` | [`AccountHandle`](#accounthandle) |  |  | Account that initiated the run, if applicable. |
 | `trigger` | [`FlowTrigger`](#flowtrigger) | ✔️ |  | Copy of the trigger configuration from the parent Flow that fired. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunActivationCause.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunActivationCause.json)
 
-## `FlowRunActivationCauses`
+### `FlowRunActivationCauses`
 Condition capturing what caused this FlowRun to be scheduled. Set by the controller at creation time; never written by users. In case of a retry, the causes of the original run are preserved.
 
 | Property | Type | Required | Format | Description |
@@ -1154,18 +1154,18 @@ Condition capturing what caused this FlowRun to be scheduled. Set by the control
 | `activationCauses` | `array(`[`FlowRunActivationCause`](#flowrunactivationcause)`)` | ✔️ |  | Triggers that caused this run to be scheduled. |
 | `lateActivationCauses` | `array(`[`FlowRunActivationCause`](#flowrunactivationcause)`)` |  |  | Additional triggers that fired while this run was already queued or executing. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunActivationCauses.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunActivationCauses.json)
 
-## `FlowRunRetry`
+### `FlowRunRetry`
 Condition linking this FlowRun to the previous FlowRun it is retrying. Set by the controller; never written by users.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `retryOf` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | Reference to the FlowRun this run is retrying. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunRetry.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunRetry.json)
 
-## `FlowRunSpec`
+### `FlowRunSpec`
 Defines a set of tasks to be executed in a sequence.
 
 | Property | Type | Required | Format | Description |
@@ -1173,9 +1173,9 @@ Defines a set of tasks to be executed in a sequence.
 | `target` | [`ResourceHandle`](#resourcehandle) |  |  | Defines the default target resources on which tasks will be performed. |
 | `tasks` | `array(`[`TaskSpec`](#taskspec)`)` | ✔️ |  | List of tasks to run consecutively. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunSpec.json)
 
-## `FlowRunSpecInput`
+### `FlowRunSpecInput`
 Defines a set of tasks to be executed in a sequence.
 
 | Property | Type | Required | Format | Description |
@@ -1183,9 +1183,9 @@ Defines a set of tasks to be executed in a sequence.
 | `target` | [`ResourceRef`](#resourceref) |  |  | Defines the default target resources on which tasks will be performed. |
 | `tasks` | `array(`[`TaskSpecInput`](#taskspecinput)`)` | ✔️ |  | List of tasks to run consecutively. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunSpecInput.json)
 
-## `FlowRunStatus`
+### `FlowRunStatus`
 Condition tracking the overall execution status of a FlowRun and its spawned tasks.
 
 | Property | Type | Required | Format | Description |
@@ -1193,9 +1193,9 @@ Condition tracking the overall execution status of a FlowRun and its spawned tas
 | `status` | [`Value`](#value) | ✔️ |  | Overall execution status of the FlowRun. |
 | `tasks` | `array(`[`TaskEntry`](#taskentry)`)` |  |  | Tasks spawned by this FlowRun, in execution order. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowRunStatus.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowRunStatus.json)
 
-## `FlowSpec`
+### `FlowSpec`
 Defines a sequence of tasks to be executed upon certain trigger conditions.
 
 | Property | Type | Required | Format | Description |
@@ -1205,9 +1205,9 @@ Defines a sequence of tasks to be executed upon certain trigger conditions.
 | `tasks` | `array(`[`TaskSpec`](#taskspec)`)` | ✔️ |  | List of tasks to run consecutively. |
 | `retryPolicy` | [`RetryPolicy`](#retrypolicy) |  |  | Defines how a flow should react to failures. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowSpec.json)
 
-## `FlowSpecInput`
+### `FlowSpecInput`
 Defines a sequence of tasks to be executed upon certain trigger conditions.
 
 | Property | Type | Required | Format | Description |
@@ -1217,9 +1217,9 @@ Defines a sequence of tasks to be executed upon certain trigger conditions.
 | `tasks` | `array(`[`TaskSpecInput`](#taskspecinput)`)` | ✔️ |  | List of tasks to run consecutively. |
 | `retryPolicy` | [`RetryPolicy`](#retrypolicy) |  |  | Defines how a flow should react to failures. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowSpecInput.json)
 
-## `FlowTrigger`
+### `FlowTrigger`
 Condition that causes a flow to be executed.
 
 | Union Type | Description |
@@ -1230,23 +1230,23 @@ Condition that causes a flow to be executed.
 | [`FlowTrigger::Source`](#flowtriggersource) | Triggers the flow when a source receives new data, with optional batching controls. |
 | [`FlowTrigger::Dataset`](#flowtriggerdataset) | Triggers the flow when matching datasets are updated. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
-## `FlowTrigger::Manual`
+### `FlowTrigger::Manual`
 Triggers the flow via an API call or UI action.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
-## `FlowTrigger::Schedule`
+### `FlowTrigger::Schedule`
 Triggers the flow on a cron schedule.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `cron` | `string` | ✔️ |  | Cron5 expression defining the schedule e.g. `@daily` or `*/30 * * * *`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
-## `FlowTrigger::Event`
+### `FlowTrigger::Event`
 Triggers the flow when an event bus event matching one of the filters is observed.
 
 | Property | Type | Required | Format | Description |
@@ -1255,9 +1255,9 @@ Triggers the flow when an event bus event matching one of the filters is observe
 | `cooldown` | `string` |  | `duration` | The trigger will fire upon first observed event. If another event arrives withing the `cooldown` interval the firing will be postponed until `cooldown` interval ends. I.e. trigger is guaranteed to fire, but may batch multiple events together into one flow run. |
 | `cooldownMaxBatch` | `integer` |  | `uint64` | If an event is observed a `cooldownMaxBatch` number of times during the `cooldown` interval it will fire the trigger without waiting for cooldown to finish. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
-## `FlowTrigger::Source`
+### `FlowTrigger::Source`
 Triggers the flow when a source receives new data, with optional batching controls.
 
 | Property | Type | Required | Format | Description |
@@ -1266,9 +1266,9 @@ Triggers the flow when a source receives new data, with optional batching contro
 | `minRecordsToAwait` | `integer` |  | `uint64` | Minimum number of new records to accumulate before triggering. |
 | `maxAwaitInterval` | `string` |  | `duration` | Maximum time to wait for `minRecordsToAwait` before triggering anyway e.g. `1h`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
-## `FlowTrigger::Dataset`
+### `FlowTrigger::Dataset`
 Triggers the flow when matching datasets are updated.
 
 | Property | Type | Required | Format | Description |
@@ -1276,10 +1276,10 @@ Triggers the flow when matching datasets are updated.
 | `dataset` | [`DatasetSelector`](#datasetselector) | ✔️ |  | Selector that identifies which datasets can trigger this flow. |
 | `events` | `array(string)` |  |  | Set of event bus event IDs that this trigger will react to |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTrigger.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTrigger.json)
 
 
-## `FlowTriggerInput`
+### `FlowTriggerInput`
 Condition that causes a flow to be executed.
 
 | Union Type | Description |
@@ -1290,23 +1290,23 @@ Condition that causes a flow to be executed.
 | [`FlowTriggerInput::Source`](#flowtriggerinputsource) | Triggers the flow when a source receives new data, with optional batching controls. |
 | [`FlowTriggerInput::Dataset`](#flowtriggerinputdataset) | Triggers the flow when matching datasets are updated. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
-## `FlowTriggerInput::Manual`
+### `FlowTriggerInput::Manual`
 Triggers the flow via an API call or UI action.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
-## `FlowTriggerInput::Schedule`
+### `FlowTriggerInput::Schedule`
 Triggers the flow on a cron schedule.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `cron` | `string` | ✔️ |  | Cron5 expression defining the schedule e.g. `@daily` or `*/30 * * * *`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
-## `FlowTriggerInput::Event`
+### `FlowTriggerInput::Event`
 Triggers the flow when an event bus event matching one of the filters is observed.
 
 | Property | Type | Required | Format | Description |
@@ -1315,9 +1315,9 @@ Triggers the flow when an event bus event matching one of the filters is observe
 | `cooldown` | `string` |  | `duration` | The trigger will fire upon first observed event. If another event arrives withing the `cooldown` interval the firing will be postponed until `cooldown` interval ends. I.e. trigger is guaranteed to fire, but may batch multiple events together into one flow run. |
 | `cooldownMaxBatch` | `integer` |  | `uint64` | If an event is observed a `cooldownMaxBatch` number of times during the `cooldown` interval it will fire the trigger without waiting for cooldown to finish. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
-## `FlowTriggerInput::Source`
+### `FlowTriggerInput::Source`
 Triggers the flow when a source receives new data, with optional batching controls.
 
 | Property | Type | Required | Format | Description |
@@ -1326,9 +1326,9 @@ Triggers the flow when a source receives new data, with optional batching contro
 | `minRecordsToAwait` | `integer` |  | `uint64` | Minimum number of new records to accumulate before triggering. |
 | `maxAwaitInterval` | `string` |  | `duration` | Maximum time to wait for `minRecordsToAwait` before triggering anyway e.g. `1h`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
-## `FlowTriggerInput::Dataset`
+### `FlowTriggerInput::Dataset`
 Triggers the flow when matching datasets are updated.
 
 | Property | Type | Required | Format | Description |
@@ -1336,10 +1336,10 @@ Triggers the flow when matching datasets are updated.
 | `dataset` | [`DatasetSelector`](#datasetselector) | ✔️ |  | Selector that identifies which datasets can trigger this flow. |
 | `events` | `array(string)` |  |  | Set of event bus event IDs that this trigger will react to |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/FlowTriggerInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/FlowTriggerInput.json)
 
 
-## `RetryBackoff`
+### `RetryBackoff`
 Type of the backoff scaling.
 
 | Enum Value |
@@ -1347,9 +1347,9 @@ Type of the backoff scaling.
 | `Linear` |
 | `Exponential` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/RetryBackoff.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/RetryBackoff.json)
 
-## `RetryPolicy`
+### `RetryPolicy`
 Defines how a flow should react to failures.
 
 | Property | Type | Required | Format | Description |
@@ -1358,17 +1358,17 @@ Defines how a flow should react to failures.
 | `minDelay` | `string` |  | `duration` | How long to wait until the first retry. |
 | `backoff` | [`RetryBackoff`](#retrybackoff) |  |  | Type of the backoff scaling. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/flow/v1alpha1/RetryPolicy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/flow/v1alpha1/RetryPolicy.json)
 
-# Resource
-## `LabelFilter`
+## Resource
+### `LabelFilter`
 Filters that work on resource labels and identity headers.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/LabelFilter.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/LabelFilter.json)
 
-## `Resource`
+### `Resource`
 Top-level container for canonical representation of a resource that specifies the type and version of the resource, carries identity, ownership, and status information.
 
 | Property | Type | Required | Format | Description |
@@ -1378,23 +1378,23 @@ Top-level container for canonical representation of a resource that specifies th
 | `spec` | `object` | ✔️ | `fragment` | Specifies the desired state of a resource. |
 | `status` | [`ResourceStatus`](#resourcestatus) | ✔️ |  | Resource lifecycle and reconciliation information. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/Resource.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/Resource.json)
 
-## `ResourceAnnotations`
+### `ResourceAnnotations`
 Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. Unlike labels, annotations are not indexed and cannot be queried by.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceAnnotations.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceAnnotations.json)
 
-## `ResourceConditions`
+### `ResourceConditions`
 Container of feneric contditions that can be added by contollers to provide additional information about the state of a resource. Keys uniquely identify the condition and should be in the form of URL to a schema describing this condition, e.g. `https://opendatafabric.org/schemas/resource/ConditionReady.json`.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceConditions.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceConditions.json)
 
-## `ResourceHandle`
+### `ResourceHandle`
 Link to another resolved resource.
 
 | Property | Type | Required | Format | Description |
@@ -1405,9 +1405,9 @@ Link to another resolved resource.
 | `did` | `string` |  | `did` | DID of the resource, if applicable. |
 | `name` | `string` | ✔️ | `resource-name` | Name of a resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceHandle.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceHandle.json)
 
-## `ResourceHeaders`
+### `ResourceHeaders`
 Container for identity and ownership information of a resource.
 
 | Property | Type | Required | Format | Description |
@@ -1423,9 +1423,9 @@ Container for identity and ownership information of a resource.
 | `updatedAt` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Time when the resource was last updated, including header, spec, and status updates. |
 | `deletedAt` | `string` |  | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Time when the resource was deleted. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceHeaders.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceHeaders.json)
 
-## `ResourceHeadersInput`
+### `ResourceHeadersInput`
 Container for identity and ownership information of a resource.
 
 | Property | Type | Required | Format | Description |
@@ -1437,9 +1437,9 @@ Container for identity and ownership information of a resource.
 | `annotations` | [`ResourceAnnotations`](#resourceannotations) |  |  | Annotations is a key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. Unlike labels, annotations are not indexed and cannot be queried by. |
 | `ownerReferences` | `array(`[`ResourceRef`](#resourceref)`)` |  |  | References to resources that created this resource. Used for lineage tracking and cascading cleanup. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceHeadersInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceHeadersInput.json)
 
-## `ResourceInput`
+### `ResourceInput`
 Top-level container for user-authored representation of a resource that specifies the type and version of the resource and its desired state.
 
 | Property | Type | Required | Format | Description |
@@ -1448,16 +1448,16 @@ Top-level container for user-authored representation of a resource that specifie
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | `object` | ✔️ | `fragment` | Specifies the desired state of a resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceInput.json)
 
-## `ResourceLabels`
+### `ResourceLabels`
 Map of string keys and values that can be used to organize, categorize, and query resources.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceLabels.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceLabels.json)
 
-## `ResourcePhase`
+### `ResourcePhase`
 Represents the reconciliation phase of a resource.
 
 | Enum Value |
@@ -1468,9 +1468,9 @@ Represents the reconciliation phase of a resource.
 | `Degraded` |
 | `Failed` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourcePhase.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourcePhase.json)
 
-## `ResourceRef`
+### `ResourceRef`
 
 
 | Property | Type | Required | Format | Description |
@@ -1481,9 +1481,9 @@ Represents the reconciliation phase of a resource.
 | `type` | `string` |  | `type-ref` | Short type name or full type URI of the target resource. |
 | `name` | `string` |  | `resource-name` | Name of a resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceRef.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceRef.json)
 
-## `ResourceSelector`
+### `ResourceSelector`
 
 
 | Property | Type | Required | Format | Description |
@@ -1495,9 +1495,9 @@ Represents the reconciliation phase of a resource.
 | `name` | `string` |  |  | Name pattern in SQL `LIKE` format. |
 | `labels` | [`LabelFilter`](#labelfilter) |  |  | Filter by resource labels. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceSelector.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceSelector.json)
 
-## `ResourceStatus`
+### `ResourceStatus`
 Resource lifecycle and reconciliation information.
 
 | Property | Type | Required | Format | Description |
@@ -1509,10 +1509,10 @@ Resource lifecycle and reconciliation information.
 | `reconciledAt` | `string` |  | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | Time when the controller last reconciled the desired resource state as defined in `reconciledGeneration`. |
 | `conditions` | [`ResourceConditions`](#resourceconditions) | ✔️ |  | Detailed conditions describing the state of the resource that are added by controllers. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/resource/v1alpha1/ResourceStatus.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resource/v1alpha1/ResourceStatus.json)
 
-# Sink
-## `WebhookTarget`
+## Sink
+### `WebhookTarget`
 Defines a webhook target endpoint that can receive event notifications and data.
 
 | Property | Type | Required | Format | Description |
@@ -1521,9 +1521,9 @@ Defines a webhook target endpoint that can receive event notifications and data.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`WebhookTargetSpecInput`](#webhooktargetspecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/sink/v1alpha1/WebhookTarget.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/sink/v1alpha1/WebhookTarget.json)
 
-## `WebhookTargetSpec`
+### `WebhookTargetSpec`
 Defines a webhook target endpoint that can receive event notifications and data.
 
 | Property | Type | Required | Format | Description |
@@ -1531,9 +1531,9 @@ Defines a webhook target endpoint that can receive event notifications and data.
 | `url` | `string` | ✔️ | `uri` | Target url of the webhook. |
 | `secret` | [`Secret`](#secret) |  |  | Shared secret used for HMAC signature of the request payload for authentication. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/sink/v1alpha1/WebhookTargetSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/sink/v1alpha1/WebhookTargetSpec.json)
 
-## `WebhookTargetSpecInput`
+### `WebhookTargetSpecInput`
 Defines a webhook target endpoint that can receive event notifications and data.
 
 | Property | Type | Required | Format | Description |
@@ -1541,10 +1541,10 @@ Defines a webhook target endpoint that can receive event notifications and data.
 | `url` | `string` | ✔️ | `uri` | Target url of the webhook. |
 | `secret` | [`Secret`](#secret) |  |  | Shared secret used for HMAC signature of the request payload for authentication. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/sink/v1alpha1/WebhookTargetSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/sink/v1alpha1/WebhookTargetSpecInput.json)
 
-# Source
-## `CompressionFormat`
+## Source
+### `CompressionFormat`
 Defines a compression algorithm.
 
 | Enum Value |
@@ -1552,9 +1552,9 @@ Defines a compression algorithm.
 | `Gzip` |
 | `Zip` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/CompressionFormat.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/CompressionFormat.json)
 
-## `EnvVar`
+### `EnvVar`
 Defines an environment variable passed into some job.
 
 | Property | Type | Required | Format | Description |
@@ -1562,9 +1562,9 @@ Defines an environment variable passed into some job.
 | `name` | `string` | ✔️ |  | Name of the variable. |
 | `value` | `string` |  |  | Value of the variable. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/EnvVar.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/EnvVar.json)
 
-## `EventTimeSource`
+### `EventTimeSource`
 Defines the external source of data.
 
 | Union Type | Description |
@@ -1573,19 +1573,19 @@ Defines the external source of data.
 | [`EventTimeSource::FromPath`](#eventtimesourcefrompath) | Extracts event time from the path component of the source. |
 | [`EventTimeSource::FromSystemTime`](#eventtimesourcefromsystemtime) | Assigns event time from the system time source. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/EventTimeSource.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/EventTimeSource.json)
 
-## `EventTimeSource::FromMetadata`
+### `EventTimeSource::FromMetadata`
 Extracts event time from the source's metadata.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/EventTimeSource.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/EventTimeSource.json)
 
-## `EventTimeSource::FromSystemTime`
+### `EventTimeSource::FromSystemTime`
 Assigns event time from the system time source.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/EventTimeSource.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/EventTimeSource.json)
 
-## `EventTimeSource::FromPath`
+### `EventTimeSource::FromPath`
 Extracts event time from the path component of the source.
 
 | Property | Type | Required | Format | Description |
@@ -1593,19 +1593,19 @@ Extracts event time from the path component of the source.
 | `pattern` | `string` | ✔️ | `regex` | Regular expression where first group contains the timestamp string. |
 | `timestampFormat` | `string` |  |  | Format of the expected timestamp in java.text.SimpleDateFormat form. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/EventTimeSource.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/EventTimeSource.json)
 
 
-## `IngestParams`
+### `IngestParams`
 Optional parameters to control ingestion behavior.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `targetSliceRecords` | `integer` |  | `uint64` | Target number of records to ingest per data slice. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/IngestParams.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/IngestParams.json)
 
-## `Ingress`
+### `Ingress`
 Defines the point where data enters the system.
 
 | Union Type | Description |
@@ -1617,9 +1617,9 @@ Defines the point where data enters the system.
 | [`Ingress::EvmLogs`](#ingressevmlogs) | Connects to an EVM (Ethereum) node to stream transaction logs. |
 | [`Ingress::RestEndpoint`](#ingressrestendpoint) | Exposes a REST HTTP endpoint that accepts pushed data records. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::Url`
+### `Ingress::Url`
 Pulls data from one of the supported sources by its URL.
 
 | Property | Type | Required | Format | Description |
@@ -1629,9 +1629,9 @@ Pulls data from one of the supported sources by its URL.
 | `cache` | [`SourceCaching`](#sourcecaching) |  |  | Describes the caching settings used for this source. |
 | `headers` | `array(`[`RequestHeader`](#requestheader)`)` |  |  | Headers to pass during the request (e.g. HTTP Authorization) |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::FilesGlob`
+### `Ingress::FilesGlob`
 Uses glob operator to match files on the local file system.
 
 | Property | Type | Required | Format | Description |
@@ -1641,9 +1641,9 @@ Uses glob operator to match files on the local file system.
 | `cache` | [`SourceCaching`](#sourcecaching) |  |  | Describes the caching settings used for this source. |
 | `order` | [`SourceOrdering`](#sourceordering) |  |  | Specifies how input files should be ordered before ingestion.<br/>Order is important as every file will be processed individually<br/>and will advance the dataset's watermark. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::Container`
+### `Ingress::Container`
 Runs the specified OCI container to fetch data from an arbitrary source.
 
 | Property | Type | Required | Format | Description |
@@ -1653,9 +1653,9 @@ Runs the specified OCI container to fetch data from an arbitrary source.
 | `args` | `array(string)` |  |  | Arguments to the entrypoint. The OCI image's CMD is used if this is not provided. |
 | `env` | `array(`[`EnvVar`](#envvar)`)` |  |  | Environment variables to propagate into or set in the container. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::Mqtt`
+### `Ingress::Mqtt`
 Connects to an MQTT broker to fetch events from the specified topic.
 
 | Property | Type | Required | Format | Description |
@@ -1666,18 +1666,18 @@ Connects to an MQTT broker to fetch events from the specified topic.
 | `password` | `string` |  |  | Password to use for auth with the broker (can be templated). |
 | `topics` | `array(`[`MqttTopicSubscription`](#mqtttopicsubscription)`)` | ✔️ |  | List of topic subscription parameters. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::RestEndpoint`
+### `Ingress::RestEndpoint`
 Exposes a REST HTTP endpoint that accepts pushed data records.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `buffer` | [`IngressBuffer`](#ingressbuffer) |  |  | Buffer configuration for holding records until they are ingested. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
-## `Ingress::EvmLogs`
+### `Ingress::EvmLogs`
 Connects to an EVM (Ethereum) node to stream transaction logs.
 
 | Property | Type | Required | Format | Description |
@@ -1687,19 +1687,19 @@ Connects to an EVM (Ethereum) node to stream transaction logs.
 | `filter` | `string` |  |  | An SQL WHERE clause that can be used to pre-filter the logs before fetching them from the ETH node. |
 | `signature` | `string` |  |  | Solidity log event signature to use for decoding. Using this field adds `event` to the output containing decoded log as JSON. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Ingress.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Ingress.json)
 
 
-## `IngressBuffer`
+### `IngressBuffer`
 Buffer configuration for holding pushed records until they are ingested.
 
 | Union Type | Description |
 | --- | --- |
 | [`IngressBuffer::Memory`](#ingressbuffermemory) | An in-memory buffer. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/IngressBuffer.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/IngressBuffer.json)
 
-## `IngressBuffer::Memory`
+### `IngressBuffer::Memory`
 An in-memory buffer.
 
 | Property | Type | Required | Format | Description |
@@ -1707,10 +1707,10 @@ An in-memory buffer.
 | `bufferSize` | `integer` |  | `uint64` | Maximum number of records to hold in the buffer. |
 | `overflowPolicy` | `string` |  |  | Policy applied when the buffer is full. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/IngressBuffer.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/IngressBuffer.json)
 
 
-## `MergeStrategy`
+### `MergeStrategy`
 Merge strategy determines how newly ingested data should be combined with the data that already exists in the dataset.
 
 | Union Type | Description |
@@ -1721,16 +1721,16 @@ Merge strategy determines how newly ingested data should be combined with the da
 | [`MergeStrategy::ChangelogStream`](#mergestrategychangelogstream) | Changelog stream merge strategy. |
 | [`MergeStrategy::UpsertStream`](#mergestrategyupsertstream) | Upsert stream merge strategy. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
-## `MergeStrategy::Append`
+### `MergeStrategy::Append`
 Append merge strategy.
 
 Under this strategy new data will be appended to the dataset in its entirety, without any deduplication.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
-## `MergeStrategy::ChangelogStream`
+### `MergeStrategy::ChangelogStream`
 Changelog stream merge strategy.
 
 This is the native stream format for ODF that accurately describes the evolution of all event records including appends, retractions, and corrections as per RFC-015. No pre-processing except for format validation is done.
@@ -1739,9 +1739,9 @@ This is the native stream format for ODF that accurately describes the evolution
 | --- | --- | :---: | :---: | --- |
 | `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
-## `MergeStrategy::Ledger`
+### `MergeStrategy::Ledger`
 Ledger merge strategy.
 
 This strategy should be used for data sources containing ledgers of events. Currently this strategy will only perform deduplication of events using user-specified primary key columns. This means that the source data can contain partially overlapping set of records and only those records that were not previously seen will be appended.
@@ -1750,9 +1750,9 @@ This strategy should be used for data sources containing ledgers of events. Curr
 | --- | --- | :---: | :---: | --- |
 | `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
-## `MergeStrategy::Snapshot`
+### `MergeStrategy::Snapshot`
 Snapshot merge strategy.
 
 This strategy can be used for data state snapshots that are taken periodically and contain only the latest state of the observed entity or system. Over time such snapshots can have new rows added, and old rows either removed or modified.
@@ -1771,9 +1771,9 @@ To identify whether a row has changed this strategy will compare all other colum
 | `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime. |
 | `compareColumns` | `array(string)` |  |  | Names of the columns to compared to determine if a row has changed between two snapshots. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
-## `MergeStrategy::UpsertStream`
+### `MergeStrategy::UpsertStream`
 Upsert stream merge strategy.
 
 This strategy should be used for data sources containing ledgers of insert-or-update and delete events. Unlike ChangelogStream the insert-or-update events only carry the new values, so this strategy will use primary key to re-classify the events into an append or a correction from/to pair, looking up the previous values.
@@ -1782,10 +1782,10 @@ This strategy should be used for data sources containing ledgers of insert-or-up
 | --- | --- | :---: | :---: | --- |
 | `primaryKey` | `array(string)` | ✔️ |  | Names of the columns that uniquely identify the record throughout its lifetime |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MergeStrategy.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MergeStrategy.json)
 
 
-## `MqttQos`
+### `MqttQos`
 MQTT quality of service class.
 
 | Enum Value |
@@ -1794,9 +1794,9 @@ MQTT quality of service class.
 | `AtLeastOnce` |
 | `ExactlyOnce` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MqttQos.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MqttQos.json)
 
-## `MqttTopicSubscription`
+### `MqttTopicSubscription`
 MQTT topic subscription parameters.
 
 | Property | Type | Required | Format | Description |
@@ -1804,9 +1804,9 @@ MQTT topic subscription parameters.
 | `path` | `string` | ✔️ |  | Name of the topic (may include patterns). |
 | `qos` | [`MqttQos`](#mqttqos) |  |  | Quality of service class.<br/><br/>Default: `AtMostOnce` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/MqttTopicSubscription.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/MqttTopicSubscription.json)
 
-## `PrepStep`
+### `PrepStep`
 Defines the steps to prepare raw data for ingestion.
 
 | Union Type | Description |
@@ -1814,9 +1814,9 @@ Defines the steps to prepare raw data for ingestion.
 | [`PrepStep::Decompress`](#prepstepdecompress) | Pulls data from one of the supported sources by its URL. |
 | [`PrepStep::Pipe`](#prepsteppipe) | Executes external command to process the data using piped input/output. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/PrepStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/PrepStep.json)
 
-## `PrepStep::Decompress`
+### `PrepStep::Decompress`
 Pulls data from one of the supported sources by its URL.
 
 | Property | Type | Required | Format | Description |
@@ -1824,19 +1824,19 @@ Pulls data from one of the supported sources by its URL.
 | `format` | [`CompressionFormat`](#compressionformat) | ✔️ |  | Name of a compression algorithm used on data. |
 | `subPath` | `string` |  |  | Path to a data file within a multi-file archive. Can contain glob patterns. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/PrepStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/PrepStep.json)
 
-## `PrepStep::Pipe`
+### `PrepStep::Pipe`
 Executes external command to process the data using piped input/output.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `command` | `array(string)` | ✔️ |  | Command to execute and its arguments. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/PrepStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/PrepStep.json)
 
 
-## `ReadStep`
+### `ReadStep`
 Defines how raw data should be read into the structured form.
 
 | Union Type | Description |
@@ -1849,9 +1849,9 @@ Defines how raw data should be read into the structured form.
 | [`ReadStep::NdJson`](#readstepndjson) | Reader for files containing multiple newline-delimited JSON objects with the same schema. |
 | [`ReadStep::NdGeoJson`](#readstepndgeojson) | Reader for Newline-delimited GeoJSON files. It is similar to `GeoJson` format but instead of `FeatureCollection` object in the root it expects every individual feature object to appear on its own line. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::Csv`
+### `ReadStep::Csv`
 Reader for comma-separated files.
 
 | Property | Type | Required | Format | Description |
@@ -1868,9 +1868,9 @@ Reader for comma-separated files.
 | `timestampFormat` | `string` |  |  | Sets the string that indicates a timestamp format. The `rfc3339` is the only required format, the other format strings are implementation-specific.<br/><br/>Default: `rfc3339` |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::Json`
+### `ReadStep::Json`
 Reader for JSON files that contain an array of objects within them.
 
 | Property | Type | Required | Format | Description |
@@ -1882,9 +1882,9 @@ Reader for JSON files that contain an array of objects within them.
 | `timestampFormat` | `string` |  |  | Sets the string that indicates a timestamp format. The `rfc3339` is the only required format, the other format strings are implementation-specific.<br/><br/>Default: `rfc3339` |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::NdJson`
+### `ReadStep::NdJson`
 Reader for files containing multiple newline-delimited JSON objects with the same schema.
 
 | Property | Type | Required | Format | Description |
@@ -1895,9 +1895,9 @@ Reader for files containing multiple newline-delimited JSON objects with the sam
 | `timestampFormat` | `string` |  |  | Sets the string that indicates a timestamp format. The `rfc3339` is the only required format, the other format strings are implementation-specific.<br/><br/>Default: `rfc3339` |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::GeoJson`
+### `ReadStep::GeoJson`
 Reader for GeoJSON files. It expects one `FeatureCollection` object in the root and will create a record per each `Feature` inside it extracting the properties into individual columns and leaving the feature geometry in its own column.
 
 | Property | Type | Required | Format | Description |
@@ -1905,9 +1905,9 @@ Reader for GeoJSON files. It expects one `FeatureCollection` object in the root 
 | `ddlSchema` | `array(string)` |  |  | DEPRECATED: A DDL-formatted schema. Schema can be used to coerce values into more appropriate data types. |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::NdGeoJson`
+### `ReadStep::NdGeoJson`
 Reader for Newline-delimited GeoJSON files. It is similar to `GeoJson` format but instead of `FeatureCollection` object in the root it expects every individual feature object to appear on its own line.
 
 | Property | Type | Required | Format | Description |
@@ -1915,9 +1915,9 @@ Reader for Newline-delimited GeoJSON files. It is similar to `GeoJson` format bu
 | `ddlSchema` | `array(string)` |  |  | DEPRECATED: A DDL-formatted schema. Schema can be used to coerce values into more appropriate data types. |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::EsriShapefile`
+### `ReadStep::EsriShapefile`
 Reader for ESRI Shapefile format.
 
 | Property | Type | Required | Format | Description |
@@ -1926,9 +1926,9 @@ Reader for ESRI Shapefile format.
 | `subPath` | `string` |  |  | If the ZIP archive contains multiple shapefiles use this field to specify a sub-path to the desired `.shp` file. Can contain glob patterns to act as a filter. |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
-## `ReadStep::Parquet`
+### `ReadStep::Parquet`
 Reader for Apache Parquet format.
 
 | Property | Type | Required | Format | Description |
@@ -1936,10 +1936,10 @@ Reader for Apache Parquet format.
 | `ddlSchema` | `array(string)` |  |  | DEPRECATED: A DDL-formatted schema. Schema can be used to coerce values into more appropriate data types. |
 | `schema` | [`DataSchema`](#dataschema) |  |  | Schema used to coerce values into more appropriate data types. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/ReadStep.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/ReadStep.json)
 
 
-## `RequestHeader`
+### `RequestHeader`
 Defines a header (e.g. HTTP) to be passed into some request.
 
 | Property | Type | Required | Format | Description |
@@ -1947,9 +1947,9 @@ Defines a header (e.g. HTTP) to be passed into some request.
 | `name` | `string` | ✔️ |  | Name of the header. |
 | `value` | `string` | ✔️ |  | Value of the header. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/RequestHeader.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/RequestHeader.json)
 
-## `Source`
+### `Source`
 Defines an external source of data for ingestion.
 
 | Property | Type | Required | Format | Description |
@@ -1958,24 +1958,24 @@ Defines an external source of data for ingestion.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`SourceSpecInput`](#sourcespecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/Source.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/Source.json)
 
-## `SourceCaching`
+### `SourceCaching`
 Defines how external data should be cached.
 
 | Union Type | Description |
 | --- | --- |
 | [`SourceCaching::Forever`](#sourcecachingforever) | After source was processed once it will never be ingested again. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceCaching.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceCaching.json)
 
-## `SourceCaching::Forever`
+### `SourceCaching::Forever`
 After source was processed once it will never be ingested again.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceCaching.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceCaching.json)
 
 
-## `SourceOrdering`
+### `SourceOrdering`
 Specifies how input files should be ordered before ingestion.
 
 | Enum Value |
@@ -1983,9 +1983,9 @@ Specifies how input files should be ordered before ingestion.
 | `ByEventTime` |
 | `ByName` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceOrdering.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceOrdering.json)
 
-## `SourceSpec`
+### `SourceSpec`
 Specifies an external source of data for ingestion.
 
 | Property | Type | Required | Format | Description |
@@ -1998,9 +1998,9 @@ Specifies an external source of data for ingestion.
 | `merge` | [`MergeStrategy`](#mergestrategy) |  |  | Determines how newly-ingested data should be merged with existing history. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) |  |  | Defines the mapping of system fields to dataset column names. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceSpec.json)
 
-## `SourceSpecInput`
+### `SourceSpecInput`
 Specifies an external source of data for ingestion.
 
 | Property | Type | Required | Format | Description |
@@ -2013,9 +2013,9 @@ Specifies an external source of data for ingestion.
 | `merge` | [`MergeStrategy`](#mergestrategy) |  |  | Determines how newly-ingested data should be merged with existing history. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) |  |  | Defines the mapping of system fields to dataset column names. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceSpecInput.json)
 
-## `SourceState`
+### `SourceState`
 The state of the source the data was added from to allow fast resuming.
 
 | Property | Type | Required | Format | Description |
@@ -2024,10 +2024,10 @@ The state of the source the data was added from to allow fast resuming.
 | `kind` | `string` | ✔️ |  | Identifies the type of the state. Standard types include: `odf/etag`, `odf/last-modified`. |
 | `value` | `string` | ✔️ |  | Opaque value representing the state. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/source/v1alpha1/SourceState.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/source/v1alpha1/SourceState.json)
 
-# Storage
-## `AwsCredentials`
+## Storage
+### `AwsCredentials`
 Access credentials for AWS or an AWS-compatible service.
 
 | Property | Type | Required | Format | Description |
@@ -2035,9 +2035,9 @@ Access credentials for AWS or an AWS-compatible service.
 | `accessKey` | [`ValueHandle`](#valuehandle) |  |  | Reference to a secret containing the AWS access key ID. |
 | `secretKey` | [`ValueHandle`](#valuehandle) |  |  | Reference to a secret containing the AWS secret access key. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/AwsCredentials.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/AwsCredentials.json)
 
-## `AwsCredentialsInput`
+### `AwsCredentialsInput`
 Access credentials for AWS or an AWS-compatible service.
 
 | Property | Type | Required | Format | Description |
@@ -2045,9 +2045,9 @@ Access credentials for AWS or an AWS-compatible service.
 | `accessKey` | [`ValueRef`](#valueref) |  |  | Reference to a secret containing the AWS access key ID. |
 | `secretKey` | [`ValueRef`](#valueref) |  |  | Reference to a secret containing the AWS secret access key. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/AwsCredentialsInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/AwsCredentialsInput.json)
 
-## `PersistentVolume`
+### `PersistentVolume`
 Defines a storage volume where data can be stored and its access credentials.
 
 | Property | Type | Required | Format | Description |
@@ -2056,9 +2056,9 @@ Defines a storage volume where data can be stored and its access credentials.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`PersistentVolumeSpecInput`](#persistentvolumespecinput) | ✔️ |  | Specifies the desired state of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolume.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolume.json)
 
-## `PersistentVolumeRef`
+### `PersistentVolumeRef`
 
 
 | Property | Type | Required | Format | Description |
@@ -2067,18 +2067,18 @@ Defines a storage volume where data can be stored and its access credentials.
 | `id` | `string` |  | `resource-id` | ID of the resource. |
 | `name` | `string` |  | `resource-name` | Name of the resource. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolumeRef.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolumeRef.json)
 
-## `PersistentVolumeSpec`
+### `PersistentVolumeSpec`
 Defines a storage volume where data can be stored and its access credentials.
 
 | Union Type | Description |
 | --- | --- |
 | [`PersistentVolumeSpec::S3`](#persistentvolumespecs3) | An Amazon S3 or S3-compatible object storage bucket. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolumeSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolumeSpec.json)
 
-## `PersistentVolumeSpec::S3`
+### `PersistentVolumeSpec::S3`
 An Amazon S3 or S3-compatible object storage bucket.
 
 | Property | Type | Required | Format | Description |
@@ -2090,19 +2090,19 @@ An Amazon S3 or S3-compatible object storage bucket.
 | `capacity` | [`VolumeCapacity`](#volumecapacity) |  |  | Storage capacity allocation. |
 | `credentials` | [`AwsCredentials`](#awscredentials) |  |  | Access credentials for the bucket. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolumeSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolumeSpec.json)
 
 
-## `PersistentVolumeSpecInput`
+### `PersistentVolumeSpecInput`
 Defines a storage volume where data can be stored and its access credentials.
 
 | Union Type | Description |
 | --- | --- |
 | [`PersistentVolumeSpecInput::S3`](#persistentvolumespecinputs3) | An Amazon S3 or S3-compatible object storage bucket. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolumeSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolumeSpecInput.json)
 
-## `PersistentVolumeSpecInput::S3`
+### `PersistentVolumeSpecInput::S3`
 An Amazon S3 or S3-compatible object storage bucket.
 
 | Property | Type | Required | Format | Description |
@@ -2114,20 +2114,20 @@ An Amazon S3 or S3-compatible object storage bucket.
 | `capacity` | [`VolumeCapacity`](#volumecapacity) |  |  | Storage capacity allocation. |
 | `credentials` | [`AwsCredentialsInput`](#awscredentialsinput) |  |  | Access credentials for the bucket. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/PersistentVolumeSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/PersistentVolumeSpecInput.json)
 
 
-## `VolumeCapacity`
+### `VolumeCapacity`
 Storage capacity allocation.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `storage` | `string` |  | `byte-size` | Maximum storage size e.g. `10Gi`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/storage/v1alpha1/VolumeCapacity.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/storage/v1alpha1/VolumeCapacity.json)
 
-# Task
-## `Task`
+## Task
+### `Task`
 An individual work item to be executed.
 
 | Property | Type | Required | Format | Description |
@@ -2136,9 +2136,9 @@ An individual work item to be executed.
 | `headers` | [`ResourceHeadersInput`](#resourceheadersinput) | ✔️ |  | Container for identity and ownership information of a resource. |
 | `spec` | [`TaskSpecInput`](#taskspecinput) |  |  | Specifies the desired state of the task. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/Task.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/Task.json)
 
-## `TaskOutcome`
+### `TaskOutcome`
 Result of the execution of a task.
 
 | Union Type | Description |
@@ -2148,41 +2148,41 @@ Result of the execution of a task.
 | [`TaskOutcome::NoOp`](#taskoutcomenoop) | Task completed with no work done (e.g. no new data to process). |
 | [`TaskOutcome::Cancelled`](#taskoutcomecancelled) | Task was cancelled before completion. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskOutcome.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskOutcome.json)
 
-## `TaskOutcome::Success`
+### `TaskOutcome::Success`
 Task completed successfully.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskOutcome.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskOutcome.json)
 
-## `TaskOutcome::Failed`
+### `TaskOutcome::Failed`
 Task failed.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `message` | `string` | ✔️ |  | Human-readable description of the failure. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskOutcome.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskOutcome.json)
 
-## `TaskOutcome::NoOp`
+### `TaskOutcome::NoOp`
 Task completed with no work done (e.g. no new data to process).
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskOutcome.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskOutcome.json)
 
-## `TaskOutcome::Cancelled`
+### `TaskOutcome::Cancelled`
 Task was cancelled before completion.
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskOutcome.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskOutcome.json)
 
 
-## `TaskPlan`
+### `TaskPlan`
 A self-contained logical execution plan of a task.
 
 _Map of string keys to arbitrary values._
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskPlan.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskPlan.json)
 
-## `TaskSpec`
+### `TaskSpec`
 An individual work item to be executed as part of a flow.
 
 | Union Type | Description |
@@ -2193,9 +2193,9 @@ An individual work item to be executed as part of a flow.
 | [`TaskSpec::GarbageCollection`](#taskspecgarbagecollection) | Removes unreferenced data files from matching datasets. |
 | [`TaskSpec::WebhookCall`](#taskspecwebhookcall) | Dispatches a certain payload to a specific `WebhookTarget`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
-## `TaskSpec::Ingest`
+### `TaskSpec::Ingest`
 Fetches data from a source and appends it to a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -2204,9 +2204,9 @@ Fetches data from a source and appends it to a dataset.
 | `source` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | Reference to the source resource that defines how to fetch data. |
 | `params` | [`IngestParams`](#ingestparams) |  |  | Optional parameters to control ingestion behavior. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
-## `TaskSpec::Transform`
+### `TaskSpec::Transform`
 Executes transformation of data defined in a derivative dataset.
 
 | Property | Type | Required | Format | Description |
@@ -2214,9 +2214,9 @@ Executes transformation of data defined in a derivative dataset.
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 | `target` | [`DatasetHandle`](#datasethandle) |  |  | Reference to the derivative dataset that defines how to transform data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
-## `TaskSpec::Compaction`
+### `TaskSpec::Compaction`
 Compacts data files in matching datasets to improve query performance.
 
 | Property | Type | Required | Format | Description |
@@ -2224,18 +2224,18 @@ Compacts data files in matching datasets to improve query performance.
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 | `params` | [`CompactionParams`](#compactionparams) |  |  | Optional parameters to control ingestion behavior. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
-## `TaskSpec::GarbageCollection`
+### `TaskSpec::GarbageCollection`
 Removes unreferenced data files from matching datasets.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
-## `TaskSpec::WebhookCall`
+### `TaskSpec::WebhookCall`
 Dispatches a certain payload to a specific `WebhookTarget`.
 
 | Property | Type | Required | Format | Description |
@@ -2244,10 +2244,10 @@ Dispatches a certain payload to a specific `WebhookTarget`.
 | `target` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | Reference to the `WebhookTarget`. |
 | `payload` | `string` |  |  | The payload to send. May include templating. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpec.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpec.json)
 
 
-## `TaskSpecInput`
+### `TaskSpecInput`
 An individual work item to be executed as part of a flow.
 
 | Union Type | Description |
@@ -2258,9 +2258,9 @@ An individual work item to be executed as part of a flow.
 | [`TaskSpecInput::GarbageCollection`](#taskspecinputgarbagecollection) | Removes unreferenced data files from matching datasets. |
 | [`TaskSpecInput::WebhookCall`](#taskspecinputwebhookcall) | Dispatches a certain payload to a specific `WebhookTarget`. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
-## `TaskSpecInput::Ingest`
+### `TaskSpecInput::Ingest`
 Fetches data from a source and appends it to a dataset.
 
 | Property | Type | Required | Format | Description |
@@ -2269,9 +2269,9 @@ Fetches data from a source and appends it to a dataset.
 | `source` | [`ResourceRef`](#resourceref) | ✔️ |  | Reference to the source resource that defines how to fetch data. |
 | `params` | [`IngestParams`](#ingestparams) |  |  | Optional parameters to control ingestion behavior. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
-## `TaskSpecInput::Transform`
+### `TaskSpecInput::Transform`
 Executes transformation of data defined in a derivative dataset.
 
 | Property | Type | Required | Format | Description |
@@ -2279,9 +2279,9 @@ Executes transformation of data defined in a derivative dataset.
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 | `target` | [`DatasetRef`](#datasetref) |  |  | Reference to the derivative dataset that defines how to transform data. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
-## `TaskSpecInput::Compaction`
+### `TaskSpecInput::Compaction`
 Compacts data files in matching datasets to improve query performance.
 
 | Property | Type | Required | Format | Description |
@@ -2289,18 +2289,18 @@ Compacts data files in matching datasets to improve query performance.
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 | `params` | [`CompactionParams`](#compactionparams) |  |  | Optional parameters to control ingestion behavior. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
-## `TaskSpecInput::GarbageCollection`
+### `TaskSpecInput::GarbageCollection`
 Removes unreferenced data files from matching datasets.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `name` | `string` |  |  | An alias for the task used to refer to it in flows and access the results |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
-## `TaskSpecInput::WebhookCall`
+### `TaskSpecInput::WebhookCall`
 Dispatches a certain payload to a specific `WebhookTarget`.
 
 | Property | Type | Required | Format | Description |
@@ -2310,10 +2310,10 @@ Dispatches a certain payload to a specific `WebhookTarget`.
 | `payload` | `string` |  |  | The payload to send. May include templating. |
 | `retryPolicy` | [`RetryPolicy`](#retrypolicy) |  |  | Defines how a webhook should react to failures. |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskSpecInput.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskSpecInput.json)
 
 
-## `TaskStatus`
+### `TaskStatus`
 Execution phase of a task.
 
 | Enum Value |
@@ -2325,5 +2325,5 @@ Execution phase of a task.
 | `Committing` |
 | `Finished` |
 
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/tree/master/schemas/task/v1alpha1/TaskStatus.json)
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/task/v1alpha1/TaskStatus.json)
 

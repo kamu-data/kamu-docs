@@ -4,7 +4,6 @@ import sys
 import json
 
 # Locate `open-data-fabric` repo
-ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
 ODF_PATH = os.path.normpath(
     os.path.join(
         os.path.dirname(__file__),
@@ -175,10 +174,11 @@ def render_table(ctx, header, header_fmt, rows):
 
 
 def render_schema_links(ctx, name):
-    rel_path = os.path.relpath(ctx.current_schema.path, ODF_SCHEMAS_PATH)
+    schema_id = ctx.current_schema.schema.get("$id", "")
+    url = schema_id + ".json" if schema_id else ""
     ctx.out.write(
         f"[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)]"
-        f"({ODF_URL}tree/master/schemas/{rel_path})\n")
+        f"({url})\n")
 
 
 def render_header(ctx, name, code=False):
@@ -358,7 +358,7 @@ if __name__ == "__main__":
     ctx = Ctx(
         out=sys.stdout,
         schemas_by_name=None,
-        header_level=1,
+        header_level=2,
         current_schema=None,
     )
 
