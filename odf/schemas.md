@@ -413,6 +413,15 @@ User account specification.
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/UserSpecInput.json)
 
+### `BindPolicy`
+Create `PolicyBinding` resources that reference this resource as `object`.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `subject` | [`SubjectHandle`](#subjecthandle) | ✔️ |  | Subject of the binding being created, allowing policies to restrict granting access to e.g. `Everyone`. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/auth/v1alpha1/actions/BindPolicy.json)
+
 ## Config
 ### `Secret`
 
@@ -1794,15 +1803,6 @@ Apply a specific label to the resource.
 | `labelValue` | `object` | ✔️ |  | Value of the label being added. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resources/v1alpha1/actions/AddLabel.json)
-
-### `BindPolicy`
-Create `PolicyBinding` resources that reference this resource as `object`.
-
-| Property | Type | Required | Format | Description |
-| --- | --- | :---: | :---: | --- |
-| `subject` | [`SubjectHandle`](#subjecthandle) | ✔️ |  | Subject of the binding being created, allowing policies to restrict granting access to e.g. `Everyone`. |
-
-[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://opendatafabric.org/schemas/resources/v1alpha1/actions/BindPolicy.json)
 
 ### `Create`
 Create a new resource instance of a type (object is a type URI) under an account.
