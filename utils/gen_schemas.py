@@ -18,7 +18,10 @@ if not os.path.exists(ODF_PATH):
 ODF_SCHEMAS_PATH = os.path.join(ODF_PATH, "schemas")
 
 # Contexts to skip entirely
-SKIP_CONTEXTS = {"legacy", "metaschemas"}
+SKIP_CONTEXTS = {"legacy", "meta"}
+
+# Subdirectories within `{context}/{version}/` to skip (e.g. metaschemas)
+SKIP_DIRS = {"meta"}
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
@@ -102,16 +105,19 @@ def read_all_schemas(schemas_dir):
             if not os.path.isdir(version_path):
                 continue
 
-            for fname in sorted(os.listdir(version_path)):
-                if not fname.endswith(".json"):
-                    continue
-                path = os.path.join(version_path, fname)
-                with open(path) as f:
-                    sch = json.load(f)
-                name = os.path.splitext(fname)[0]
-                schema = Schema(name=name, schema=sch, path=path, context=context, version=version)
-                schemas_by_name[name] = schema
-                schemas_by_context[context].append(schema)
+            # Schemas may be nested in subdirectories within a version
+            for dirpath, dirnames, fnames in os.walk(version_path):
+                dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
+                for fname in sorted(fnames):
+                    if not fname.endswith(".json"):
+                        continue
+                    path = os.path.join(dirpath, fname)
+                    with open(path) as f:
+                        sch = json.load(f)
+                    name = os.path.splitext(fname)[0]
+                    schema = Schema(name=name, schema=sch, path=path, context=context, version=version)
+                    schemas_by_name[name] = schema
+                    schemas_by_context[context].append(schema)
 
     return schemas_by_name, schemas_by_context
 
@@ -333,7 +339,7 @@ def render_schema(ctx, sch):
     elif s.get("type") in ("boolean", "null", "integer", "number"):
         render_scalar(ctx, s, name)
     else:
-        raise Exception(f"Unsupported schema shape: {name}")
+        raise Exception(f"Unsupported schema shape: {sch.path}")
 
 
 def render_all(ctx, schemas_dir):

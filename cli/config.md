@@ -20,6 +20,23 @@ title: Config Reference
 <td>Auth configuration</td>
 </tr>
 <tr>
+<td><code>backgroundAgents</code></td>
+<td><a href="#backgroundagentsconfig"><code>BackgroundAgentsConfig</code></a></td>
+<td><pre><code class="language-json">\{
+  &quot;batching&quot;: \{
+    &quot;flowActivations&quot;: 20,
+    &quot;flowSystemEvents&quot;: 20,
+    &quot;outboxMessages&quot;: 20
+  },
+  &quot;concurrency&quot;: \{
+    &quot;outboxConsumers&quot;: 1
+  },
+  &quot;maxListeningTimeout&quot;: &quot;2s&quot;,
+  &quot;minDebounceInterval&quot;: &quot;20ms&quot;
+}</code></pre></td>
+<td>Background agents configuration (outbox, flow system events, tasks)</td>
+</tr>
+<tr>
 <td><code>database</code></td>
 <td><a href="#databaseconfig"><code>DatabaseConfig</code></a></td>
 <td><code class="language-json">null</code></td>
@@ -78,19 +95,9 @@ title: Config Reference
 <td><code>flowSystem</code></td>
 <td><a href="#flowsystemconfig"><code>FlowSystemConfig</code></a></td>
 <td><pre><code class="language-json">\{
-  &quot;flowAgent&quot;: \{
-    &quot;awaitingStepSecs&quot;: 1,
-    &quot;defaultRetryPolicies&quot;: \{},
-    &quot;mandatoryThrottlingPeriodSecs&quot;: 60
-  },
-  &quot;flowSystemEventAgent&quot;: \{
-    &quot;batchSize&quot;: 20,
-    &quot;maxListeningTimeout&quot;: &quot;2s&quot;,
-    &quot;minDebounceInterval&quot;: &quot;100ms&quot;
-  },
-  &quot;taskAgent&quot;: \{
-    &quot;checkingIntervalSecs&quot;: 1
-  }
+  &quot;awaitingStepSecs&quot;: 1,
+  &quot;defaultRetryPolicies&quot;: \{},
+  &quot;mandatoryThrottlingPeriodSecs&quot;: 60
 }</code></pre></td>
 <td>Configuration for flow system</td>
 </tr>
@@ -110,16 +117,6 @@ title: Config Reference
 <td><a href="#identityconfig"><code>IdentityConfig</code></a></td>
 <td><code class="language-json">\{}</code></td>
 <td>UNSTABLE: Identity configuration</td>
-</tr>
-<tr>
-<td><code>outbox</code></td>
-<td><a href="#outboxagentconfig"><code>OutboxAgentConfig</code></a></td>
-<td><pre><code class="language-json">\{
-  &quot;batchSize&quot;: 20,
-  &quot;maxListeningTimeout&quot;: &quot;2s&quot;,
-  &quot;minDebounceInterval&quot;: &quot;100ms&quot;
-}</code></pre></td>
-<td>Messaging outbox agent configuration</td>
 </tr>
 <tr>
 <td><code>protocol</code></td>
@@ -190,7 +187,7 @@ title: Config Reference
   &quot;http&quot;: \{
     &quot;connectTimeout&quot;: &quot;30s&quot;,
     &quot;maxRedirects&quot;: 10,
-    &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.267.0&quot;
+    &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.270.0&quot;
   },
   &quot;mqtt&quot;: \{
     &quot;brokerIdleTimeout&quot;: &quot;1s&quot;
@@ -379,6 +376,106 @@ Base type: `string`
 </tbody>
 </table>
 
+## `BackgroundAgentsBatchingConfig`
+
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code>flowActivations</code></td>
+<td><code>integer</code></td>
+<td><code class="language-json">20</code></td>
+<td>
+
+Due flows the flow agent loads at once before activating them.
+0 is treated as 1
+
+</td>
+</tr>
+<tr>
+<td><code>flowSystemEvents</code></td>
+<td><code>integer</code></td>
+<td><code class="language-json">20</code></td>
+<td>
+
+Flow system events applied to a projection per transaction. 0 is
+treated as 1
+
+</td>
+</tr>
+<tr>
+<td><code>outboxMessages</code></td>
+<td><code>integer</code></td>
+<td><code class="language-json">20</code></td>
+<td>Outbox messages relayed per transaction. 0 is treated as 1</td>
+</tr>
+</tbody>
+</table>
+
+## `BackgroundAgentsConcurrencyConfig`
+
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code>outboxConsumers</code></td>
+<td><code>integer</code></td>
+<td><code class="language-json">1</code></td>
+<td>
+
+Outbox consumers running at once, in order per producer, each holding a
+pooled connection: e.g. 8 with Postgres, 1 with `SQLite`. 0 is treated
+as 1
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## `BackgroundAgentsConfig`
+
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code>batching</code></td>
+<td><a href="#backgroundagentsbatchingconfig"><code>BackgroundAgentsBatchingConfig</code></a></td>
+<td><pre><code class="language-json">\{
+  &quot;flowActivations&quot;: 20,
+  &quot;flowSystemEvents&quot;: 20,
+  &quot;outboxMessages&quot;: 20
+}</code></pre></td>
+<td>Batch sizes of agents processing records in batches</td>
+</tr>
+<tr>
+<td><code>concurrency</code></td>
+<td><a href="#backgroundagentsconcurrencyconfig"><code>BackgroundAgentsConcurrencyConfig</code></a></td>
+<td><pre><code class="language-json">\{
+  &quot;outboxConsumers&quot;: 1
+}</code></pre></td>
+<td>Concurrency limits of agents processing records in parallel</td>
+</tr>
+<tr>
+<td><code>maxListeningTimeout</code></td>
+<td><a href="#durationstring"><code>DurationString</code></a></td>
+<td><code class="language-json">&quot;2s&quot;</code></td>
+<td>
+
+Fallback period to re-check for work if a change signal is missed.
+With `SQLite` it also paces the polling. The flow agent wakes up at
+the next flow activation moment regardless of it.
+
+</td>
+</tr>
+<tr>
+<td><code>minDebounceInterval</code></td>
+<td><a href="#durationstring"><code>DurationString</code></a></td>
+<td><code class="language-json">&quot;20ms&quot;</code></td>
+<td>How long agents absorb a burst of change signals before processing</td>
+</tr>
+</tbody>
+</table>
+
 ## `ContainerRuntimeType`
 
 <table>
@@ -396,8 +493,6 @@ Base type: `string`
 <tbody>
 <tr><td><a href="#databaseconfigsqlite"><code>Sqlite</code></a></td></tr>
 <tr><td><a href="#databaseconfigpostgres"><code>Postgres</code></a></td></tr>
-<tr><td><a href="#databaseconfigmysql"><code>MySql</code></a></td></tr>
-<tr><td><a href="#databaseconfigmariadb"><code>MariaDB</code></a></td></tr>
 </tbody>
 </table>
 
@@ -455,121 +550,7 @@ Base type: `string`
 <tr>
 <td><code>maxConnections</code></td>
 <td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxLifetimeSecs</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>port</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>provider</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-## `DatabaseConfig::MySql`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>acquireTimeoutSecs</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>credentialsPolicy</code></td>
-<td><a href="#databasecredentialspolicyconfig"><code>DatabaseCredentialsPolicyConfig</code></a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>databaseName</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>host</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxConnections</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxLifetimeSecs</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>port</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>provider</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-
-## `DatabaseConfig::MariaDB`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>acquireTimeoutSecs</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>credentialsPolicy</code></td>
-<td><a href="#databasecredentialspolicyconfig"><code>DatabaseCredentialsPolicyConfig</code></a></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>databaseName</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>host</code></td>
-<td><code>string</code></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxConnections</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">null</code></td>
+<td><code class="language-json">20</code></td>
 <td></td>
 </tr>
 <tr>
@@ -1144,7 +1125,7 @@ the resources (for authenticated clients)
 </tbody>
 </table>
 
-## `FlowAgentConfig`
+## `FlowSystemConfig`
 
 <table>
 <thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
@@ -1153,81 +1134,24 @@ the resources (for authenticated clients)
 <td><code>awaitingStepSecs</code></td>
 <td><code>integer</code></td>
 <td><code class="language-json">1</code></td>
-<td></td>
+<td>
+
+Scheduling granularity: activation times are rounded to it, and failed
+activations retried after it. Not a polling period
+
+</td>
 </tr>
 <tr>
 <td><code>defaultRetryPolicies</code></td>
 <td><code>object</code></td>
 <td><code class="language-json">\{}</code></td>
-<td></td>
+<td>Retry policies applied by default, by flow type</td>
 </tr>
 <tr>
 <td><code>mandatoryThrottlingPeriodSecs</code></td>
 <td><code>integer</code></td>
 <td><code class="language-json">60</code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-## `FlowSystemConfig`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>flowAgent</code></td>
-<td><a href="#flowagentconfig"><code>FlowAgentConfig</code></a></td>
-<td><pre><code class="language-json">\{
-  &quot;awaitingStepSecs&quot;: 1,
-  &quot;defaultRetryPolicies&quot;: \{},
-  &quot;mandatoryThrottlingPeriodSecs&quot;: 60
-}</code></pre></td>
-<td></td>
-</tr>
-<tr>
-<td><code>flowSystemEventAgent</code></td>
-<td><a href="#flowsystemeventagentconfig"><code>FlowSystemEventAgentConfig</code></a></td>
-<td><pre><code class="language-json">\{
-  &quot;batchSize&quot;: 20,
-  &quot;maxListeningTimeout&quot;: &quot;2s&quot;,
-  &quot;minDebounceInterval&quot;: &quot;100ms&quot;
-}</code></pre></td>
-<td></td>
-</tr>
-<tr>
-<td><code>taskAgent</code></td>
-<td><a href="#taskagentconfig"><code>TaskAgentConfig</code></a></td>
-<td><pre><code class="language-json">\{
-  &quot;checkingIntervalSecs&quot;: 1
-}</code></pre></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-## `FlowSystemEventAgentConfig`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>batchSize</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">20</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxListeningTimeout</code></td>
-<td><a href="#durationstring"><code>DurationString</code></a></td>
-<td><code class="language-json">&quot;2s&quot;</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>minDebounceInterval</code></td>
-<td><a href="#durationstring"><code>DurationString</code></a></td>
-<td><code class="language-json">&quot;100ms&quot;</code></td>
-<td></td>
+<td>Minimal time between two runs of the same flow</td>
 </tr>
 </tbody>
 </table>
@@ -1277,7 +1201,7 @@ the resources (for authenticated clients)
 <tr>
 <td><code>userAgent</code></td>
 <td><code>string</code></td>
-<td><code class="language-json">&quot;kamu-cli&#x2F;0.267.0&quot;</code></td>
+<td><code class="language-json">&quot;kamu-cli&#x2F;0.270.0&quot;</code></td>
 <td>Value to use for User-Agent header</td>
 </tr>
 </tbody>
@@ -1421,32 +1345,6 @@ it usually runs uses host network namespace.
 <tbody>
 <tr><td><code>Private</code></td></tr>
 <tr><td><code>Host</code></td></tr>
-</tbody>
-</table>
-
-## `OutboxAgentConfig`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>batchSize</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">20</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>maxListeningTimeout</code></td>
-<td><a href="#durationstring"><code>DurationString</code></a></td>
-<td><code class="language-json">&quot;2s&quot;</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>minDebounceInterval</code></td>
-<td><a href="#durationstring"><code>DurationString</code></a></td>
-<td><code class="language-json">&quot;100ms&quot;</code></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 
@@ -1796,7 +1694,7 @@ tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32; echo
 <td><pre><code class="language-json">\{
   &quot;connectTimeout&quot;: &quot;30s&quot;,
   &quot;maxRedirects&quot;: 10,
-  &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.267.0&quot;
+  &quot;userAgent&quot;: &quot;kamu-cli&#x2F;0.270.0&quot;
 }</code></pre></td>
 <td>HTTP-specific configuration</td>
 </tr>
@@ -1819,20 +1717,6 @@ resumable source and commit data, leaving the rest for the next
 iteration. This ensures that one data slice doesn't become too big.
 
 </td>
-</tr>
-</tbody>
-</table>
-
-## `TaskAgentConfig`
-
-<table>
-<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-<tbody>
-<tr>
-<td><code>checkingIntervalSecs</code></td>
-<td><code>integer</code></td>
-<td><code class="language-json">1</code></td>
-<td></td>
 </tr>
 </tbody>
 </table>

@@ -225,7 +225,8 @@
                   "/odf/rfcs/016-odf-schema",
                   "/odf/rfcs/017-large-files-linking",
                   "/odf/rfcs/018-iac-resource-framework",
-                  "/odf/rfcs/019-iac-task-flow-system"
+                  "/odf/rfcs/019-iac-task-flow-system",
+                  "/odf/rfcs/020-auth"
                 ]
               }
             ]

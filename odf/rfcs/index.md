@@ -25,3 +25,4 @@ Protocol design evolution proposals:
 - [RFC-017: Large Files Linking](/odf/rfcs/017-large-files-linking)
 - [RFC-018: Infrastructure-as-Code Resource Framework](/odf/rfcs/018-iac-resource-framework)
 - [RFC-019: IaC Task and Flow System](/odf/rfcs/019-iac-task-flow-system)
+- [RFC-020: Authorization Model](/odf/rfcs/020-auth)
