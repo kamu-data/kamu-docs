@@ -24,7 +24,7 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 [Chat](https://discord.gg/nU6TXRQNXC)
 
 <div class="badges">
-  <a href="/odf/spec">
+  <a href="/odf/spec/overview">
     <img
       src="https://img.shields.io/github/v/tag/open-data-fabric/open-data-fabric?include_prereleases&logo=gitbook&logoColor=white&label=Spec&style=for-the-badge"
       noZoom/>

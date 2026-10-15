@@ -3,25 +3,15 @@ import os
 import sys
 import json
 
-# Locate `open-data-fabric` repo
-ODF_PATH = os.path.normpath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "../../open-data-fabric"
-    )
-)
-if not os.path.exists(ODF_PATH):
-    raise Exception(
-        f"Expecting to have `open-data-fabric` repository checked "
-        f"out side by side, but couldn't find path: {ODF_PATH}")
+import odf
 
-ODF_SCHEMAS_PATH = os.path.join(ODF_PATH, "schemas")
+ODF_SCHEMAS_PATH = os.path.join(odf.ODF_PATH, "schemas")
 
 # Contexts to skip entirely
-SKIP_CONTEXTS = {"legacy", "meta"}
+SKIP_CONTEXTS = odf.SCHEMAS_SKIP_CONTEXTS
 
 # Subdirectories within `{context}/{version}/` to skip (e.g. metaschemas)
-SKIP_DIRS = {"meta"}
+SKIP_DIRS = odf.SCHEMAS_SKIP_DIRS
 
 PAGE_HEADER = """---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
@@ -38,15 +28,15 @@ CONTEXT_TITLES = {
     "auth": "Auth",
     "config": "Config",
     "data": "Data",
-    "dataset": "Dataset",
-    "engine": "Engine",
-    "event": "Event",
-    "flow": "Flow",
-    "resource": "Resource",
-    "sink": "Sink",
-    "source": "Source",
+    "datasets": "Datasets",
+    "engines": "Engines",
+    "events": "Events",
+    "flows": "Flows",
+    "resources": "Resources",
+    "sinks": "Sinks",
+    "sources": "Sources",
     "storage": "Storage",
-    "task": "Task",
+    "tasks": "Tasks",
 }
 
 
@@ -180,8 +170,8 @@ def render_table(ctx, header, header_fmt, rows):
 
 
 def render_schema_links(ctx, name):
-    schema_id = ctx.current_schema.schema.get("$id", "")
-    url = schema_id + ".json" if schema_id else ""
+    rel_path = os.path.relpath(ctx.current_schema.path, odf.ODF_PATH)
+    url = f"{odf.ODF_URL}/blob/master/{rel_path}"
     ctx.out.write(
         f"[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)]"
         f"({url})\n")

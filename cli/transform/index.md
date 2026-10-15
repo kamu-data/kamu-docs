@@ -16,7 +16,7 @@ In simple terms, given two root datasets `A` and `B` the derivative dataset `C` 
 C = f(A, B)
 ```
 
-Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams](/odf/spec#nature-of-data), and function `f()` is a [streaming (temporal) processing](/odf/spec#stream-processing-model) operation that produces another stream as an output.
+Unlike databases, or most data processing libraries you might've used ODF is not "batch", but **stream-oriented**. So `A`, `B` here are both potentially infinite [data streams](/odf/spec/overview#nature-of-data), and function `f()` is a [streaming (temporal) processing](/odf/spec/overview#stream-processing-model) operation that produces another stream as an output.
 
 Stream processing composition works just like normal functional composition:
 
@@ -34,7 +34,7 @@ Functions being "pure" means that <Term t="derivative datasets" id="derivative-d
 While this may seem restrictive - this unlocks highly desirable properties like <Term t="reproducibility and verifiability" id="verifiability"/> of all computations and ability to automatically derive <Term t="provenance"/>.
 
 <Info>
-Imagine being able to erase all derivative data in the world and [reconstruct it in identical form](/odf/spec#derivative-data-transience) just from source data. Derivative data in ODF sometimes feels like a superpower.
+Imagine being able to erase all derivative data in the world and [reconstruct it in identical form](/odf/spec/transformations/processing-model#derivative-data-transience) just from source data. Derivative data in ODF sometimes feels like a superpower.
 </Info>
 
 
@@ -74,7 +74,7 @@ This event is as simple as defining two things:
 - `inputs` - data from which datasets will be used as input to this pipeline step
 - `transform` - the transformation being performed.
 
-Technically ODF supports [any data processing framework](/odf/spec#engine). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
+Technically ODF supports [any data processing framework](/odf/spec/transformations/engine-contract). You will see a lot of Streaming SQL in our examples as we believe it currently offers best user experience when defining streaming transformations.
 
 ## Execution Model
 When you use [`kamu pull`](/cli/commands#kamu-pull) on a derivative dataset the tool will:

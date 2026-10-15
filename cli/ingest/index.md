@@ -14,7 +14,7 @@ When interacting with data on the web we usually cannot make any assumptions abo
 
 Data on the web is in a state of a *constant churn* where data is often updated in destructive ways and even important medical datasets disappear over night. Any guarantees do exist are hidden behind many layers of service agreements, yet still provide us no strong assurance that they won't be violated (on purpose or by accident). This is why step #1 of every data science project is to **copy and version** the data.
 
-[Open Data Fabric](/odf/spec) was created to **avoid excessive copying and harmful versioning** of data, and instead embed these guarantees into the data format itself, making them **impossible to violate**.
+[Open Data Fabric](/odf/spec/overview) was created to **avoid excessive copying and harmful versioning** of data, and instead embed these guarantees into the data format itself, making them **impossible to violate**.
 
 Ingestion step is about getting the external data from this *"churning world"* into strict ledgers of <Term t="root datasets" id="root-dataset"/>, where properties like clear ownership, reproducibility, accountability, and complete historical account can be guaranteed and made explicit.
 

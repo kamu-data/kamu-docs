@@ -11,6 +11,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Published Date**: 2026-10-12
 
+**Specs**:
+- [Authorization](/odf/spec/auth-and-privacy/authorization)
+
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:sergii.mikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 - [Sergiy Zaychenko](mailto:sergiy.zaychenko@kamu.dev), [Kamu](https://kamu.dev)
@@ -21,12 +24,12 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 - [ ] Forwards-compatible
 
 
-## Summary {/* omit in toc */}
+## Summary
 
-This RFC defines the authorization model for ODF nodes. It specifies how accounts, groups, auth attributes, and policies are expressed within the [Resource Framework](/odf/rfcs/018-iac-resource-framework.md). The data model is designed to be engine-agnostic. A minimal node can implement simple ownership checks, while a full node can plug in a RBAC / ABAC / ReBAC policy engine.
+This RFC defines the authorization model for ODF nodes. It specifies how accounts, groups, auth attributes, and policies are expressed within the [Resource Framework](/odf/rfcs/018-iac-resource-framework). The data model is designed to be engine-agnostic. A minimal node can implement simple ownership checks, while a full node can plug in a RBAC / ABAC / ReBAC policy engine.
 
 
-## Table of Contents {/* omit in toc */}
+## Table of Contents
 
 - [Motivation](#motivation)
 - [Proposed Solution](#proposed-solution)
@@ -228,7 +231,7 @@ Groups owned by the system `Node` account like `Group:node/admins` can be used t
 
 ### Attributes
 
-Some properties of a resource directly affect access control — for example, whether a dataset allows public reads. We expresses these properties using the existing [labels](/odf/rfcs/018-iac-resource-framework.md) mechanism.
+Some properties of a resource directly affect access control — for example, whether a dataset allows public reads. We expresses these properties using the existing [labels](/odf/rfcs/018-iac-resource-framework#labels--annotations) mechanism.
 
 A label schema that declares `labelProperties.isAuthAttribute: true` signals that any resource carrying that label should have its value materialized into an auth attribute.
 

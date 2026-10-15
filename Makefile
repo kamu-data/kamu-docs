@@ -15,9 +15,10 @@ lint:
 
 .PHONY: docgen
 docgen:
+	rm -rf images/odf/specs images/odf/rfcs
 	python utils/gen_schemas.py > odf/schemas.md
 	python utils/gen_glossary.py > general/glossary.md
-	python utils/gen_spec.py > odf/spec.md
+	python utils/gen_spec.py
 	python utils/gen_rfcs.py
 	python utils/gen_cli_commands_reference.py > cli/commands.md
 	python utils/gen_cli_config_reference.py > cli/config.md

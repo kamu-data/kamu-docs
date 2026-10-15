@@ -1,150 +1,68 @@
 #!/usr/bin/env python
+"""
+Generates RFC pages from `rfcs/` directory of the ODF repository.
+"""
+import json
 import os
 import re
-import sys
-import json
-import shutil
 
-# Locate `open-data-fabric` repo
-ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
-ODF_PATH = os.path.normpath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "../../open-data-fabric"
-    )
-)
-if not os.path.exists(ODF_PATH):
-    raise Exception(
-        f"Expecting to have `open-data-fabric` repository checked "
-        f"out side by side, but couldn't find path: {ODF_PATH}")
+import odf
 
-PAGE_HEADER = """---
-# !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: "{title}"
----
+DST_DIR = "odf/rfcs"
 
-import {{Diagram, Term, Schema, YouTube, YouTubeList}} from '/components/common.jsx'
-
-"""
-
-INDEX_HEADER = """---
-# !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: RFCs
----
-
-import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
-
-Protocol design evolution proposals:
-"""
-
-RFC_LINK_PREFIX = "/odf/rfcs/"
+INDEX_TITLE = "RFCs"
+INDEX_INTRO = "Protocol design evolution proposals:\n"
 
 
 def get_summary(text: str) -> str:
-    section_name = "## Summary"
-    start = text.find(section_name)
-    if start < 0:
-        raise Exception(f"Unable to find section '## Summary'")
-
-    start += len(section_name)
-
-    end = text.find("##", start + 2)
-    if end < 0:
-        raise Exception(f"Unable to find section end")
-
-    return text[start:end].strip()
+    m = re.search(r"^#+ Summary.*\n", text, flags=re.MULTILINE)
+    if not m:
+        raise Exception("Unable to find the summary section")
+    end = re.search(r"^#", text[m.end():], flags=re.MULTILINE)
+    end = m.end() + end.start() if end else len(text)
+    return text[m.end():end].strip()
 
 
 if __name__ == "__main__":
-    rfcs_src_dir = os.path.join(ODF_PATH, "rfcs")
-    rfcs_dst_dir = "odf/rfcs"
-    rfcs_src_images_dir = os.path.join(ODF_PATH, "rfcs/img")
-    rfcs_dst_images_dir = "images/odf/rfcs"
+    src_dir = os.path.join(odf.ODF_PATH, "rfcs")
+    os.makedirs(DST_DIR, exist_ok=True)
 
-    # Copy images
-    if os.path.exists(rfcs_dst_images_dir):
-        shutil.rmtree(rfcs_dst_images_dir)
-    shutil.copytree(rfcs_src_images_dir, rfcs_dst_images_dir)
+    file_names = sorted(
+        fname
+        for fname in os.listdir(src_dir)
+        if re.fullmatch(r"\d{3}-.+\.md", fname) and fname != "000-template.md"
+    )
 
-
-    # Copy and fix up RFC md files
-    file_names = list(os.listdir(rfcs_src_dir))
-    file_names.sort()
-
-    summaries = []
+    rfcs = []
 
     for fname in file_names:
-        src_path = os.path.join(rfcs_src_dir, fname)
-        dst_path = os.path.join(rfcs_dst_dir, fname)
+        src_path = f"rfcs/{fname}"
 
-        if fname == "000-template.md" or os.path.isdir(src_path):
-            continue
+        title, text = odf.split_title(odf.read(src_path).strip())
+        text = odf.convert(src_path, text)
 
-        # Read the source
-        with open(src_path) as f:
-            text = f.read().strip()
+        with open(os.path.join(DST_DIR, fname), "w") as f:
+            f.write(odf.page_header(title))
+            f.write(text + "\n")
 
-        # Get title
-        m = re.match(r"# (.*)", text)
-        title = m.group(1)
-
-        # Remove title
-        text = text[len(m.group(0)):].strip()
-        title = title.replace("<!-- omit in toc -->", "").strip()
-
-        # Convert comments
-        text = text.replace("<!--", "{/*").replace("-->", "*/}")
-
-        # Fix up links
-        def map_link(m: re.Match[str]) -> str:
-            t = m.group(1)
-            url = m.group(2)
-
-            rfc_match = re.search(r"(\d{3}-.*)\.md", url)
-
-            if rfc_match:
-                rfc = rfc_match[0]
-                return f'[{t}]({RFC_LINK_PREFIX}{rfc})'
-            else:
-                return f'[{t}]({url})'
-
-
-        text = re.sub(r"\[([^]]+)]\(([^)]+)\)", map_link, text)
-
-        # Fix up images
-        def sub_images(m: re.Match[str]) -> str:
-            alt = m.group(1)
-            path = m.group(2)
-            return f'<Diagram src="/{rfcs_dst_images_dir}/{path}" alt="{alt}"/>'
-
-        text = re.sub(r"\!\[([^]]*)\]\(/rfcs/img/(.+)\)", sub_images, text)
-
-        with open(dst_path, "w") as f:
-            f.write(PAGE_HEADER.format(title=title))
-            f.write(text)
-
-        summaries.append((
-            fname,
-            title,
-            get_summary(text)
-        ))
+        rfcs.append((fname.removesuffix(".md"), title, get_summary(text)))
 
     # Write index
-    with open(os.path.join(rfcs_dst_dir, "index.md"), "w") as f:
-        f.write(INDEX_HEADER)
+    with open(os.path.join(DST_DIR, "index.md"), "w") as f:
+        f.write(odf.page_header(INDEX_TITLE))
+        f.write(INDEX_INTRO)
+        for name, title, _ in rfcs:
+            f.write(f"- [{title}]({odf.RFCS_URL_PREFIX}{name})\n")
 
-        for fname, title, summary in summaries:
-            f.write(f'- [{title}]({RFC_LINK_PREFIX}{fname[:-3]})\n')
-    
     # Update docs.json
     with open("docs.json") as f:
         cfg = json.load(f)
 
-    odf = cfg["navigation"]["tabs"][1]["groups"][0]
-    assert odf["group"] == "Open Data Fabric"
-    rfcs = odf["pages"][3]
-    assert rfcs["group"] == "RFCs"
-    rfcs["pages"] = [f"/odf/rfcs/{fname[:-3]}" for fname, _, _ in summaries]
+    group = cfg["navigation"]["tabs"][1]["groups"][0]
+    assert group["group"] == "Open Data Fabric"
+    rfcs_group = next(p for p in group["pages"] if isinstance(p, dict) and p.get("group") == "RFCs")
+    rfcs_group["pages"] = [f"{odf.RFCS_URL_PREFIX}{name}" for name, _, _ in rfcs]
 
     with open("docs.json", "w") as f:
         json.dump(cfg, f, indent=2)
+        f.write("\n")

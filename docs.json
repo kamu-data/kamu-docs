@@ -201,7 +201,52 @@
             "group": "Open Data Fabric",
             "pages": [
               "/odf/about",
-              "/odf/spec",
+              {
+                "group": "Specification",
+                "root": "/odf/spec/overview",
+                "pages": [
+                  {
+                    "group": "Datasets",
+                    "pages": [
+                      "/odf/spec/datasets/logical-structure",
+                      "/odf/spec/datasets/identity",
+                      "/odf/spec/datasets/data-model",
+                      "/odf/spec/datasets/data-schema",
+                      "/odf/spec/datasets/metadata-chain",
+                      "/odf/spec/datasets/data-and-checkpoint-hashing",
+                      "/odf/spec/datasets/storage-layout",
+                      "/odf/spec/datasets/ingestion"
+                    ]
+                  },
+                  {
+                    "group": "Transformations",
+                    "pages": [
+                      "/odf/spec/transformations/processing-model",
+                      "/odf/spec/transformations/engine-contract"
+                    ]
+                  },
+                  {
+                    "group": "Exchange",
+                    "pages": [
+                      "/odf/spec/exchange/transfer-protocols",
+                      "/odf/spec/exchange/verifiable-batch-queries"
+                    ]
+                  },
+                  {
+                    "group": "Automation",
+                    "pages": [
+                      "/odf/spec/automation/resource-framework",
+                      "/odf/spec/automation/tasks-and-flows"
+                    ]
+                  },
+                  {
+                    "group": "Auth & Privacy",
+                    "pages": [
+                      "/odf/spec/auth-and-privacy/authorization"
+                    ]
+                  }
+                ]
+              },
               "/odf/schemas",
               {
                 "group": "RFCs",
@@ -226,7 +271,9 @@
                   "/odf/rfcs/017-large-files-linking",
                   "/odf/rfcs/018-iac-resource-framework",
                   "/odf/rfcs/019-iac-task-flow-system",
-                  "/odf/rfcs/020-auth"
+                  "/odf/rfcs/020-auth",
+                  "/odf/rfcs/021-spec-restructuring",
+                  "/odf/rfcs/022-batch-query-commitments"
                 ]
               }
             ]
@@ -400,6 +447,10 @@
     {
       "source": "/cli/get-started/installation",
       "destination": "/cli/install"
+    },
+    {
+      "source": "/odf/spec",
+      "destination": "/odf/spec/overview"
     }
   ],
   "metadata": {

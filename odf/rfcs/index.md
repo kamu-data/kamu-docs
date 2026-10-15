@@ -1,6 +1,6 @@
 ---
 # !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: RFCs
+title: "RFCs"
 ---
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
@@ -26,3 +26,5 @@ Protocol design evolution proposals:
 - [RFC-018: Infrastructure-as-Code Resource Framework](/odf/rfcs/018-iac-resource-framework)
 - [RFC-019: IaC Task and Flow System](/odf/rfcs/019-iac-task-flow-system)
 - [RFC-020: Authorization Model](/odf/rfcs/020-auth)
+- [RFC-021: ODF Spec Restructuring](/odf/rfcs/021-spec-restructuring)
+- [RFC-022: Batch Query Commitments](/odf/rfcs/022-batch-query-commitments)

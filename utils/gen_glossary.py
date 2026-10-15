@@ -1,136 +1,40 @@
 #!/usr/bin/env python
-import os
+"""
+Generates the glossary page by combining the ODF glossary (`specs/glossary.md`)
+with Kamu-specific terms from `utils/glossary-extra.md`.
+"""
 import re
-import subprocess
 
-# Locate `open-data-fabric` repo
-ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
-ODF_PATH = os.path.normpath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "../../open-data-fabric"
-    )
-)
-if not os.path.exists(ODF_PATH):
-    raise Exception(
-        f"Expecting to have `open-data-fabric` repository checked "
-        f"out side by side, but couldn't find path: {ODF_PATH}")
+import odf
 
+SRC_PATH = "specs/glossary.md"
 GLOSSARY_EXTRA_PATH = "utils/glossary-extra.md"
 
-IMAGES_DIR = "images/glossary"
-IMAGES_URL = "/images/glossary/"
-
-PAGE_HEADER = """---
-# !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: Glossary
-description: Definitions of commonly used terms in Open Data Fabric and Kamu projects
-icon: arrow-down-a-z
----
-
-import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
-
-"""
-
-
-def id_of(name: str) -> str:
-    return name.lower().replace(" ", "-")
+PAGE_TITLE = "Glossary"
+PAGE_DESCRIPTION = "Definitions of commonly used terms in Open Data Fabric and Kamu projects"
 
 
 if __name__ == "__main__":
-    # Read the spec source
-    with open(os.path.join(ODF_PATH, "src/open-data-fabric.md")) as f:
-        spec = f.read()
+    _, odf_terms = odf.split_title(odf.read(SRC_PATH))
+    odf_terms = odf.remove_section(odf_terms, "Table of Contents")
 
-    # Extract "Concepts" section
-    section_name = "# Concepts and Components"
-    following_section_name = "# Specification"
+    # Drop the intro paragraph - glossary entries start from the first heading
+    odf_terms = odf_terms[odf_terms.index("\n## ") + 1:]
 
-    start = spec.find(section_name)
-    if start < 0:
-        raise Exception(f"Unable to find section '{section_name}'")
-    else:
-        start = start + len(section_name)
+    # Links to terms within the glossary itself are styled as terms
+    odf_terms = re.sub(
+        r"(?<!!)\[([^\]]+)\]\(#([^)]+)\)",
+        lambda m: f'<Term t="{m.group(1)}" id="{m.group(2)}"/>',
+        odf_terms,
+    )
+    odf_terms = odf.convert(SRC_PATH, odf_terms)
 
-    end = spec.find(following_section_name)
-    if end < 0:
-        raise Exception(f"Unable to find section '{following_section_name}'")
-
-    section = spec[start:end].strip()
-
-    # Read the extra glossary terms
+    # Read the extra glossary terms, stripping the YAML header
     with open(GLOSSARY_EXTRA_PATH) as f:
-        extra = f.read()
+        extra = f.read().split("---", 2)[-1].strip()
 
-        # Strip YAML header
-        extra = extra.split("---", 2)[-1].strip()
-
-    # Combine ODF terms and extra
-    section = f"""
-# Open Data Fabric
-{section}
-
-{extra}"""
-
-    # Substitute or glossary links with a styled version
-    # Fix the rest of the links to point to the spec document
-    terms = {
-        m.group(1)
-        for m in re.finditer(r"^###? (.+)", section, flags=re.MULTILINE)
-    }
-    term_links = {
-        id_of(t)
-        for t in terms
-    }
-
-
-    def sub_refs(m: re.Match[str]) -> str:
-        t = m.group(1)
-        url = m.group(2)
-        if url in term_links:
-            return f'<Term t="{t}" id="{url}"/>'
-        elif url.endswith("-schema") and url != "common-data-schema":
-            t = t.strip('`')
-            schema = url.removesuffix("-schema").removeprefix("#")
-            return f'<Schema t="{t}" id="{schema}"/>'
-        elif url.startswith("reference-"):
-            t = t.strip('`')
-            schema = url.removeprefix("reference-")
-            return f'<Schema t="{t}" id="{schema}"/>'
-        else:
-            return f'[{t}](/odf/spec#{url})'
-
-
-    section = re.sub(r"\[([^]]+)]\(#([^)]+)\)", sub_refs, section)
-
-    # Clean up old images
-    subprocess.run(
-        f"mkdir -p {IMAGES_DIR}",
-        shell=True,
-        check=True,
-    )
-    subprocess.run(
-        f"rm -f {IMAGES_DIR}/*",
-        shell=True,
-        check=True,
-    )
-
-
-    # Copy images and fix up URLs
-    def sub_images(m: re.Match[str]) -> str:
-        alt = m.group(1)
-        file_name = os.path.basename(m.group(2))
-        src_path = os.path.join(ODF_PATH, m.group(2))
-        dst_path = os.path.join(IMAGES_DIR, file_name)
-        subprocess.run(
-            f'cp "{src_path}" "{dst_path}"',
-            shell=True,
-            check=True,
-        )
-        return f'<Diagram src="{IMAGES_URL}{file_name}" alt="{alt}"/>'
-
-
-    section = re.sub(r"!\[(.+)]\((.+)\)", sub_images, section)
-
-    print(PAGE_HEADER)
-    print(section)
+    print(odf.page_header(PAGE_TITLE, PAGE_DESCRIPTION, extra="icon: arrow-down-a-z"))
+    print("# Open Data Fabric\n")
+    print(odf_terms.strip())
+    print()
+    print(extra)

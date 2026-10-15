@@ -7,6 +7,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Start Date**: 2021-06-01
 
+**Specs**:
+- [Data Model](/odf/spec/datasets/data-model)
+
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/10?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/10)
 
 [![Spec PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/13?label=Spec%20PR)](https://github.com/kamu-data/open-data-fabric/pull/13)

@@ -6,7 +6,7 @@ icon: database
 
 import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.jsx'
 
-All data processing in `kamu` is done by a set of plug-in <Term t="engines"/>. This allows us to integrate many mature data processing frameworks, use them to transform data, while `kamu` coordinates all the advanced aspects of processing, tracks <Term t="provenance"/>, ensures <Term t="verifiability"/>, etc.
+All data processing in `kamu` is done by a set of plug-in <Term t="engines" id="engine"/>. This allows us to integrate many mature data processing frameworks, use them to transform data, while `kamu` coordinates all the advanced aspects of processing, tracks <Term t="provenance"/>, ensures <Term t="verifiability"/>, etc.
 
 <Note>
 The opinions below relate to ODF adapters implemented using the described engine, not the engines themselves. Engines featured here all have very different designs, making them more suitable for some tasks than others. Information below is intended as a rough guidance for engine choice within ODF and should be taken with a big grain of salt.

@@ -176,7 +176,7 @@ DatasetKind: Root
 DatasetID: did:odf:fed01057c94fb0378e3222704bb70a261d3ebeaa0d1b38c056a0bdd476360b8548db1
 ```
 
-This is a [globally unique identity](/odf/spec#dataset-identity) which is based on a cryptographic key-pair that only you control.
+This is a [globally unique identity](/odf/spec/datasets/identity) which is based on a cryptographic key-pair that only you control.
 
 Thus by creating an ODF dataset you get both:
 - a way to **uniquely identify** it on the web

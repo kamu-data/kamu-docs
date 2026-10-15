@@ -25,7 +25,7 @@ Our documentation is organized around four closely related projects:
 
     <Columns cols={2}>
       <div><a href="/odf" class="project-quicklink">&gt; About</a></div>
-      <div><a href="/odf/spec" class="project-quicklink">&gt; Specification</a></div>
+      <div><a href="/odf/spec/overview" class="project-quicklink">&gt; Specification</a></div>
       <div><a href="/odf/schemas" class="project-quicklink">&gt; Schemas</a></div>
       <div><a href="/odf/rfcs" class="project-quicklink">&gt; RFCs</a></div>
     </Columns>

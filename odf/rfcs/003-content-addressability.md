@@ -7,6 +7,10 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Start Date**: 2021-11-20
 
+**Specs**:
+- [Storage Layout](/odf/spec/datasets/storage-layout)
+- [Identity](/odf/spec/datasets/identity)
+
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/6?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/6)
 
 [![Spec PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/17?label=Spec%20PR)](https://github.com/kamu-data/open-data-fabric/pull/17)
@@ -46,7 +50,7 @@ Conforming to the `DID` specification will allow us in future to expand related 
 
 To make `MetadataBlock` content-addressable we will remove `blockHash` from it to avoid chicken-egg problem of hashing. The metadata hashing procedure will be updated accordingly.
 
-We will also expand the use of `multihash` format proposed in [RFC-002](/odf/rfcs/002-logical-data-hashes.md) to all hashes, removing the use of `sha3-256` schema format.
+We will also expand the use of `multihash` format proposed in [RFC-002](/odf/rfcs/002-logical-data-hashes) to all hashes, removing the use of `sha3-256` schema format.
 
 New `dataset-name` format will be introduced for dataset names (symbolic aliases) in the same manner as the existing `dataset-id` format.
 

@@ -7,6 +7,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Start Date**: 2022-12-23
 
+**Specs**:
+- [Transfer Protocols](/odf/spec/exchange/transfer-protocols)
+
 [![RFC Status](https://img.shields.io/github/issues/detail/state/kamu-data/open-data-fabric/35?label=RFC%20Status)](https://github.com/kamu-data/open-data-fabric/issues/35)
 
 [![Spec PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/38?label=Spec%20PR)](https://github.com/kamu-data/open-data-fabric/pull/38)
@@ -19,7 +22,7 @@ An enhanced read/write transfer protocol that can be used to efficiently synchro
 
 ## Motivation
 
-The performance limitations of the [Simple Transfer Protocol](/odf/rfcs/007-simple-transfer-protocol.md) are significant:
+The performance limitations of the [Simple Transfer Protocol](/odf/rfcs/007-simple-transfer-protocol) are significant:
 - the exchange becomes noticeably slow on datasets with >200 files, there is no use of batching, compression
 - proxied push/pull are not allowed (being able to read/write directly from/to S3 instead of overloading the servers)
 
@@ -73,20 +76,20 @@ alternative type of channel that supports bi-directional non-blocking message ex
 ## Reference-level explanation
 
 Smart Transfer Protocol defines 2 kinds of APIs:
- - `OpenAPI` [description of the initial REST endpoints](../protocols/smart-transfer-protocol.openapi.yaml).
- - `AsyncAPI` [description of the protocol messages](../protocols/smart-transfer-protocol.asyncapi.yaml).
+ - `OpenAPI` [description of the initial REST endpoints](https://github.com/open-data-fabric/open-data-fabric/blob/master/contracts/transfer/smart-transfer-protocol.openapi.yaml).
+ - `AsyncAPI` [description of the protocol messages](https://github.com/open-data-fabric/open-data-fabric/blob/master/contracts/transfer/smart-transfer-protocol.asyncapi.yaml).
 
 `OpenAPI` is a superset of REST API endpoints as defined in the 
-[Simple Transfer Protocol](/odf/rfcs/007-simple-transfer-protocol.md), with extensions to establish 
+[Simple Transfer Protocol](/odf/rfcs/007-simple-transfer-protocol), with extensions to establish 
 asynchronous duplex messaging channel as defined by `AsyncAPI`.
 
 ### Push flow
 
-![Diagram: ODF Smart TransferProtocol Push](../images/smart_transfer_protocol_push.svg)
+<Diagram src="/images/odf/specs/exchange/transfer-protocols/smart_transfer_protocol_push.svg" alt="Diagram: ODF Smart TransferProtocol Push"/>
 
 ### Pull flow
 
-![Diagram: ODF Smart TransferProtocol Pull](../images/smart_transfer_protocol_pull.svg)
+<Diagram src="/images/odf/specs/exchange/transfer-protocols/smart_transfer_protocol_pull.svg" alt="Diagram: ODF Smart TransferProtocol Pull"/>
 
 
 ## Drawbacks

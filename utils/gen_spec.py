@@ -1,118 +1,88 @@
 #!/usr/bin/env python
+"""
+Generates ODF specification pages from `specs/` directory of the ODF repository.
+
+Specs are rendered into `odf/spec/{domain}/{spec}.md`, preserving the structure of the
+source repository. The order of domains and specs in navigation follows the "Specs"
+table of the overview document.
+"""
+import json
 import os
 import re
-import subprocess
+import shutil
 
-from typing import Optional
+import odf
 
-# Locate `open-data-fabric` repo
-ODF_URL = "https://github.com/open-data-fabric/open-data-fabric/"
-ODF_PATH = os.path.normpath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "../../open-data-fabric"
-    )
-)
-if not os.path.exists(ODF_PATH):
-    raise Exception(
-        f"Expecting to have `open-data-fabric` repository checked "
-        f"out side by side, but couldn't find path: {ODF_PATH}")
-
-IMAGES_DIR = "images/odf/spec"
-IMAGES_URL = "/images/odf/spec/"
-
-PAGE_HEADER = """---
-# !!! THIS FILE IS AUTO-GENERATED - DO NOT MODIFY MANUALLY !!!
-title: Specification
----
-
-import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
-
-"""
+DST_DIR = "odf/spec"
+OVERVIEW = "specs/overview.md"
 
 
-def id_of(name: str) -> str:
-    return name.lower().replace(" ", "-")
+def list_specs() -> list[tuple[str, list[str]]]:
+    """Returns domains and paths of their specs (relative to ODF root) in order of the overview table"""
+    text = odf.read(OVERVIEW)
+    domains: dict[str, list[str]] = {}
+    for m in re.finditer(r"^\| ([^|]+?) \| \[[^\]]+\]\(([^)]+\.md)\) \|", text, flags=re.MULTILINE):
+        domain, path = m.groups()
+        domains.setdefault(domain, []).append(os.path.normpath(os.path.join("specs", path)))
+    if not domains:
+        raise Exception(f"Unable to find the list of specs in {OVERVIEW}")
+    return list(domains.items())
 
 
-def remove_section(spec: str, section_name: str, following_section_name: Optional[str] = None) -> str:
-    start = spec.find(section_name)
-    if start < 0:
-        raise Exception(f"Unable to find section '{section_name}'")
+def render(src_path: str, title: str = None):
+    text = odf.read(src_path)
+    doc_title, text = odf.split_title(text)
+    text = odf.remove_section(text, "Table of Contents")
+    text = odf.convert(src_path, text)
 
-    if following_section_name is not None:
-        end = spec.find(following_section_name)
-        if end < 0:
-            raise Exception(f"Unable to find section '{following_section_name}'")
+    page = src_path.removeprefix("specs/").removesuffix(".md")
+    dst_path = os.path.join(DST_DIR, page + ".md")
+    os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+    with open(dst_path, "w") as f:
+        f.write(odf.page_header(title or doc_title))
+        f.write(text.strip() + "\n")
+
+    return odf.SPECS_URL_PREFIX + page
+
+
+def update_navigation(overview_page: str, domains: list[tuple[str, list[str]]]):
+    with open("docs.json") as f:
+        cfg = json.load(f)
+
+    group = cfg["navigation"]["tabs"][1]["groups"][0]
+    assert group["group"] == "Open Data Fabric"
+
+    spec_group = {
+        "group": "Specification",
+        "root": overview_page,
+        "pages": [
+            {"group": domain, "pages": pages}
+            for domain, pages in domains
+        ],
+    }
+
+    pages = group["pages"]
+    for i, p in enumerate(pages):
+        if p == "/odf/spec" or (isinstance(p, dict) and p.get("group") == "Specification"):
+            pages[i] = spec_group
+            break
     else:
-        end = len(spec)
+        raise Exception("Unable to find the specification page in docs.json")
 
-    return spec[:start].strip() + "\n\n" + spec[end:].strip()
+    with open("docs.json", "w") as f:
+        json.dump(cfg, f, indent=2)
+        f.write("\n")
 
 
 if __name__ == "__main__":
-    # Read the spec source
-    with open(os.path.join(ODF_PATH, "src/open-data-fabric.md")) as f:
-        text = f.read()
+    if os.path.exists(DST_DIR):
+        shutil.rmtree(DST_DIR)
 
-    # Remove title
-    text = text.removeprefix("# Open Data Fabric").strip()
-    text = remove_section(text, "# Table of Contents", "# Requirements")
-    text = remove_section(text, "# Reference Information")
+    overview_page = render(OVERVIEW, title="Overview")
 
+    domains = [
+        (domain, [render(path) for path in paths])
+        for domain, paths in list_specs()
+    ]
 
-    # Fix up links
-    def map_link(m: re.Match[str]) -> str:
-        t = m.group(1)
-        url = m.group(2)
-
-        if url.startswith("/rfcs/"):
-            rfc = url.removeprefix("/rfcs/")
-            return f'[{t}](/odf/rfcs/{rfc})'
-        elif url.startswith("#") and url.endswith("-schema") and url != "#common-data-schema":
-            t = t.strip('`')
-            schema = url.removesuffix("-schema").removeprefix("#")
-            return f'<Schema t="{t}" id="{schema}"/>'
-        elif url.startswith("#reference-"):
-            t = t.strip('`')
-            schema = url.removeprefix("#reference-")
-            return f'<Schema t="{t}" id="{schema}"/>'
-        elif url.startswith("/protocols/"):
-            return f'[{t}](https://github.com/open-data-fabric/open-data-fabric/blob/master{url})'
-        else:
-            return f'[{t}]({url})'
-
-
-    text = re.sub(r"\[([^]]+)]\(([^)]+)\)", map_link, text)
-
-    # Clean up old images
-    subprocess.run(
-        f"mkdir -p {IMAGES_DIR}",
-        shell=True,
-        check=True,
-    )
-    subprocess.run(
-        f"rm -f {IMAGES_DIR}/*",
-        shell=True,
-        check=True,
-    )
-
-
-    # Copy images and fix up URLs
-    def sub_images(m: re.Match[str]) -> str:
-        alt = m.group(1)
-        file_name = os.path.basename(m.group(2))
-        src_path = os.path.join(ODF_PATH, m.group(2))
-        dst_path = os.path.join(IMAGES_DIR, file_name)
-        subprocess.run(
-            f'cp "{src_path}" "{dst_path}"',
-            shell=True,
-            check=True,
-        )
-        return f'<Diagram src="{IMAGES_URL}{file_name}" alt="{alt}"/>'
-
-
-    text = re.sub(r"!\[(.+)]\((.+)\)", sub_images, text)
-
-    print(PAGE_HEADER)
-    print(text)
+    update_navigation(overview_page, domains)

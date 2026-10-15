@@ -10,6 +10,11 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Start Date**: 2023-12-17
 
+**Specs**:
+- [Data Model](/odf/spec/datasets/data-model)
+- [Processing Model](/odf/spec/transformations/processing-model)
+- [Engine Contract](/odf/spec/transformations/engine-contract)
+
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:sergii.mikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 

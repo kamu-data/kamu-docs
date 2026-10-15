@@ -7,7 +7,7 @@ import {Term, Schema, YouTube, YouTubeList, Diagram} from '/components/common.js
 
 # Purpose
 
-Open Data Fabric [by design](/odf/spec#nature-of-data) stores all data in the append-only event log format, always preserving the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may share their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
+Open Data Fabric [by design](/odf/spec/overview#nature-of-data) stores all data in the append-only event log format, always preserving the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way. Some organizations may share their data in the form of periodic database dumps, while some choose to provide it as a log of changes between current and the previous export.
 
 When ingesting data from external sources, <Term t="Root datasets" id="root-dataset"/> can choose between different <Schema t="merge strategies" id="MergeStrategy"/> that define how to combine the newly-ingested data with the existing one.
 

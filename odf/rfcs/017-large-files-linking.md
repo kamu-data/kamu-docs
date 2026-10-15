@@ -12,6 +12,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Published Date**: 2025-08-25
 
+**Specs**:
+- [Storage Layout](/odf/spec/datasets/storage-layout)
+
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:smikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 

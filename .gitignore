@@ -4,3 +4,4 @@
 /.archive/.hugo_build.lock
 
 /node_modules
+__pycache__/

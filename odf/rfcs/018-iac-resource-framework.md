@@ -11,6 +11,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Published Date**: 2026-06-28
 
+**Specs**:
+- [Resource Framework](/odf/spec/automation/resource-framework)
+
 **Authors**:
 - [Sergiy Zaychenko](mailto:sergiy.zaychenko@kamu.dev), [Kamu](https://kamu.dev)
 - [Sergii Mikhtoniuk](mailto:smikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
@@ -21,10 +24,10 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 - [ ] Forwards-compatible
 
 
-## Summary {/* omit in toc */}
+## Summary
 This RFC proposes a new Open Data Fabric manifest format and a set of resource types aiming to re-center ODF around the declarative approach for defining the desired state of the system, achieve better functional decomposition of the system, and provide a better framework for extensibility.
 
-## Table of Contents {/* omit in toc */}
+## Table of Contents
 
 - [Motivation](#motivation)
 - [General Direction](#general-direction)
@@ -183,7 +186,7 @@ account: alice  # Short form can parse UID, DID, or name
 
 See [resource references](#references) for details about referring to accounts.
 
-Unlike Kubernetes that uses RBAC and `namespace`-based isolation - ODF is based on an **account-centric model** that allows complex ownership and access control hierarchies, e.g. teams, organizations, flexible permissions for accounts outside of organizations (see [RFC-020](/odf/rfcs/020-auth.md)).
+Unlike Kubernetes that uses RBAC and `namespace`-based isolation - ODF is based on an **account-centric model** that allows complex ownership and access control hierarchies, e.g. teams, organizations, flexible permissions for accounts outside of organizations (see [RFC-020](/odf/rfcs/020-auth)).
 
 
 ### Identity
@@ -481,7 +484,7 @@ Conditions contributed by controllers other than the main resource controller sh
 
 
 ## Authorization
-The authorization model is defined in [RFC-020](/odf/rfcs/020-auth.md). 
+The authorization model is defined in [RFC-020](/odf/rfcs/020-auth). 
 
 
 ## Resource Application
@@ -513,7 +516,7 @@ Current API of the Node evolved as several groups of functionality:
   - GraphQL
   - FlightSQL
 
-<Diagram src="/images/odf/rfcs/018/apis-before.png" alt=""/>
+<Diagram src="/images/odf/rfcs/img/018/apis-before.png" alt=""/>
 
 Our REST API is currently missing the functionality for listing datasets, inspecting metadata, and manipulating other objects like accounts, flows, variables etc - this role is only filled by GraphQL.
 
@@ -527,7 +530,7 @@ As we evolve our APIs we would like:
 ### REST API strategy
 We will introduce another core REST API protocol group: **Resource protocol**.
 
-<Diagram src="/images/odf/rfcs/018/apis-after.png" alt=""/>
+<Diagram src="/images/odf/rfcs/img/018/apis-after.png" alt=""/>
 
 Resource protocol will define:
 * How to list, create, update, delete, and get the state of various resources in an ODF system  
@@ -612,7 +615,7 @@ Proposed changes can be introduced in implementations in parallel with existing 
 
 Kubernetes provides a unified API that is very extensible and provides a uniform way to work with all object resources.
 
-<Diagram src="/images/odf/rfcs/018/k8s-apis.png" alt=""/>
+<Diagram src="/images/odf/rfcs/img/018/k8s-apis.png" alt=""/>
 
 Basic Kubernetes API scheme is:
 
@@ -709,8 +712,8 @@ tasks:
 
 
 # Appendix A: Example Manifests
-Example resource manifests are provided with this RFC in the [`/examples`](/examples) directory.
+Example resource manifests are provided with this RFC in the [`/examples`](https://github.com/open-data-fabric/open-data-fabric/tree/master/examples) directory.
 
-An [entity-relationship diagram](/schemas-generated/mermaid/erd.svg) is also available to see the interplay of core prototype types.
+An [entity-relationship diagram](https://github.com/open-data-fabric/open-data-fabric/blob/master/contracts/erd.svg) is also available to see the interplay of core prototype types.
 
 Note that many resource types are still in **early prototype stage** of maturity and will be refined during the reference implementation.

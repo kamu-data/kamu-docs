@@ -12,6 +12,9 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Published Date**: 2025-08-25
 
+**Specs**:
+- [Data Schema](/odf/spec/datasets/data-schema)
+
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:smikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 
@@ -159,11 +162,11 @@ This format is compatible with old event format because flatbuffers only care ab
 
 `[1]` New `schema` field replaces the old `schema` field now containing the ODF schema. Note that schema includes the system columns like `offset`, `op`, and `system_time`.
 
-`[2]` The `extra` field is a container for custom attributes (see [format explanation](#attributes-format) below). Extra attributes will be allowed on the schema level too and work the same as on field (column) level.
+`[2]` The `extra` field is a container for custom attributes (see [format explanation](#extra-attributes-format) below). Extra attributes will be allowed on the schema level too and work the same as on field (column) level.
 
 `[3]` We introduce `opendatafabric.org/description` attribute to contain field (column) description.
 
-`[4]` The `opendatafabric.org/type` here is used only as an example of possible advanced attribute used to extend logical type beyond core schema - see [RFC-017](/odf/rfcs/017-large-files-linking.md) for more details.
+`[4]` The `opendatafabric.org/type` here is used only as an example of possible advanced attribute used to extend logical type beyond core schema - see [RFC-017](/odf/rfcs/017-large-files-linking) for more details.
 
 `[5]` Types recursively work for struct fields.
 
@@ -271,7 +274,7 @@ Field optionality (nullability) deserves a special note. Arrow currently has ver
 Why should we *not* do this?
 */}
 
-- It requires changing `SetDataSchema` event to store ODF schemas instead of nested [Arrow Flatbuffers](https://github.com/apache/arrow/blob/main/format/Schema.fbs) (see [RFC-010](/odf/rfcs/010-data-schema-in-metadata.md))
+- It requires changing `SetDataSchema` event to store ODF schemas instead of nested [Arrow Flatbuffers](https://github.com/apache/arrow/blob/main/format/Schema.fbs) (see [RFC-010](/odf/rfcs/010-data-schema-in-metadata))
 
 - At present users would have to define the schema for **system fields** (`offset, op, system_time, event_time`) which is verbose and error-prone. We believe that this extra burden can be resolved by providing better automatic schema inference in the tooling.
   

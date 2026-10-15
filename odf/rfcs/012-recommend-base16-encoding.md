@@ -10,6 +10,10 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 **Start Date**: 2023-12-14
 
+**Specs**:
+- [Metadata Chain](/odf/spec/datasets/metadata-chain)
+- [Identity](/odf/spec/datasets/identity)
+
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:sergii.mikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)
 

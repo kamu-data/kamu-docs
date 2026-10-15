@@ -15,7 +15,7 @@ This diagram shows a complete deployment of [Kamu Node](/node) and [Kamu Web Pla
 ## Dataset Storage
 ODF datasets are always safely stored in the storage of your choice, separate from the rest of the system. Multiple [storage systems](/node/deploy/storage) are supported.
 
-<Term t="Root" id="root-dataset"/> and <Term t="derivative" id="derivative-dataset"/> datasets can be stored separately, so that only root datasets were (geo-)replicated to safeguard them from catastrophic loss of data. The property that derivative datasets [can be fully reconstructed](/odf/spec#derivative-data-transience) from metadata can enable significant cost savings.
+<Term t="Root" id="root-dataset"/> and <Term t="derivative" id="derivative-dataset"/> datasets can be stored separately, so that only root datasets were (geo-)replicated to safeguard them from catastrophic loss of data. The property that derivative datasets [can be fully reconstructed](/odf/spec/transformations/processing-model#derivative-data-transience) from metadata can enable significant cost savings.
 
 ## Operational Storage
 This set of storage systems is needed for operating the node and web platform.
