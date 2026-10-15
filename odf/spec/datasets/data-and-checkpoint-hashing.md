@@ -5,8 +5,8 @@ title: "Data & Checkpoint Hashing"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Data Model](/odf/spec/datasets/data-model)
+**Domain**: Datasets\
+**Depends on**: [Data Model](/odf/spec/datasets/data-model)\
 **RFCs**: [RFC-002](/odf/rfcs/002-logical-data-hashes)
 
 

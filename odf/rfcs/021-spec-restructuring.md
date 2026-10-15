@@ -220,8 +220,8 @@ All spec files follow a common structure:
 ```markdown
 # {Spec Title}
 
-**Domain**: {Domain}
-**Depends on**: [{Spec}](../{domain}/{spec}.md), ...
+**Domain**: {Domain}\
+**Depends on**: [{Spec}](../{domain}/{spec}.md), ...\
 **RFCs**: [RFC-{NNN}](../../rfcs/{NNN}-{rfc}.md), ...
 
 ## Abstract

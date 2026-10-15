@@ -5,8 +5,8 @@ title: "Resource Framework"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Automation
-**Depends on**: -
+**Domain**: Automation\
+**Depends on**: -\
 **RFCs**: [RFC-018](/odf/rfcs/018-iac-resource-framework)
 
 

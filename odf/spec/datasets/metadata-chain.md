@@ -5,8 +5,8 @@ title: "Metadata Chain"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data Schema](/odf/spec/datasets/data-schema), [Data & Checkpoint Hashing](/odf/spec/datasets/data-and-checkpoint-hashing)
+**Domain**: Datasets\
+**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data Schema](/odf/spec/datasets/data-schema), [Data & Checkpoint Hashing](/odf/spec/datasets/data-and-checkpoint-hashing)\
 **RFCs**: [RFC-004](/odf/rfcs/004-metadata-extensibility), [RFC-005](/odf/rfcs/005-dataset-annotations), [RFC-010](/odf/rfcs/010-data-schema-in-metadata), [RFC-012](/odf/rfcs/012-recommend-base16-encoding), [RFC-014](/odf/rfcs/014-minimize-offset-scanning)
 
 

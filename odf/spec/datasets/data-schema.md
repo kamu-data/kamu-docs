@@ -5,8 +5,8 @@ title: "Data Schema"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: -
+**Domain**: Datasets\
+**Depends on**: -\
 **RFCs**: [RFC-016](/odf/rfcs/016-odf-schema)
 
 

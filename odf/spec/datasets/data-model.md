@@ -5,8 +5,8 @@ title: "Data Model"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Data Schema](/odf/spec/datasets/data-schema)
+**Domain**: Datasets\
+**Depends on**: [Data Schema](/odf/spec/datasets/data-schema)\
 **RFCs**: [RFC-001](/odf/rfcs/001-record-offsets), [RFC-015](/odf/rfcs/015-unified-changelog-stream-schema)
 
 

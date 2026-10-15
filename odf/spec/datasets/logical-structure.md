@@ -5,8 +5,8 @@ title: "Logical Structure"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: -
+**Domain**: Datasets\
+**Depends on**: -\
 **RFCs**: -
 
 

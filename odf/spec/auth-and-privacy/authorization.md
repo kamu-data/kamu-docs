@@ -5,8 +5,8 @@ title: "Authorization"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Auth & Privacy
-**Depends on**: [Resource Framework](/odf/spec/automation/resource-framework)
+**Domain**: Auth & Privacy\
+**Depends on**: [Resource Framework](/odf/spec/automation/resource-framework)\
 **RFCs**: [RFC-020](/odf/rfcs/020-auth)
 
 

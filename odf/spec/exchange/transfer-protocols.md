@@ -5,8 +5,8 @@ title: "Transfer Protocols"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Exchange
-**Depends on**: [Storage Layout](/odf/spec/datasets/storage-layout)
+**Domain**: Exchange\
+**Depends on**: [Storage Layout](/odf/spec/datasets/storage-layout)\
 **RFCs**: [RFC-007](/odf/rfcs/007-simple-transfer-protocol), [RFC-008](/odf/rfcs/008-smart-transfer-protocol)
 
 

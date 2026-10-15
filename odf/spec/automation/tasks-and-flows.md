@@ -5,8 +5,8 @@ title: "Tasks and Flows"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Automation
-**Depends on**: [Resource Framework](/odf/spec/automation/resource-framework), [Authorization](/odf/spec/auth-and-privacy/authorization)
+**Domain**: Automation\
+**Depends on**: [Resource Framework](/odf/spec/automation/resource-framework), [Authorization](/odf/spec/auth-and-privacy/authorization)\
 **RFCs**: [RFC-019](/odf/rfcs/019-iac-task-flow-system)
 
 

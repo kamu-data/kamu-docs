@@ -5,8 +5,8 @@ title: "Storage Layout"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data & Checkpoint Hashing](/odf/spec/datasets/data-and-checkpoint-hashing)
+**Domain**: Datasets\
+**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data & Checkpoint Hashing](/odf/spec/datasets/data-and-checkpoint-hashing)\
 **RFCs**: [RFC-003](/odf/rfcs/003-content-addressability), [RFC-006](/odf/rfcs/006-checkpoints-as-files), [RFC-017](/odf/rfcs/017-large-files-linking)
 
 

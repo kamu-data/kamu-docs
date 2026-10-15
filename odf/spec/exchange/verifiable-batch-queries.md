@@ -5,8 +5,8 @@ title: "Verifiable Batch Queries"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Exchange
-**Depends on**: -
+**Domain**: Exchange\
+**Depends on**: -\
 **RFCs**: [RFC-022](/odf/rfcs/022-batch-query-commitments)
 
 

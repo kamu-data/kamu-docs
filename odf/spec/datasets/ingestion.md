@@ -5,8 +5,8 @@ title: "Ingestion"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data Schema](/odf/spec/datasets/data-schema), [Resource Framework](/odf/spec/automation/resource-framework)
+**Domain**: Datasets\
+**Depends on**: [Data Model](/odf/spec/datasets/data-model), [Data Schema](/odf/spec/datasets/data-schema), [Resource Framework](/odf/spec/automation/resource-framework)\
 **RFCs**: [RFC-009](/odf/rfcs/009-ingest-source-state), [RFC-011](/odf/rfcs/011-push-ingest-sources), [RFC-014](/odf/rfcs/014-minimize-offset-scanning)
 
 

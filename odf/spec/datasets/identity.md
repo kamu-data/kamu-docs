@@ -5,8 +5,8 @@ title: "Identity"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Domain**: Datasets
-**Depends on**: [Metadata Chain](/odf/spec/datasets/metadata-chain)
+**Domain**: Datasets\
+**Depends on**: [Metadata Chain](/odf/spec/datasets/metadata-chain)\
 **RFCs**: [RFC-003](/odf/rfcs/003-content-addressability), [RFC-007](/odf/rfcs/007-simple-transfer-protocol), [RFC-012](/odf/rfcs/012-recommend-base16-encoding)
 
 
