@@ -5,11 +5,10 @@ title: "RFC-021: ODF Spec Restructuring"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-[![PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/)
+[![PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/135?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/)
 
-**Start Date**: 2026-10-13
-
-**Published Date**: ???
+**Start Date**: 2026-10-13\
+**Published Date**: 2026-10-14
 
 **Authors**:
 - [Sergii Mikhtoniuk](mailto:sergii.mikhtoniuk@kamu.dev), [Kamu](https://kamu.dev)

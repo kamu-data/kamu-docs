@@ -5,8 +5,7 @@ title: "RFC-022: Batch Query Commitments"
 
 import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.jsx'
 
-**Start Date**: 2024-07-26
-
+**Start Date**: 2024-07-26\
 **Published Date**: 2024-10-01
 
 **Specs**:

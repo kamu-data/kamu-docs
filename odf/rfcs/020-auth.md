@@ -7,8 +7,7 @@ import {Diagram, Term, Schema, YouTube, YouTubeList} from '/components/common.js
 
 [![PR](https://img.shields.io/github/pulls/detail/state/kamu-data/open-data-fabric/133?label=PR)](https://github.com/kamu-data/open-data-fabric/pull/133)
 
-**Start Date**: 2026-09-23
-
+**Start Date**: 2026-09-23\
 **Published Date**: 2026-10-12
 
 **Specs**:
