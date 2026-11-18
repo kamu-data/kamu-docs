@@ -150,8 +150,8 @@ def render_format(sch):
         "path", "regex", "url", "uri",
         "date-time", "duration", "byte-size", "email",
         "resource-id", "resource-name", "type-uri", "type-ref",
-        "account-id", "account-name",
-        "dataset-id", "dataset-name", "dataset-alias", "dataset-ref", "dataset-ref-any",
+        "account-did", "account-name", "node-did",
+        "dataset-did", "dataset-name", "dataset-alias", "dataset-ref", "dataset-ref-any",
         "did", "struct-or-string", "union-or-string", "fragment",
     ):
         return f"`{fmt}`"

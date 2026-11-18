@@ -231,6 +231,14 @@ title: Config Reference
 <td>External URLs</td>
 </tr>
 <tr>
+<td><code>versionedFiles</code></td>
+<td><a href="#versionedfilesconfig"><code>VersionedFilesConfig</code></a></td>
+<td><pre><code class="language-json">\{
+  &quot;maxInBandContentSizeInBytes&quot;: 10485760
+}</code></pre></td>
+<td>Versioned files configuration</td>
+</tr>
+<tr>
 <td><code>webhooks</code></td>
 <td><a href="#webhooksconfig"><code>WebhooksConfig</code></a></td>
 <td><pre><code class="language-json">\{
@@ -1987,6 +1995,25 @@ iteration. This ensures that one data slice doesn't become too big.
 ## `UrlOrPath`
 
 Base type: `string`
+
+## `VersionedFilesConfig`
+
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+<tbody>
+<tr>
+<td><code>maxInBandContentSizeInBytes</code></td>
+<td><code>integer</code></td>
+<td><code class="language-json">10485760</code></td>
+<td>
+
+Largest file version, in bytes, whose content is returned in-band in a
+GraphQL response. Larger files are downloaded through their content URL
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## `WebhooksConfig`
 

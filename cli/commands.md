@@ -846,6 +846,7 @@ Returns manifest representation of a resource
   Default value: `100`
 * `--unbounded` — Disable the limit for expanding selectors
 * `-l`, `--label <LABEL_SELECTOR>` — Narrow the selection to resources carrying all of the given labels, as `key=value` pairs (repeatable, or comma-separated)
+* `--include-deleting` — Also include resources whose deletion is in progress
 
 Returns the current state of one or more resources as YAML or JSON.
 
@@ -1112,6 +1113,7 @@ List datasets or resources
 * `--max-results <N>` — Maximum number of results to list
 * `--unbounded` — Disable the result limit
 * `-l`, `--label <LABEL_SELECTOR>` — Narrow the listing to resources carrying all of the given labels, as `key=value` pairs (repeatable, or comma-separated)
+* `--include-deleting` — Also include resources whose deletion is in progress
 
 **Examples:**
 
@@ -1185,7 +1187,13 @@ Shows dataset metadata history
 
 * `-o`, `--output-format <FMT>` — Format of the output
 
-  Possible values: `shell`, `yaml`
+  Possible values:
+  - `shell`
+  - `yaml`
+  - `json`:
+    Array of blocks, each in the YAML manifest shape plus its `blockHash`
+  - `ndjson`:
+    One JSON block object per line - easily splittable format
 
 * `-f`, `--filter <FLT>` — Types of events to include
 * `--limit <LIMIT>` — Maximum number of blocks to display
@@ -1215,6 +1223,10 @@ Show detailed content of all blocks:
 Using a filter to inspect blocks containing query changes of a derivative dataset:
 
     kamu log -o yaml --filter source org.example.data
+
+Print the event kind of every block as one JSON object per line, for scripts:
+
+    kamu log -o ndjson org.example.data | jq .content.event.kind
 
 
 

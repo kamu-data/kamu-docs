@@ -114,10 +114,19 @@ Inputs (`RawQueryRequest`):
 - Input data files to perform the query over - all files must have identical schema
 - Transformation <Term t="Query" id="query"/>
 - Location where the query result should be written
+- Whether the order of records must be preserved
 
 Outputs (`RawQueryResponse`):
 - Number of records produced by the query
 - Operation progress and status
+
+The order of records is significant to some <Term t="Merge Strategies" id="merge-strategy"/>, in which case the <Term t="Coordinator" id="coordinator"/> sets `preserveOrder`. The <Term t="Engine" id="engine"/> must then preserve the order of records:
+- Input records are read in the order of the input files, and in their order within each file
+- Operations that don't define the order of their output by themselves (e.g. projections and filters) must keep the records in the order of their input
+
+Engines that process data in batches and parallelize work must preserve this order as well (e.g. by not splitting an input file into multiple partitions, or by restoring the order before writing the result). An <Term t="Engine" id="engine"/> that cannot preserve the order must fail the request rather than produce records in a different order. When `preserveOrder` is set, the <Term t="Engine" id="engine"/> may reject queries that use operations with an undefined output order without restoring it.
+
+Without `preserveOrder`, the order of records in the result is not significant, and the <Term t="Engine" id="engine"/> is free to change it, e.g. to process the input in parallel.
 
 
 ### Validate Query

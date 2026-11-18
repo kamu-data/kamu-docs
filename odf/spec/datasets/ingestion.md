@@ -241,6 +241,8 @@ preprocess:
 
 Preprocessing queries are executed by <Term t="Engines" id="engine"/> using the [Raw Query](/odf/spec/transformations/engine-contract#raw-query) operation.
 
+The order of records in the query result is the order in which the subsequent [Merge Strategy](#merge-strategies) receives them. For strategies where this order is significant the engine will be instructed to preserve the order of records read from the input.
+
 
 ## Merge Strategies
 By design, ODF stores data only in the append-only event log format to preserve the entire history. Unfortunately, a lot of data in the world is not stored or exposed this way - some publishers expose data as periodic database dumps, while others provide a log of changes between the current and the previous export.
@@ -248,6 +250,10 @@ By design, ODF stores data only in the append-only event log format to preserve 
 <Term t="Merge Strategies" id="merge-strategy"/> (<Schema t="MergeStrategy" id="mergestrategy"/>) bridge the gap between the wide variety of data in the external world and the strict event-based world of ODF, by defining how the newly-ingested data is combined with the existing history.
 
 All strategies except `Append` rely on a user-specified `primaryKey` - the names of columns that uniquely identify a record throughout its lifetime.
+
+Strategies differ in whether the order of records in the new data is significant:
+- [Changelog Stream](#changelog-stream) and [Upsert Stream](#upsert-stream) treat the new data as a sequence of changes, each related to a certain `primaryKey`. The order of those changes is significant and must be preserved through all [ingestion phases](#ingestion-phases) up to the merge (see [Preprocessing](#preprocessing)).
+- [Append](#append), [Ledger](#ledger), and [Snapshot](#snapshot) treat the new data as a set of records - its order is not significant, and implementations may assign <Term t="Offsets" id="offset"/> to the resulting records in any order (e.g. by event time or by primary key).
 
 
 ### Append
@@ -321,9 +327,13 @@ After the population of Vancouver changes in the source, ingestion produces a co
 ### Changelog Stream
 This strategy is used for sources that already provide data in the native ODF changelog format that describes appends, retractions, and corrections (see [Data Model](/odf/spec/datasets/data-model#representation-of-retractions-and-corrections)). No processing except for format validation is performed.
 
+Records are applied in the order they are read: a key can be retracted and appended again, or corrected several times within one portion of new data. The resulting records are therefore assigned <Term t="Offsets" id="offset"/> in the order of the input.
+
 
 ### Upsert Stream
 This strategy is used for sources containing ledgers of insert-or-update and delete events. Unlike in the changelog stream, insert-or-update events only carry the new values, so this strategy uses the primary key to look up the previous values and re-classify events into appends or correction pairs.
+
+When the new data contains several events for the same key, they are applied in the order they are read, so the last of them determines the new state of the key.
 
 
 ## Committing Data

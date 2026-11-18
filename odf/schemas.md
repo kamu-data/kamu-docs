@@ -23,7 +23,7 @@ Group specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `members` | `array(`[`SubjectHandle`](#subjecthandle)`)` |  |  | Members of the group. Only the `Resource` subject kind is allowed, so that well-known subjects like `Everyone` cannot be nested into a group. |
+| `members` | `array(`[`SubjectHandle`](#subjecthandle)`)` |  |  | Members of the group. Only the `Principal` and `Group` subject kinds are allowed, so that well-known subjects like `Everyone` cannot be nested into a group. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/GroupSpec.json)
 
@@ -32,7 +32,7 @@ Group specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `members` | `array(`[`SubjectRef`](#subjectref)`)` |  |  | Members of the group. Only the `Resource` subject kind is allowed, so that well-known subjects like `Everyone` cannot be nested into a group. |
+| `members` | `array(`[`SubjectRef`](#subjectref)`)` |  |  | Members of the group. Only the `Principal` and `Group` subject kinds are allowed, so that well-known subjects like `Everyone` cannot be nested into a group. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/GroupSpecInput.json)
 
@@ -52,7 +52,7 @@ Node account specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` |  | `account-id` | DID associated with the account by ODF or an external system. |
+| `did` | `string` |  | `node-did` | DID associated with the ODF node. |
 | `displayName` | `string` |  |  | Human-friendly display name. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/NodeSpec.json)
@@ -62,7 +62,7 @@ Node account specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` |  | `account-id` | DID associated with the account by ODF or an external system. |
+| `did` | `string` |  | `node-did` | DID associated with the ODF node. |
 | `displayName` | `string` |  |  | Human-friendly display name. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/NodeSpecInput.json)
@@ -218,11 +218,11 @@ Link to a resolved identity that can act as a principal: `User`, `ServiceAccount
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
+| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) |  |  | Owner account, if principal is a service account. |
 | `type` | `string` | ✔️ | `type-uri` | Type URI of the principal. |
-| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) |  |  | Account that owns the service account. |
-| `id` | `string` | ✔️ | `resource-id` | ID of the principal resource. |
-| `did` | `string` |  | `did` | DID of the principal, if applicable. |
-| `name` | `string` | ✔️ | `resource-name` | Name of the principal resource. |
+| `id` | `string` | ✔️ | `resource-id` | ID of the principal account resource. |
+| `did` | `string` |  | `did` | DID of the principal account. |
+| `name` | `string` | ✔️ | `resource-name` | Name of the principal account. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/PrincipalHandle.json)
 
@@ -234,7 +234,7 @@ Link to a resolved identity that can act as a principal: `User`, `ServiceAccount
 | `type` | `string` |  | `type-ref` | Short type name or full type URI of the principal. |
 | `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the service account. |
 | `id` | `string` |  | `resource-id` | ID of the principal resource. |
-| `did` | `string` |  | `did` | DID of the principal. |
+| `did` | `string` |  | `did` | DID of the principal account or node. |
 | `name` | `string` |  | `resource-name` | Name of the principal resource. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/PrincipalRef.json)
@@ -244,8 +244,9 @@ Link to a resolved account that can own resources: `User`, `Organization`, or `N
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
+| `type` | `string` | ✔️ | `type-uri` | Type URI of the account. |
 | `id` | `string` | ✔️ | `resource-id` | ID of the account resource. |
-| `did` | `string` | ✔️ | `account-id` | DID of the account. |
+| `did` | `string` | ✔️ | `account-did` | DID of the account. |
 | `name` | `string` | ✔️ | `account-name` | Name of the account. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/ResourceOwnerHandle.json)
@@ -255,8 +256,9 @@ Link to a resolved account that can own resources: `User`, `Organization`, or `N
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
+| `type` | `string` |  | `type-ref` | Name or URI of the account type. |
 | `id` | `string` |  | `resource-id` | UUID of the account resource. |
-| `did` | `string` |  | `account-id` | DID of the account. |
+| `did` | `string` |  | `account-did` | DID of the account. |
 | `name` | `string` |  | `account-name` | Name of the account. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/ResourceOwnerRef.json)
@@ -297,23 +299,35 @@ Resolved reference to a party a grant is given to.
 
 | Union Type | Description |
 | --- | --- |
-| [`SubjectHandle::Resource`](#subjecthandleresource) | A specific `User`, `ServiceAccount`, `Node`, or members of a `Group`. |
+| [`SubjectHandle::Principal`](#subjecthandleprincipal) | A specific `User`, `ServiceAccount`, or `Node`. |
+| [`SubjectHandle::Group`](#subjecthandlegroup) | Members of a `Group`, including members of nested groups. |
 | [`SubjectHandle::Authenticated`](#subjecthandleauthenticated) | Matches any authenticated principal. |
 | [`SubjectHandle::Anonymous`](#subjecthandleanonymous) | Matches any unauthenticated principal. |
 | [`SubjectHandle::Everyone`](#subjecthandleeveryone) | Matches any principal, authenticated or not. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectHandle.json)
 
-### `SubjectHandle::Resource`
-A specific `User`, `ServiceAccount`, `Node`, or members of a `Group`.
+### `SubjectHandle::Principal`
+A specific `User`, `ServiceAccount`, or `Node`.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `type` | `string` | ✔️ | `type-uri` | Type URI of the subject resource. |
-| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) |  |  | Account that owns the subject resource (for service accounts and groups). |
-| `id` | `string` | ✔️ | `resource-id` | ID of the subject resource. |
-| `did` | `string` |  | `did` | DID of the subject resource, if applicable. |
-| `name` | `string` | ✔️ | `resource-name` | Name of the subject resource. |
+| `type` | `string` | ✔️ | `type-uri` | Type URI of the principal. |
+| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) |  |  | Account that owns the service account. |
+| `id` | `string` | ✔️ | `resource-id` | ID of the principal resource. |
+| `did` | `string` |  | `did` | DID of the principal, if applicable. |
+| `name` | `string` | ✔️ | `resource-name` | Name of the principal resource. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectHandle.json)
+
+### `SubjectHandle::Group`
+Members of a `Group`, including members of nested groups.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) | ✔️ |  | Account that owns the group. |
+| `id` | `string` | ✔️ | `resource-id` | ID of the group resource. |
+| `name` | `string` | ✔️ | `resource-name` | Name of the group resource. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectHandle.json)
 
@@ -334,27 +348,39 @@ Matches any principal, authenticated or not.
 
 
 ### `SubjectRef`
-Reference to a party a grant is given to. Unlike a principal, a subject may stand for many principals at once. Short form is either a well-known subject name (e.g. `Authenticated`) or a resource reference with a type prefix, DID, or ID (e.g. `Group:acme/engineering`).
+Reference to a party a grant is given to. Unlike a principal, a subject may stand for many principals at once. Short form always starts with a prefix that determines the subject kind: a resource type followed by a resource name (e.g. `User:alice`, `Group:acme/engineering`), or a well-known subject followed by `*` (e.g. `Authenticated:*`).
 
 | Union Type | Description |
 | --- | --- |
-| [`SubjectRef::Resource`](#subjectrefresource) | A specific `User`, `ServiceAccount`, `Node`, or members of a `Group`. |
+| [`SubjectRef::Principal`](#subjectrefprincipal) | A specific `User`, `ServiceAccount`, or `Node`. |
+| [`SubjectRef::Group`](#subjectrefgroup) | Members of a `Group`, including members of nested groups. |
 | [`SubjectRef::Authenticated`](#subjectrefauthenticated) | Matches any authenticated principal. |
 | [`SubjectRef::Anonymous`](#subjectrefanonymous) | Matches any unauthenticated principal. |
 | [`SubjectRef::Everyone`](#subjectrefeveryone) | Matches any principal, authenticated or not. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectRef.json)
 
-### `SubjectRef::Resource`
-A specific `User`, `ServiceAccount`, `Node`, or members of a `Group`.
+### `SubjectRef::Principal`
+A specific `User`, `ServiceAccount`, or `Node`.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `type` | `string` |  | `type-ref` | Short type name or full type URI of the subject resource. |
-| `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the subject resource (for service accounts and groups). |
-| `id` | `string` |  | `resource-id` | ID of the subject resource. |
-| `did` | `string` |  | `did` | DID of the subject resource. |
-| `name` | `string` |  | `resource-name` | Name of the subject resource. |
+| `type` | `string` |  | `type-ref` | Short type name or full type URI of the principal. |
+| `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the service account. |
+| `id` | `string` |  | `resource-id` | ID of the principal resource. |
+| `did` | `string` |  | `did` | DID of the principal. |
+| `name` | `string` |  | `resource-name` | Name of the principal resource. |
+
+[![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectRef.json)
+
+### `SubjectRef::Group`
+Members of a `Group`, including members of nested groups.
+
+| Property | Type | Required | Format | Description |
+| --- | --- | :---: | :---: | --- |
+| `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the group. |
+| `id` | `string` |  | `resource-id` | ID of the group resource. |
+| `name` | `string` |  | `resource-name` | Name of the group resource. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/auth/v1alpha1/SubjectRef.json)
 
@@ -390,7 +416,7 @@ User account specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` |  | `account-id` | DID associated with the account by ODF or an external system. |
+| `did` | `string` |  | `account-did` | DID associated with the account by ODF or an external system. |
 | `displayName` | `string` |  |  | Human-friendly display name. |
 | `email` | `string` |  | `email` | Email address of the user. |
 | `avatarUrl` | `string` |  | `uri` | URL of the account's avatar image. |
@@ -404,7 +430,7 @@ User account specification.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` |  | `account-id` | DID associated with the account by ODF or an external system. |
+| `did` | `string` |  | `account-did` | DID associated with the account by ODF or an external system. |
 | `displayName` | `string` |  |  | Human-friendly display name. |
 | `email` | `string` |  | `email` | Email address of the user. |
 | `avatarUrl` | `string` |  | `uri` | URL of the account's avatar image. |
@@ -896,10 +922,11 @@ Link to a dataset.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) |  |  | Reference to an account that owns the dataset. |
+| `account` | [`ResourceOwnerHandle`](#resourceownerhandle) | ✔️ |  | Reference to an account that owns the dataset. |
 | `id` | `string` | ✔️ | `resource-id` | ID of the dataset resource. |
-| `did` | `string` | ✔️ | `dataset-id` | DID of the dataset. |
+| `did` | `string` | ✔️ | `dataset-did` | DID of the dataset. |
 | `name` | `string` | ✔️ | `resource-name` | Name of the dataset. |
+| `kind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Kind of the dataset. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/datasets/v1alpha1/DatasetHandle.json)
 
@@ -920,7 +947,7 @@ Represents type of the dataset.
 | --- | --- | :---: | :---: | --- |
 | `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the dataset. |
 | `id` | `string` |  | `resource-id` | UUID of the dataset resource. |
-| `did` | `string` |  | `dataset-id` | DID of the dataset. |
+| `did` | `string` |  | `dataset-did` | DID of the dataset. |
 | `name` | `string` |  | `resource-name` | Name of the dataset. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/datasets/v1alpha1/DatasetRef.json)
@@ -943,7 +970,7 @@ Represents a desired state of the dataset metadata.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` | ✔️ | `dataset-id` | DID of the dataset in global ODF network |
+| `did` | `string` | ✔️ | `dataset-did` | DID of the dataset in global ODF network |
 | `kind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 | `metadata` | `array(`[`MetadataEvent`](#metadataevent)`)` | ✔️ |  | An array of metadata events that will be used to populate the chain, e.g. to set info, licenses, and attachments. As the dataset evolves, it maintains a snapshot of the key events that describe the dataset in its latest state, excluding intermediate transitions (e.g. previous schema changes) and events related to ingestions and transformations. |
 | `volume` | [`ResourceHandle`](#resourcehandle) | ✔️ |  | Reference to a storage volume where dataset data will be stored. If omitted, the node's default storage is used. |
@@ -955,7 +982,7 @@ Represents a desired state of the dataset metadata.
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `did` | `string` |  | `dataset-id` | DID of the dataset in global ODF network |
+| `did` | `string` |  | `dataset-did` | DID of the dataset in global ODF network |
 | `kind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 | `metadata` | `array(`[`MetadataEvent`](#metadataevent)`)` | ✔️ |  | An array of metadata events that will be used to populate the chain, e.g. to set info, licenses, and attachments. As the dataset evolves, it maintains a snapshot of the key events that describe the dataset in its latest state, excluding intermediate transitions (e.g. previous schema changes) and events related to ingestions and transformations. |
 | `volume` | [`PersistentVolumeRef`](#persistentvolumeref) |  |  | Reference to a storage volume where dataset data will be stored. If omitted, the node's default storage is used. |
@@ -993,7 +1020,7 @@ Describes a slice of the input dataset used during a transformation
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | `dataset-id` | Input dataset identifier. |
+| `datasetId` | `string` | ✔️ | `dataset-did` | Input dataset identifier. |
 | `prevBlockHash` | `string` |  | [`multihash`](https://github.com/multiformats/multihash) | Last block of the input dataset that was previously incorporated into the derivative transformation, if any. Must be equal to the last non-empty `newBlockHash`. Together with `newBlockHash` defines a half-open `(prevBlockHash, newBlockHash]` interval of blocks that will be considered in this transaction. |
 | `newBlockHash` | `string` |  | [`multihash`](https://github.com/multiformats/multihash) | Hash of the last block that will be incorporated into the derivative transformation. When present, defines a half-open `(prevBlockHash, newBlockHash]` interval of blocks that will be considered in this transaction. |
 | `prevOffset` | `integer` |  | `uint64` | Last data record offset in the input dataset that was previously incorporated into the derivative transformation, if any. Must be equal to the last non-empty `newOffset`. Together with `newOffset` defines a half-open `(prevOffset, newOffset]` interval of data records that will be considered in this transaction. |
@@ -1081,7 +1108,7 @@ Establishes the identity of the dataset. Always the first metadata event in the 
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | `dataset-id` | Unique identity of the dataset. |
+| `datasetId` | `string` | ✔️ | `dataset-did` | Unique identity of the dataset. |
 | `datasetKind` | [`DatasetKind`](#datasetkind) | ✔️ |  | Type of the dataset. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/datasets/v1alpha1/Seed.json)
@@ -1236,6 +1263,7 @@ Sent by the coordinator to an engine to perform query on raw input data, usually
 | `inputDataPaths` | `array(string)` | ✔️ |  | Paths to input data files to perform query over. Must all have identical schema. |
 | `transform` | [`Transform`](#transform) | ✔️ |  | Transformation that will be applied to produce new data. |
 | `outputDataPath` | `string` | ✔️ | `path` | Path where query result will be written. |
+| `preserveOrder` | `boolean` |  |  | Requires the engine to keep the order of records read from the input in the query result, or fail the request if it cannot. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/engines/v1alpha1/RawQueryRequest.json)
 
@@ -1290,7 +1318,7 @@ Sent by the coordinator to an engine to perform the next step of data transforma
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | `dataset-id` | Unique identifier of the output dataset. |
+| `datasetId` | `string` | ✔️ | `dataset-did` | Unique identifier of the output dataset. |
 | `datasetAlias` | `string` | ✔️ | `dataset-alias` | Alias of the output dataset, for logging purposes only. |
 | `systemTime` | `string` | ✔️ | [`date-time`](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.7.3.1) | System time to use for new records. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the output dataset. |
@@ -1308,7 +1336,7 @@ Sent as part of the engine transform request operation to describe the input
 
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
-| `datasetId` | `string` | ✔️ | `dataset-id` | Unique identifier of the dataset. |
+| `datasetId` | `string` | ✔️ | `dataset-did` | Unique identifier of the dataset. |
 | `datasetAlias` | `string` | ✔️ | `dataset-alias` | Alias of the output dataset, for logging purposes only. |
 | `queryAlias` | `string` | ✔️ |  | An alias of this input to be used in queries. |
 | `vocab` | [`DatasetVocabulary`](#datasetvocabulary) | ✔️ |  | Vocabulary of the input dataset. |
@@ -1852,9 +1880,9 @@ Represents the reconciliation or deletion phase of a resource.
 | Property | Type | Required | Format | Description |
 | --- | --- | :---: | :---: | --- |
 | `account` | [`ResourceOwnerRef`](#resourceownerref) |  |  | Reference to an account that owns the target resource. |
+| `type` | `string` |  | `type-ref` | Short type name or full type URI of the target resource. |
 | `id` | `string` |  | `resource-id` | ID of the resource within a node. |
 | `did` | `string` |  | `did` | DID of the resource. |
-| `type` | `string` |  | `type-ref` | Short type name or full type URI of the target resource. |
 | `name` | `string` |  | `resource-name` | Name of a resource. |
 
 [![JSON Schema](https://img.shields.io/badge/schema-JSON-orange)](https://github.com/open-data-fabric/open-data-fabric/blob/master/schemas/resources/v1alpha1/ResourceRef.json)
